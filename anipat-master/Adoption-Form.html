@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content=
+		"width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Adoption-Form.css">
+	<title>
+		Animal Adoption Form
+	</title>
+
+</head>
+
+<body>
+	<h1>WARP Animal Adoption Form</h1>
+<p>Please answer the following questions carefully before deciding on your potential pet. <br> Some of these questions are designed to 
+  help reflect on your decision to adopt a pet. <br> We try to ensure the best possible match between animal and adopter.
+  Remember that this is a lifetime commitment.</p>
+
+	<!-- Create Form -->
+	<form id="form">
+    <h2>Personal Information</h2>
+		<!-- Details -->
+		<div class="form-control">
+			<label for="name" id="label-name">
+				Name
+			</label>
+
+			<!-- Input Type Text -->
+			<input type="text"
+				id="name"
+				placeholder="Enter your name" />
+		</div>
+    <div class="form-control">
+			<label for="age" id="label-age">
+				Age
+			</label>
+
+			<!-- Input Type Text -->
+			<input type="text"
+				id="age"
+				placeholder="Enter your age" />
+		</div>
+
+    <div class="form-control">
+			<label for="FB/Twittter/IG" id="label-FB/Twittter/IG">
+				FB/Twittter/IG
+			</label>
+
+			<!-- Input Type Text -->
+			<input type="text"
+				id="FB/Twittter/IG"
+				placeholder="Enter your FB/Twittter/IG" />
+		</div>
+
+    <div class="form-control">
+			<label for="Address" id="label-address">
+				Address
+			</label>
+
+			<!-- Input Type Text -->
+			<input type="text"
+				id="address"
+				placeholder="Enter your address" />
+		</div>
+    <div class="form-control">
+			<label for="Phone" id="label-phone">
+				Phone
+			</label>
+
+			<!-- Input Type Email-->
+			<input type="phone"
+				id="phone"
+				placeholder="Enter your Phone" />
+		</div>
+		<div class="form-control">
+			<label for="email" id="label-email">
+				Email
+			</label>
+
+			<!-- Input Type Email-->
+			<input type="email"
+				id="email"
+				placeholder="Enter your email" />
+		</div>
+
+		<h2>Questionnaire</h2>
+<!-- OPTIONS
+		<div class="form-control">
+			<label for="role" id="label-role">
+				Which option best describes you?
+			</label>
+			
+			<!-- Dropdown options 
+			<select name="role" id="role">
+				<option value="student">Student</option>
+				<option value="intern">Intern</option>
+				<option value="professional">
+					Professional
+				</option>
+				<option value="other">Other</option>
+			</select>
+		</div>
+  -->
+		<div class="form-control">
+			<label>
+			<b> Occupation</b>	
+			</label>
+
+			<!-- Input Type Radio Button -->
+			<label for="recommed-1">
+				<input type="radio"
+					id="recommed-1"
+					name="recommed"> Student</input>
+			</label>
+			<label for="recommed-2">
+				<input type="radio"
+					id="recommed-2"
+					name="recommed"> Employed</input>
+			</label>
+			<label for="recommed-3">
+				<input type="radio"
+					id="recommed-3"
+					name="recommed"> Self-emlpoyed</input>
+			</label>
+		</div>
+<!-- Input Type Checkbox 
+		<div class="form-control">
+			<label>Languages and Frameworks known
+				<small>(Check all that apply)</small>
+			</label>
+			
+			<label for="inp-1">
+				<input type="checkbox"
+					name="inp">C</input></label>
+			<label for="inp-2">
+				<input type="checkbox"
+					name="inp">C++</input></label>
+			<label for="inp-3">
+				<input type="checkbox"
+					name="inp">C#</input></label>
+			<label for="inp-4">
+				<input type="checkbox"
+					name="inp">Java</input></label>
+			<label for="inp-5">
+				<input type="checkbox"
+					name="inp">Python</input></label>
+			<label for="inp-6">
+				<input type="checkbox"
+					name="inp">JavaScript</input></label>
+			<label for="inp-7">
+				<input type="checkbox"
+					name="inp">React</input></label>
+			<label for="inp-7">
+				<input type="checkbox"
+					name="inp">Angular</input></label>
+			<label for="inp-7">
+				<input type="checkbox"
+					name="inp">Django</input></label>
+			<label for="inp-7">
+				<input type="checkbox"
+					name="inp">Spring</input></label>
+		</div> -->
+    <div class="form-control">
+			<label>
+				<b> Civil Status </b>
+			</label>
+
+			<!-- Input Type Radio Button -->
+			<label for="recommed-1">
+				<input type="radio"
+					id="recommed-1"
+					name="recommed"> Single</input>
+			</label>
+			<label for="recommed-2">
+				<input type="radio"
+					id="recommed-2"
+					name="recommed"> Married</input>
+			</label>
+			<label for="recommed-3">
+				<input type="radio"
+					id="recommed-3"
+					name="recommed"> Widowed</input>
+			</label>
+      <label for="recommed-4">
+				<input type="radio"
+					id="recommed-4"
+					name="recommed"> Separated</input>
+			</label>
+      <label for="recommed-5">
+				<input type="radio"
+					id="recommed-5"
+					name="recommed"> Annuled</input>
+			</label>
+      <label for="recommed-6">
+				<input type="radio"
+					id="recommed-6"
+					name="recommed"> CommonLaw</input>
+			</label>
+		</div>
+		
+
+      <div class="form-control">
+        <label>
+          <b> Are there children (below 18) in the house? If yes how old are they? </b>
+        </label>
+  
+        <!-- Input Type Radio Button -->
+        <label for="recommed-1">
+          <input type="radio"
+            id="recommed-1"
+            name="recommed"> There is a/are children below 8 years old</input>
+        </label>
+        <label for="recommed-2">
+          <input type="radio"
+            id="recommed-2"
+            name="recommed"> All children in our house are older than 8 years old</input>
+        </label>
+        <label for="recommed-3">
+          <input type="radio"
+            id="recommed-3"
+            name="recommed"> There is no children living in our house</input>
+        </label>
+      </div>
+  
+      <div class="form-control">
+        <label>
+          <b> Do you have other pets? </b>
+        </label>
+  
+        <!-- Input Type Radio Button -->
+        <label for="recommed-1">
+          <input type="radio"
+            id="recommed-1"
+            name="recommed"> Yes</input>
+        </label>
+        <label for="recommed-2">
+          <input type="radio"
+            id="recommed-2"
+            name="recommed"> No</input>
+        </label>
+      </div>
+
+      <div class="form-control">
+        <label>
+          <b> Have you had pets in the past? </b>
+        </label>
+  
+        <!-- Input Type Radio Button -->
+        <label for="recommed-1">
+          <input type="radio"
+            id="recommed-1"
+            name="recommed"> Yes</input>
+        </label>
+        <label for="recommed-2">
+          <input type="radio"
+            id="recommed-2"
+            name="recommed"> No</input>
+        </label>
+      </div>
+
+      <div class="form-control">
+        <label>
+          <b> Who else do you live with?  </b>
+        </label>
+  
+        <!-- Input Type Radio Button -->
+        <label for="recommed-1">
+          <input type="radio"
+            id="recommed-1"
+            name="recommed"> I live by myself</input>
+        </label>
+        <label for="recommed-2">
+          <input type="radio"
+            id="recommed-2"
+            name="recommed"> Spouse/Partner</input>
+        </label>
+        <label for="recommed-3">
+          <input type="radio"
+            id="recommed-3"
+            name="recommed"> Parents</input>
+        </label>
+        <label for="recommed-4">
+          <input type="radio"
+            id="recommed-4"
+            name="recommed"> Roommate (s)</input>
+        </label>
+        <label for="recommed-5">
+          <input type="radio"
+            id="recommed-5"
+            name="recommed"> Other Relatives</input>
+        </label>
+      </div>
+
+      <div class="form-control">
+        <label>
+          <b> Are any members of your household allergic to animals?  </b>
+        </label>
+  
+        <!-- Input Type Radio Button -->
+        <label for="recommed-1">
+          <input type="radio"
+            id="recommed-1"
+            name="recommed"> Yes</input>
+        </label>
+        <label for="recommed-2">
+          <input type="radio"
+            id="recommed-2"
+            name="recommed"> No</input>
+        </label>
+        <label for="recommed-3">
+          <input type="radio"
+            id="recommed-3"
+            name="recommed"> I don’t Know</input>
+        </label>
+      </div>
+
+      <div class="form-control">
+        <label>
+          <b> Who will be responsible for feeding, grooming, and generally caring for your pet? </b>
+        </label>
+  
+        <!-- Input Type Radio Button -->
+        <label for="recommed-1">
+          <input type="radio"
+            id="recommed-1"
+            name="recommed"> Myself</input>
+        </label>
+        <label for="recommed-2">
+          <input type="radio"
+            id="recommed-2"
+            name="recommed"> My partner</input>
+        </label>
+        <label for="recommed-3">
+          <input type="radio"
+            id="recommed-3"
+            name="recommed"> My Family</input>
+        </label>
+      </div>
+
+      <div class="form-control">
+        <label>
+          <b> 
+            Who will be financially responsible for your pet's needs  </b>
+        </label>
+  
+        <!-- Input Type Radio Button -->
+        <label for="recommed-1">
+          <input type="radio"
+            id="recommed-1"
+            name="recommed"> Myself</input>
+        </label>
+        <label for="recommed-2">
+          <input type="radio"
+            id="recommed-2"
+            name="recommed"> My partner</input>
+        </label>
+        <label for="recommed-3">
+          <input type="radio"
+            id="recommed-3"
+            name="recommed"> My Family</input>
+        </label>
+      </div>
+
+      <div class="form-control">
+        <label>
+          <b>  Who will look after your pet if you go on vacation or in case of emergency? </b>
+        </label>
+  
+        <!-- Input Type Radio Button -->
+        <label for="recommed-1">
+          <input type="radio"
+            id="recommed-1"
+            name="recommed"> Partner</input>
+        </label>
+        <label for="recommed-2">
+          <input type="radio"
+            id="recommed-2"
+            name="recommed"> Family</input>
+        </label>
+        <label for="recommed-3">
+          <input type="radio"
+            id="recommed-3"
+            name="recommed"> Friends</input>
+        </label>
+      </div>
+
+      <div class="form-control">
+        <label>
+          <b>  How many hours in an average workday will your pet be left alone?    </b>
+        </label>
+  
+        <!-- Input Type Radio Button -->
+        <label for="recommed-1">
+          <input type="radio"
+            id="recommed-1"
+            name="recommed"> 1-4</input>
+        </label>
+        <label for="recommed-2">
+          <input type="radio"
+            id="recommed-2"
+            name="recommed"> 4-8</input>
+        </label>
+        <label for="recommed-3">
+          <input type="radio"
+            id="recommed-3"
+            name="recommed"> More than 8hrs</input>
+        </label>
+        <label for="recommed-4">
+          <input type="radio"
+            id="recommed-4"
+            name="recommed"> I work remotely </input>
+        </label>
+      </div>
+
+      <div class="form-control">
+        <label>
+          <b> Does everyone in the family support your decision to adopt a pet? </b>
+        </label>
+  
+        <!-- Input Type Radio Button -->
+        <label for="recommed-1">
+          <input type="radio"
+            id="recommed-1"
+            name="recommed"> Yes</input>
+        </label>
+        <label for="recommed-2">
+          <input type="radio"
+            id="recommed-2"
+            name="recommed"> No</input>
+        </label>
+      </div>
+
+      <div class="form-control">
+        <label>
+          <b>  What type of building do you live in?    </b>
+        </label>
+  
+        <!-- Input Type Radio Button -->
+        <label for="recommed-1">
+          <input type="radio"
+            id="recommed-1"
+            name="recommed"> House </input>
+        </label>
+        <label for="recommed-2">
+          <input type="radio"
+            id="recommed-2"
+            name="recommed"> Condo</input>
+        </label>
+        <label for="recommed-3">
+          <input type="radio"
+            id="recommed-3"
+            name="recommed"> Apartment</input>
+        </label>
+      </div>
+
+      <div class="form-control">
+        <label>
+          <b>  If you rent, do you have permission from your landlord to have an animal?  </b>
+        </label>
+  
+        <!-- Input Type Radio Button -->
+        <label for="recommed-1">
+          <input type="radio"
+            id="recommed-1"
+            name="recommed"> Yes </input>
+        </label>
+        <label for="recommed-2">
+          <input type="radio"
+            id="recommed-2"
+            name="recommed"> No</input>
+        </label>
+        <label for="recommed-3">
+          <input type="radio"
+            id="recommed-3"
+            name="recommed"> I own</input>
+        </label>
+      </div>
+
+      <div class="form-control">
+        <label>
+          <b>  Are you prepared to spend for the wellness of your pet? If so, how much 
+            are you willing to spend in a year?  </b>
+        </label>
+  
+        <!-- Input Type Radio Button -->
+        <label for="recommed-1">
+          <input type="radio"
+            id="recommed-1"
+            name="recommed"> Under 10,000 </input>
+        </label>
+        <label for="recommed-2">
+          <input type="radio"
+            id="recommed-2"
+            name="recommed"> 10,000 - 20,000</input>
+        </label>
+        <label for="recommed-3">
+          <input type="radio"
+            id="recommed-3"
+            name="recommed"> 20,001 – 40,000</input>
+        </label>
+        <label for="recommed-4">
+          <input type="radio"
+            id="recommed-4"
+            name="recommed"> 40,001 – 60,000</input>
+        </label>
+        <label for="recommed-5">
+          <input type="radio"
+            id="recommed-5"
+            name="recommed"> 60,001 – 80,000</input>
+        </label>
+      </div>
+<!--
+      <div class="form-control">
+        <label for="comment">
+          Any comments or suggestions
+        </label>
+
+			<textarea name="comment" id="comment"
+				placeholder="Enter your comment here">
+			</textarea>
+		</div> -->
+
+		<!-- Multi-line Text Input Control -->
+		<button type="submit" value="submit">
+			Submit
+		</button>
+
+	</form>
+</body>
+
+</html>
