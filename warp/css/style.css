@@ -6772,3 +6772,7 @@ h6 {
  font-size: 18px;
  color: fff;
  margin-left: 50px;
+}
+.checked {
+  color: #f94cff;
+}
