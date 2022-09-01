@@ -416,9 +416,9 @@ h3 {
 
 /* line 49, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_btn.scss */
 .boxed-btn4 {
-  background-image: -moz-linear-gradient(0deg, #f94cff 0%, #ff843a 99%);
-  background-image: -webkit-linear-gradient(0deg, #f94cff 0%, #ff843a 99%);
-  background-image: -ms-linear-gradient(0deg, #f94cff 0%, #ff843a 99%);
+  background-image: -moz-linear-gradient(0deg, #ff843a 0%, #ff843a 99%);
+  background-image: -webkit-linear-gradient(0deg, #ff843a 0%, #ff843a 99%);
+  background-image: -ms-linear-gradient(0deg, #ff843a 0%, #ff843a 99%);
   font-size: 16px;
   font-weight: 500;
   border: 1px solid transparent;
@@ -433,7 +433,7 @@ h3 {
 
 /* line 59, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_btn.scss */
 .boxed-btn4:hover {
-  color: -moz-linear-gradient(0deg, #f94cff 0%, #ff843a 99%);
+  color: -moz-linear-gradient(0deg, #ff843a 0%, #ff843a 99%);
   border: 1px solid #ff843a;
 }
 
@@ -1329,7 +1329,7 @@ h3 {
 
 /* line 1, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_slider.scss */
 .slider_bg_1 {
-  background-image: url(../img/banner/banner.png);
+  background-image: url(../img/banner/banner2.png);
 }
 
 /* line 4, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_slider.scss */
@@ -2965,7 +2965,7 @@ h3 {
 
 /* line 1, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_bradcam.scss */
 .breadcam_bg {
-  background-image: url(../img/banner/bradcam.png);
+  background-image: url(../img/banner/bradcam2.png);
 }
 
 /* line 4, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_bradcam.scss */
@@ -2975,7 +2975,7 @@ h3 {
 
 /* line 7, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_bradcam.scss */
 .breadcam_bg_2 {
-  background-image: url(../img/banner/bradcam3.png);
+  background-image: url(../img/banner/bradcam2.png);
 }
 
 /* line 10, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_bradcam.scss */
@@ -3347,7 +3347,7 @@ h3 {
 
 /* line 1, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_anipat.scss */
 .anipat_bg_1 {
-  background-image: url(../img/banner/contact_bg.png);
+  background-image: url(../img/banner/contact_bg2.png);
 }
 
 /* line 5, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_anipat.scss */
@@ -6767,4 +6767,12 @@ h6 {
 }
 .service_icon_bg_17 {
   background-image: url(../img/shelters/Seal_of_Pateros.svg.png);
+}
+.icon-block {
+ font-size: 18px;
+ color: fff;
+ margin-left: 50px;
+}
+.checked {
+  color: #f94cff;
 }
