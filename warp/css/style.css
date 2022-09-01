@@ -1865,10 +1865,6 @@ h3 {
   top: -1px;
 }
 
-/* line 1, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_service.scss */
-.service_icon_bg_1 {
-  background-image: url(../img/service/service_icon_bg_1.png);
-}
 
 /* line 4, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_service.scss */
 .service_area {
@@ -6715,4 +6711,57 @@ h6 {
 }
 .portfolio-details .portfolio-description p {
   padding: 0;
+}
+/* line 1, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_service.scss */
+.service_icon_bg_1 {
+  background-image: url(../img/shelters/Ph_seal_ncr_manila.svg.png);
+}
+
+.service_icon_bg_2 {
+  background-image: url(../img/shelters/Las_Piñas_City_seal.png);
+}
+.service_icon_bg_3 {
+  background-image: url(../img/shelters/Quezon_City.svg.png);
+}
+.service_icon_bg_4 {
+  background-image: url(../img/shelters/Caloocan_City.png);
+}
+.service_icon_bg_5 {
+  background-image: url(../img/shelters/Makati_City.svg.png);
+}
+.service_icon_bg_6 {
+  background-image: url(../img/shelters/Ph_seal_Malabon.png);
+}
+.service_icon_bg_7 {
+  background-image: url(../img/shelters/Ph_seal_Mandaluyong.png);
+}
+.service_icon_bg_8 {
+  background-image: url(../img/shelters/marikina-city-seal-big.jpg);
+}
+.service_icon_bg_9 {
+  background-image: url(../img/shelters/Muntinlupa_City.svg.png);
+}
+.service_icon_bg_10 {
+  background-image: url(../img/shelters/navotas_seal.png);
+}
+.service_icon_bg_11 {
+  background-image: url(../img/shelters/download\ \(1\).png);
+}
+.service_icon_bg_12 {
+  background-image: url(../img/shelters/pasay-logo-1.png);
+}
+.service_icon_bg_13 {
+  background-image: url(../img/shelters/corporate-seal.jpg);
+}
+.service_icon_bg_14 {
+  background-image: url(../img/shelters/download.png);
+}
+.service_icon_bg_15 {
+  background-image: url(../img/shelters/logo-taguig.png);
+}
+.service_icon_bg_16 {
+  background-image: url(../img/shelters/Valenzuela_Seal.svg.png);
+}
+.service_icon_bg_17 {
+  background-image: url(../img/shelters/Seal_of_Pateros.svg.png);
 }
