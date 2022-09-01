@@ -10,7 +10,7 @@
 
 		/* Styling the Form (Color, Padding, Shadow) */
 		form {
-			background-color: #fff;
+			background-color: #f3d1dc;
 			max-width: 800px;
 			margin: 50px auto;
 			padding: 30px 20px;
@@ -52,8 +52,8 @@
 
 		/* Styling Button */
 		button {
-			background-color: #d6670d;
-			border: 1px solid #777;
+			background-color: #f94cff;
+			border: 1px solid #ff843a
 			border-radius: 2px;
       font-family: "Poppins", sans-serif;
 			font-size: 21px;
