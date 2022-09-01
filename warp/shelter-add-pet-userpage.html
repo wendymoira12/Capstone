@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/shelter.css">
+    <script src="https://kit.fontawesome.com/2fc1fce0fb.js" crossorigin="anonymous"></script>
+    <title>Las Piñas User Page</title>
+</head>
+
+<body>
+    <div class="adopter-container">
+<!-- Sidebar Start -->
+        <div class="adopter-sidebar">
+            <ul>
+                <li>
+                    <img src="img/City Logo/last_pinas.png" alt="asdasdg" height="150" width="150"><br>
+                    Las Piñas
+                </li><br>
+                <li>
+                    <a href="shelter-profile-userpage.html">
+                        <div class="sidebar-title">
+                            Shelter Profile
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="shelter-add-pet-userpage.html">
+                        <div class="sidebar-title">
+                            Add Pet Adoptee
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="shelter-adoptee-list-userpage.html">
+                        <div class="sidebar-title">
+                            Pet Adoptee List
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="shelter-adopted-list-userpage.html">
+                        <div class="sidebar-title">
+                            Adopted Pet List
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="adopter-main">
+<!-- Sidebar End -->
+<!-- Top Bar Start -->
+            <div class="adopter-top-bar">
+                <div class="adopter-search">
+                    <input type="text" name="search" placeholder="search here...">
+                    <label for="search"><i class="fa-solid fa-magnifying-glass"></i></label>
+                </div>
+                <i class="fa-solid fa-bell"></i>
+            </div>
+<!-- Top Bar End -->
+<!-- Adoptee Card Start -->
+            <div class="adopter-cards">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="number">1</div>
+                        <div class="card-name">Pet Adoptees</div>
+                    </div>
+                    <div class="icon-box">
+                        <i class="fa-solid fa-dog"></i>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <div class="number">1</div>
+                        <div class="card-name">Pet Adopted</div>
+                    </div>
+                    <div class="icon-box">
+                        <i class="fa-solid fa-cat"></i>
+                    </div>
+                </div>
+            </div> 
+<!-- Adoptee Card End -->
+<!-- Adoptee CRUD Start -->
+            <div class="add-adoptee-container">
+                <input type="file" accept="image/png, image/jpeg, image/jpg" name="adoptee_image" class="adoptee-img-box"><br>
+                <input type="text" placeholder="Enter Adoptee Name.." name="adoptee_name" class="adoptee-box"><br>
+                <input type="text" placeholder="Enter Adoptee Age.." name="adoptee_age" class="adoptee-box"><br>
+                <input type="text" placeholder="Enter Adoptee Color.." name="adoptee_color" class="adoptee-box"><br>
+                <input type="text" placeholder="Enter Adoptee Specie.." name="adoptee_specie" class="adoptee-box"><br>
+                <input type="text" placeholder="Enter Adoptee Sex.." name="adoptee_sex" class="adoptee-box"><br>
+                <input type="text" placeholder="Enter Adoptee Neuter.." name="adoptee_neuter" class="adoptee-box"><br>
+                <input type="text" placeholder="Enter Adoptee Vax.." name="adoptee_vax" class="adoptee-box"><br>
+                <input type="text" placeholder="Enter Adoptee Size.." name="adoptee_size" class="adoptee-box"><br>
+                <input type="text" placeholder="Enter Adoptee Medical Record.." name="adoptee_medrec" class="adoptee-box"><br>
+                <input type="text" placeholder="Enter Adoptee Level of Sociability.." name="adoptee_color" class="adoptee-box"><br>
+                <input type="text" placeholder="Enter Adoptee Level of Energy.." name="adoptee_color" class="adoptee-box"><br>
+                <input type="text" placeholder="Enter Adoptee Level of Affection.." name="adoptee_color" class="adoptee-box"><br>
+                <input type="submit" class="btn-add-adoptee" name="adoptee_add" value="Add Adoptee">
+            </div>
+<!-- Adoptee CRUD End -->
+        </div>
+    </div>
+</body>
+</html>
