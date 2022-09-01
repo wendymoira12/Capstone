@@ -88,3 +88,27 @@
       display: inline-block;
       visibility: visible;
       border: 2px solid white;
+  }
+	  .form-inline {
+		text-align: left;
+		margin-bottom: 25px;
+	}
+
+	/* Styling form-control Label */
+	.form-control-2 label {
+		display: block;
+		margin-bottom: 10px;
+	}
+
+	/* Styling form-control input,
+	select, textarea */
+	.form-control-2 input,
+	.form-control-2 select,
+	.form-control-2 textarea {
+		border: 1px solid #777;
+		border-radius: 2px;
+  font-family: "Poppins", sans-serif;
+		padding: 10px;
+		display: block;
+		width: 95%;
+	}
