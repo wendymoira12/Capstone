@@ -6768,3 +6768,7 @@ h6 {
 .service_icon_bg_17 {
   background-image: url(../img/shelters/Seal_of_Pateros.svg.png);
 }
+.icon-block {
+ font-size: 18px;
+ color: fff;
+ margin-left: 50px;
