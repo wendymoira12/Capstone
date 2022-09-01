@@ -361,7 +361,7 @@ h3 {
   font-size: 14px;
   font-weight: 400;
   border: 0;
-  border: 1px solid #ff843a;
+  border: 1px solid #f94cff;
   letter-spacing: 3px;
   text-align: center;
   color: #ff843a !important;
@@ -371,9 +371,11 @@ h3 {
 
 /* line 17, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_btn.scss */
 .boxed-btn:hover {
-  background: #ff843a;
+  background-image: -moz-linear-gradient(0deg, #f94cff 0%, #ff843a 99%);
+  background-image: -webkit-linear-gradient(0deg, #f94cff 0%, #ff843a 99%);
+  background-image: -ms-linear-gradient(0deg, #f94cff 0%, #ff843a 99%);
   color: #fff !important;
-  border: 1px solid #ff843a;
+  border: 1px solid #f94cff;
 }
 
 /* line 22, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_btn.scss */
@@ -414,11 +416,13 @@ h3 {
 
 /* line 49, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_btn.scss */
 .boxed-btn4 {
-  background: #fff;
+  background-image: -moz-linear-gradient(0deg, #f94cff 0%, #ff843a 99%);
+  background-image: -webkit-linear-gradient(0deg, #f94cff 0%, #ff843a 99%);
+  background-image: -ms-linear-gradient(0deg, #f94cff 0%, #ff843a 99%);
   font-size: 16px;
   font-weight: 500;
   border: 1px solid transparent;
-  color: #ff843a;
+  color: #fff;
   padding: 17px 50px;
   font-family: "Poppins", sans-serif;
   display: inline-block;
@@ -429,8 +433,7 @@ h3 {
 
 /* line 59, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_btn.scss */
 .boxed-btn4:hover {
-  background: #ff843a;
-  color: #fff;
+  color: -moz-linear-gradient(0deg, #f94cff 0%, #ff843a 99%);
   border: 1px solid #ff843a;
 }
 
