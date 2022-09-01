@@ -128,13 +128,13 @@ form.sign-in-form {
 }
 
 .social-icon:hover {
-  background-image: -webkit-linear-gradient(0deg, #f14437 0%, #ed5b0d 99%);
-  background-image: -webkit-linear-gradient(0deg, #f14437 0%, #ed5b0d 99%);
+  background-image: -webkit-linear-gradient(0deg, #ff843a 0%, #f94cff 99%);
+  background-image: -webkit-linear-gradient(0deg, #ff843a 0%, #f94cff 99%);
 }
 
 .btn {
   width: 150px;
-  background-image: -webkit-linear-gradient(0deg, #f14437 0%, #ed5b0d 99%);
+  background-image: -webkit-linear-gradient(0deg, #f94cff 0%, #f94cff 99%);
   border: none;
   outline: none;
   height: 49px;
@@ -148,7 +148,7 @@ form.sign-in-form {
 }
 
 .btn:hover {
-  background-image: -webkit-linear-gradient(0deg, #f14437 0%, #ed5b0d 99%);
+  background-image: -webkit-linear-gradient(0deg, #ff843a 0%, #f94cff 99%);
 }
 .panels-container {
   position: absolute;
@@ -168,7 +168,7 @@ form.sign-in-form {
   top: -10%;
   right: 48%;
   transform: translateY(-50%);
-  background-image: -webkit-linear-gradient(0deg, #f14437 0%, #ed5b0d 99%);
+  background-image: -webkit-linear-gradient(0deg,  #ff843a 0%, #f94cff 99%);
   transition: 1.8s ease-in-out;
   border-radius: 50%;
   z-index: 6;
