@@ -1,3 +1,22 @@
+<?php 
+
+include 'config.php';
+
+
+if(isset($_POST['submit']))
+{
+  $fname = $_POST['fname'];
+  $lname = $_POST['lname'];
+  $age = $_POST['age'];
+  $cnum = $_POST['cnum'];
+  $address = $_POST['address'];
+
+  $sql = "SELECT * FROM adopter_tbl WHERE adopter_fname='$fname', adopter_lname='$lname', adopter_age='$age', adopter_cnum='$cnum' AND adopter_addres='$address'";
+  $result = mysqli_query($conn, $sql);
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -16,32 +35,32 @@
     <div class="container">
       <div class="forms-container">
         <div class="signin-signup">
-          <form action="#" class="sign-in-form">
+          <form action="" class="sign-in-form">
             <h2 class="title"> You're almost done!</h2>
               <div class="input-field">
                 <i class="fas fa-user"></i>
-                <input type="text" placeholder="First Name" />
+                <input type="text" placeholder="First Name" name="fname" required/>
               </div>
               <div class="input-field">
                 <i class="fas fa-user"></i>
-                <input type="text" placeholder="Last Name" />
+                <input type="text" placeholder="Last Name" name="lname" required/>
               </div>
               <div class="input-field">
                 <i class="fa-solid fa-cake-candles"></i>
-                <input type="age" placeholder="Age" />
+                <input type="number" placeholder="Age" name="age" required/>
               </div>
               <div class="input-field">
                 <i class="fa-solid fa-phone"></i>
-                <input type="text" placeholder="Phone Number" />
+                <input type="text" placeholder="Cellphone Number" name="cnumber" required/>
               </div>
               <div class="input-field">
                 <i class="fa-solid fa-location-dot"></i>
-                <input type="text" placeholder="Address" />
+                <input type="text" placeholder="Address" name="address" required/>
               </div>
             
             <!--
             <input type="submit" value="Login" action="home.html" class="btn solid" /> -->
-            <button class="btn solid" formaction ="home.html">submit</button>
+            <button name="submit" class="btn solid" formaction ="home.html">submit</button>
 
            
           </form>
