@@ -13,11 +13,12 @@ if(isset($_POST['submit-signup'])) {
   {
     $sql = "SELECT * FROM user_tbl WHERE user_email='$email_signup'";
     $result = mysqli_query($conn, $sql);
-
+    $role = 1;
     if (!$result->num_rows > 0)
     {
-        $sql = "INSERT INTO user_tbl (user_email, user_password)
-                VALUES ('$email_signup', '$pass_signup')";
+
+        $sql = "INSERT INTO user_tbl (user_email, user_password, role_id)
+                VALUES ('$email_signup', '$pass_signup','$role')";
         $result = mysqli_query($conn, $sql);
         header("Location: login2.php");
         if ($result) 
@@ -48,7 +49,7 @@ if (isset($_POST['submit-login']))
   $email_login = $_POST['email-login'];
   $pass_login = md5($_POST['pass-login']);
 
-  $sql = "SELECT * FROM user_tbl WHERE user_email='$email_login' AND user_password='$pass_login'";
+  $sql = "SELECT * FROM user_tbl WHERE user_email='$email_login' AND user_password='$pass_login' AND role_id='1'";
   $result = mysqli_query($conn, $sql);
   if($result->num_rows > 0) 
   {

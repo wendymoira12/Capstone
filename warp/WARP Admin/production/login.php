@@ -26,7 +26,7 @@ if (isset($_POST['submit'])) {
 
   if (empty($emailErr) && empty($passErr)) {
     // add to database
-    $pass = md5($pass);
+    $pass = password_hash($pass, PASSWORD_DEFAULT);
     $role = 3;
     $sql = "INSERT INTO user_tbl (user_email, user_password, role_id) VALUES ('$email', '$pass', '$role')";
     if (mysqli_query($conn, $sql)) {
@@ -36,6 +36,29 @@ if (isset($_POST['submit'])) {
       // error
       echo 'Error: ' . mysqli_error($conn);
     }
+  }
+}
+
+?>
+
+<?php
+session_start(); 
+
+if (isset($_POST['submit-login'])) 
+{
+  $email_login = $_POST['email-login'];
+  $pass_login = md5($_POST['password-login']);
+
+  $sql = "SELECT * FROM user_tbl WHERE user_email='$email_login' AND user_password='$pass_login' AND role_id='3'";
+  $result = mysqli_query($conn, $sql);
+  if($result->num_rows > 0) 
+  {
+    $row = mysqli_fetch_assoc($result);
+    $_SESSION['email-login'] = $row['email-login'];
+    header("Location: admin_home.html");
+  } else
+  {
+    echo "<script>alert('Oops! Email or Password is incorrect')</script>";
   }
 }
 ?>
@@ -71,16 +94,18 @@ if (isset($_POST['submit'])) {
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content">
-            <form>
+            <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
               <h1>Admin Login Form</h1>
               <div>
-                <input type="text" class="form-control" placeholder="Username" required="" />
+                <input type="email" class="form-control <?php echo !$emailErr ?:
+          'is-invalid'; ?>" placeholder="Email" required="" name="email-login"/>
               </div>
               <div>
-                <input type="password" class="form-control" placeholder="Password" required="" />
+                <input type="password" class="form-control <?php echo !$passErr ?:
+          'is-invalid'; ?>" placeholder="Password" required="" name="password-login"/>
               </div>
               <div>
-                <a class="btn btn-default submit" href="admin_home.html">Log in</a>
+                <input type="submit" class="btn btn-default submit" name="submit-login">
                 <!-- <a class="reset_pass" href="#">Lost your password?</a> -->
               </div>
 
@@ -109,14 +134,14 @@ if (isset($_POST['submit'])) {
               <h1>Create Account</h1>
               <div>
                 <input type="email" class="form-control <?php echo !$emailErr ?:
-          'is-invalid'; ?>" placeholder="Email" required="" name="email"/>
+          'is-invalid'; ?>" placeholder="Email"  name="email"/>
               </div>
               <div>
                 <input type="password" class="form-control <?php echo !$passErr ?:
-          'is-invalid'; ?>" placeholder="Password" required="" name="password" />
+          'is-invalid'; ?>" placeholder="Password"  name="password" />
               </div>
               <div>
-                <a class="btn btn-default submit" href="index.html" type="submit" name="submit">Submit</a>
+                <input type="submit" class="btn btn-default submit" name="submit">
               </div>
 
               <div class="clearfix"></div>
