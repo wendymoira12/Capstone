@@ -5,44 +5,33 @@ include 'config/database.php'; ?>
 <?php 
 // Form submit
 if (isset($_POST['submit'])) {
-  // Validate name
-  if (empty($_POST['name'])) {
-    $nameErr = 'Name is required';
-  } else {
-    // $name = filter_var($_POST['name'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $name = filter_input(
-      INPUT_POST,
-      'name',
-      FILTER_SANITIZE_FULL_SPECIAL_CHARS
-    );
-  }
 
   // Validate email
   if (empty($_POST['email'])) {
     $emailErr = 'Email is required';
   } else {
-    // $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
   }
 
-  // Validate body
-  if (empty($_POST['body'])) {
-    $bodyErr = 'Body is required';
+  // Validate password
+  if (empty($_POST['password'])) {
+    $passErr = 'Password is required';
   } else {
-    // $body = filter_var($_POST['body'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $body = filter_input(
+    $pass = filter_input(
       INPUT_POST,
-      'body',
+      'password',
       FILTER_SANITIZE_FULL_SPECIAL_CHARS
     );
   }
 
-  if (empty($nameErr) && empty($emailErr) && empty($bodyErr)) {
+  if (empty($emailErr) && empty($passErr)) {
     // add to database
-    $sql = "INSERT INTO feedback (name, email, body) VALUES ('$name', '$email', '$body')";
+    $pass = md5($pass);
+    $role = 3;
+    $sql = "INSERT INTO user_tbl (user_email, user_password, role_id) VALUES ('$email', '$pass', '$role')";
     if (mysqli_query($conn, $sql)) {
       // success
-      header('Location: feedback.php');
+      header('Location: login.php');
     } else {
       // error
       echo 'Error: ' . mysqli_error($conn);
@@ -116,26 +105,25 @@ if (isset($_POST['submit'])) {
 
         <div id="register" class="animate form registration_form">
           <section class="login_content">
-            <form>
+            <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
               <h1>Create Account</h1>
               <div>
-                <input type="text" class="form-control" placeholder="Username" required="" />
+                <input type="email" class="form-control <?php echo !$emailErr ?:
+          'is-invalid'; ?>" placeholder="Email" required="" name="email"/>
               </div>
               <div>
-                <input type="email" class="form-control" placeholder="Email" required="" />
+                <input type="password" class="form-control <?php echo !$passErr ?:
+          'is-invalid'; ?>" placeholder="Password" required="" name="password" />
               </div>
               <div>
-                <input type="password" class="form-control" placeholder="Password" required="" />
-              </div>
-              <div>
-                <a class="btn btn-default submit" href="index.html">Submit</a>
+                <a class="btn btn-default submit" href="index.html" type="submit" name="submit">Submit</a>
               </div>
 
               <div class="clearfix"></div>
 
               <div class="separator">
                 <p class="change_link">
-                  <a href="#signin" class="to_register"> Log in </a>
+                  <a href="#signin" class="to_register">Log in</a>
                 </p>
 
                 <div class="clearfix"></div>
