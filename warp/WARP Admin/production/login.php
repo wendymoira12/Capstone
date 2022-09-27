@@ -134,11 +134,11 @@ if (isset($_POST['submit-login']))
               <h1>Create Account</h1>
               <div>
                 <input type="email" class="form-control <?php echo !$emailErr ?:
-          'is-invalid'; ?>" placeholder="Email"  name="email"/>
+          'is-invalid'; ?>" placeholder="Email" required="" name="email"/>
               </div>
               <div>
                 <input type="password" class="form-control <?php echo !$passErr ?:
-          'is-invalid'; ?>" placeholder="Password"  name="password" />
+          'is-invalid'; ?>" placeholder="Password" required="" name="password" />
               </div>
               <div>
                 <input type="submit" class="btn btn-default submit" name="submit">
