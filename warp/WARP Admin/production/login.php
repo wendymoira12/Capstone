@@ -1,3 +1,55 @@
+<?php 
+
+include 'config/database.php'; ?>
+
+<?php 
+// Form submit
+if (isset($_POST['submit'])) {
+  // Validate name
+  if (empty($_POST['name'])) {
+    $nameErr = 'Name is required';
+  } else {
+    // $name = filter_var($_POST['name'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $name = filter_input(
+      INPUT_POST,
+      'name',
+      FILTER_SANITIZE_FULL_SPECIAL_CHARS
+    );
+  }
+
+  // Validate email
+  if (empty($_POST['email'])) {
+    $emailErr = 'Email is required';
+  } else {
+    // $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+  }
+
+  // Validate body
+  if (empty($_POST['body'])) {
+    $bodyErr = 'Body is required';
+  } else {
+    // $body = filter_var($_POST['body'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $body = filter_input(
+      INPUT_POST,
+      'body',
+      FILTER_SANITIZE_FULL_SPECIAL_CHARS
+    );
+  }
+
+  if (empty($nameErr) && empty($emailErr) && empty($bodyErr)) {
+    // add to database
+    $sql = "INSERT INTO feedback (name, email, body) VALUES ('$name', '$email', '$body')";
+    if (mysqli_query($conn, $sql)) {
+      // success
+      header('Location: feedback.php');
+    } else {
+      // error
+      echo 'Error: ' . mysqli_error($conn);
+    }
+  }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,7 +59,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Gentelella Alela! | </title>
+    <title>WARP ADMIN LOGIN</title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -31,7 +83,7 @@
         <div class="animate form login_form">
           <section class="login_content">
             <form>
-              <h1>Login Form</h1>
+              <h1>Admin Login Form</h1>
               <div>
                 <input type="text" class="form-control" placeholder="Username" required="" />
               </div>
@@ -39,14 +91,14 @@
                 <input type="password" class="form-control" placeholder="Password" required="" />
               </div>
               <div>
-                <a class="btn btn-default submit" href="index.html">Log in</a>
-                <a class="reset_pass" href="#">Lost your password?</a>
+                <a class="btn btn-default submit" href="admin_home.html">Log in</a>
+                <!-- <a class="reset_pass" href="#">Lost your password?</a> -->
               </div>
 
               <div class="clearfix"></div>
 
               <div class="separator">
-                <p class="change_link">New to site?
+                <p class="change_link">
                   <a href="#signup" class="to_register"> Create Account </a>
                 </p>
 
@@ -54,8 +106,8 @@
                 <br />
 
                 <div>
-                  <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-                  <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
+                  <h1><i class="fa fa-paw"></i> WARP ADMIN</h1>
+                  <!-- <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p> -->
                 </div>
               </div>
             </form>
@@ -82,7 +134,7 @@
               <div class="clearfix"></div>
 
               <div class="separator">
-                <p class="change_link">Already a member ?
+                <p class="change_link">
                   <a href="#signin" class="to_register"> Log in </a>
                 </p>
 
@@ -90,8 +142,8 @@
                 <br />
 
                 <div>
-                  <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-                  <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
+                  <h1><i class="fa fa-paw"></i> WARP ADMIN</h1>
+                  <!-- <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p> -->
                 </div>
               </div>
             </form>
