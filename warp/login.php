@@ -11,12 +11,12 @@ if(isset($_POST['submit-signup'])) {
 
   if($pass_signup == $cpass_signup) 
   {
-    $sql = "SELECT * FROM adopter_tbl WHERE adopter_email='$email_signup'";
+    $sql = "SELECT * FROM user_tbl WHERE user_email='$email_signup'";
     $result = mysqli_query($conn, $sql);
 
     if (!$result->num_rows > 0)
     {
-        $sql = "INSERT INTO adopter_tbl (adopter_email, adopter_password)
+        $sql = "INSERT INTO user_tbl (user_email, user_password)
                 VALUES ('$email_signup', '$pass_signup')";
         $result = mysqli_query($conn, $sql);
         header("Location: login2.php");
@@ -48,7 +48,7 @@ if (isset($_POST['submit-login']))
   $email_login = $_POST['email-login'];
   $pass_login = md5($_POST['pass-login']);
 
-  $sql = "SELECT * FROM adopter_tbl WHERE adopter_email='$email_login' AND adopter_password='$pass_login'";
+  $sql = "SELECT * FROM user_tbl WHERE user_email='$email_login' AND user_password='$pass_login'";
   $result = mysqli_query($conn, $sql);
   if($result->num_rows > 0) 
   {

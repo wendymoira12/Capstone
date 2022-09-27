@@ -2,17 +2,28 @@
 
 include 'config.php';
 
+session_start();
 
-if(isset($_POST['submit']))
+if(isset($_POST['submit'])) 
 {
   $fname = $_POST['fname'];
   $lname = $_POST['lname'];
   $age = $_POST['age'];
-  $cnum = $_POST['cnum'];
-  $address = $_POST['address'];
+  $cnumber = $_POST['cnumber'];
+  $region = $_POST['region'];
+  $city = $_POST['city'];
 
-  $sql = "SELECT * FROM adopter_tbl WHERE adopter_fname='$fname', adopter_lname='$lname', adopter_age='$age', adopter_cnum='$cnum' AND adopter_addres='$address'";
-  $result = mysqli_query($conn, $sql);
+  $sql = "INSERT INTO adopter_tbl(adopter_fname, adopter_lname, adopter_age, adopter_cnum, adopter_region, adopter_city) VALUES(?,?,?,?,?,?)";
+  $stmtinsert = $db->prepare($sql);
+  $result = $stmtinsert->execute([$fname, $lname, $age, $cnumber, $region, $city]);
+  if($result)
+  {
+    echo "<script>alert('Registration complete')</script>";
+    header("Location: Home-guest.php");
+  } else 
+  {
+    echo "<script>alert('Oops! Something went wrong')</script>";
+  }
 }
 
 ?>
@@ -35,7 +46,7 @@ if(isset($_POST['submit']))
     <div class="container">
       <div class="forms-container">
         <div class="signin-signup">
-          <form action="" class="sign-in-form">
+          <form action="" method="POST" class="sign-in-form">
             <h2 class="title"> You're almost done!</h2>
               <div class="input-field">
                 <i class="fas fa-user"></i>
@@ -55,12 +66,16 @@ if(isset($_POST['submit']))
               </div>
               <div class="input-field">
                 <i class="fa-solid fa-location-dot"></i>
-                <input type="text" placeholder="Address" name="address" required/>
+                <input type="text" placeholder="Region" name="region" required/>
+              </div>
+              <div class="input-field">
+                <i class="fa-solid fa-location-dot"></i>
+                <input type="text" placeholder="City" name="city" required/>
               </div>
             
             <!--
             <input type="submit" value="Login" action="home.html" class="btn solid" /> -->
-            <button name="submit" class="btn solid" formaction ="home.html">submit</button>
+            <button name="submit" class="btn solid">submit</button>
 
            
           </form>
