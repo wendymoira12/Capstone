@@ -1,3 +1,8 @@
+<?php 
+include 'config/database.php';
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,9 +13,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" type="image/x-icon" href="/warp/img/WARP_LOGO copy.png">
-
   <title>WARP Admin</title>
-
   <!-- Bootstrap -->
   <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Font Awesome -->
@@ -19,14 +22,12 @@
   <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
   <!-- iCheck -->
   <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-
   <!-- bootstrap-progressbar -->
   <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
   <!-- JQVMap -->
   <link href="../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet" />
   <!-- bootstrap-daterangepicker -->
   <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-
   <!-- Custom Theme Style -->
   <link href="../build/css/custom.min.css" rel="stylesheet">
 
@@ -52,7 +53,15 @@
             </div>
             <div class="profile_info">
               <span>Welcome,</span>
-              <h2>Admin</h2>
+              <h2>
+              <?php 
+              if (isset($_SESSION['email-login'])){
+                echo $_SESSION['email-login'];
+              } else {
+                header("Location: login.php");
+              }
+              ?>
+              </h2>
             </div>
           </div>
           <!-- /menu profile quick info -->
@@ -72,7 +81,6 @@
                     <li><a href="manage_adopter.html">Adopter</a></li>
                   </ul>
                 </li>
-
               </ul>
             </div>
 
@@ -111,7 +119,7 @@
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
                   aria-expanded="false">
-                  <img src="images/WARP_LOGO.svg" alt="">Admin
+                  <img src="images/WARP_LOGO.svg" alt=""><?php echo $_SESSION['email-login']?>
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -123,7 +131,7 @@
                     </a>
                   </li>
                   <li><a href="javascript:;">Help</a></li>
-                  <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                  <li><a href="logout.php?logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                 </ul>
               </li>
 

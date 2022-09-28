@@ -25,7 +25,7 @@ if (isset($_POST['submit'])) {
   }
 
   if (empty($emailErr) && empty($passErr)) {
-    // add to database
+    // Add to database
     $pass = password_hash($pass, PASSWORD_DEFAULT);
     $role = 3;
     $sql = "INSERT INTO user_tbl (user_email, user_password, role_id) VALUES ('$email', '$pass', '$role')";
@@ -54,8 +54,8 @@ if (isset($_POST['submit-login']))
   if($result->num_rows > 0) 
   {
     $row = mysqli_fetch_assoc($result);
-    $_SESSION['email-login'] = $row['email-login'];
-    header("Location: admin_home.html");
+    $_SESSION['email-login'] = $row['user_email'];
+    header("Location: admin_home.php");
   } else
   {
     echo "<script>alert('Oops! Email or Password is incorrect')</script>";
