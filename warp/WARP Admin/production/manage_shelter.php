@@ -1,3 +1,11 @@
+<?php 
+include 'config/database.php';
+session_start();
+
+if(!isset($_SESSION['email-login'])){
+  header('Location: login.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,7 +54,7 @@
       <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
-            <a href="admin_home.html" class="site_title"><i class="fa fa-paw"></i> <span>WARP</span></a>
+            <a href="admin_home.php" class="site_title"><i class="fa fa-paw"></i> <span>WARP</span></a>
           </div>
 
           <div class="clearfix"></div>
@@ -58,7 +66,15 @@
             </div>
             <div class="profile_info">
               <span>Welcome,</span>
-              <h2>Admin</h2>
+              <h2>
+                <?php
+                //DISPLAY SESSION
+                if (isset($_SESSION['email-login'])) {
+                  echo $_SESSION['email-login'];
+                } else {
+                  header("Location: login.php");
+                }
+                ?></h2>
             </div>
           </div>
           <!-- /menu profile quick info -->
@@ -70,17 +86,17 @@
             <div class="menu_section">
               <h3>General</h3>
               <ul class="nav side-menu">
-                <li><a href="admin_home.html"><i class="fa fa-home"></i> Home <span></span></a>
+                <li><a href="admin_home.php"><i class="fa fa-home"></i> Home <span></span></a>
                 </li>
                 <li><a><i class="fa fa-users"></i> Manage Accounts <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a href="manage_shelter.html">Shelter</a></li>
+                    <li><a href="manage_shelter.php">Shelter</a></li>
                     <li><a href="manage_adopter.html">Adopter</a></li>
                   </ul>
                 </li>
               </ul>
             </div>
- 
+
 
           </div>
           <!-- /sidebar menu -->
@@ -114,21 +130,12 @@
 
             <ul class="nav navbar-nav navbar-right">
               <li class="">
-                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
-                  aria-expanded="false">
-                  <img src="images/WARP_LOGO.svg" alt="">Admin
+                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  <img src="images/WARP_LOGO.svg" alt=""><?php echo $_SESSION['email-login']?>
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
-                  <li><a href="javascript:;"> Profile</a></li>
-                  <li>
-                    <a href="javascript:;">
-                      <span class="badge bg-red pull-right"></span>
-                      <span>Settings</span>
-                    </a>
-                  </li>
-                  <li><a href="javascript:;">Help</a></li>
-                  <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                  <li><a href="logout.php?logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                 </ul>
               </li>
             </ul>
@@ -142,51 +149,21 @@
         <div class="">
           <div class="page-title">
             <div class="title_left">
-              <h3>Manage Shelter</h3>
+              <h3>Manage Shelter</h3><br>
             </div>
-
-            <div class="title_right">
-              <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Search for...">
-                  <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">Go!</button>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
           <div class="clearfix"></div>
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
                   <h2>Create Shelter Account</h2>
-                  <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i
-                          class="fa fa-wrench"></i></a>
-                      <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Settings 1</a>
-                        </li>
-                        <li><a href="#">Settings 2</a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                    </li>
-                  </ul>
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                  <br />
+                  <br/>
                   <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">City<span
-                          class="required">*</span></label>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">City<span class="required">*</span></label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <select class="form-control">
                           <option>Caloocan</option>
@@ -200,44 +177,35 @@
                           <option>Paranaque</option>
                           <option>Pasay</option>
                           <option>Pasig</option>
-
                         </select>
                       </div>
                     </div>
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Contact Number<span
-                          class="required">*</span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Contact Number<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="last-name" name="last-name" required="required"
-                          class="form-control col-md-7 col-xs-12">
+                        <input type="text" id="last-name" name="last-name" required="required" class="form-control col-md-7 col-xs-12">
                       </div>
                     </div>
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Email Address <span
-                          class="required">*</span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Email Address <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input id="birthday" class="date-picker form-control col-md-7 col-xs-12" required="required"
-                          type="text">
+                        <input id="birthday" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
                       </div>
                     </div>
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Password">Password<span
-                          class="required">*</span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Password">Password<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="password" id="password" name="password" required="required"
-                          class="form-control col-md-7 col-xs-12">
+                        <input type="password" id="password" name="password" required="required" class="form-control col-md-7 col-xs-12">
                       </div>
                     </div>
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Password">Re-Type Password<span
-                          class="required">*</span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Password">Re-Type Password<span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="password" id="password" name="password" required="required"
-                          class="form-control col-md-7 col-xs-12">
+                        <input type="password" id="password" name="password" required="required" class="form-control col-md-7 col-xs-12">
                       </div>
                     </div>
                     <div class="ln_solid"></div>
@@ -262,8 +230,7 @@
                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                 </li>
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i
-                      class="fa fa-wrench"></i></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
                   <ul class="dropdown-menu" role="menu">
                     <li><a href="#">Settings 1</a>
                     </li>
@@ -277,8 +244,7 @@
               <div class="clearfix"></div>
             </div>
             <div class="x_content">
-              <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap"
-                cellspacing="0" width="100%">
+              <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                 <thead>
                   <tr>
                     <th>No.</th>

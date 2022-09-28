@@ -1,6 +1,10 @@
 <?php 
 include 'config/database.php';
 session_start();
+
+if(!isset($_SESSION['email-login'])){
+  header('Location: login.php');
+}
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +16,7 @@ session_start();
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" type="image/x-icon" href="/warp/img/WARP_LOGO copy.png">
+  <link rel="shortcut icon" type="image/x-icon" href="/warp/img/WARP_Logo_Orange.png">
   <title>WARP Admin</title>
   <!-- Bootstrap -->
   <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -41,7 +45,7 @@ session_start();
       <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
-            <a href="admin_home.html" class="site_title"><i class="fa fa-paw"></i> <span>WARP</span></a>
+            <a href="admin_home.php" class="site_title"><i class="fa fa-paw"></i> <span>WARP</span></a>
           </div>
 
           <div class="clearfix"></div>
@@ -55,6 +59,7 @@ session_start();
               <span>Welcome,</span>
               <h2>
               <?php 
+              //DISPLAY SESSION
               if (isset($_SESSION['email-login'])){
                 echo $_SESSION['email-login'];
               } else {
@@ -77,7 +82,7 @@ session_start();
                 </li>
                 <li><a><i class="fa fa-users"></i> Manage Accounts </a>
                   <ul class="nav child_menu">
-                    <li><a href="manage_shelter.html">Shelter</a></li>
+                    <li><a href="manage_shelter.php">Shelter</a></li>
                     <li><a href="manage_adopter.html">Adopter</a></li>
                   </ul>
                 </li>
@@ -123,14 +128,6 @@ session_start();
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
-                  <li><a href="javascript:;"> Profile</a></li>
-                  <li>
-                    <a href="javascript:;">
-                      <span class="badge bg-red pull-right"></span>
-                      <span>Settings</span>
-                    </a>
-                  </li>
-                  <li><a href="javascript:;">Help</a></li>
                   <li><a href="logout.php?logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                 </ul>
               </li>
