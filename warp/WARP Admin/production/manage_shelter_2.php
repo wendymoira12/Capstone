@@ -6,73 +6,44 @@ if (!isset($_SESSION['email-login'])) {
   header('Location: login.php');
 }
 
-
-
 ?>
 
-
 <?php
-// Form submit for shelter creation
+// Form submit
 if (isset($_POST['submit'])) {
 
-  // Validate email
-  if (empty($_POST['email'])) {
-    $emailErr  = 'Email is required';
+  // Validate City
+  if (empty($_POST['city'])) {
+    $cityErr = 'City is required';
   } else {
-    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+    $city = filter_input(
+      INPUT_POST, 
+      'city', 
+      FILTER_SANITIZE_FULL_SPECIAL_CHARS);
   }
 
-  // Validate password
-  if (empty($_POST['password'])) {
-    $passErr = 'Password is required';
+  // Validate Contact
+  if (empty($_POST['contact'])) {
+    $contactErr = 'contact is required';
   } else {
     $pass = filter_input(
       INPUT_POST,
-      'password',
+      'contact',
       FILTER_SANITIZE_FULL_SPECIAL_CHARS
     );
   }
 
-  // Validate confirm password
-  if (empty($_POST['cpassword'])) {
-    $cpassErr = 'Password is required';
-  } else {
-    $cpass = filter_input(
-      INPUT_POST,
-      'cpassword',
-      FILTER_SANITIZE_FULL_SPECIAL_CHARS
-    );
-  }
-
-  if (empty($emailErr) && empty($passErr) && empty($cpassErr)) {
-    //Check if password == to confirm password
-    if ($pass == $cpass) {
-      //To check if username exists in the database
-      $sql = "SELECT * FROM user_tbl WHERE user_email='$email'";
-      $result = mysqli_query($conn, $sql);
-      // If the query is false, add data to database
-      if (!$result->num_rows > 0) {
-        $pass = password_hash($pass, PASSWORD_DEFAULT);
-        $role = 2;
-        $sql = "INSERT INTO user_tbl (user_email, user_password, role_id) VALUES ('$email', '$pass', '$role')";
-        if (mysqli_query($conn, $sql)) {
-          // success
-          $_SESSION['user_email'] = $email;
-          $_SESSION['role_id'] = $role;
-          header('Location: manage_shelter_2.php');
-        } else {
-          // error
-          echo 'Error: ' . mysqli_error($conn);
-        }
-      } else {
-        echo "<script>alert('Oops! Email already used')</script>";
-      }
-    } else {
-      echo "<script>alert('Password doesnt Match')</script>";
-    }
+  if (empty($cityErr) && empty($contactErr)) {
+    //Check if stored Session variable(user_email, role_id) is == to the query
+    //To do that fetch ung user id
+    //If true then iistore in temp variable si user id to save in shelter table
+    //then insert na ung values ng additional info ng shelter pati narin ung id ng user_email na may role#2 as foreign key na sa shelter table
+    //To verify ifefetch ung data from 2 tables with JOIN sa query then ishoshow sa table
   }
 }
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -228,36 +199,41 @@ if (isset($_POST['submit'])) {
                   </div>
                   <div class="x_content">
                     <br />
-                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Email Address <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="city">City<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="email" class="form-control col-md-7 col-xs-12 <?php echo !$emailErr ?:
-                                                                                      'is-invalid'; ?>" required="required" type="email" name="email">
+                          <input type="text" id="city" name="city" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Password">Password<span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Contact Number<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="password" id="password" name="password" required="required" class="form-control col-md-7 col-xs-12 <?php echo !$passErr ?:
-                                                                                                                                            'is-invalid'; ?>">
+                          <input type="text" id="contact" name="contact" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Password">Confirm Password<span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">About/Bio<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="password" id="cpassword" name="cpassword" required="required" class="form-control col-md-7 col-xs-12 <?php echo !$cpassErr ?:
-                                                                                                                                              'is-invalid'; ?>">
+                          <input type="text" id="about" name="about" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
+                      <!-- ADD IMAGE INPUT FORM HERE FOR LATER -->
+                      <!-- <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Insert Image<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="last-name" name="last-name" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div> -->
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                           <button class="btn btn-primary" type="reset">Reset</button>
-                          <button type="submit" class="btn btn-success" name="submit">Submit</button>
+                          <button type="submit" class="btn btn-success">Submit</button>
                         </div>
                       </div>
                     </form>

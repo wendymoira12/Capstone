@@ -57,6 +57,7 @@ if (isset($_POST['submit-login'])) {
 
   $sql = "SELECT * FROM user_tbl WHERE user_email='$email_login' AND user_password='$pass_login' AND role_id='3'";
   $result = mysqli_query($conn, $sql);
+  // If the query is true, sql will fetch the data
   if ($result->num_rows > 0) {
     $row = mysqli_fetch_assoc($result);
     $_SESSION['email-login'] = $row['user_email'];
