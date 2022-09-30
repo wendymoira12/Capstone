@@ -5,11 +5,7 @@ session_start();
 if (!isset($_SESSION['email-login'])) {
   header('Location: login.php');
 }
-
-
-
 ?>
-
 
 <?php
 // Form submit for shelter creation

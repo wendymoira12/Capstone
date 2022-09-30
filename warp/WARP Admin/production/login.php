@@ -17,7 +17,7 @@ if (isset($_POST['submit'])) {
   if (empty($_POST['password'])) {
     $passErr = 'Password is required';
   } else {
-    $pass = filter_input(
+    $password = filter_input(
       INPUT_POST,
       'password',
       FILTER_SANITIZE_FULL_SPECIAL_CHARS
@@ -30,7 +30,7 @@ if (isset($_POST['submit'])) {
     $result = mysqli_query($conn, $sql);
     // Add to database
     if (!$result->num_rows > 0) {
-      $pass = password_hash($pass, PASSWORD_DEFAULT);
+      $pass = password_hash($password, PASSWORD_DEFAULT);
       $role = 3;
       $sql = "INSERT INTO user_tbl (user_email, user_password, role_id) VALUES ('$email', '$pass', '$role')";
       if (mysqli_query($conn, $sql)) {
@@ -53,17 +53,28 @@ session_start();
 
 if (isset($_POST['submit-login'])) {
   $email_login = $_POST['email-login'];
-  $pass_login = md5($_POST['password-login']);
-
-  $sql = "SELECT * FROM user_tbl WHERE user_email='$email_login' AND user_password='$pass_login' AND role_id='3'";
+  $pass_login = $_POST['password-login'];
+  $role_login = 3;
+  //Fetch muna si user_email pati role_id to check if the user exist
+  $sql = "SELECT * FROM user_tbl WHERE user_email='$email_login' AND role_id='$role_login'";
   $result = mysqli_query($conn, $sql);
-  // If the query is true, sql will fetch the data
+  // If the query is true, sql will fetch all the data in the row
   if ($result->num_rows > 0) {
     $row = mysqli_fetch_assoc($result);
     $_SESSION['email-login'] = $row['user_email'];
-    header("Location: admin_home.php");
+    // The password will be stored in the session variable
+    $_SESSION['password-login'] = $row['user_password'];
+    $hashpass = $_SESSION['password-login'];
+    // To check if $pass_login == $hashpass(session variable)
+    if (password_verify($pass_login, $hashpass)){
+      unset($_SESSION['password-login']);
+      header('Location: admin_home.php');
+    } else {
+      echo "<script>alert('Oops! Email or Password is incorrect')</script>";
+    }
   } else {
     echo "<script>alert('Oops! Email or Password is incorrect')</script>";
+    echo 'Error: '. mysqli_error($conn);
   }
 }
 ?>

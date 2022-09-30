@@ -5,7 +5,6 @@ session_start();
 if (!isset($_SESSION['email-login'])) {
   header('Location: login.php');
 }
-
 ?>
 
 <?php
@@ -52,7 +51,7 @@ if (isset($_POST['submit'])) {
       $sql2 = "INSERT INTO shelter_tbl (city, contact, bio, user_id) VALUES ('$city','$contact','$about','$userid')";
       //then insert na ung values ng additional info ng shelter pati narin ung id ng user_email na may role#2 as foreign key na sa shelter table
       if (mysqli_query($conn, $sql2)) {
-        echo "<script>alert('Shelter Account Created Successfully')</script>";
+
         header('Location: manage_shelter.php');
       } else {
         echo 'Error' . mysqli_error($conn);
