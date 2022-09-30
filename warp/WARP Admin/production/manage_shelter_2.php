@@ -17,31 +17,52 @@ if (isset($_POST['submit'])) {
     $cityErr = 'City is required';
   } else {
     $city = filter_input(
-      INPUT_POST, 
-      'city', 
-      FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+      INPUT_POST,
+      'city',
+      FILTER_SANITIZE_FULL_SPECIAL_CHARS
+    );
   }
 
   // Validate Contact
   if (empty($_POST['contact'])) {
     $contactErr = 'contact is required';
   } else {
-    $pass = filter_input(
+    $contact = filter_input(
       INPUT_POST,
       'contact',
       FILTER_SANITIZE_FULL_SPECIAL_CHARS
     );
   }
+  // Get About info
+  $about = $_POST['about'];
+
+  $roleno = $_SESSION['role_id'];
+  $email = $_SESSION['user_email'];
 
   if (empty($cityErr) && empty($contactErr)) {
-    //Check if stored Session variable(user_email, role_id) is == to the query
-    //To do that fetch ung user id
+    //Check if stored Session variable(user_email, role_id) is == to the query and it exists
+    //To do that need ifetch ung user id
+    $sql = "SELECT * FROM user_tbl WHERE user_email='$email' AND role_id='$roleno'";
+    $result = mysqli_query($conn, $sql);
     //If true then iistore in temp variable si user id to save in shelter table
-    //then insert na ung values ng additional info ng shelter pati narin ung id ng user_email na may role#2 as foreign key na sa shelter table
+    if ($result->num_rows > 0) {
+      $row = mysqli_fetch_assoc($result);
+      $_SESSION['user_id'] = $row['id'];
+      $userid = $_SESSION['user_id'];
+      $sql2 = "INSERT INTO shelter_tbl (city, contact, bio, user_id) VALUES ('$city','$contact','$about','$userid')";
+      //then insert na ung values ng additional info ng shelter pati narin ung id ng user_email na may role#2 as foreign key na sa shelter table
+      if (mysqli_query($conn, $sql2)) {
+        echo "<script>alert('Shelter Account Created Successfully')</script>";
+        header('Location: manage_shelter.php');
+      } else {
+        echo 'Error' . mysqli_error($conn);
+      }
+    } else {
+      echo 'Error' . mysqli_error($conn);
+    }
     //To verify ifefetch ung data from 2 tables with JOIN sa query then ishoshow sa table
   }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -199,19 +220,19 @@ if (isset($_POST['submit'])) {
                   </div>
                   <div class="x_content">
                     <br />
-                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="city">City<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="city" name="city" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="city" name="city" required="required" class="form-control col-md-7 col-xs-12 <?php echo !$cityErr ?: 'is-invalid'; ?>">
                         </div>
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Contact Number<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="contact" name="contact" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="contact" name="contact" required="required" class="form-control col-md-7 col-xs-12 <?php echo !$contactErr ?: 'is-invalid'; ?>">
                         </div>
                       </div>
                       <div class="form-group">
@@ -233,7 +254,7 @@ if (isset($_POST['submit'])) {
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                           <button class="btn btn-primary" type="reset">Reset</button>
-                          <button type="submit" class="btn btn-success">Submit</button>
+                          <button type="submit" class="btn btn-success" name="submit">Submit</button>
                         </div>
                       </div>
                     </form>
