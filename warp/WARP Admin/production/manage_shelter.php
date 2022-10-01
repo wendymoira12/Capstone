@@ -154,7 +154,7 @@ if (isset($_POST['submit'])) {
                 <li><a><i class="fa fa-users"></i> Manage Accounts <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="manage_shelter.php">Shelter</a></li>
-                    <li><a href="manage_adopter.html">Adopter</a></li>
+                    <li><a href="manage_adopter.php">Adopter</a></li>
                   </ul>
                 </li>
               </ul>
@@ -263,6 +263,11 @@ if (isset($_POST['submit'])) {
             </div>
           </div>
 
+
+          <?php
+          $sql = "SELECT shelter_tbl.id, shelter_tbl.city, shelter_tbl.contact, user_tbl.user_email FROM user_tbl INNER JOIN shelter_tbl ON user_tbl.id = shelter_tbl.user_id";
+          $result = mysqli_query($conn, $sql);
+          ?>
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
               <div class="x_title">
@@ -288,7 +293,6 @@ if (isset($_POST['submit'])) {
                 <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                   <thead>
                     <tr>
-                      <th>No.</th>
                       <th>Shelter ID.</th>
                       <th>City</th>
                       <th>Contact Number</th>
@@ -296,8 +300,26 @@ if (isset($_POST['submit'])) {
                       <th>Action</th>
                     </tr>
                   </thead>
-                  <tbody>
-                  </tbody>
+                  <?php
+                  if ($result->num_rows > 0) {
+                    foreach ($result as $row) {
+                  ?>
+                      <tbody>
+                        <tr>
+                          <td><?php echo $row['id']; ?></td>
+                          <td><?php echo $row['city']; ?></td>
+                          <td><?php echo $row['contact']; ?></td>
+                          <td><?php echo $row['user_email']; ?></td>
+                          <td>
+                            <button type="button" class="btn btn-round btn-success">Update</button>
+                            <button type="button" class="btn btn-round btn-danger">Delete</button>
+                          </td>
+                        </tr>
+                    <?php
+                    }
+                  }
+                    ?>
+                      </tbody>
                 </table>
               </div>
             </div>

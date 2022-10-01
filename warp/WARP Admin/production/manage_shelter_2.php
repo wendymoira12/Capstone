@@ -60,6 +60,8 @@ if (isset($_POST['submit'])) {
       echo 'Error' . mysqli_error($conn);
     }
     //To verify ifefetch ung data from 2 tables with JOIN sa query then ishoshow sa table
+    //Then ung nafetch na data ipapasok sa foreach loop
+
   }
 }
 ?>
@@ -103,7 +105,7 @@ if (isset($_POST['submit'])) {
   <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
   <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
   <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
-
+  <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body class="nav-md">
@@ -149,7 +151,7 @@ if (isset($_POST['submit'])) {
                 <li><a><i class="fa fa-users"></i> Manage Accounts <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="manage_shelter.php">Shelter</a></li>
-                    <li><a href="manage_adopter.html">Adopter</a></li>
+                    <li><a href="manage_adopter.php">Adopter</a></li>
                   </ul>
                 </li>
               </ul>
@@ -263,32 +265,21 @@ if (isset($_POST['submit'])) {
             </div>
           </div>
 
+          
+          <?php
+          $sql = "SELECT shelter_tbl.id, shelter_tbl.city, shelter_tbl.contact, user_tbl.user_email FROM user_tbl INNER JOIN shelter_tbl ON user_tbl.id = shelter_tbl.user_id";
+          $result = mysqli_query($conn, $sql);
+          ?>
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
               <div class="x_title">
                 <h2>List of Shelter Accounts<small>Users</small></h2>
-                <ul class="nav navbar-right panel_toolbox">
-                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                  </li>
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                    <ul class="dropdown-menu" role="menu">
-                      <li><a href="#">Settings 1</a>
-                      </li>
-                      <li><a href="#">Settings 2</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li><a class="close-link"><i class="fa fa-close"></i></a>
-                  </li>
-                </ul>
                 <div class="clearfix"></div>
               </div>
               <div class="x_content">
                 <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                   <thead>
                     <tr>
-                      <th>No.</th>
                       <th>Shelter ID.</th>
                       <th>City</th>
                       <th>Contact Number</th>
@@ -296,8 +287,26 @@ if (isset($_POST['submit'])) {
                       <th>Action</th>
                     </tr>
                   </thead>
-                  <tbody>
-                  </tbody>
+                  <?php
+                  if ($result->num_rows > 0) {
+                    foreach ($result as $row) {
+                  ?>
+                      <tbody>
+                        <tr>
+                          <td><?php echo $row['id']; ?></td>
+                          <td><?php echo $row['city']; ?></td>
+                          <td><?php echo $row['contact']; ?></td>
+                          <td><?php echo $row['user_email']; ?></td>
+                          <td>
+                            <button type="button" class="btn btn-round btn-success">Update</button>
+                            <button type="button" class="btn btn-round btn-danger">Delete</button>
+                          </td>
+                        </tr>
+                    <?php
+                    }
+                  }
+                    ?>
+                      </tbody>
                 </table>
               </div>
             </div>
@@ -368,7 +377,6 @@ if (isset($_POST['submit'])) {
   <script src="../vendors/jszip/dist/jszip.min.js"></script>
   <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
   <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
-
 </body>
 
 </html>

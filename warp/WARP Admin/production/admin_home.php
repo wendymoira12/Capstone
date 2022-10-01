@@ -83,7 +83,7 @@ if(!isset($_SESSION['email-login'])){
                 <li><a><i class="fa fa-users"></i> Manage Accounts </a>
                   <ul class="nav child_menu">
                     <li><a href="manage_shelter.php">Shelter</a></li>
-                    <li><a href="manage_adopter.html">Adopter</a></li>
+                    <li><a href="manage_adopter.php">Adopter</a></li>
                   </ul>
                 </li>
               </ul>

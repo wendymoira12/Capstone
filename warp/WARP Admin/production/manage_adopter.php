@@ -46,7 +46,7 @@
       <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
-            <a href="admin_home.html" class="site_title"><i class="fa fa-paw"></i> <span>WARP</span></a>
+            <a href="admin_home.php" class="site_title"><i class="fa fa-paw"></i> <span>WARP</span></a>
           </div>
 
           <div class="clearfix"></div>
@@ -70,12 +70,12 @@
             <div class="menu_section">
               <h3>General</h3>
               <ul class="nav side-menu">
-                <li><a href="admin_home.html"><i class="fa fa-home"></i> Home <span></span></a>
+                <li><a href="admin_home.php"><i class="fa fa-home"></i> Home <span></span></a>
                 </li>
                 <li><a><i class="fa fa-users"></i> Manage Accounts <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a href="manage_shelter.html">Shelter</a></li>
-                    <li><a href="manage_adopter.html">Adopter</a></li>
+                    <li><a href="manage_shelter.php">Shelter</a></li>
+                    <li><a href="manage_adopter.php">Adopter</a></li>
                   </ul>
                 </li>
               </ul>
