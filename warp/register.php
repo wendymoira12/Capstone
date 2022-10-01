@@ -126,7 +126,7 @@
         <div class="panel left-panel">
           <div class="content">
             <h3>Already one of us?</h3><br>
-            <a href = "signin.php">
+            <a href = "index.php">
             <button class="btn transparent">Sign in</button>
             </a> 
             
