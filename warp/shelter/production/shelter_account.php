@@ -57,15 +57,15 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a href="shelter_account.html"><i class="fa fa-home"></i> Account </a>
+                  <li><a href="shelter_account.php"><i class="fa fa-home"></i> Account </a>
                   </li>
-                  <li><a href="shelter_adoptee_info.html"><i class="fa fa-edit"></i> Add Adoptee info </a>
+                  <li><a href="shelter_adoptee_info.php"><i class="fa fa-edit"></i> Add Adoptee info </a>
                   </li>
-                  <li><a href="shelter_adoptee_list.html"><i class="fa fa-paw"></i> Pet Adoptee List </a>
+                  <li><a href="shelter_adoptee_list.php"><i class="fa fa-paw"></i> Pet Adoptee List </a>
                   </li>
-                  <li><a href="shelter_adopted_list.html"><i class="fa fa-paw"></i> Adopted Pet List </a>
+                  <li><a href="shelter_adopted_list.php"><i class="fa fa-paw"></i> Adopted Pet List </a>
                   </li>
-                  <li><a href="shelter_application_list.html"><i class="fa fa-paw"></i> Application List </a>
+                  <li><a href="shelter_application_list.php"><i class="fa fa-paw"></i> Application List </a>
                   </li>
                 </ul>
               </div>
