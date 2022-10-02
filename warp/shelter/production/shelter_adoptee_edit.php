@@ -1,91 +1,22 @@
 <?php 
 
-include 'config.php';
+    include 'config.php';
 
-if (isset($_POST['pet-submit']))
-{
-
-  $pet_name = $_POST['pet-name'];
-  $pet_age = $_POST['pet-age'];
-  $color = $_POST['color'];
-  $specie = $_POST['specie'];
-  $gender = $_POST['gender'];
-  $neuter = $_POST['neuter'];
-  $vaccine = $_POST['vaccine'];
-  $size = $_POST['size'];
-  $medrec = $_POST['medrec'];
-  $sociability = $_POST['sociability'];
-  $energy = $_POST['energy'];
-  $affection = $_POST['affection'];
-
-  $pet_img = $_FILES['pet-img']['name'];
-  $pet_img_tmp_name = $_FILES['pet-img']['tmp_name'];
-  $pet_img_folder = 'images/' . $pet_img;
-  // $pet_img_name = $_FILES['pet-img']['name'];
-  // $pet_img_size = $_FILES['pet-img']['size'];
-  // $pet_img_error = $_FILES['pet-img']['error'];
-
-  // if($pet_img_error == 0)
-  // {
-  //   $img_ex = pathinfo($pet_img_name, PATHINFO_EXTENSION);
-  //   $img_ex_to_lc = strtolower($img_ex);
-
-  //   $allowed_exs = array('jpg', 'jpeg', 'png');
-  //   if (in_array($img_ex_to_lc, $allowed_exs))
-  //   {
-  //     $new_img_name = uniqid("$pet_name", true). '.'.$img_ex_to_lc;
-  //     move_uploaded_file($pet_img_tmp_name, $pet_img_folder);
-  //   }else 
-  //   {
-  //     $message[] = "This file type is unavailable.";
-  //     header("Locatiion: shelter_adoptee_info.php");
-  //     exit;
-  //   }
-  // }else
-  // {
-  //   $message[] = 'Error occured';
-  //   header("Locatiion: shelter_adoptee_info.php");
-  //   exit;
-  // }
-
-  $pet_vid = $_FILES['pet-vid']['name'];
-  $pet_vid_tmp_name = $_FILES['pet-vid']['tmp_name'];
-  $pet_vid_folder = 'images/' . $pet_vid;
-
-  if (empty($pet_img) && ($pet_vid) && empty($pet_name) && empty($pet_age) && empty($color) && empty($specie) && empty($gender) && empty($neuter) &&  empty($vaccine) && empty($size) && empty($medrec) && empty($sociability) && empty($energy) && empty($affection))
-  {
-    $message[] = 'Please fill ouT all fieldS';
-  }else
-  {
-    $sql = "INSERT INTO adoptee_tbl(pet_img, pet_vid, pet_name, pet_age, pet_color, pet_specie, pet_gender, pet_neuter, pet_vax, pet_size, pet_medrec, pet_lsoc, pet_lene, pet_laff) VALUES('$pet_img', '$pet_vid', '$pet_name', '$pet_age', '$color', '$specie', '$gender', '$neuter', '$vaccine', '$size', '$medrec', '$sociability', '$energy', '$affection')";
-
-    $result = mysqli_query($conn, $sql);
-
-    if ($result)
+    if (!isset($_GET['id']))
     {
-      move_uploaded_file($pet_img_tmp_name, $pet_img_folder);
-      move_uploaded_file($pet_vid_tmp_name, $pet_vid_folder);
-
-      echo "<script>alert('Adoptee added successfully')</script>";
-      header("Location: shelter_adoptee_info.php");
-    } else
-    {
-      echo "<script>alert('Oops! Something went wrong')</script>";
-      header("Location: shelter_adoptee_info.php");
+        die('Id not provided');
     }
 
-    // $upload = mysqli_query($conn, $sql);
-    // if ($upload)
-    // {
-    //   move_uploaded_file($pet_img_tmp_name, $pet_img_folder);
-    //   // move_uploaded_file($pet_vid_tmp_name, $pet_vid_folder);
-    //   $message[] = 'New adoptee addedd successfully';
-    // }else
-    // {
-    //   $message[] = 'Could not add the adoptee';
-    // }
-  }
-};
+    $id = $_GET['id'];
+    $sql = "SELECT * FROM adoptee_tbl WHERE pet_id = $id";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows != 1)
+    {
+        die('id not found');
+    }
+
+    $data = $result->fetch_assoc();
 
 ?>
 
@@ -158,15 +89,15 @@ if (isset($_POST['pet-submit']))
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a href="shelter_account.php"><i class="fa fa-home"></i> Account </a>
+                  <li><a href="#"><i class="fa fa-home"></i> Account </a>
                   </li>
-                  <li><a href="shelter_adoptee_info.php"><i class="fa fa-edit"></i> Add Adoptee info </a>
+                  <li><a href="#"><i class="fa fa-edit"></i> Add Adoptee info </a>
                   </li>
-                  <li><a href="shelter_adoptee_list.php"><i class="fa fa-paw"></i> Pet Adoptee List </a>
+                  <li><a href="#"><i class="fa fa-paw"></i> Pet Adoptee List </a>
                   </li>
-                  <li><a href="shelter_adopted_list.php"><i class="fa fa-paw"></i> Adopted Pet List </a>
+                  <li><a href="#"><i class="fa fa-paw"></i> Adopted Pet List </a>
                   </li>
-                  <li><a href="shelter_application_list.php"><i class="fa fa-paw"></i> Application List </a>
+                  <li><a href="#"><i class="fa fa-paw"></i> Application List </a>
                   </li>
                 </ul>
               </div>
@@ -236,7 +167,7 @@ if (isset($_POST['pet-submit']))
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Add an Adoptee</h3>
+                <h3>EditAdoptee</h3>
               </div>
 
               <div class="title_right">
@@ -287,7 +218,7 @@ if (isset($_POST['pet-submit']))
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">Name <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" name="pet-name" required class="form-control col-md-7 col-xs-12">
+                          <input type="text" name="pet-name" value="<?= $data['pet_name']?>" required class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
 
@@ -295,14 +226,14 @@ if (isset($_POST['pet-submit']))
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-age">Age <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" name="pet-age" required class="form-control col-md-7 col-xs-12">
+                          <input type="text" name="pet-age" value="<?= $data['pet_age']?>" required class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
 
                       <div class="form-group">
                         <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Color <span class="required">*</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input class="form-control col-md-7 col-xs-12" type="text" name="color" required>
+                          <input class="form-control col-md-7 col-xs-12" type="text" name="color" value="<?= $data['pet_color']?>" required>
                         </div>
                       </div>
 
@@ -311,10 +242,10 @@ if (isset($_POST['pet-submit']))
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div class="btn-group" data-toggle="buttons">
                             <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                              <input type="radio" name="specie" value="Dog" required> &nbsp; Dog &nbsp;
+                              <input type="radio" name="specie" value="<?= $data['pet_specie']?>" required> &nbsp; Dog &nbsp;
                             </label>
                             <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                              <input type="radio" name="specie" value="Cat" required> &nbsp; Cat &nbsp;
+                              <input type="radio" name="specie" value="<?= $data['pet_specie']?>" required> &nbsp; Cat &nbsp;
                             </label>
                           </div>
                         </div>
@@ -365,7 +296,7 @@ if (isset($_POST['pet-submit']))
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Size <span class="required">*</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select name="size" class="select2_single form-control" tabindex="-1" required>
-                            <option></option>
+                            <option value="<?= $data['pet_size']?>"></option>
                             <option value="Small">Small</option>
                             <option value="Average">Average</option>
                             <option value="Large">Large</option>
@@ -376,7 +307,7 @@ if (isset($_POST['pet-submit']))
                       <div class="form-group">
                         <label for="pet-medrec" class="control-label col-md-3 col-sm-3 col-xs-12">Medical Record <span class="required">*</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input class="form-control col-md-7 col-xs-12" type="text" name="medrec" required>
+                          <input class="form-control col-md-7 col-xs-12" type="text" name="medrec" value="<?= $data['pet_medrec']?>" required>
                         </div>
                       </div>
 
@@ -384,7 +315,7 @@ if (isset($_POST['pet-submit']))
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Level of Sociability <span class="required">*</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select name="sociability" class="select2_single form-control" tabindex="-1" required>
-                            <option></option>
+                            <option value="<?= $data['pet_lsoc']?>"></option>
                             <option value="Very Poor">Very Poor</option>
                             <option value="Poor">Poor</option>
                             <option value="Okay">Okay</option>
@@ -398,7 +329,7 @@ if (isset($_POST['pet-submit']))
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Level of Energy <span class="required">*</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select name="energy" class="select2_single form-control" tabindex="-1" required>
-                            <option></option>
+                            <option value="<?= $data['pet_lene']?>"></option>
                             <option value="Very Poor">Very Poor</option>
                             <option value="Poor">Poor</option>
                             <option value="Okay">Okay</option>
@@ -412,7 +343,7 @@ if (isset($_POST['pet-submit']))
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Level of Affection <span class="required">*</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select name="affection" class="select2_single form-control" tabindex="-1" required>
-                            <option></option>
+                            <option value="<?= $data['pet_laff']?>"></option>
                             <option value="Very Poor">Very Poor</option>
                             <option value="Poor">Poor</option>
                             <option value="Okay">Okay</option>
@@ -425,23 +356,25 @@ if (isset($_POST['pet-submit']))
                       <div class="form-group">
                         <label for="pet-img" class="control-label col-md-3 col-sm-3 col-xs-12">Upload Adoptee Image<span class="required">*</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input class="form-control col-md-7 col-xs-12" type="file" name="pet-img" required>
+                          <input class="form-control col-md-7 col-xs-12" type="file" name="pet-img" value="<?= $data['pet_img']?>" required>
                         </div>
                       </div>
 
                       <div class="form-group">
                         <label for="pet-vid" class="control-label col-md-3 col-sm-3 col-xs-12">Upload Adoptee Video<span class="required">*</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input class="form-control col-md-7 col-xs-12" type="file" name="pet-vid" required>
+                          <input class="form-control col-md-7 col-xs-12" type="file" name="pet-vid" value="<?= $data['pet_vid']?>" required>
                         </div>
                       </div>
                       
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <button name="pet-cancel" class="btn btn-primary" type="button">Cancel</button>
+                          <a href="shelter_adoptee_list.php">
+                            <button name="pet-cancel" class="btn btn-primary" type="button">Cancel</button>
+                          </a>
 						              <button name="pet-reset" class="btn btn-primary" type="reset">Reset</button>
-                          <button name="pet-submit" class="btn btn-success">Submit</button>
+                          <button name="edit-pet-submit" class="btn btn-success">Submit</button>
                         </div>
                       </div>
 

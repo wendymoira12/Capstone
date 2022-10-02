@@ -2,18 +2,16 @@
 
 include 'config.php';
 
+$i = 1;
+
 $sql = "SELECT * FROM adoptee_tbl";
 $result = $conn->query($sql);
 
-if(!$result)
+if (isset($_GET['pet-delete']))
 {
-  die("Invalid query: " . $conn->error);
-}
-
-while($row = $result->fetch_assoc())
-{
-  echo"
-  ";
+  $id = $_GET['pet-delete'];
+  mysqli_query($conn, "DELETE FROM adoptee_tbl WHERE pet_id = $id");
+  header('Location: shelter_adoptee_list.php');
 }
 
 ?>
@@ -177,8 +175,6 @@ while($row = $result->fetch_assoc())
                     <h4>This table shows all the pet that is up for adoption in this animal shelter. </h4>
                     
                       </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
                     </ul>
 
                   </div>
@@ -205,30 +201,50 @@ while($row = $result->fetch_assoc())
                           <th>Level of Sociability</th>
                           <th>Level of Energy</th>
                           <th>Level of Affection</th>
+                          <th>Action</th>
                         </tr>
                       </thead>
 
 
                       <tbody>
 
-                        <tr>
-                          <td>1</td>
-                          <td>P001</td>
-                          <td><img src="../../img/adoption/pet (2).jfif" alt="pet" width="100"></td>
-                          <td>Brownie</td>
-                          <td>6 m/o</td>
-                          <td>Brown</td>
-                          <td>Dog</td>
-                          <td>Female</td>
-                          <td>Yes</td>
-                          <td>5in1, Anti-Rabies</td>
-                          <td>Small</td>
-                          <td>N/A</td>
-                          <td>3</td>
-                          <td>5</td>
-                          <td>4</td>
-                        </tr>
+                        <?php 
+                        
+                        while ($row = $result->fetch_assoc())
+                        {
+                        
+                        ?>
 
+                        <tr>
+                          <td><?php echo $i++; ?></td>
+                          <td><?php echo $row['pet_id']; ?></td>
+                          <td><img src="images/<?php echo $row['pet_img']; ?>" alt="pet" width="100"></td>
+                          <td><?php echo $row['pet_name']; ?></td>
+                          <td><?php echo $row['pet_age']; ?></td>
+                          <td><?php echo $row['pet_color']; ?></td>
+                          <td><?php echo $row['pet_specie']; ?></td>
+                          <td><?php echo $row['pet_gender']; ?></td>
+                          <td><?php echo $row['pet_neuter']; ?></td>
+                          <td><?php echo $row['pet_vax']; ?></td>
+                          <td><?php echo $row['pet_size']; ?></td>
+                          <td><?php echo $row['pet_medrec']; ?></td>
+                          <td><?php echo $row['pet_lsoc']; ?></td>
+                          <td><?php echo $row['pet_lene']; ?></td>
+                          <td><?php echo $row['pet_laff']; ?></td>
+                          <td>
+                            <a href="shelter_adoptee_edit.php?id=<?php echo $row['pet_id']; ?>"> 
+                            <button type="button" class="btn btn-round btn-success">Edit</button> 
+                            </a>
+
+                            <a href="shelter_adoptee.delete.php?id=<?php echo $row['pet_id']; ?>"> 
+                            <button type="button" class="btn btn-round btn-danger" onclick="submitData(<?php echo $row['pet_id']; ?>);">Delete</button>
+                            </a>
+                          </td>
+                        </tr>
+                      
+                        <?php 
+                        }
+                        ?>
                       </tbody>
                     </table>
                   </div>
