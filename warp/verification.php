@@ -72,7 +72,7 @@
             mysqli_query($connect, "UPDATE login SET status = 1 WHERE email = '$email'");
             ?>
              <script>
-                 alert("Verfiy account done, you may sign in now");
+                 alert("Verify account done");
                    window.location.replace("index.php");
              </script>
              <?php
