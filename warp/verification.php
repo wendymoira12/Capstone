@@ -73,7 +73,7 @@
             ?>
              <script>
                  alert("Verify account done");
-                   window.location.replace("index.php");
+                   window.location.replace("login2.php");
              </script>
              <?php
         }
