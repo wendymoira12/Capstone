@@ -212,7 +212,7 @@
                           </div>
                         </div> -->
 
-                    <form enctype="multipart/form-data" action="" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                    <form enctype="multipart/form-data" action="modify.php?id=<?= $id ?>" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">Name <span class="required">*</span>
@@ -241,11 +241,12 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Specie <span class="required">*</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div class="btn-group" data-toggle="buttons">
-                            <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                              <input type="radio" name="specie" value="<?= $data['pet_specie']?>" required> &nbsp; Dog &nbsp;
+                            <!-- <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"> -->
+                              <input type="radio" name="specie" value="Dog" <?php echo ($data['pet_specie'] == "Dog")?"checked":""?> required> &nbsp; Dog &nbsp;
                             </label>
-                            <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                              <input type="radio" name="specie" value="<?= $data['pet_specie']?>" required> &nbsp; Cat &nbsp;
+
+                            <!-- <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"> -->
+                              <input type="radio" name="specie" value="Cat" <?php echo ($data['pet_specie'] == "Cat")?"checked":""?> required> &nbsp; Cat &nbsp;
                             </label>
                           </div>
                         </div>
@@ -255,11 +256,12 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender <span class="required">*</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div class="btn-group" data-toggle="buttons">
-                            <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                              <input type="radio" name="gender" value="Male" required> &nbsp; Male &nbsp;
+                            <!-- <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"> -->
+                              <input type="radio" name="gender" value="Male" <?php echo ($data['pet_gender'] == "Male")?"checked":""?> required> &nbsp; Male &nbsp;
                             </label>
-                            <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                              <input type="radio" name="gender" value="Female" required> &nbsp; Female &nbsp;
+
+                            <!-- <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"> -->
+                              <input type="radio" name="gender" value="Female" <?php echo ($data['pet_gender'] == "Female")?"checked":""?> required> &nbsp; Female &nbsp;
                             </label>
                           </div>
                         </div>
@@ -269,11 +271,12 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Neuter <span class="required">*</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div class="btn-group" data-toggle="buttons">
-                            <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                              <input type="radio" name="neuter" value="Yes" required> &nbsp; Yes &nbsp;
+                            <!-- <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"> -->
+                              <input type="radio" name="neuter" value="Yes" <?php echo ($data['pet_neuter'] == "Yes")?"checked":""?> required> &nbsp; Yes &nbsp;
                             </label>
-                            <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default" >
-                              <input type="radio" name="neuter" value="No" required> &nbsp; No &nbsp;
+
+                            <!-- <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default" > -->
+                              <input type="radio" name="neuter" value="No" <?php echo ($data['pet_neuter'] == "No")?"checked":""?> required> &nbsp; No &nbsp;
                             </label>
                           </div>
                         </div>
@@ -283,11 +286,15 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Vaccine <span class="required">*</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select name="vaccine" class="select2_single form-control" tabindex="-1" required>
-                            <option></option>
-                            <option value="5in1">5in1</option>
-                            <option value="4in1">4in1</option>
-                            <option value="Anti-Rabies">Anti-Rabies</option>
-                            <option value="Not Applicable">Not Applicable</option>
+
+                            <option value="5in1" <?php echo ($data['pet_vax'] == "5in1")?"selected":""?>>5in1</option>
+
+                            <option value="4in1" <?php echo ($data['pet_vax'] == "4in1")?"selected":""?>>4in1</option>
+
+                            <option value="Anti-Rabies" <?php echo ($data['pet_vax'] == "Anti-Rabies")?"selected":""?>>Anti-Rabies</option>
+
+                            <option value="Not Applicable" <?php echo ($data['pet_vax'] == "Not Applicable")?"selected":""?>>Not Applicable</option>
+
                           </select>
                         </div>
                       </div>
@@ -296,10 +303,13 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Size <span class="required">*</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select name="size" class="select2_single form-control" tabindex="-1" required>
-                            <option value="<?= $data['pet_size']?>"></option>
-                            <option value="Small">Small</option>
-                            <option value="Average">Average</option>
-                            <option value="Large">Large</option>
+
+                            <option value="Small" <?php echo ($data['pet_size'] == "Small")?"selected":""?>>Small</option>
+
+                            <option value="Average" <?php echo ($data['pet_size'] == "Average")?"selected":""?>>Average</option>
+                            
+                            <option value="Large" <?php echo ($data['pet_size'] == "Large")?"selected":""?>>Large</option>
+
                           </select>
                         </div>
                       </div>
@@ -315,12 +325,17 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Level of Sociability <span class="required">*</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select name="sociability" class="select2_single form-control" tabindex="-1" required>
-                            <option value="<?= $data['pet_lsoc']?>"></option>
-                            <option value="Very Poor">Very Poor</option>
-                            <option value="Poor">Poor</option>
-                            <option value="Okay">Okay</option>
-                            <option value="Good">Good</option>
-                            <option value="Superb">Superb</option>
+
+                            <option value="Very Poor" <?php echo ($data['pet_lsoc'] == "Very Poor")?"selected":""?>>Very Poor</option>
+
+                            <option value="Poor" <?php echo ($data['pet_lsoc'] == "Poor")?"selected":""?>>Poor</option>
+
+                            <option value="Okay" <?php echo ($data['pet_lsoc'] == "Okay")?"selected":""?>>Okay</option>
+
+                            <option value="Good" <?php echo ($data['pet_lsoc'] == "Good")?"selected":""?>>Good</option>
+
+                            <option value="Superb" <?php echo ($data['pet_lsoc'] == "Superb")?"selected":""?>>Superb</option>
+
                           </select>
                         </div>
                       </div>
@@ -329,12 +344,17 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Level of Energy <span class="required">*</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select name="energy" class="select2_single form-control" tabindex="-1" required>
-                            <option value="<?= $data['pet_lene']?>"></option>
-                            <option value="Very Poor">Very Poor</option>
-                            <option value="Poor">Poor</option>
-                            <option value="Okay">Okay</option>
-                            <option value="Good">Good</option>
-                            <option value="Superb">Superb</option>
+
+                            <option value="Very Poor" <?php echo ($data['pet_lene'] == "Very Poor")?"selected":""?>>Very Poor</option>
+
+                            <option value="Poor" <?php echo ($data['pet_lene'] == "Poor")?"selected":""?>>Poor</option>
+
+                            <option value="Okay" <?php echo ($data['pet_lene'] == "Okay")?"selected":""?>>Okay</option>
+
+                            <option value="Good" <?php echo ($data['pet_lene'] == "Good")?"selected":""?>>Good</option>
+
+                            <option value="Superb" <?php echo ($data['pet_lene'] == "Superb")?"selected":""?>>Superb</option>
+
                           </select>
                         </div>
                       </div>
@@ -343,12 +363,17 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Level of Affection <span class="required">*</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select name="affection" class="select2_single form-control" tabindex="-1" required>
-                            <option value="<?= $data['pet_laff']?>"></option>
-                            <option value="Very Poor">Very Poor</option>
-                            <option value="Poor">Poor</option>
-                            <option value="Okay">Okay</option>
-                            <option value="Good">Good</option>
-                            <option value="Superb">Superb</option>
+
+                            <option value="Very Poor" <?php echo ($data['pet_laff'] == "Very Poor")?"selected":""?>>Very Poor</option>
+
+                            <option value="Poor" <?php echo ($data['pet_laff'] == "Poor")?"selected":""?>>Poor</option>
+
+                            <option value="Okay" <?php echo ($data['pet_laff'] == "Okay")?"selected":""?>>Okay</option>
+
+                            <option value="Good" <?php echo ($data['pet_laff'] == "Good")?"selected":""?>>Good</option>
+
+                            <option value="Superb" <?php echo ($data['pet_laff'] == "Superb")?"selected":""?>>Superb</option>
+
                           </select>
                         </div>
                       </div>
