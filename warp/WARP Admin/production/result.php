@@ -17,8 +17,10 @@ print_r($_SESSION['password-login']);
 // echo $roleno;
 // echo $email;
 //echo '<br>'.$pass1.'<br>'.$pass2;
+print_r($_SESSION['shelter_id']);
 
-
+print_r($_SESSION['rows']);
+print_r($_SESSION['user_id']);
 // if (password_verify($pass1, $pass2)){
 //     echo "Password Match";
 // } else{

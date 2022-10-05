@@ -34,7 +34,7 @@ if (isset($_POST['submit'])) {
   }
   // Get About info
   $about = $_POST['about'];
-
+  $position = $_POST['position'];
   $roleno = $_SESSION['role_id'];
   $email = $_SESSION['user_email'];
 
@@ -46,12 +46,11 @@ if (isset($_POST['submit'])) {
     //If true then iistore in temp variable si user id to save in shelter table
     if ($result->num_rows > 0) {
       $row = mysqli_fetch_assoc($result);
-      $_SESSION['user_id'] = $row['id'];
+      $_SESSION['user_id'] = $row['user_id'];
       $userid = $_SESSION['user_id'];
-      $sql2 = "INSERT INTO shelter_tbl (city, contact, bio, user_id) VALUES ('$city','$contact','$about','$userid')";
+      $sql2 = "INSERT INTO shelter_tbl (shelter_city, shelter_contact, shelter_about, shelter_position, user_id) VALUES ('$city','$contact','$about','$position','$userid')";
       //then insert na ung values ng additional info ng shelter pati narin ung id ng user_email na may role#2 as foreign key na sa shelter table
       if (mysqli_query($conn, $sql2)) {
-
         header('Location: manage_shelter.php');
       } else {
         echo 'Error' . mysqli_error($conn);
@@ -78,7 +77,6 @@ if (isset($_POST['submit'])) {
   <link rel="shortcut icon" type="image/x-icon" href="/warp/img/WARP_LOGO copy.png">
 
   <title>Manage Accounts </title>
-
   <!-- Bootstrap -->
   <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Font Awesome -->
@@ -97,7 +95,6 @@ if (isset($_POST['submit'])) {
   <link href="../vendors/starrr/dist/starrr.css" rel="stylesheet">
   <!-- bootstrap-daterangepicker -->
   <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-
   <!-- Custom Theme Style -->
   <link href="../build/css/custom.min.css" rel="stylesheet">
   <!-- Datatables -->
@@ -203,7 +200,7 @@ if (isset($_POST['submit'])) {
         </div>
       </div>
       <!-- /top navigation -->
-
+      <!--======================================================== FORM =========================================================================-->
       <!-- page content -->
       <div class="right_col" role="main">
         <div class="">
@@ -243,6 +240,13 @@ if (isset($_POST['submit'])) {
                           <input type="text" id="about" name="about" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="position">Position<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="position" name="position" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
                       <!-- ADD IMAGE INPUT FORM HERE FOR LATER -->
                       <!-- <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Insert Image<span class="required">*</span>
@@ -265,9 +269,10 @@ if (isset($_POST['submit'])) {
             </div>
           </div>
 
-          
+          <!--======================================================== END OF FORM =========================================================================-->
+          <!--=========================================================   TABLE   ==========================================================================-->
           <?php
-          $sql = "SELECT shelter_tbl.id, shelter_tbl.city, shelter_tbl.contact, user_tbl.user_email FROM user_tbl INNER JOIN shelter_tbl ON user_tbl.id = shelter_tbl.user_id";
+          $sql = "SELECT shelter_tbl.shelter_id, shelter_tbl.shelter_city, shelter_tbl.shelter_contact, user_tbl.user_email FROM user_tbl INNER JOIN shelter_tbl ON user_tbl.user_id = shelter_tbl.user_id";
           $result = mysqli_query($conn, $sql);
           ?>
           <div class="col-md-12 col-sm-12 col-xs-12">
@@ -293,13 +298,13 @@ if (isset($_POST['submit'])) {
                   ?>
                       <tbody>
                         <tr>
-                          <td><?php echo $row['id']; ?></td>
-                          <td><?php echo $row['city']; ?></td>
-                          <td><?php echo $row['contact']; ?></td>
-                          <td><?php echo $row['user_email']; ?></td>
+                          <td><?= $row['shelter_id']; ?></td>
+                          <td><?= $row['shelter_city']; ?></td>
+                          <td><?= $row['shelter_contact']; ?></td>
+                          <td><?= $row['user_email']; ?></td>
                           <td>
-                            <button type="button" class="btn btn-round btn-success">Update</button>
-                            <button type="button" class="btn btn-round btn-danger">Delete</button>
+                            <a href="edit_shelter.php?id=<?= $row['shelter_id'] ?>" type="submit" class="btn btn-round btn-success">Update</a>
+                            <button type="submit" class="btn btn-round btn-danger">Delete</button>
                           </td>
                         </tr>
                     <?php
@@ -313,6 +318,9 @@ if (isset($_POST['submit'])) {
           </div>
         </div>
       </div>
+
+
+      <!--=========================================================   END OF TABLE   ==========================================================================-->
       <!-- /page content -->
 
       <!-- footer content -->
@@ -377,6 +385,7 @@ if (isset($_POST['submit'])) {
   <script src="../vendors/jszip/dist/jszip.min.js"></script>
   <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
   <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+
 </body>
 
 </html>
