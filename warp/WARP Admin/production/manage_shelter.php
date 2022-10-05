@@ -265,7 +265,7 @@ if (isset($_POST['submit'])) {
 
 
           <?php
-          $sql = "SELECT shelter_tbl.shelter_id, shelter_tbl.shelter_city, shelter_tbl.shelter_contact, user_tbl.user_email FROM user_tbl INNER JOIN shelter_tbl ON user_tbl.user_id = shelter_tbl.user_id";
+          $sql = "SELECT shelter_tbl.shelter_id, shelter_tbl.shelter_city, shelter_tbl.shelter_contact, shelter_tbl.shelter_position, user_tbl.user_email FROM user_tbl INNER JOIN shelter_tbl ON user_tbl.user_id = shelter_tbl.user_id";
           $result = mysqli_query($conn, $sql);
           ?>
           <div class="col-md-12 col-sm-12 col-xs-12">
@@ -296,6 +296,7 @@ if (isset($_POST['submit'])) {
                       <th>Shelter ID.</th>
                       <th>City</th>
                       <th>Contact Number</th>
+                      <th>Position</th>
                       <th>E-mail Address</th>
                       <th>Action</th>
                     </tr>
@@ -309,6 +310,7 @@ if (isset($_POST['submit'])) {
                           <td><?php echo $row['shelter_id']; ?></td>
                           <td><?php echo $row['shelter_city']; ?></td>
                           <td><?php echo $row['shelter_contact']; ?></td>
+                          <td><?php echo $row['shelter_position']; ?></td>
                           <td><?php echo $row['user_email']; ?></td>
                           <td>
                           <a href="edit_shelter.php?id=<?= $row['shelter_id']?>" type="submit" class="btn btn-round btn-success">Update</a>
