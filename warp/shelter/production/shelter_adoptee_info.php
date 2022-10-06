@@ -12,6 +12,8 @@ if (isset($_POST['pet-submit']))
   $gender = $_POST['gender'];
   $neuter = $_POST['neuter'];
   $vaccine = $_POST['vaccine'];
+  $chkstr = implode(", ", $vaccine);
+
   $size = $_POST['size'];
   $medrec = $_POST['medrec'];
   $sociability = $_POST['sociability'];
@@ -52,12 +54,12 @@ if (isset($_POST['pet-submit']))
   $pet_vid_tmp_name = $_FILES['pet-vid']['tmp_name'];
   $pet_vid_folder = 'images/' . $pet_vid;
 
-  if (empty($pet_img) && ($pet_vid) && empty($pet_name) && empty($pet_age) && empty($color) && empty($specie) && empty($gender) && empty($neuter) &&  empty($vaccine) && empty($size) && empty($medrec) && empty($sociability) && empty($energy) && empty($affection))
+  if (empty($pet_img) && ($pet_vid) && empty($pet_name) && empty($pet_age) && empty($color) && empty($specie) && empty($gender) && empty($neuter) &&  empty($chkstr) && empty($size) && empty($medrec) && empty($sociability) && empty($energy) && empty($affection))
   {
     $message[] = 'Please fill ouT all fieldS';
   }else
   {
-    $sql = "INSERT INTO adoptee_tbl(pet_img, pet_vid, pet_name, pet_age, pet_color, pet_specie, pet_gender, pet_neuter, pet_vax, pet_size, pet_medrec, pet_lsoc, pet_lene, pet_laff) VALUES('$pet_img', '$pet_vid', '$pet_name', '$pet_age', '$color', '$specie', '$gender', '$neuter', '$vaccine', '$size', '$medrec', '$sociability', '$energy', '$affection')";
+    $sql = "INSERT INTO adoptee_tbl(pet_img, pet_vid, pet_name, pet_age, pet_color, pet_specie, pet_gender, pet_neuter, pet_vax, pet_size, pet_medrec, pet_lsoc, pet_lene, pet_laff) VALUES('$pet_img', '$pet_vid', '$pet_name', '$pet_age', '$color', '$specie', '$gender', '$neuter', '$chkstr', '$size', '$medrec', '$sociability', '$energy', '$affection')";
 
     $result = mysqli_query($conn, $sql);
 
@@ -120,6 +122,8 @@ if (isset($_POST['pet-submit']))
     <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
     <!-- Dropzone.js -->
     <link href="../vendors/dropzone/dist/min/dropzone.min.css" rel="stylesheet"
+
+    <script type="text/javascript"></script>
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
@@ -308,13 +312,15 @@ if (isset($_POST['pet-submit']))
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Specie <span class="required">*</label>
+
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div class="btn-group" data-toggle="buttons">
-                            <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                              <input type="radio" name="specie" value="Dog" required> &nbsp; Dog &nbsp;
+                            <!-- <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"> -->
+                              <input type="radio" class="flat" name="specie" value="Dog" required> &nbsp; Dog &nbsp;
                             </label>
-                            <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                              <input type="radio" name="specie" value="Cat" required> &nbsp; Cat &nbsp;
+
+                            <!-- <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"> -->
+                              <input type="radio" class="flat" name="specie" value="Cat" required> &nbsp; Cat &nbsp;
                             </label>
                           </div>
                         </div>
@@ -322,13 +328,15 @@ if (isset($_POST['pet-submit']))
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender <span class="required">*</label>
+                        
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div class="btn-group" data-toggle="buttons">
-                            <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                              <input type="radio" name="gender" value="Male" required> &nbsp; Male &nbsp;
+                            <!-- <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"> -->
+                              <input type="radio" class="flat" name="gender" value="Male" required> &nbsp; Male &nbsp;
                             </label>
-                            <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                              <input type="radio" name="gender" value="Female" required> &nbsp; Female &nbsp;
+
+                            <!-- <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"> -->
+                              <input type="radio" class="flat" name="gender" value="Female" required> &nbsp; Female &nbsp;
                             </label>
                           </div>
                         </div>
@@ -336,19 +344,86 @@ if (isset($_POST['pet-submit']))
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Neuter <span class="required">*</label>
+
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div class="btn-group" data-toggle="buttons">
-                            <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                              <input type="radio" name="neuter" value="Yes" required> &nbsp; Yes &nbsp;
+                            <!-- <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"> -->
+                              <input type="radio" class="flat" name="neuter" value="Yes" required> &nbsp; Yes &nbsp;
                             </label>
-                            <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default" >
-                              <input type="radio" name="neuter" value="No" required> &nbsp; No &nbsp;
+
+                            <!-- <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default" > -->
+                              <input type="radio" class="flat" name="neuter" value="No" required> &nbsp; No &nbsp;
                             </label>
                           </div>
                         </div>
                       </div>
-                      
+
                       <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Vaccine <span class="required">*</label>
+
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="checkbox" name="vaccine[]" id="cb1" value="5in1" data-parsley-mincheck="2" required class="flat" onclick="chkChange()" /> 5in1
+
+                          <input type="checkbox" name="vaccine[]" id="cb2" value="4in1" data-parsley-mincheck="2" required class="flat" onclick="chkChange()" /> 4in1
+
+                          <input type="checkbox" name="vaccine[]" id="cb3" value="Anti-Rabies" data-parsley-mincheck="2" required class="flat" onclick="chkChange()" /> Anti-Rabies
+
+                          <input type="checkbox" name="vaccine[]" id="cb4" value="Not Applicable" data-parsley-mincheck="2" required class="flat" onclick="chkChange()" /> Not Applicable
+                        </div>
+                      </div>
+<!-------- NOT APPLICABLE CHECKBOX CHECK AND UNCHECK OTHER CHECKBOXES --------->
+
+                      <!-- <script>
+                        function chkChange()
+                        {
+                          var cb1 = document.getElementById("cb1");
+                          var cb2 = document.getElementById("cb2");
+                          var cb3 = document.getElementById("cb3");
+                          var cb4 = document.getElementById("cb4");
+
+                          if(cb4.checked==true)
+                          {
+                            cb2.disabled = true;
+                            cb3.disabled = true;
+                            cb4.disabled = true;
+                          }else
+                          {
+                            cb2.disabled = false;
+                            cb3.disabled = false;
+                            cb4.disabled = false;
+                          }
+                        }
+                      </script> -->
+
+                      <!-- <script type="text/javascript">
+
+  $('input:checkbox').click(function(){
+
+   var id = ($(this).attr('vaccine4'));
+
+   // alert(id)
+
+    var $inputs = $("#id")
+
+        if($(this).is(':checked')){
+
+            // $("."+id).prop('disabled', true); // <-- disable all but checked one
+
+             $("."+id).not(this).prop('disabled',true);
+
+        }else{
+
+           // $inputs.prop('disabled',false); // <--
+
+           $("."+id).prop('disabled', false);
+
+        }
+
+    })
+
+</script> -->
+                      
+                      <!-- <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Vaccine <span class="required">*</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select name="vaccine" class="select2_single form-control" tabindex="-1" required>
@@ -359,7 +434,7 @@ if (isset($_POST['pet-submit']))
                             <option value="Not Applicable">Not Applicable</option>
                           </select>
                         </div>
-                      </div>
+                      </div> -->
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Size <span class="required">*</label>

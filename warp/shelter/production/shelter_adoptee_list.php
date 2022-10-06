@@ -78,7 +78,7 @@ if (isset($_GET['pet-delete']))
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a href="shelter_account.html"><i class="fa fa-home"></i> Account </a>
+                  <li><a href="shelter_account.php"><i class="fa fa-home"></i> Account </a>
                   </li>
                   <li><a href="shelter_adoptee_info.php"><i class="fa fa-edit"></i> Add Adoptee info </a>
                   </li>

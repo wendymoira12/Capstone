@@ -13,6 +13,8 @@
         $gender = $_POST['gender'];
         $neuter = $_POST['neuter'];
         $vaccine = $_POST['vaccine'];
+        $chkstr = implode(", ", $vaccine);
+
         $size = $_POST['size'];
         $medrec = $_POST['medrec'];
         $sociability = $_POST['sociability'];
@@ -27,10 +29,10 @@
         $pet_vid_tmp_name = $_FILES['pet-vid']['tmp_name'];
         $pet_vid_folder = 'images/' . $pet_vid;
 
-        if (!empty($pet_name) && !empty($pet_age) && !empty($color) && !empty($specie) && !empty($gender) && !empty($neuter) && !empty($vaccine) && !empty($size) && !empty($medrec) && !empty($sociability) && !empty($energy) && !empty($affection) && !empty($pet_img) && !empty($pet_vid))
+        if (!empty($pet_name) && !empty($pet_age) && !empty($color) && !empty($specie) && !empty($gender) && !empty($neuter) && !empty($chkstr) && !empty($size) && !empty($medrec) && !empty($sociability) && !empty($energy) && !empty($affection) && !empty($pet_img) && !empty($pet_vid))
         {
 
-            $sql = "UPDATE adoptee_tbl SET pet_name = '$pet_name', pet_age = '$pet_age', pet_color = '$color', pet_specie = '$specie', pet_gender = '$gender', pet_neuter = '$neuter', pet_vax = '$vaccine', pet_size = '$size', pet_medrec = '$medrec', pet_lsoc = '$sociability', pet_lene = '$energy', pet_laff = '$affection', pet_img = '$pet_img', pet_vid = '$pet_vid' WHERE pet_id = '$id'";
+            $sql = "UPDATE adoptee_tbl SET pet_name = '$pet_name', pet_age = '$pet_age', pet_color = '$color', pet_specie = '$specie', pet_gender = '$gender', pet_neuter = '$neuter', pet_vax = '$chkstr', pet_size = '$size', pet_medrec = '$medrec', pet_lsoc = '$sociability', pet_lene = '$energy', pet_laff = '$affection', pet_img = '$pet_img', pet_vid = '$pet_vid' WHERE pet_id = '$id'";
 
             $result = $conn->query($sql);
 
