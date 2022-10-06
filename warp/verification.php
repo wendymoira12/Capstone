@@ -61,7 +61,6 @@
         $otp = $_SESSION['otp'];
         $email = $_SESSION['mail'];
         $otp_code = $_POST['otp_code'];
-
         if($otp != $otp_code){
             ?>
            <script>
@@ -69,11 +68,11 @@
            </script>
            <?php
         }else{
-            mysqli_query($connect, "UPDATE login SET status = 1 WHERE email = '$email'");
+            //mysqli_query($conn, "UPDATE login SET status = 1 WHERE email = '$email'");
             ?>
              <script>
                  alert("Verify account done");
-                   window.location.replace("login2.php");
+                   window.location.replace("register2.php");
              </script>
              <?php
         }
