@@ -39,6 +39,7 @@
             if ($result == true)
             {
                 echo "Database updated";
+                header('Location: shelter_adoptee_list.php');
             }else
             {
                 echo "Connection Failed";

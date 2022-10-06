@@ -246,11 +246,11 @@
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div class="btn-group" data-toggle="buttons">
                             <!-- <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"> -->
-                              <input type="radio" class="flat" name="specie" value="Dog" <?php echo ($data['pet_specie'] == "Dog")?"checked":""?> required> &nbsp; Dog &nbsp;
+                              <input type="radio" name="specie" value="Dog" <?php echo ($data['pet_specie'] == "Dog")?"checked":""?> required> &nbsp; Dog &nbsp;
                             </label>
 
                             <!-- <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"> -->
-                              <input type="radio" class="flat" name="specie" value="Cat" <?php echo ($data['pet_specie'] == "Cat")?"checked":""?> required> &nbsp; Cat &nbsp;
+                              <input type="radio" name="specie" value="Cat" <?php echo ($data['pet_specie'] == "Cat")?"checked":""?> required> &nbsp; Cat &nbsp;
                             </label>
                           </div>
                         </div>
@@ -262,11 +262,11 @@
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div class="btn-group" data-toggle="buttons">
                             <!-- <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"> -->
-                              <input type="radio" class="flat" name="gender" value="Male" <?php echo ($data['pet_gender'] == "Male")?"checked":""?> required> &nbsp; Male &nbsp;
+                              <input type="radio" name="gender" value="Male" <?php echo ($data['pet_gender'] == "Male")?"checked":""?> required> &nbsp; Male &nbsp;
                             </label>
 
                             <!-- <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"> -->
-                              <input type="radio" class="flat" name="gender" value="Female" <?php echo ($data['pet_gender'] == "Female")?"checked":""?> required> &nbsp; Female &nbsp;
+                              <input type="radio" name="gender" value="Female" <?php echo ($data['pet_gender'] == "Female")?"checked":""?> required> &nbsp; Female &nbsp;
                             </label>
                           </div>
                         </div>
@@ -278,11 +278,11 @@
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div class="btn-group" data-toggle="buttons">
                             <!-- <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"> -->
-                              <input type="radio" class="flat" name="neuter" value="Yes" <?php echo ($data['pet_neuter'] == "Yes")?"checked":""?> required> &nbsp; Yes &nbsp;
+                              <input type="radio" name="neuter" value="Yes" <?php echo ($data['pet_neuter'] == "Yes")?"checked":""?> required> &nbsp; Yes &nbsp;
                             </label>
 
                             <!-- <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default" > -->
-                              <input type="radio" class="flat" name="neuter" value="No" <?php echo ($data['pet_neuter'] == "No")?"checked":""?> required> &nbsp; No &nbsp;
+                              <input type="radio" name="neuter" value="No" <?php echo ($data['pet_neuter'] == "No")?"checked":""?> required> &nbsp; No &nbsp;
                             </label>
                           </div>
                         </div>
@@ -304,6 +304,7 @@
                         if (in_array("Not Applicable", $chkvalues))
                         {
                           $chkvalue4 = "checked='checked'";
+
                         }
                       ?>
 
@@ -311,15 +312,44 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Vaccine <span class="required">*</label>
 
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="checkbox" name="vaccine[]" id="vaccine1" value="5in1" <?php echo $chkvalue1; ?> data-parsley-mincheck="2" required class="flat" /> 5in1
+                          <input type="checkbox" name="vaccine[]" id="cb1" value="5in1" <?php echo $chkvalue1; ?> data-parsley-mincheck="1" required /> 5in1
 
-                          <input type="checkbox" name="vaccine[]" id="vaccine2" value="4in1" <?php echo $chkvalue2; ?> data-parsley-mincheck="2" required class="flat" /> 4in1
+                          <input type="checkbox" name="vaccine[]" id="cb2" value="4in1" <?php echo $chkvalue2; ?> data-parsley-mincheck="1" required /> 4in1
 
-                          <input type="checkbox" name="vaccine[]" id="vaccine3" value="Anti-Rabies" <?php echo $chkvalue3; ?> data-parsley-mincheck="2" required class="flat" /> Anti-Rabies
+                          <input type="checkbox" name="vaccine[]" id="cb3" value="Anti-Rabies" <?php echo $chkvalue3; ?> data-parsley-mincheck="1" required /> Anti-Rabies
 
-                          <input type="checkbox" name="vaccine[]" id="vaccine4" value="Not Applicable" <?php echo $chkvalue4; ?> data-parsley-mincheck="2" required class="flat" /> Not Applicable
+                          <input type="checkbox" name="vaccine[]" id="cb4" value="Not Applicable" <?php echo $chkvalue4; ?> data-parsley-mincheck="1" required /> Not Applicable
                         </div>
                       </div>
+
+<!-------- NOT APPLICABLE CHECKBOX CHECK AND UNCHECK OTHER CHECKBOXES --------->
+
+                        <script>
+                          var cb1 = document.getElementById("cb1");
+                          var cb2 = document.getElementById("cb2");
+                          var cb3 = document.getElementById("cb3");
+                          var cb4 = document.getElementById("cb4");
+
+                          cb4.addEventListener('change', () => {
+                            console.log("checkbox clicked")
+                              if (cb4.checked == true) {
+                                  cb1.disabled = true;
+                                  cb2.disabled = true;
+                                  cb3.disabled = true;
+
+                                  cb1.checked = false;
+                                  cb2.checked = false;
+                                  cb3.checked = false;
+
+
+                              } else {
+                                  cb1.disabled = false;
+                                  cb2.disabled = false;
+                                  cb3.disabled = false;
+
+                              }
+                          })
+                        </script>
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Size <span class="required">*</label>

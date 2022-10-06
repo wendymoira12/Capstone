@@ -316,11 +316,11 @@ if (isset($_POST['pet-submit']))
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div class="btn-group" data-toggle="buttons">
                             <!-- <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"> -->
-                              <input type="radio" class="flat" name="specie" value="Dog" required> &nbsp; Dog &nbsp;
+                              <input type="radio" name="specie" value="Dog" required> &nbsp; Dog &nbsp;
                             </label>
 
                             <!-- <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"> -->
-                              <input type="radio" class="flat" name="specie" value="Cat" required> &nbsp; Cat &nbsp;
+                              <input type="radio" name="specie" value="Cat" required> &nbsp; Cat &nbsp;
                             </label>
                           </div>
                         </div>
@@ -332,11 +332,11 @@ if (isset($_POST['pet-submit']))
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div class="btn-group" data-toggle="buttons">
                             <!-- <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"> -->
-                              <input type="radio" class="flat" name="gender" value="Male" required> &nbsp; Male &nbsp;
+                              <input type="radio" name="gender" value="Male" required> &nbsp; Male &nbsp;
                             </label>
 
                             <!-- <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"> -->
-                              <input type="radio" class="flat" name="gender" value="Female" required> &nbsp; Female &nbsp;
+                              <input type="radio" name="gender" value="Female" required> &nbsp; Female &nbsp;
                             </label>
                           </div>
                         </div>
@@ -348,11 +348,11 @@ if (isset($_POST['pet-submit']))
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div class="btn-group" data-toggle="buttons">
                             <!-- <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"> -->
-                              <input type="radio" class="flat" name="neuter" value="Yes" required> &nbsp; Yes &nbsp;
+                              <input type="radio" name="neuter" value="Yes" required> &nbsp; Yes &nbsp;
                             </label>
 
                             <!-- <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default" > -->
-                              <input type="radio" class="flat" name="neuter" value="No" required> &nbsp; No &nbsp;
+                              <input type="radio" name="neuter" value="No" required> &nbsp; No &nbsp;
                             </label>
                           </div>
                         </div>
@@ -362,66 +362,43 @@ if (isset($_POST['pet-submit']))
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Vaccine <span class="required">*</label>
 
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="checkbox" name="vaccine[]" id="cb1" value="5in1" data-parsley-mincheck="2" required class="flat" onclick="chkChange()" /> 5in1
+                          <input type="checkbox" name="vaccine[]" id="cb1" value="5in1" data-parsley-mincheck="1" required /> 5in1
 
-                          <input type="checkbox" name="vaccine[]" id="cb2" value="4in1" data-parsley-mincheck="2" required class="flat" onclick="chkChange()" /> 4in1
+                          <input type="checkbox" name="vaccine[]" id="cb2" value="4in1" data-parsley-mincheck="1" required /> 4in1
 
-                          <input type="checkbox" name="vaccine[]" id="cb3" value="Anti-Rabies" data-parsley-mincheck="2" required class="flat" onclick="chkChange()" /> Anti-Rabies
+                          <input type="checkbox" name="vaccine[]" id="cb3" value="Anti-Rabies" data-parsley-mincheck="1" required /> Anti-Rabies
 
-                          <input type="checkbox" name="vaccine[]" id="cb4" value="Not Applicable" data-parsley-mincheck="2" required class="flat" onclick="chkChange()" /> Not Applicable
+                          <input type="checkbox" name="vaccine[]" id="cb4" value="Not Applicable" data-parsley-mincheck="1" required/> Not Applicable
                         </div>
                       </div>
 <!-------- NOT APPLICABLE CHECKBOX CHECK AND UNCHECK OTHER CHECKBOXES --------->
 
-                      <!-- <script>
-                        function chkChange()
-                        {
+                      <script>
                           var cb1 = document.getElementById("cb1");
                           var cb2 = document.getElementById("cb2");
                           var cb3 = document.getElementById("cb3");
                           var cb4 = document.getElementById("cb4");
 
-                          if(cb4.checked==true)
-                          {
-                            cb2.disabled = true;
-                            cb3.disabled = true;
-                            cb4.disabled = true;
-                          }else
-                          {
-                            cb2.disabled = false;
-                            cb3.disabled = false;
-                            cb4.disabled = false;
-                          }
-                        }
-                      </script> -->
+                          cb4.addEventListener('change', () => {
+                            console.log("checkbox clicked")
+                              if (cb4.checked == true) {
+                                  cb1.disabled = true;
+                                  cb2.disabled = true;
+                                  cb3.disabled = true;
 
-                      <!-- <script type="text/javascript">
+                                  cb1.checked = false;
+                                  cb2.checked = false;
+                                  cb3.checked = false;
 
-  $('input:checkbox').click(function(){
 
-   var id = ($(this).attr('vaccine4'));
+                              } else {
+                                  cb1.disabled = false;
+                                  cb2.disabled = false;
+                                  cb3.disabled = false;
 
-   // alert(id)
-
-    var $inputs = $("#id")
-
-        if($(this).is(':checked')){
-
-            // $("."+id).prop('disabled', true); // <-- disable all but checked one
-
-             $("."+id).not(this).prop('disabled',true);
-
-        }else{
-
-           // $inputs.prop('disabled',false); // <--
-
-           $("."+id).prop('disabled', false);
-
-        }
-
-    })
-
-</script> -->
+                              }
+                          })
+                      </script>
                       
                       <!-- <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Vaccine <span class="required">*</label>
