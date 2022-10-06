@@ -8,8 +8,8 @@ if (!isset($_SESSION['email-login'])) {
 ?>
 
 <?php
-// Form submit for shelter creation
-if (isset($_POST['submit'])) {
+// Form submit for shelter update
+if (isset($_POST['submit-update'])) {
 
   // Validate email
   if (empty($_POST['email'])) {
@@ -18,56 +18,52 @@ if (isset($_POST['submit'])) {
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
   }
 
-  // Validate password
-  if (empty($_POST['password'])) {
-    $passErr = 'Password is required';
+  // Validate City
+  if (empty($_POST['city'])) {
+    $cityErr = 'City is required';
   } else {
-    $pass = filter_input(
+    $city = filter_input(
       INPUT_POST,
-      'password',
+      'city',
       FILTER_SANITIZE_FULL_SPECIAL_CHARS
     );
   }
 
-  // Validate confirm password
-  if (empty($_POST['cpassword'])) {
-    $cpassErr = 'Password is required';
+  // Validate Contact
+  if (empty($_POST['contact'])) {
+    $contactErr = 'contact is required';
   } else {
-    $cpass = filter_input(
+    $contact = filter_input(
       INPUT_POST,
-      'cpassword',
+      'contact',
       FILTER_SANITIZE_FULL_SPECIAL_CHARS
     );
   }
+  // Store in variables other data to be updated
+  $user_id = $_SESSION['user_id'];
+  $shelter_id = $_SESSION['shelter_id'];
+  $about = $_POST['about'];
+  $position = $_POST['position'];
 
-  if (empty($emailErr) && empty($passErr) && empty($cpassErr)) {
-    //Check if password == to confirm password
-    if ($pass == $cpass) {
-      //To check if username exists in the database
-      $sql = "SELECT * FROM user_tbl WHERE user_email='$email'";
-      $result = mysqli_query($conn, $sql);
-      // If the query is false, add data to database
-      if (!$result->num_rows > 0) {
-        $pass = password_hash($pass, PASSWORD_DEFAULT);
-        $role = 2;
-        $sql = "INSERT INTO user_tbl (user_email, user_password, role_id) VALUES ('$email', '$pass', '$role')";
-        if (mysqli_query($conn, $sql)) {
-          // success
-          $_SESSION['user_email'] = $email;
-          $_SESSION['role_id'] = $role;
-          header('Location: manage_shelter_2.php');
-        } else {
-          // error
-          echo 'Error: ' . mysqli_error($conn);
-        }
+  //If there are no errors the function will execute
+  if (empty($emailErr) && empty($cityErr) && empty($contactErr)) {
+    // Query to update the shelter_tbl first
+    $sql = "UPDATE shelter_tbl SET shelter_city='$city', shelter_contact='$contact', shelter_about='$about', shelter_position='$position' WHERE shelter_id='$shelter_id'";
+    // If true then the query will be executed and another query will be executed
+    if (mysqli_query($conn, $sql) === TRUE) {
+      $sql = "UPDATE user_tbl SET user_email='$email' WHERE user_id='$user_id'";
+      // If true the query will be executed and will be redirected back to manage_shelter.php
+      if (mysqli_query($conn, $sql)) {
+        header('location:manage_shelter.php');
       } else {
-        echo "<script>alert('Oops! Email already used')</script>";
+        echo "Error" . mysqli_error($conn);
       }
     } else {
-      echo "<script>alert('Password doesnt Match')</script>";
+      echo "Error" . mysqli_error($conn);
     }
   }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -208,6 +204,8 @@ if (isset($_POST['submit'])) {
       <!-- /top navigation -->
 
       <!-- page content -->
+
+
       <div class="right_col" role="main">
         <div class="">
           <div class="page-title">
@@ -219,110 +217,84 @@ if (isset($_POST['submit'])) {
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Create Shelter Account</h2>
+                    <h2>Edit Shelter Account</h2>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
                     <br />
-                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Email Address <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="email" class="form-control col-md-7 col-xs-12 <?php echo !$emailErr ?:
-                                                                                      'is-invalid'; ?>" required="required" type="email" name="email">
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Password">Password<span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="password" id="password" name="password" required="required" class="form-control col-md-7 col-xs-12 <?php echo !$passErr ?:
-                                                                                                                                            'is-invalid'; ?>">
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Password">Confirm Password<span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="password" id="cpassword" name="cpassword" required="required" class="form-control col-md-7 col-xs-12 <?php echo !$cpassErr ?:
-                                                                                                                                              'is-invalid'; ?>">
-                        </div>
-                      </div>
+                    <?php
+                    //Check if naget ung id sa URL
+                    if (isset($_GET['id'])) {
+                      //istotore sa $shelter_id ung id na nakuha sa url parameter
+                      $id = $_GET['id'];
+                      //Kukunin ung info ng both tables kung saan ung shelter_tbl.id = $shelter_id
+                      $sql = "SELECT shelter_tbl.shelter_id, shelter_tbl.shelter_city, shelter_tbl.shelter_contact, shelter_tbl.shelter_about, shelter_tbl.shelter_position,
+                       user_tbl.user_email, user_tbl.user_id FROM user_tbl INNER JOIN shelter_tbl ON user_tbl.user_id = shelter_tbl.user_id WHERE shelter_tbl.shelter_id='$id'";
+                      $result = mysqli_query($conn, $sql);
+                      //If successful ung query ilalagay sa array ung data
+                      if ($result->num_rows > 0) {
+                        $row = mysqli_fetch_assoc($result);
+                        foreach ($result as $rows) {
+                          $_SESSION['rows'] = $rows;
+                          $_SESSION['user_id'] = $rows['user_id'];
+                          $_SESSION['shelter_id'] = $rows['shelter_id'];
+
+                    ?>
+                          <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12">Email Address <span class="required">*</span>
+                              </label>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="email" class="form-control col-md-7 col-xs-12 <?php echo !$emailErr ?:
+                                                                                            'is-invalid'; ?>" required="required" type="email" name="email" value="<?= $row['user_email']; ?>">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="city">City<span class="required">*</span>
+                              </label>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="city" name="city" required="required" class="form-control col-md-7 col-xs-12 <?php echo !$cityErr ?: 'is-invalid'; ?>" value="<?= $row['shelter_city']; ?>">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Contact Number<span class="required">*</span>
+                              </label>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="contact" name="contact" required="required" class="form-control col-md-7 col-xs-12 <?php echo !$contactErr ?: 'is-invalid'; ?>" value="<?= $row['shelter_contact']; ?>">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">About/Bio<span class="required">*</span>
+                              </label>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="about" name="about" class="form-control col-md-7 col-xs-12" value="<?= $row['shelter_about']; ?>">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="position">Position<span class="required">*</span>
+                              </label>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="position" name="position" required="required" class="form-control col-md-7 col-xs-12" value="<?= $row['shelter_position']; ?>">
+                              </div>
+                            </div>
+                      <?php
+                        }
+                      } else {
+                        echo 'Error' . mysqli_error($conn);
+                      }
+                    }
+                      ?>
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                           <button class="btn btn-primary" type="reset">Reset</button>
-                          <button type="submit" class="btn btn-success" name="submit">Submit</button>
+                          <button type="submit" class="btn btn-success" name="submit-update">Submit</button>
+                          <a href="manage_shelter.php" class="btn btn-danger" name="cancel-update">Cancel</a>
                         </div>
                       </div>
-                    </form>
+                          </form>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-
-
-          <?php
-          $sql = "SELECT shelter_tbl.shelter_id, shelter_tbl.shelter_city, shelter_tbl.shelter_contact, shelter_tbl.shelter_position, user_tbl.user_email FROM user_tbl INNER JOIN shelter_tbl ON user_tbl.user_id = shelter_tbl.user_id";
-          $result = mysqli_query($conn, $sql);
-          ?>
-          <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="x_panel">
-              <div class="x_title">
-                <h2>List of Shelter Accounts<small>Users</small></h2>
-                <ul class="nav navbar-right panel_toolbox">
-                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                  </li>
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                    <ul class="dropdown-menu" role="menu">
-                      <li><a href="#">Settings 1</a>
-                      </li>
-                      <li><a href="#">Settings 2</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li><a class="close-link"><i class="fa fa-close"></i></a>
-                  </li>
-                </ul>
-                <div class="clearfix"></div>
-              </div>
-              <div class="x_content">
-                <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
-                  <thead>
-                    <tr>
-                      <th>Shelter ID.</th>
-                      <th>City</th>
-                      <th>Contact Number</th>
-                      <th>Position</th>
-                      <th>E-mail Address</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <?php
-                  if ($result->num_rows > 0) {
-                    foreach ($result as $row) {
-                  ?>
-                      <tbody>
-                        <tr>
-                          <td><?php echo $row['shelter_id']; ?></td>
-                          <td><?php echo $row['shelter_city']; ?></td>
-                          <td><?php echo $row['shelter_contact']; ?></td>
-                          <td><?php echo $row['shelter_position']; ?></td>
-                          <td><?php echo $row['user_email']; ?></td>
-                          <td>
-                          <a href="edit_shelter.php?id=<?= $row['shelter_id']?>" type="submit" class="btn btn-round btn-success">Update</a>
-                            <button type="button" class="btn btn-round btn-danger">Delete</button>
-                          </td>
-                        </tr>
-                    <?php
-                    }
-                  }
-                    ?>
-                      </tbody>
-                </table>
               </div>
             </div>
           </div>
