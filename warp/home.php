@@ -1,3 +1,12 @@
+<?php
+include 'config.php';
+session_start();
+
+if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
+    header('Location: login.php');
+}
+?>
+
 <!doctype html>
 <html class="no-js" lang="zxx">
 
@@ -55,8 +64,18 @@
                                         <li> <a href="about.html">About Us </i></a>
                                         <li> <a href="newpage.html">Pets for Adoption </i></a>
                                         <li><a href="contact.html">Contact</a></li>
-                                        <li><a href="../warp/shelter/production/adopter_user_page.html"><i class="fa-solid fa-user" style="font-size:20px;color:rgb(4, 4, 41);"></i></a></li>
-                                        <li><a href="home-guest.php"> Logout </a></li>
+                                        <li><a href="../warp/shelter/production/adopter_user_page.html">
+                                                <?php
+                                                //DISPLAY SESSION
+                                                if (isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
+                                                    echo $_SESSION['user-email'];
+                                                } else {
+                                                    header("Location: login.php");
+                                                }
+                                                ?>
+                                                <i class="fa-solid fa-user" style="font-size:20px;color:rgb(4, 4, 41);"></i>
+                                                </a></li>
+                                        <li><a href="logout.php?logout">Logout </a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -244,7 +263,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="single_service">
                         <div class="service_thumb service_icon_bg_15 d-flex align-items-center justify-content-center">
-                            </div>
+                        </div>
                         <div class="service_content text-center">
                             <h3>Taguig</h3>
                         </div>

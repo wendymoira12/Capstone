@@ -4,61 +4,66 @@ include 'config.php';
 
 error_reporting(0);
 
-if(isset($_POST['submit-signup'])) {
+if (isset($_POST['submit-signup'])) {
   $email_signup = $_POST['email-signup'];
   $pass_signup = md5($_POST['pass-signup']);
   $cpass_signup = md5($_POST['cpass-signup']);
 
-  if($pass_signup == $cpass_signup) 
-  {
+  if ($pass_signup == $cpass_signup) {
     $sql = "SELECT * FROM user_tbl WHERE user_email='$email_signup'";
     $result = mysqli_query($conn, $sql);
     $role = 1;
-    if (!$result->num_rows > 0)
-    {
+    if (!$result->num_rows > 0) {
 
-        $sql = "INSERT INTO user_tbl (user_email, user_password, role_id)
+      $sql = "INSERT INTO user_tbl (user_email, user_password, role_id)
                 VALUES ('$email_signup', '$pass_signup','$role')";
-        $result = mysqli_query($conn, $sql);
-        header("Location: login2.php");
-        if ($result) 
-        {
-          echo "<script>alert('Registration complete')</script>";
-          $email_signup = "";
-          $_POST['pass-signup'] = "";
-          $_POST['cpass-signup'] = "";
-
-        } else 
-        {
-          echo "<script>alert('Oops! Something went wrong')</script>";
-        }
-    } else
-      {
-        echo "<script>alert('Oops! Email already used')</script>";
+      $result = mysqli_query($conn, $sql);
+      header("Location: login2.php");
+      if ($result) {
+        echo "<script>alert('Registration complete')</script>";
+        $email_signup = "";
+        $_POST['pass-signup'] = "";
+        $_POST['cpass-signup'] = "";
+      } else {
+        echo "<script>alert('Oops! Something went wrong')</script>";
       }
-  } else 
-  {
+    } else {
+      echo "<script>alert('Oops! Email already used')</script>";
+    }
+  } else {
     echo "<script>alert('Password doesnt Match')</script>";
   }
 }
 
 session_start();
 
-if (isset($_POST['submit-login'])) 
-{
+if (isset($_POST['submit-login'])) {
   $email_login = $_POST['email-login'];
-  $pass_login = md5($_POST['pass-login']);
-
-  $sql = "SELECT * FROM user_tbl WHERE user_email='$email_login' AND user_password='$pass_login' AND role_id='1'";
+  $pass_login = $_POST['pass-login'];
+  $role_adopter = 1;
+  $role_shelter = 2;
+  $_SESSION['password2'] = $pass_login;
+  $sql = "SELECT * FROM user_tbl WHERE (user_email='$email_login' AND role_id='$role_adopter') OR (user_email='$email_login' AND role_id='$role_shelter')";
   $result = mysqli_query($conn, $sql);
-  if($result->num_rows > 0) 
-  {
+  //If the query is true, sql will fetch all the data in the row
+  if ($result->num_rows > 0) {
     $row = mysqli_fetch_assoc($result);
-    $_SESSION['email-login'] = $row['email-login'];
-    header("Location: home.php");
-  } else
-  {
+    //Store User Email and its role for user functions
+    $_SESSION['user-email'] = $row['user_email'];
+    $_SESSION['user-role-id'] = $row['role_id'];
+    // The password will be stored in the session variable
+    $_SESSION['password-login'] = $row['user_password'];
+    $hashpass = $_SESSION['password-login'];
+    // To check if $pass_login == $hashpass(session variable)
+    if (password_verify($pass_login, $hashpass)) {
+      unset($_SESSION['password-login']);
+      header("Location: home.php");
+    } else {
+      echo "<script>alert('Incorrect Email or Password')</script>";
+    }
+  } else {
     echo "<script>alert('Oops! Email or Password is incorrect')</script>";
+    echo 'Error: ' . mysqli_error($conn);
   }
 }
 
@@ -88,15 +93,15 @@ if (isset($_POST['submit-login']))
           <h2 class="title">Sign in</h2>
           <div class="input-field">
             <i class="fas fa-user"></i>
-            <input type="email" placeholder="Email" name="email-login" value="<?php echo $email_login; ?>" required/>
+            <input type="email" placeholder="Email" name="email-login" value="<?php echo $email_login; ?>" required />
           </div>
           <div class="input-field">
             <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Password" name="pass-login" value="<?php echo $_POST['pass-login']; ?>" required/>
+            <input type="password" placeholder="Password" name="pass-login" required />
           </div>
           <!--
             <input type="submit" value="Login" action="home.html" class="btn solid" /> -->
-          <button name="submit-login" class="btn solid">Login</button>
+          <button type="submit" name="submit-login" class="btn solid">Login</button>
 
           <!--<a href="#">Forgot Password</a>
             <p class="social-text">Or Sign in with social platforms</p>
@@ -120,11 +125,11 @@ if (isset($_POST['submit-login']))
 
           <div class="input-field">
             <i class="fas fa-envelope"></i>
-            <input type="email" placeholder="Email" name="email-signup" value="<?php echo $email_signup; ?>" required/>
+            <input type="email" placeholder="Email" name="email-signup" value="<?php echo $email_signup; ?>" required />
           </div>
           <div class="input-field">
             <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Password" name="pass-signup" value="<?php echo $_POST['pass-signup']; ?>" required/>
+            <input type="password" placeholder="Password" name="pass-signup" value="<?php echo $_POST['pass-signup']; ?>" required />
           </div>
           <div class="input-field">
             <i class="fas fa-lock"></i>

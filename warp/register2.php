@@ -36,8 +36,10 @@ if (isset($_POST['submit'])) {
   $region = $_POST['region'];
   $city = $_POST['city'];
   $email = $_SESSION['mail'];
+
+  //Check if no errors sa pass at confirm pass
   if (empty($passErr) && empty($cpassErr)) {
-    //Check if password == confirm password
+    //Check if password == confirm password if true insert data into database
     if ($password == $cpassword) {
       $password_hash = password_hash($password, PASSWORD_DEFAULT);
       $role = 1;
@@ -61,6 +63,7 @@ if (isset($_POST['submit'])) {
           //If successful ang insertion mareredirect na sa homepage si adopter
           if ($result3) {
             echo "<script>alert('Registration complete')</script>";
+            //$_SESSION['adopter-email'] = $email;
             header("Location: Home-guest.php");
           } else {
             echo "<script>alert('Oops! Something went wrong')</script>";

@@ -1,3 +1,11 @@
+<?php
+include 'config/database.php';
+session_start();
+
+if (!isset($_SESSION['email-login'])) {
+  header('Location: login.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -58,7 +66,15 @@
             </div>
             <div class="profile_info">
               <span>Welcome,</span>
-              <h2>Admin</h2>
+              <h2>
+                <?php
+                //DISPLAY SESSION
+                if (isset($_SESSION['email-login'])) {
+                  echo $_SESSION['email-login'];
+                } else {
+                  header("Location: login.php");
+                }
+                ?></h2>
             </div>
           </div>
           <!-- /menu profile quick info -->
@@ -80,7 +96,7 @@
                 </li>
               </ul>
             </div>
- 
+
 
           </div>
           <!-- /sidebar menu -->
@@ -114,21 +130,12 @@
 
             <ul class="nav navbar-nav navbar-right">
               <li class="">
-                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
-                  aria-expanded="false">
-                  <img src="images/WARP_LOGO.svg" alt="">Admin
+                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  <img src="images/WARP_LOGO.svg" alt=""><?php echo $_SESSION['email-login'] ?>
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
-                  <li><a href="javascript:;"> Profile</a></li>
-                  <li>
-                    <a href="javascript:;">
-                      <span class="badge bg-red pull-right"></span>
-                      <span>Settings</span>
-                    </a>
-                  </li>
-                  <li><a href="javascript:;">Help</a></li>
-                  <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                  <li><a href="logout.php?logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                 </ul>
               </li>
             </ul>
@@ -144,7 +151,6 @@
             <div class="title_left">
               <h3>Manage Adopter</h3>
             </div>
-
             <div class="title_right">
               <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                 <div class="input-group">
@@ -155,71 +161,78 @@
                 </div>
               </div>
             </div>
-
           </div>
 
-
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="x_panel">
-            <div class="x_title">
-              <h2>List of Adopter Accounts</h2>
-              <ul class="nav navbar-right panel_toolbox">
-                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                </li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i
-                      class="fa fa-wrench"></i></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Settings 1</a>
-                    </li>
-                    <li><a href="#">Settings 2</a>
-                    </li>
-                  </ul>
-                </li>
-                <li><a class="close-link"><i class="fa fa-close"></i></a>
-                </li>
-              </ul>
-              <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-              <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap"
-                cellspacing="0" width="100%">
-                <thead>
-                  <tr>
-                    <th>No.</th>
-                    <th>Adopter ID.</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Age</th>
-                    <th>Contact Number</th>
-                    <th>E-mail Address</th>
-                    <th>Region</th>
-                    <th>City </th>
-                    <th>Address</th>
-                    <th>Image</th>
-                    <th>Date Created</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                </tbody>
-              </table>
+          <?php
+          $sql = "SELECT adopter_tbl.adopter_id, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adopter_tbl.adopter_age, 
+          adopter_tbl.adopter_cnum, adopter_tbl.adopter_region, adopter_tbl.adopter_city, user_tbl.user_email, user_tbl.user_datecreated FROM user_tbl INNER JOIN adopter_tbl 
+          ON user_tbl.user_id = adopter_tbl.user_id";
+          $result = mysqli_query($conn, $sql);
+          ?>
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+              <div class="x_title">
+                <h2>List of Adopter Accounts</h2>
+                <div class="clearfix"></div>
+              </div>
+              <div class="x_content">
+                <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                  <thead>
+                    <tr>
+                      <th>Adopter ID.</th>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      <th>Age</th>
+                      <th>Contact Number</th>
+                      <th>Region</th>
+                      <th>City </th>
+                      <th>Date Created</th>
+                      <th>E-mail Address</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <?php
+                  if ($result->num_rows > 0) {
+                    foreach ($result as $row) {
+                  ?>
+                      <tbody>
+                        <tr>
+                          <td><?php echo $row['adopter_id']; ?></td>
+                          <td><?php echo $row['adopter_fname']; ?></td>
+                          <td><?php echo $row['adopter_lname']; ?></td>
+                          <td><?php echo $row['adopter_age']; ?></td>
+                          <td><?php echo $row['adopter_cnum']; ?></td>
+                          <td><?php echo $row['adopter_region']; ?></td>
+                          <td><?php echo $row['adopter_city']; ?></td>
+                          <td><?php echo $row['user_datecreated']; ?></td>
+                          <td><?php echo $row['user_email']; ?></td>
+                          <td>
+                            <!-- <a href="edit_shelter.php?id=<?= $row['adopter_id'] ?>" type="submit" class="btn btn-round btn-success">Update</a> -->
+                            <button type="button" class="btn btn-round btn-danger">Delete</button>
+                          </td>
+                        </tr>
+                    <?php
+                    }
+                  }
+                    ?>
+                      </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <!-- /page content -->
+      <!-- /page content -->
 
-    <!-- footer content -->
-    <footer>
-      <!-- <div class="pull-right">
+      <!-- footer content -->
+      <footer>
+        <!-- <div class="pull-right">
         Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
       </div> -->
-      <div class="clearfix"></div>
-    </footer>
-    <!-- /footer content -->
-  </div>
+        <div class="clearfix"></div>
+      </footer>
+      <!-- /footer content -->
+    </div>
   </div>
 
   <!-- jQuery -->
