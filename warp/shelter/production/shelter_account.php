@@ -92,6 +92,10 @@
                           <div class="main-menu  d-none d-lg-block">
                               <nav>
                                 <ul class="nav navbar-nav navbar-right">
+                                <li><a href="/warp/home.php">Home</a></li>
+                                        <li> <a href="/warp/about.html">About Us </i></a>
+                                        <li> <a href="/warp/newpage.html">Pets for Adoption </i></a>
+                                        <li><a href="/warp/contact.html">Contact</a></li>
                                   <li class="">
                                     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                       <img src="../../img/shelters/Las_Piñas_City_seal.png" alt="">Las Piñas
@@ -99,7 +103,7 @@
                                     </a>
                                     <ul class="dropdown-menu dropdown-usermenu pull-right">
                                       
-                                      <li><a href="../../login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                                      <li><a href="../../login.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                                     </ul>
                                   </li>
                   
