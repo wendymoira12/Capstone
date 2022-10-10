@@ -8,17 +8,20 @@ if (isset($_POST['pet-submit']))
   $pet_name = $_POST['pet-name'];
   $pet_age = $_POST['pet-age'];
   $color = $_POST['color'];
+  $breed = $_POST['breed'];
   $specie = $_POST['specie'];
   $gender = $_POST['gender'];
   $neuter = $_POST['neuter'];
   $vaccine = $_POST['vaccine'];
   $chkstr = implode(", ", $vaccine);
 
+  $weight = $_POST['weight'];
   $size = $_POST['size'];
   $medrec = $_POST['medrec'];
   $sociability = $_POST['sociability'];
   $energy = $_POST['energy'];
   $affection = $_POST['affection'];
+  $description = $_POST['description'];
 
   $pet_img = $_FILES['pet-img']['name'];
   $pet_img_tmp_name = $_FILES['pet-img']['tmp_name'];
@@ -54,12 +57,12 @@ if (isset($_POST['pet-submit']))
   $pet_vid_tmp_name = $_FILES['pet-vid']['tmp_name'];
   $pet_vid_folder = 'images/' . $pet_vid;
 
-  if (empty($pet_img) && ($pet_vid) && empty($pet_name) && empty($pet_age) && empty($color) && empty($specie) && empty($gender) && empty($neuter) &&  empty($chkstr) && empty($size) && empty($medrec) && empty($sociability) && empty($energy) && empty($affection))
+  if (empty($pet_img) && ($pet_vid) && empty($pet_name) && empty($pet_age) && empty($color) && empty($breed) && empty($specie) && empty($gender) && empty($neuter) &&  empty($chkstr) && empty($weight) && empty($size) && empty($medrec) && empty($sociability) && empty($energy) && empty($affection) && empty($description))
   {
     $message[] = 'Please fill ouT all fieldS';
   }else
   {
-    $sql = "INSERT INTO adoptee_tbl(pet_img, pet_vid, pet_name, pet_age, pet_color, pet_specie, pet_gender, pet_neuter, pet_vax, pet_size, pet_medrec, pet_lsoc, pet_lene, pet_laff) VALUES('$pet_img', '$pet_vid', '$pet_name', '$pet_age', '$color', '$specie', '$gender', '$neuter', '$chkstr', '$size', '$medrec', '$sociability', '$energy', '$affection')";
+    $sql = "INSERT INTO adoptee_tbl(pet_img, pet_vid, pet_name, pet_age, pet_color, pet_breed, pet_specie, pet_gender, pet_neuter, pet_vax, pet_weight, pet_size, pet_medrec, pet_lsoc, pet_lene, pet_laff, pet_desc) VALUES('$pet_img', '$pet_vid', '$pet_name', '$pet_age', '$color', '$breed', '$specie', '$gender', '$neuter', '$chkstr', '$weight', '$size', '$medrec', '$sociability', '$energy', '$affection', '$description')";
 
     $result = mysqli_query($conn, $sql);
 
@@ -195,7 +198,7 @@ if (isset($_POST['pet-submit']))
                           <div class="main-menu  d-none d-lg-block">
                               <nav>
                                 <ul class="nav navbar-nav navbar-right">
-                                <li><a href="/warp/home.php">Home</a></li>
+                                        <li><a href="/warp/home.php">Home</a></li>
                                         <li> <a href="/warp/about.html">About Us </i></a>
                                         <li> <a href="/warp/newpage.html">Pets for Adoption </i></a>
                                         <li><a href="/warp/contact.html">Contact</a></li>
@@ -315,6 +318,13 @@ if (isset($_POST['pet-submit']))
                       </div>
 
                       <div class="form-group">
+                        <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Breed <span class="required">*</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input class="form-control col-md-7 col-xs-12" type="text" name="breed" required>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Specie <span class="required">*</label>
 
                         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -375,8 +385,8 @@ if (isset($_POST['pet-submit']))
                           <input type="checkbox" name="vaccine[]" id="cb4" value="Not Applicable" data-parsley-mincheck="1" required/> Not Applicable
                         </div>
                       </div>
-<!-------- NOT APPLICABLE CHECKBOX CHECK AND UNCHECK OTHER CHECKBOXES --------->
 
+<!-------- NOT APPLICABLE CHECKBOX CHECK AND UNCHECK OTHER CHECKBOXES --------->
                       <script>
                           var cb1 = document.getElementById("cb1");
                           var cb2 = document.getElementById("cb2");
@@ -403,19 +413,13 @@ if (isset($_POST['pet-submit']))
                               }
                           })
                       </script>
-                      
-                      <!-- <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Vaccine <span class="required">*</label>
+
+                      <div class="form-group">
+                        <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Weight(kg) <span class="required">*</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select name="vaccine" class="select2_single form-control" tabindex="-1" required>
-                            <option></option>
-                            <option value="5in1">5in1</option>
-                            <option value="4in1">4in1</option>
-                            <option value="Anti-Rabies">Anti-Rabies</option>
-                            <option value="Not Applicable">Not Applicable</option>
-                          </select>
+                          <input class="form-control col-md-7 col-xs-12" type="number" name="weight" required>
                         </div>
-                      </div> -->
+                      </div>
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Size <span class="required">*</label>
@@ -441,11 +445,11 @@ if (isset($_POST['pet-submit']))
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select name="sociability" class="select2_single form-control" tabindex="-1" required>
                             <option></option>
-                            <option value="Very Poor">Very Poor</option>
-                            <option value="Poor">Poor</option>
-                            <option value="Okay">Okay</option>
-                            <option value="Good">Good</option>
-                            <option value="Superb">Superb</option>
+                            <option value="1">Very Poor</option>
+                            <option value="2">Poor</option>
+                            <option value="3">Okay</option>
+                            <option value="4">Good</option>
+                            <option value="5">Superb</option>
                           </select>
                         </div>
                       </div>
@@ -455,11 +459,11 @@ if (isset($_POST['pet-submit']))
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select name="energy" class="select2_single form-control" tabindex="-1" required>
                             <option></option>
-                            <option value="Very Poor">Very Poor</option>
-                            <option value="Poor">Poor</option>
-                            <option value="Okay">Okay</option>
-                            <option value="Good">Good</option>
-                            <option value="Superb">Superb</option>
+                            <option value="1">Very Poor</option>
+                            <option value="2">Poor</option>
+                            <option value="3">Okay</option>
+                            <option value="4">Good</option>
+                            <option value="5">Superb</option>
                           </select>
                         </div>
                       </div>
@@ -469,12 +473,20 @@ if (isset($_POST['pet-submit']))
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select name="affection" class="select2_single form-control" tabindex="-1" required>
                             <option></option>
-                            <option value="Very Poor">Very Poor</option>
-                            <option value="Poor">Poor</option>
-                            <option value="Okay">Okay</option>
-                            <option value="Good">Good</option>
-                            <option value="Superb">Superb</option>
+                            <option value="1">Very Poor</option>
+                            <option value="2">Poor</option>
+                            <option value="3">Okay</option>
+                            <option value="4">Good</option>
+                            <option value="5">Superb</option>
                           </select>
+                        </div>
+                      </div>
+
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">Description <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <textarea id="textarea" required="required" name="description" class="form-control col-md-7 col-xs-12"></textarea>
                         </div>
                       </div>
 
@@ -495,9 +507,9 @@ if (isset($_POST['pet-submit']))
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <button name="pet-cancel" class="btn btn-primary" type="button">Cancel</button>
-						              <button name="pet-reset" class="btn btn-primary" type="reset">Reset</button>
-                          <button name="pet-submit" class="btn btn-success">Submit</button>
+                          <button name="pet-cancel" class="btn-round btn-primary" type="button">Cancel</button>
+						              <button name="pet-reset" class="btn-round btn-primary" type="reset">Reset</button>
+                          <button name="pet-submit" class="btn-round btn-success" height >Submit</button>
                         </div>
                       </div>
 

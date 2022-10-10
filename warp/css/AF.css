@@ -1,0 +1,357 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
+
+/* -------------------- STAR RATING-------------------- */
+.star-rating li {
+    padding: 0;
+    color: #ff6df3;
+}
+.star-rating i {
+    font-size: 24px;
+    color: #ff6df3;
+}
+
+
+
+.modal-box{ font-family: 'Poppins', sans-serif; }
+.show-modal{
+    color: rgb(255, 255, 255);
+    background:  #ff6df3;
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: capitalize;
+    padding: 10px 15px;
+    margin: auto auto 0;
+    border: none;
+    outline: none;
+    box-shadow: 0 0 20px rgba(62, 0, 0, 0.1);
+    display: inline-block;
+    transition: all 0.3s ease 0s;
+}
+.show-modal:hover{
+    color: #fff;
+    background:  #ae42a5;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    outline: none;
+}
+.show-modal:focus{
+    color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    outline: none;
+}
+.modal-dialog{
+    width: 700px;
+    margin: 70px auto 0;
+}
+.modal-dialog{ transform: scale(0.5); }
+.modal-dialog{ transform: scale(1); }
+.modal-dialog .modal-content{
+    text-align: center;
+    border: none;
+}
+.modal-content .close{
+    color: rgb(255, 255, 255);
+    background: rgb(255, 107, 38);
+    font-size: 25px;
+    font-weight: 400;
+    text-shadow: none;
+    line-height: 27px;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    overflow: hidden;
+    opacity: 1;
+    position: absolute;
+    left: auto;
+    right: 8px;
+    top: 8px;
+    z-index: 1;
+    transition: all 0.3s;
+}
+.modal-content .close:hover{
+    color: #fff;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+.close:focus{ outline: none; }
+.modal-body{ padding: 60px 40px 40px !important; }
+.modal-body .title{
+    color: #ff45f6;
+    font-size: 33px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin: 0 0 10px;
+}
+.modal-body .description{
+    color: #121212;
+    font-size: 16px;
+    margin: 0 0 20px;
+}
+.modal-body .form-group{
+    text-align: left;
+    margin-bottom: 20px;
+    position: relative;
+}
+.modal-body .input-icon{
+    color: rgb(255, 169, 111);
+    font-size: 18px;
+    transform: translateY(-50%);
+    position: absolute;
+    top: 50%;
+    left: 20px;
+}
+.modal-body .form-control{
+    font-size: 17px;
+    height: 45px;
+    width: 100%;
+    padding: 6px 0 6px 50px;
+    margin: 0 auto;
+    border: 2px solid #eee;
+    border-radius: 5px;
+    box-shadow: none;
+    outline: none;
+}
+.form-control::placeholder{
+    color: #a8aeba;
+}
+.form-group.checkbox{
+    margin-top: 0;
+    Width: auto;
+    display: block;
+}
+.form-group.checkbox label{
+    color: #9A9EA9;
+    font-weight: normal;
+}
+.form-group.checkbox input[type=checkbox]{
+    margin-left: 0;
+}
+/*.modal-body .forgot-pass{
+    color: #7F7FD5;
+    font-size: 13px;
+    text-align: right;
+    width: calc(100% - 135px);
+    margin: 2px 0;
+    display: inline-block;
+    vertical-align: top;
+    transition: all 0.3s ease 0s;
+}
+.forgot-pass:hover{
+    color: #9A9EA9;
+    text-decoration: underline;
+}*/
+.modal-content .modal-body .btn{
+    color: #fff;
+    background: #ff5ee4;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: auto;
+    width: auto;
+    height: auto;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    border: none;
+    display: inline-flex;
+    transition: all 0.2s ease 0s;
+    margin-right:10px;
+}
+
+.modal-content .modal-body .btn last-child
+{
+    margin-right:0px;
+}
+.btn-primary.focus, .btn-primary:focus {
+    color: #fff;
+    background-color: #ee58ab;
+    border-color: #ffffff;
+}
+.modal-content .modal-body .btn:hover{
+    color: #fff;
+    letter-spacing: 2px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.modal-content .modal-body .btn:focus{ outline: none; }
+@media only screen and (max-width: 700px){
+    .modal-dialog{ width: 95% !important; }
+    .modal-content .modal-body{
+        padding: 60px 20px 40px !important;
+    }
+}
+
+
+/* Styling the Body element i.e. Color,
+		Font, Alignment */
+		body {
+			background-color: #e1e6e4;
+            font-family: "Poppins", sans-serif;
+			text-align: left;
+            border-radius: 3px;
+		}
+
+		/* Styling the Form (Color, Padding, Shadow) */
+		/*form {
+			background-color: #ffffff;
+			max-width: 800px;
+			margin: 50px auto;
+			padding: 30px 20px;
+			box-shadow: 2px 5px 10px rgba(255, 220, 192, 0.616);
+            border-radius: 3px;
+		}
+
+		/* Styling form-control Class */
+		.form-control {
+			text-align: left;
+			margin-bottom: 25px;
+		}
+
+		/* Styling form-control Label */
+		.form-control label {
+			display: block;
+			margin-bottom: 10px;
+		}
+
+		/* Styling form-control input,
+		select, textarea */
+		.form-control input,
+		.form-control select,
+		.form-control textarea {
+			border: 1px solid #777;
+			border-radius: 2px;
+      		font-family: "Poppins", sans-serif;
+			padding: 10px;
+			display: block;
+			width: 95%;
+			background-color: #EBEBE4;
+		}
+
+		/* Styling form-control Radio
+		button and Checkbox */
+		.form-control input[type="radio"],
+		.form-control input[type="checkbox"] {
+			display: inline-block;
+			width: auto;
+		}
+
+		/* Styling Button */
+		.button1 {
+			background-color: #ffffff;
+			border: 1px solid #ff843a;
+			border-radius: 2px;
+            font-family: "Poppins", sans-serif;
+			font-size: 14px;
+			display: inline-block;
+			width: 100%;
+			margin-top: 5px;
+			margin-bottom: 5px;
+		}
+    input[type='radio']:after {
+      width: 15px;
+      height: 15px;
+      border-radius: 15px;
+      top: -2px;
+      left: -1px;
+      position: relative;
+      background-color: #d1d3d1;
+      content: '';
+      display: inline-block;
+      visibility: visible;
+      border: 2px solid white;
+  }
+
+  input[type='radio']:checked:after {
+      width: 15px;
+      height: 15px;
+      border-radius: 15px;
+      top: -2px;
+      left: -1px;
+      position: relative;
+      background-color: #ffa500;
+      content: '';
+      display: inline-block;
+      visibility: visible;
+      border: 2px solid white;
+  }
+	  .form-inline {
+		text-align: left;
+		margin-bottom: 25px;
+	}
+
+	/* Styling form-control Label */
+	.form-control-2 label {
+		display: block;
+		margin-bottom: 10px;
+	}
+
+	/* Styling form-control input,
+	select, textarea */
+	.form-control-2 input,
+	.form-control-2 select,
+	.form-control-2 textarea {
+		border: 1px solid #777;
+		border-radius: 2px;
+  font-family: "Poppins", sans-serif;
+		padding: 10px;
+		display: block;
+		width: 95%;
+	}  
+
+/*CONFIRMATION MESSAGE
+    /* Popup box BEGIN */
+.hover_bkgr_fricc{
+    background:rgba(0,0,0,.4);
+    cursor:pointer;
+    display:none;
+    height:100%;
+    position:fixed;
+    text-align:center;
+    top:0;
+    width:100%;
+    z-index:1;
+}
+.hover_bkgr_fricc .helper{
+    display:inline-block;
+    height:100%;
+    vertical-align:middle;
+}
+.hover_bkgr_fricc > div {
+    background-color: #fff;
+    box-shadow: 10px 10px 60px #555;
+    display: inline-block;
+    height: auto;
+    max-width: 551px;
+    min-height: 100px;
+    vertical-align: middle;
+    width: 60%;
+    position: relative;
+    border-radius: 8px;
+    padding: 15px 5%;
+}
+.popupCloseButton {
+    background-color:none;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    display: inline-block;
+    font-family: arial;
+    font-weight: bold;
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    font-size: 25px;
+    line-height: 30px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+}
+.popupCloseButton:hover {
+    background-color: rgb(253, 130, 42);
+}
+.trigger_popup_fricc {
+    cursor: pointer;
+    font-size: 20px;
+    margin: 20px;
+    display: inline-block;
+    font-weight: bold;
+}
+/* Popup box BEGIN */

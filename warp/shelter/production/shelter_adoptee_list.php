@@ -112,7 +112,7 @@ if (isset($_GET['pet-delete']))
                           <div class="main-menu  d-none d-lg-block">
                               <nav>
                                 <ul class="nav navbar-nav navbar-right">
-                                <li><a href="/warp/home.php">Home</a></li>
+                                        <li><a href="/warp/home.php">Home</a></li>
                                         <li> <a href="/warp/about.html">About Us </i></a>
                                         <li> <a href="/warp/newpage.html">Pets for Adoption </i></a>
                                         <li><a href="/warp/contact.html">Contact</a></li>
@@ -196,15 +196,18 @@ if (isset($_GET['pet-delete']))
                           <th>Name</th>
                           <th>Age</th>
                           <th>Color</th>
+                          <th>Breed</th>
                           <th>Specie</th>
                           <th>Sex</th>
                           <th>Neuter</th>
                           <th>Vax</th>
+                          <th>Weight</th>
                           <th>Size</th>
                           <th>Medical Record</th>
                           <th>Level of Sociability</th>
                           <th>Level of Energy</th>
                           <th>Level of Affection</th>
+                          <th>Description</th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -226,15 +229,18 @@ if (isset($_GET['pet-delete']))
                           <td><?php echo $row['pet_name']; ?></td>
                           <td><?php echo $row['pet_age']; ?></td>
                           <td><?php echo $row['pet_color']; ?></td>
+                          <td><?php echo $row['pet_breed']; ?></td>
                           <td><?php echo $row['pet_specie']; ?></td>
                           <td><?php echo $row['pet_gender']; ?></td>
                           <td><?php echo $row['pet_neuter']; ?></td>
                           <td><?php echo $row['pet_vax']; ?></td>
+                          <td><?php echo $row['pet_weight']; ?>kg</td>
                           <td><?php echo $row['pet_size']; ?></td>
                           <td><?php echo $row['pet_medrec']; ?></td>
                           <td><?php echo $row['pet_lsoc']; ?></td>
                           <td><?php echo $row['pet_lene']; ?></td>
                           <td><?php echo $row['pet_laff']; ?></td>
+                          <td><?php echo $row['pet_desc']; ?></td>
                           <td>
                             <a href="shelter_adoptee_edit.php?id=<?php echo $row['pet_id']; ?>"> 
                             <button type="button" class="btn btn-round btn-success">Edit</button> 

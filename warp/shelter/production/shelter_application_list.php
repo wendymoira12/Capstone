@@ -94,7 +94,7 @@
                           <div class="main-menu  d-none d-lg-block">
                               <nav>
                                 <ul class="nav navbar-nav navbar-right">
-                                <li><a href="/warp/home.php">Home</a></li>
+                                        <li><a href="/warp/home.php">Home</a></li>
                                         <li> <a href="/warp/about.html">About Us </i></a>
                                         <li> <a href="/warp/newpage.html">Pets for Adoption </i></a>
                                         <li><a href="/warp/contact.html">Contact</a></li>

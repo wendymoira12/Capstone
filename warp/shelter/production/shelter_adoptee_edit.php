@@ -125,10 +125,6 @@
                           <div class="main-menu  d-none d-lg-block">
                               <nav>
                                 <ul class="nav navbar-nav navbar-right">
-                                <<li><a href="/warp/home.php">Home</a></li>
-                                        <li> <a href="/warp/about.html">About Us </i></a>
-                                        <li> <a href="/warp/newpage.html">Pets for Adoption </i></a>
-                                        <li><a href="/warp/contact.html">Contact</a></li>
                                   <li class="">
                                     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                       <img src="../../img/shelters/Las_Piñas_City_seal.png" alt="">Las Piñas
@@ -245,6 +241,13 @@
                       </div>
 
                       <div class="form-group">
+                        <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Breed <span class="required">*</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input class="form-control col-md-7 col-xs-12" type="text" name="breed" value="<?= $data['pet_breed']?>" required>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Specie <span class="required">*</label>
 
                         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -356,6 +359,13 @@
                         </script>
 
                       <div class="form-group">
+                        <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Weight(kg) <span class="required">*</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input class="form-control col-md-7 col-xs-12" type="text" name="weight" value="<?= $data['pet_weight']?>" required>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Size <span class="required">*</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select name="size" class="select2_single form-control" tabindex="-1" required>
@@ -382,15 +392,15 @@
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select name="sociability" class="select2_single form-control" tabindex="-1" required>
 
-                            <option value="Very Poor" <?php echo ($data['pet_lsoc'] == "Very Poor")?"selected":""?>>Very Poor</option>
+                            <option value="1" <?php echo ($data['pet_lsoc'] == "1")?"selected":""?>>Very Poor</option>
 
-                            <option value="Poor" <?php echo ($data['pet_lsoc'] == "Poor")?"selected":""?>>Poor</option>
+                            <option value="2" <?php echo ($data['pet_lsoc'] == "2")?"selected":""?>>Poor</option>
 
-                            <option value="Okay" <?php echo ($data['pet_lsoc'] == "Okay")?"selected":""?>>Okay</option>
+                            <option value="3" <?php echo ($data['pet_lsoc'] == "3")?"selected":""?>>Okay</option>
 
-                            <option value="Good" <?php echo ($data['pet_lsoc'] == "Good")?"selected":""?>>Good</option>
+                            <option value="4" <?php echo ($data['pet_lsoc'] == "4")?"selected":""?>>Good</option>
 
-                            <option value="Superb" <?php echo ($data['pet_lsoc'] == "Superb")?"selected":""?>>Superb</option>
+                            <option value="5" <?php echo ($data['pet_lsoc'] == "5")?"selected":""?>>Superb</option>
 
                           </select>
                         </div>
@@ -401,15 +411,15 @@
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select name="energy" class="select2_single form-control" tabindex="-1" required>
 
-                            <option value="Very Poor" <?php echo ($data['pet_lene'] == "Very Poor")?"selected":""?>>Very Poor</option>
+                            <option value="1" <?php echo ($data['pet_lene'] == "1")?"selected":""?>>Very Poor</option>
 
-                            <option value="Poor" <?php echo ($data['pet_lene'] == "Poor")?"selected":""?>>Poor</option>
+                            <option value="2" <?php echo ($data['pet_lene'] == "2")?"selected":""?>>Poor</option>
 
-                            <option value="Okay" <?php echo ($data['pet_lene'] == "Okay")?"selected":""?>>Okay</option>
+                            <option value="3" <?php echo ($data['pet_lene'] == "3")?"selected":""?>>Okay</option>
 
-                            <option value="Good" <?php echo ($data['pet_lene'] == "Good")?"selected":""?>>Good</option>
+                            <option value="4" <?php echo ($data['pet_lene'] == "4")?"selected":""?>>Good</option>
 
-                            <option value="Superb" <?php echo ($data['pet_lene'] == "Superb")?"selected":""?>>Superb</option>
+                            <option value="5" <?php echo ($data['pet_lene'] == "5")?"selected":""?>>Superb</option>
 
                           </select>
                         </div>
@@ -420,24 +430,32 @@
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select name="affection" class="select2_single form-control" tabindex="-1" required>
 
-                            <option value="Very Poor" <?php echo ($data['pet_laff'] == "Very Poor")?"selected":""?>>Very Poor</option>
+                            <option value="1" <?php echo ($data['pet_laff'] == "1")?"selected":""?>>Very Poor</option>
 
-                            <option value="Poor" <?php echo ($data['pet_laff'] == "Poor")?"selected":""?>>Poor</option>
+                            <option value="2" <?php echo ($data['pet_laff'] == "2")?"selected":""?>>Poor</option>
 
-                            <option value="Okay" <?php echo ($data['pet_laff'] == "Okay")?"selected":""?>>Okay</option>
+                            <option value="3" <?php echo ($data['pet_laff'] == "3")?"selected":""?>>Okay</option>
 
-                            <option value="Good" <?php echo ($data['pet_laff'] == "Good")?"selected":""?>>Good</option>
+                            <option value="4" <?php echo ($data['pet_laff'] == "4")?"selected":""?>>Good</option>
 
-                            <option value="Superb" <?php echo ($data['pet_laff'] == "Superb")?"selected":""?>>Superb</option>
+                            <option value="5" <?php echo ($data['pet_laff'] == "5")?"selected":""?>>Superb</option>
 
                           </select>
+                        </div>
+                      </div>
+
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">Description <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <textarea required="required" name="description" aria-valuemin="1" class="form-control col-md-7 col-xs-12"><?= $data['pet_desc']?></textarea>
                         </div>
                       </div>
 
                       <div class="form-group">
                         <label for="pet-img" class="control-label col-md-3 col-sm-3 col-xs-12">Upload Adoptee Image<span class="required">*</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input class="form-control col-md-7 col-xs-12" type="file" name="pet-img" value="<?= $data['pet_img']?>" required>
+                          <input class="form-control col-md-7 col-xs-12" type="file" accept="" name="pet-img" value="<?= $data['pet_img']?>" required>
                         </div>
                       </div>
 
@@ -452,10 +470,10 @@
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                           <a href="shelter_adoptee_list.php">
-                            <button name="pet-cancel" class="btn btn-primary" type="button">Cancel</button>
+                            <button name="pet-cancel" class="btn-round btn-primary" type="button">Cancel</button>
                           </a>
-						              <button name="pet-reset" class="btn btn-primary" type="reset">Reset</button>
-                          <button name="edit-pet-submit" class="btn btn-success">Submit</button>
+						              <button name="pet-reset" class="btn-round btn-primary" type="reset">Reset</button>
+                          <button name="edit-pet-submit" class="btn-round btn-success">Submit</button>
                         </div>
                       </div>
 
