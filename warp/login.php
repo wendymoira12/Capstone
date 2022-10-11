@@ -51,6 +51,7 @@ if (isset($_POST['submit-login'])) {
     //Store User Email and its role for user functions
     $_SESSION['user-email'] = $row['user_email'];
     $_SESSION['user-role-id'] = $row['role_id'];
+    $_SESSION['user_id'] = $row['user_id'];
     // The password will be stored in the session variable
     $_SESSION['password-login'] = $row['user_password'];
     $hashpass = $_SESSION['password-login'];
