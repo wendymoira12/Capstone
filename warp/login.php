@@ -146,14 +146,14 @@ if (isset($_POST['submit-login'])) {
 
     <div class="panels-container">
       <div class="panel left-panel">
-        <div class="content">
+        <!-- <div class="content">
           <h3>New here?</h3>
           <p>
           </p>
           <button class="btn transparent" id="sign-up-btn">
             Sign up
           </button>
-        </div>
+        </div> -->
         <img src="img/WARP_Logo_Orange.png" class="image" alt="" />
       </div>
       <div class="panel right-panel">

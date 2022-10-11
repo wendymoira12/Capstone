@@ -2,6 +2,7 @@
 include 'config.php';
 session_start();
 
+//if hindi nakaset si user-email and user-role-id babalik sya sa login.php
 if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
     header('Location: login.php');
 }
@@ -64,17 +65,9 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
                                         <li> <a href="about.html">About Us </i></a>
                                         <li> <a href="newpage.html">Pets for Adoption </i></a>
                                         <li><a href="contact.html">Contact</a></li>
-                                        <li><a href="../warp/shelter/production/adopter_user_page.html">
-                                                <?php
-                                                //DISPLAY SESSION
-                                                if (isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
-                                                    echo $_SESSION['user-email'];
-                                                } else {
-                                                    header("Location: login.php");
-                                                }
-                                                ?>
-                                                <i class="fa-solid fa-user" style="font-size:20px;color:rgb(4, 4, 41);"></i>
-                                                </a></li>
+                                        <li><a href="getroleid.php?id=<?= $_SESSION['user-role-id']?>">
+                                            <i class="fa-solid fa-user" style="font-size:20px;color:rgb(4, 4, 41);"></i></a>
+                                        </li>
                                         <li><a href="logout.php?logout">Logout </a></li>
                                     </ul>
                                 </nav>
