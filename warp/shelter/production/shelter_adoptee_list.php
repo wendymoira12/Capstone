@@ -242,6 +242,10 @@ if (isset($_GET['pet-delete']))
                           <td><?php echo $row['pet_laff']; ?></td>
                           <td><?php echo $row['pet_desc']; ?></td>
                           <td>
+                            <a href="shelter_adoptee_view.php?id=<?php echo $row['pet_id']; ?>"> 
+                            <button type="button" class="btn btn-round btn-info">view</button> 
+                            </a>
+
                             <a href="shelter_adoptee_edit.php?id=<?php echo $row['pet_id']; ?>"> 
                             <button type="button" class="btn btn-round btn-success">Edit</button> 
                             </a>

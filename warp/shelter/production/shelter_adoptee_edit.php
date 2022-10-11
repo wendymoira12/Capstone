@@ -448,7 +448,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">Description <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <textarea required="required" name="description" aria-valuemin="1" class="form-control col-md-7 col-xs-12"><?= $data['pet_desc']?></textarea>
+                          <textarea name="description" class="form-control col-md-7 col-xs-12" required> <?= $data['pet_desc']?> </textarea>
                         </div>
                       </div>
 
