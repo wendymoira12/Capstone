@@ -84,57 +84,26 @@
         </div>
 
         <!-- top navigation -->
-        <div class="header-area ">
-        
-          <div id="sticky-header" class="main-header-area">
-              <div class="container">
-                  <div class="row align-items-center">
-                      <div class="col-xl-3 col-lg-3">
-                          
-                      </div>
-                      <div class="col-xl-9 col-lg-9">
-                          <div class="main-menu  d-none d-lg-block">
-                              <nav>
-                                <ul class="nav navbar-nav navbar-right">
-                                        <li><a href="/warp/home.php">Home</a></li>
-                                        <li> <a href="/warp/about.html">About Us </i></a>
-                                        <li> <a href="/warp/newpage.html">Pets for Adoption </i></a>
-                                        <li><a href="/warp/contact.html">Contact</a></li>
-                                  <li class="">
-                                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                      <img src="../../img/shelters/Las_Piñas_City_seal.png" alt="">Las Piñas
-                                      <span class=" fa fa-angle-down"></span>
-                                    </a>
-                                    <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                      <li><a href="../../login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-                                    </ul>
-                                  </li>
-                  
-                               
-                                    </ul>
-                                  </li>
-                                </ul>
-                              </nav>
-                          </div>
-                      </div>
-                      <div class="col-12">
-                          <div class="mobile_menu d-block d-lg-none"></div>
-                      </div>
-                  </div>
-              </div>
-            </nav>
-          </div>
-        
-      </div>
-
         <div class="top_nav">
           <div class="nav_menu">
             <nav>
               <div class="nav toggle">
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
               </div>
-
-             
+  
+              <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
+                    aria-expanded="false">
+                    <img src="/warp/img/City Logo/last_pinas.png" alt="">Las Pinas
+                    <span class=" fa fa-angle-down"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-usermenu pull-right">
+                    <li><a href="login.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                  </ul>
+                </li>
+                <li> <a href="/warp/home-shelter.php">Go to Homepage </i></a>
+              
             </nav>
           </div>
         </div>
