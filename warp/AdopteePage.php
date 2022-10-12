@@ -632,21 +632,15 @@
                                     Contact Us
                                 </h3>
                                 <ul class="address_line">
-                                    <li><a href="#">warp@gmail.com</a></li>
+                                    <li></li>
+                                    <li>warp.pup@gmail.com</a></li>
                                     <li>Metro Manila, Philippines</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="col-xl-3  col-md-6 col-lg-3">
                             <div class="footer_widget">
-                                <h3 class="footer_title">
-                                    Quick Links
-                                </h3>
-                                <ul class="links">
-                                    <li><a href="#">About Us</a></li>
-                                    <li><a href="#">Privacy Policy</a></li>
-                                    <li><a href="#">Terms of Service</a></li>
-                                </ul>
+                               
                             </div>
                         </div>
                         <div class="col-xl-3  col-md-6 col-lg-3">
@@ -655,6 +649,7 @@
 
                                 </h3>
                                 <ul class="links">
+                                    <br>
 
                                 </ul>
                             </div>
@@ -666,32 +661,7 @@
                                         <img src="img/logo.png" alt="">
                                     </a>
                                 </div>
-                                <p class="address_text">Metro Manila, Philippines
-                                </p>
-                                <div class="socail_links">
-                                    <ul>
-                                        <li>
-                                            <a href="#">
-                                                <i class="ti-facebook"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="ti-pinterest"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-google-plus"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-linkedin"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                
 
                             </div>
                         </div>
