@@ -10,12 +10,14 @@ if (isset($_GET['pet-delete'])) {
 }
 
 $i = 1;
+
+// Get the user ID from the login sesh
 $user_id = $_SESSION['user_id'];
-// Query to check if user_id from the login sesh == user id in the shelter table
+// Query to check if user_id from the login shesh to get the shelter user (will be replacing user_id to Shelter City as WHERE for multiple access)
 $sql = "SELECT * FROM shelter_tbl WHERE user_id ='$user_id'";
 $result = mysqli_query($conn, $sql);
 
-// If true get shelter id from the shelter table to 
+// If true get shelter id from the shelter table para maspecify kung alin adoptee ang ishoshow based sa shelter_id 
 if ($result->num_rows > 0) {
   $row = mysqli_fetch_assoc($result);
   $shelter_id = $row['shelter_id'];
@@ -234,7 +236,7 @@ if ($result->num_rows > 0) {
                         <tr>
                           <td><?php echo $i++; ?></td>
                           <td><?php echo $row['pet_id']; ?></td>
-                          <td><img src="images/<?php echo $row['pet_img']; ?>" alt="pet" width="100"></td>
+                          <td><?php echo '<img src="images/' .$row['pet_img'].'" alt="pet" width="100">';?></td>
                           <td><?php echo $row['pet_name']; ?></td>
                           <td><?php echo $row['pet_age']; ?></td>
                           <td><?php echo $row['pet_color']; ?></td>
