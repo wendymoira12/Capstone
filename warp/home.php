@@ -63,10 +63,10 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
                                     <ul id="navigation">
                                         <li><a href="home.html">Home</a></li>
                                         <li> <a href="about.html">About Us </i></a>
-                                        <li> <a href="newpage.html">Pets for Adoption </i></a>
+                                        <li> <a href="newpage.php">Pets for Adoption </i></a>
                                         <li><a href="contact.html">Contact</a></li>
-                                        <li><a href="getroleid.php?id=<?= $_SESSION['user-role-id']?>">
-                                            <i class="fa-solid fa-user" style="font-size:20px;color:rgb(4, 4, 41);"></i></a>
+                                        <li><a href="getroleid.php?id=<?= $_SESSION['user-role-id'] ?>">
+                                                <i class="fa-solid fa-user" style="font-size:20px;color:rgb(4, 4, 41);"></i></a>
                                         </li>
                                         <li><a href="logout.php?logout">Logout </a></li>
                                     </ul>
@@ -399,7 +399,7 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
                         </div>
                         <div class="col-xl-3  col-md-6 col-lg-3">
                             <div class="footer_widget">
-                               
+
                             </div>
                         </div>
                         <div class="col-xl-3  col-md-6 col-lg-3">
@@ -420,7 +420,7 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
                                         <img src="img/logo.png" alt="">
                                     </a>
                                 </div>
-                                
+
 
                             </div>
                         </div>

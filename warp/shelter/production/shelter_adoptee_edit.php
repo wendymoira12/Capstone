@@ -128,10 +128,10 @@
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="login.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="logout.php?logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
-                <li> <a href="/warp/home-shelter.php">Go to Homepage </i></a>
+                <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
               
             </nav>
           </div>
