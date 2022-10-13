@@ -6,6 +6,13 @@ include 'config.php';
 
 if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
   header('Location:/Capstone/warp/login.php');
+} else {
+  $role_id = $_SESSION['user-role-id'];
+  if ($role_id == 2){
+    header('Location:shelter_adoptee_edit.php');
+  } else {
+    header('Location:/Capstone/warp/login.php');
+  }
 }
 
 if (!isset($_GET['id'])) {
