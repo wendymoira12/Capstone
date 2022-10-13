@@ -6,14 +6,14 @@ include 'config.php';
 
 if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
     header('Location:/Capstone/warp/login.php');
-  } else {
+} else {
     $role_id = $_SESSION['user-role-id'];
-    if ($role_id == 2){
+    if ($role_id == 2) {
         htmlspecialchars($_SERVER['PHP_SELF']);
     } else {
-      header('Location:/Capstone/warp/login.php');
+        header('Location:/Capstone/warp/home.php');
     }
-  }
+}
 
 if (isset($_GET['id']) && isset($_POST['edit-pet-submit'])) {
     $id = $_GET['id'];

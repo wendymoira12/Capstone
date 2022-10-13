@@ -9,7 +9,7 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
   if ($role_id == 2){
     htmlspecialchars($_SERVER['PHP_SELF']);
   } else {
-    header('Location:/Capstone/warp/login.php');
+    header('Location:/Capstone/warp/home.php');
   }
 }
 
