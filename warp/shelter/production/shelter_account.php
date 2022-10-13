@@ -1,142 +1,159 @@
+<?php
+session_start();
+include 'config.php';
+
+if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
+  header('Location:/Capstone/warp/login.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="/warp/img/WARP_LOGO copy.png">
 
-    <title>Animal Shelter | Account</title>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- Meta, title, CSS, favicons, etc. -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" type="image/x-icon" href="/warp/img/WARP_LOGO copy.png">
 
-    <!-- Bootstrap -->
-    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- NProgress -->
-    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- iCheck -->
-    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet"><!-- Dropzone.js -->
-    <link href="../vendors/dropzone/dist/min/dropzone.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/warp/shelter/production/css/style.css">
+  <title>Animal Shelter | Account</title>
 
-    <!-- Custom Theme Style -->
-    <link href="../build/css/custom.min.css" rel="stylesheet">
-  </head>
+  <!-- Bootstrap -->
+  <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <!-- NProgress -->
+  <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+  <!-- iCheck -->
+  <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet"><!-- Dropzone.js -->
+  <link href="../vendors/dropzone/dist/min/dropzone.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/warp/shelter/production/css/style.css">
 
-  <body class="nav-md">
-    <div class="container body">
-      <div class="main_container">
-        <div class="col-md-3 left_col">
-          <div class="left_col scroll-view">
-            <div class="logo">
-              <a href="home.html">
-                  <img src="/warp/img/logo.png" alt="">
-              </a>
+  <!-- Custom Theme Style -->
+  <link href="../build/css/custom.min.css" rel="stylesheet">
+</head>
+
+<body class="nav-md">
+  <div class="container body">
+    <div class="main_container">
+      <div class="col-md-3 left_col">
+        <div class="left_col scroll-view">
+          <div class="logo">
+            <a href="home.html">
+              <img src="/warp/img/logo.png" alt="">
+            </a>
           </div>
-            <div class="clearfix"></div>
+          <div class="clearfix"></div>
 
 
-            <!-- menu profile quick info -->
-            <div class="profile clearfix">
-              <div class="profile_pic">
-                <img src="../../img/shelters/Las_Piñas_City_seal.png" alt="..." class="img-circle profile_img">
-              </div>
-              <div class="profile_info">
-                <span>Welcome,</span>
-                <h2>Las Piñas</h2>
-              </div>
+          <!-- menu profile quick info -->
+          <div class="profile clearfix">
+            <div class="profile_pic">
+              <img src="../../img/shelters/Las_Piñas_City_seal.png" alt="..." class="img-circle profile_img">
             </div>
-            <!-- /menu profile quick info -->
-
-            <br />
-
-            <!-- sidebar menu -->
-            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-              <div class="menu_section">
-                <h3>General</h3>
-                <ul class="nav side-menu">
-                  <li><a href="shelter_account.php"><i class="fa fa-home"></i> Account </a>
-                  </li>
-                  <li><a href="shelter_adoptee_info.php"><i class="fa fa-edit"></i> Add Adoptee info </a>
-                  </li>
-                  <li><a href="shelter_adoptee_list.php"><i class="fa fa-paw"></i> Pet Adoptee List </a>
-                  </li>
-                  <li><a href="shelter_adopted_list.php"><i class="fa fa-paw"></i> Adopted Pet List </a>
-                  </li>
-                  <li><a href="shelter_application_list.php"><i class="fa fa-paw"></i> Application List </a>
-                  </li>
-                </ul>
-              </div>
-
+            <div class="profile_info">
+              <span>Welcome,</span>
+              <h2>
+                <?php
+                //DISPLAY SESSION
+                if (isset($_SESSION['user-email'])) {
+                  echo $_SESSION['user-email'];
+                } else {
+                  header('Location:/Capstone/warp/login.php');
+                }
+                ?>
+              </h2>
             </div>
-            <!-- /sidebar menu -->
-
-            <!-- /menu footer buttons -->
-        
-            <!-- /menu footer buttons -->
           </div>
-        </div>
+          <!-- /menu profile quick info -->
 
-        <!-- top navigation -->
-        <div class="top_nav">
-          <div class="nav_menu">
-            <nav>
-              <div class="nav toggle">
-                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-              </div>
-  
-              <ul class="nav navbar-nav navbar-right">
-                <li class="">
-                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
-                    aria-expanded="false">
-                    <img src="/warp/img/City Logo/last_pinas.png" alt="">Las Pinas
-                    <span class=" fa fa-angle-down"></span>
-                  </a>
-                  <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="logout.php?logout"><i class="fa fa-sign-out pull-right"></i>Log Out</a></li>
-                  </ul>
+          <br />
+
+          <!-- sidebar menu -->
+          <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+            <div class="menu_section">
+              <h3>General</h3>
+              <ul class="nav side-menu">
+                <li><a href="shelter_account.php"><i class="fa fa-home"></i> Account </a>
                 </li>
-                <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
-              
-            </nav>
+                <li><a href="shelter_adoptee_info.php"><i class="fa fa-edit"></i> Add Adoptee info </a>
+                </li>
+                <li><a href="shelter_adoptee_list.php"><i class="fa fa-paw"></i> Pet Adoptee List </a>
+                </li>
+                <li><a href="shelter_adopted_list.php"><i class="fa fa-paw"></i> Adopted Pet List </a>
+                </li>
+                <li><a href="shelter_application_list.php"><i class="fa fa-paw"></i> Application List </a>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+          <!-- /sidebar menu -->
+
+          <!-- /menu footer buttons -->
+
+          <!-- /menu footer buttons -->
+        </div>
+      </div>
+
+      <!-- top navigation -->
+      <div class="top_nav">
+        <div class="nav_menu">
+          <nav>
+            <div class="nav toggle">
+              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
+
+            <ul class="nav navbar-nav navbar-right">
+              <li class="">
+                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  <img src="/Capstone/warp/img/City Logo/last_pinas.png" alt=""><?php echo $_SESSION['user-email']?>
+                  <span class=" fa fa-angle-down"></span>
+                </a>
+                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                  <li><a href="logout.php?logout"><i class="fa fa-sign-out pull-right"></i>Log Out</a></li>
+                </ul>
+              </li>
+              <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
+
+          </nav>
+        </div>
+      </div>
+      <!-- /top navigation -->
+
+      <!-- page content -->
+      <div class="right_col" role="main">
+
+        <div class="">
+          <div class="page-title">
+            <div class="title_left">
+              <h3>Account Page</h3>
+            </div>
+
+            <div class="title_right">
+
+            </div>
           </div>
         </div>
-        <!-- /top navigation -->
 
-        <!-- page content -->
-        <div class="right_col" role="main">
+        <div class="clearfix"></div>
 
-          <div class="">
-            <div class="page-title">
-              <div class="title_left">
-                <h3>Account Page</h3>
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+              <div class="x_title">
+                <!-- <h2>E-commerce page design</h2> -->
+
+                <div class="clearfix"></div>
               </div>
+              <div class="x_content">
 
-              <div class="title_right">
-                
-                </div>
-              </div>
-            </div>
-            
-            <div class="clearfix"></div>
-
-            <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <!-- <h2>E-commerce page design</h2> -->
-                   
-                    <div class="clearfix"></div>
+                <div class="col-md-7 col-sm-7 col-xs-12">
+                  <div class="product-image">
+                    <img src="../../img/shelters/Las_Piñas_City_seal.png" alt="..." />
                   </div>
-                  <div class="x_content">
-
-                    <div class="col-md-7 col-sm-7 col-xs-12">
-                      <div class="product-image">
-                        <img src="../../img/shelters/Las_Piñas_City_seal.png" alt="..." />
-                      </div>
-                      <!-- <div class="product_gallery">
+                  <!-- <div class="product_gallery">
                         <a>
                           <img src="images/prod-2.jpg" alt="..." />
                         </a>
@@ -150,34 +167,34 @@
                           <img src="images/prod-5.jpg" alt="..." />
                         </a>
                       </div> -->
+                </div>
+
+                <div class="col-md-5 col-sm-5 col-xs-12" style="border:0px solid #e5e5e5;">
+
+                  <h1 class="prod_title">Las Piñas City</h1>
+
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                  <br />
+
+                  <div class="">
+                    <h2>Images and Videos</h2>
+                    <div class="x_content">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                      <form action="form_upload.html" class="dropzone"></form>
+                      <br />
+                      <br />
+                      <br />
+                      <br />
                     </div>
+                  </div>
+                  <br />
 
-                    <div class="col-md-5 col-sm-5 col-xs-12" style="border:0px solid #e5e5e5;">
-
-                      <h1 class="prod_title">Las Piñas City</h1>
-
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                      <br />
-
-                      <div class="">
-                        <h2>Images and Videos</h2>
-                          <div class="x_content">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                            <form action="form_upload.html" class="dropzone"></form>
-                            <br />
-                            <br />
-                            <br />
-                            <br />
-                          </div>
-                      </div>
-                      <br />
-
-                      <div class="x_content">
-                        <div class="buttons">
-                          <button type="button" class="btn btn-success btn-lg">Edit Information</button>
-                        </div>
-                      </div>
-                      <!-- <div class="">
+                  <div class="x_content">
+                    <div class="buttons">
+                      <button type="button" class="btn btn-success btn-lg">Edit Information</button>
+                    </div>
+                  </div>
+                  <!-- <div class="">
                         <h2>Size <small>Please select one</small></h2>
                         <ul class="list-inline prod_size">
                           <li>
@@ -196,7 +213,7 @@
                       </div>
                       <br /> -->
 
-                      <!-- <div class="">
+                  <!-- <div class="">
                         <div class="product_price">
                           <h1 class="price">Ksh80.00</h1>
                           <span class="price-tax">Ex Tax: Ksh80.00</span>
@@ -204,12 +221,12 @@
                         </div>
                       </div> -->
 
-                      <!-- <div class="">
+                  <!-- <div class="">
                         <button type="button" class="btn btn-default btn-lg">Add to Cart</button>
                         <button type="button" class="btn btn-default btn-lg">Add to Wishlist</button>
                       </div> -->
 
-                      <!-- <div class="product_social">
+                  <!-- <div class="product_social">
                         <ul class="list-inline">
                           <li><a href="#"><i class="fa fa-facebook-square"></i></a>
                           </li>
@@ -222,10 +239,10 @@
                         </ul>
                       </div> -->
 
-                    </div>
+                </div>
 
 
-                    <!-- <div class="col-md-12">
+                <!-- <div class="col-md-12">
 
                       <div class="" role="tabpanel" data-example-id="togglable-tabs">
                         <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
@@ -253,37 +270,38 @@
                       </div>
 
                     </div> -->
-                  </div>
-                </div>
               </div>
             </div>
           </div>
         </div>
-        <!-- /page content -->
-
-        <!-- footer content -->
-        <footer>
-          <div class="pull-right">
-            <!-- Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a> -->
-          </div>
-          <div class="clearfix"></div>
-        </footer>
-        <!-- /footer content -->
       </div>
     </div>
+    <!-- /page content -->
 
-    <!-- jQuery -->
-    <script src="../vendors/jquery/dist/jquery.min.js"></script>
-    <!-- Dropzone.js -->
-    <script src="../vendors/dropzone/dist/min/dropzone.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- FastClick -->
-    <script src="../vendors/fastclick/lib/fastclick.js"></script>
-    <!-- NProgress -->
-    <script src="../vendors/nprogress/nprogress.js"></script>
+    <!-- footer content -->
+    <footer>
+      <div class="pull-right">
+        <!-- Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a> -->
+      </div>
+      <div class="clearfix"></div>
+    </footer>
+    <!-- /footer content -->
+  </div>
+  </div>
 
-    <!-- Custom Theme Scripts -->
-    <script src="../build/js/custom.min.js"></script>
-  </body>
+  <!-- jQuery -->
+  <script src="../vendors/jquery/dist/jquery.min.js"></script>
+  <!-- Dropzone.js -->
+  <script src="../vendors/dropzone/dist/min/dropzone.min.js"></script>
+  <!-- Bootstrap -->
+  <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+  <!-- FastClick -->
+  <script src="../vendors/fastclick/lib/fastclick.js"></script>
+  <!-- NProgress -->
+  <script src="../vendors/nprogress/nprogress.js"></script>
+
+  <!-- Custom Theme Scripts -->
+  <script src="../build/js/custom.min.js"></script>
+</body>
+
 </html>

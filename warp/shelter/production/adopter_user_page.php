@@ -1,3 +1,11 @@
+<?php
+session_start();
+include 'config.php';
+
+if(!isset($_SESSION['user-email'], $_SESSION['user-role-id'])){
+  header('Location:/Capstone/warp/login.php');
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>

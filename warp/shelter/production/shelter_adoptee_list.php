@@ -3,6 +3,10 @@
 include 'config.php';
 session_start();
 
+if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
+  header('Location:/Capstone/warp/login.php');
+}
+
 if (isset($_GET['pet-delete'])) {
   $id = $_GET['pet-delete'];
   mysqli_query($conn, "DELETE FROM adoptee_tbl WHERE pet_id = $id");
@@ -78,7 +82,16 @@ if ($result->num_rows > 0) {
                 </div>
                 <div class="profile_info">
                   <span>Welcome,</span>
-                  <h2>Las Piñas</h2>
+                  <h2>
+                    <?php
+                    //DISPLAY SESSION
+                    if (isset($_SESSION['user-email'])) {
+                      echo $_SESSION['user-email'];
+                    } else {
+                      header('Location:/Capstone/warp/login.php');
+                    }
+                    ?>
+                  </h2>
                 </div>
               </div>
               <!-- /menu profile quick info -->
@@ -113,28 +126,27 @@ if ($result->num_rows > 0) {
 
           <!-- top navigation -->
           <div class="top_nav">
-          <div class="nav_menu">
-            <nav>
-              <div class="nav toggle">
-                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-              </div>
-  
-              <ul class="nav navbar-nav navbar-right">
-                <li class="">
-                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
-                    aria-expanded="false">
-                    <img src="/warp/img/City Logo/last_pinas.png" alt="">Las Pinas
-                    <span class=" fa fa-angle-down"></span>
-                  </a>
-                  <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="logout.php?logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-                  </ul>
-                </li>
-                <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
-              
-            </nav>
+            <div class="nav_menu">
+              <nav>
+                <div class="nav toggle">
+                  <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                </div>
+
+                <ul class="nav navbar-nav navbar-right">
+                  <li class="">
+                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                      <img src="/warp/img/City Logo/last_pinas.png" alt=""><?php echo $_SESSION['user-email']?>
+                      <span class=" fa fa-angle-down"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-usermenu pull-right">
+                      <li><a href="logout.php?logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    </ul>
+                  </li>
+                  <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
+
+              </nav>
+            </div>
           </div>
-        </div>
           <!-- /top navigation -->
 
           <!-- page content -->
@@ -205,7 +217,7 @@ if ($result->num_rows > 0) {
                         <tr>
                           <td><?php echo $i++; ?></td>
                           <td><?php echo $row['pet_id']; ?></td>
-                          <td><?php echo '<img src="images/' .$row['pet_img'].'" alt="pet" width="100">';?></td>
+                          <td><?php echo '<img src="images/' . $row['pet_img'] . '" alt="pet" width="100">'; ?></td>
                           <td><?php echo $row['pet_name']; ?></td>
                           <td><?php echo $row['pet_age']; ?></td>
                           <td><?php echo $row['pet_color']; ?></td>

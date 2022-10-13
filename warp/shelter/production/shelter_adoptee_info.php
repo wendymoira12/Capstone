@@ -2,6 +2,10 @@
 session_start();
 include 'config.php';
 
+if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
+  header('Location:/Capstone/warp/login.php');
+}
+
 if (isset($_POST['pet-submit'])) {
 
   $pet_name = $_POST['pet-name'];
@@ -131,7 +135,8 @@ if (isset($_POST['pet-submit'])) {
   <!-- bootstrap-daterangepicker -->
   <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
   <!-- Dropzone.js -->
-  <link href="../vendors/dropzone/dist/min/dropzone.min.css" rel="stylesheet" <script type="text/javascript">
+  <link href="../vendors/dropzone/dist/min/dropzone.min.css" rel="stylesheet">
+  <script type="text/javascript">
   </script>
 
   <!-- Custom Theme Style -->
@@ -159,7 +164,16 @@ if (isset($_POST['pet-submit'])) {
             </div>
             <div class="profile_info">
               <span>Welcome,</span>
-              <h2>Las Piñas</h2>
+              <h2>
+                <?php
+                //DISPLAY SESSION
+                if (isset($_SESSION['user-email'])) {
+                  echo $_SESSION['user-email'];
+                } else {
+                  header('Location:/Capstone/warp/login.php');
+                }
+                ?>
+              </h2>
             </div>
           </div>
           <!-- /menu profile quick info -->
@@ -193,28 +207,27 @@ if (isset($_POST['pet-submit'])) {
 
       <!-- top navigation -->
       <div class="top_nav">
-          <div class="nav_menu">
-            <nav>
-              <div class="nav toggle">
-                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-              </div>
-  
-              <ul class="nav navbar-nav navbar-right">
-                <li class="">
-                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
-                    aria-expanded="false">
-                    <img src="/warp/img/City Logo/last_pinas.png" alt="">Las Pinas
-                    <span class=" fa fa-angle-down"></span>
-                  </a>
-                  <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="logout.php?logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-                  </ul>
-                </li>
-                <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
-              
-            </nav>
-          </div>
+        <div class="nav_menu">
+          <nav>
+            <div class="nav toggle">
+              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
+
+            <ul class="nav navbar-nav navbar-right">
+              <li class="">
+                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  <img src="/warp/img/City Logo/last_pinas.png" alt=""><?php echo $_SESSION['user-email']?>
+                  <span class=" fa fa-angle-down"></span>
+                </a>
+                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                  <li><a href="logout.php?logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                </ul>
+              </li>
+              <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
+
+          </nav>
         </div>
+      </div>
       <!-- /top navigation -->
 
       <!-- page content -->
