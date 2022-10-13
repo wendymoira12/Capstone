@@ -8,7 +8,7 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
 } else {
   $role_id = $_SESSION['user-role-id'];
   if ($role_id == 2){
-    header('Location:shelter_adoptee_list.php');
+    htmlspecialchars($_SERVER['PHP_SELF']);
   } else {
     header('Location:/Capstone/warp/login.php');
   }
