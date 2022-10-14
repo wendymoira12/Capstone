@@ -52,7 +52,7 @@ if (isset($_POST['submit'])) {
 session_start();
 
 if (isset($_POST['submit-login'])) {
-  $email_login = $_POST['email-login'];
+  $email_login = $_POST['email-login'];//johnkevin@gmail.com
   $pass_login = $_POST['password-login'];
   $role_login = 3;
   //Fetch muna si user_email pati role_id to check if the user exist

@@ -24,7 +24,7 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" type="image/x-icon" href="/warp/img/WARP_LOGO copy.png">
+  <link rel="shortcut icon" type="image/x-icon" href="/Capstone/warp/img/WARP_LOGO copy.png">
   <title>Adopter | My Applications</title>
 
   <!-- Bootstrap -->
@@ -38,7 +38,7 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
 
   <!-- Custom Theme Style -->
   <link href="../build/css/custom.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/warp/shelter/production/css/style.css">
+  <link rel="stylesheet" href="/Capstone/warp/shelter/production/css/style.css">
 
 </head>
 
@@ -49,7 +49,7 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
         <div class="left_col scroll-view">
           <div class="logo">
             <a href="">
-              <img src="/warp/img/logo.png" alt="">
+              <img src="images/logo.png" alt="">
             </a>
           </div>
           <div class="clearfix"></div>
@@ -96,7 +96,7 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
             <div class="row align-items-center">
               <div class="col-xl-3 col-lg-3">
                 <div class="logo">
-                  <a href="home.html">
+                  <a href="home.php">
                     <img src="/warp/img/logo.png" alt="">
                   </a>
                 </div>
