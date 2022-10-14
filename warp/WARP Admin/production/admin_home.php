@@ -142,27 +142,51 @@ if(!isset($_SESSION['email-login'])){
       <div class="right_col" role="main">
         <!-- top tiles -->
         <div class="row tile_count">
+          <?php
+          // Make a query to get the total registered shelter accounts by COUNTing all the user with role id == 2
+          $sql = "SELECT COUNT(user_id) AS totalshelter FROM user_tbl WHERE role_id = '2'";
+          $result = mysqli_query($conn, $sql);
+          if ($result){
+            $row = mysqli_fetch_assoc($result);
+            $totalshelter = $row['totalshelter'];
+          }
+          ?>
           <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
             <span class="count_top"><i class="fa fa-user"></i> Total Registered Shelter Accounts</span>
-            <div class="count green">10</div>
+            <div class="count green"><?= $totalshelter ?></div>
             
           </div>
+          <?php
+          // Make a query to get the total registered adopter accounts by COUNTing all the user with role id == 1
+          $sql = "SELECT COUNT(user_id) AS totaladopter FROM user_tbl WHERE role_id = '1'";
+          $result = mysqli_query($conn, $sql);
+          if ($result){
+            $row = mysqli_fetch_assoc($result);
+            $totaladopter = $row['totaladopter'];
+          }
+          ?>
           <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
             <span class="count_top"><i class="fa fa-user"></i> Total Registered Adopter Accounts</span>
-            <div class="count green">300</div>
+            <div class="count green"><?= $totaladopter?></div>
             <span class="count_bottom"><i class="green">4% </i> From Last Week</span>
           </div>
 
           <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-            <span class="count_top"><i class="fa fa-user"></i> Total Pet Adopted</span>
+            <span class="count_top"><i class="fa fa-user"></i> Total Pet Adoptee Listed</span>
             <div class="count green">91</div>
+            <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From Last Week</span>
+          </div>
+
+          <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+            <span class="count_top"><i class="fa fa-user"></i> Total Pet Adopted</span>
+            <div class="count green">50</div>
             <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From Last Week</span>
           </div>
 
         </div>
         <!-- /top tiles -->
 
-        
+<!--         
         <div class="row">
           <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="x_panel">
@@ -189,9 +213,9 @@ if(!isset($_SESSION['email-login'])){
                 <canvas id="lineChart"></canvas>
               </div>
             </div>
-          </div>
+          </div> -->
 
-          <div class="col-md-6 col-sm-6 col-xs-12">
+          <!-- <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="x_panel">
               <div class="x_title">
                 <h2>Pets Adopted</h2>
@@ -216,7 +240,7 @@ if(!isset($_SESSION['email-login'])){
                 <canvas id="mybarChart"></canvas>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
       <!-- /page content -->
