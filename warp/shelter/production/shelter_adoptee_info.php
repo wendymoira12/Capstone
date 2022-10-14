@@ -23,6 +23,7 @@ if (isset($_POST['pet-submit'])) {
   $gender = $_POST['gender'];
   $neuter = $_POST['neuter'];
   $vaccine = $_POST['vaccine'];
+  // to print multiple vaccines if multiple vaccines are checked
   $chkstr = implode(", ", $vaccine);
 
   $weight = $_POST['weight'];
@@ -35,6 +36,7 @@ if (isset($_POST['pet-submit'])) {
 
   $pet_img = $_FILES['pet-img']['name'];
   $pet_img_tmp_name = $_FILES['pet-img']['tmp_name'];
+  // upload image to folder named images/
   $pet_img_folder = 'images/' . $pet_img;
   // $pet_img_name = $_FILES['pet-img']['name'];
   // $pet_img_size = $_FILES['pet-img']['size'];
@@ -48,6 +50,8 @@ if (isset($_POST['pet-submit'])) {
   //   $allowed_exs = array('jpg', 'jpeg', 'png');
   //   if (in_array($img_ex_to_lc, $allowed_exs))
   //   {
+
+  // RENAME PET IMAGE WITH THEIR NAME FIRST THEN ID (pero di ko tinuloy kase di ko magets)
   //     $new_img_name = uniqid("$pet_name", true). '.'.$img_ex_to_lc;
   //     move_uploaded_file($pet_img_tmp_name, $pet_img_folder);
   //   }else 
@@ -65,6 +69,7 @@ if (isset($_POST['pet-submit'])) {
 
   $pet_vid = $_FILES['pet-vid']['name'];
   $pet_vid_tmp_name = $_FILES['pet-vid']['tmp_name'];
+  // upload video to folder named images/
   $pet_vid_folder = 'images/' . $pet_vid;
 
   if (empty($pet_img) && ($pet_vid) && empty($pet_name) && empty($pet_age) && empty($color) && empty($breed) && empty($specie) && empty($gender) && empty($neuter) &&  empty($chkstr) && empty($weight) && empty($size) && empty($medrec) && empty($sociability) && empty($energy) && empty($affection) && empty($description)) {

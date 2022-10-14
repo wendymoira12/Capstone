@@ -6,12 +6,37 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
   header('Location:/Capstone/warp/login.php');
 } else {
   $role_id = $_SESSION['user-role-id'];
+
+  
   if ($role_id == 2){
     htmlspecialchars($_SERVER['PHP_SELF']);
   } else {
     header('Location:/Capstone/warp/home.php');
   }
 }
+
+// Get the user ID from the login sesh
+$user_id = $_SESSION['user_id'];
+// Query to check if user_id from the login shesh to get the shelter user (will be replacing user_id to Shelter City as WHERE for multiple access)
+$sql = "SELECT * FROM shelter_tbl WHERE user_id ='$user_id'";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($result);
+$shelter_id = $row['shelter_id'];
+$edit = false;
+
+// Edit the account information
+if(isset($_GET['edit'])){
+  $id = $_GET['shelter_id'];
+  $edit = true;
+  $result = $mysqli->query("SELECT * FROM shelter_tbl WHERE shelter_id = $id") or die($mysqli->error());
+
+  $row = $result->mysqli_fetch_assoc();
+  $about = $row['shelter_about'];
+  $city = $row['shelter_city'];
+  $contact = $row['shelter_contact'];
+
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -65,7 +90,7 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
                 <?php
                 //DISPLAY SESSION
                 if (isset($_SESSION['user-email'])) {
-                  echo $_SESSION['user-email'];
+                  echo $row['shelter_city'] . " Animal Shelter";
                 } else {
                   header('Location:/Capstone/warp/login.php');
                 }
@@ -178,29 +203,40 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
 
                 <div class="col-md-5 col-sm-5 col-xs-12" style="border:0px solid #e5e5e5;">
 
-                  <h1 class="prod_title">Las Piñas City</h1>
+                    <?php
+                    if($edit == false){ 
+                    ?>
+                      <h1 class="prod_title"> <?php echo $row['shelter_city']; ?> </h1>
 
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                  <br />
+                      <p><?php echo $row['shelter_about']; ?></p>
+                      <br />
 
-                  <div class="">
-                    <h2>Images and Videos</h2>
-                    <div class="x_content">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                      <form action="form_upload.html" class="dropzone"></form>
+                      <div class="">
+                        <h2>Contact us</h2>
+                        <div class="x_content">
+                          <p><?php echo $row['shelter_contact']; ?></p>
+                          <form action="form_upload.html" class="dropzone"></form>
+                          <br />
+                          <br />
+                          <br />
+                          <br />
+                        </div>
+                      </div>
                       <br />
-                      <br />
-                      <br />
-                      <br />
-                    </div>
-                  </div>
-                  <br />
 
-                  <div class="x_content">
-                    <div class="buttons">
-                      <button type="button" class="btn btn-success btn-lg">Edit Information</button>
-                    </div>
-                  </div>
+                      <div class="x_content">
+                        <div class="buttons">
+                          <a href="shelter_account.php?shelter_id=<?php echo $row['shelter_id']; ?>">
+                          <button name="edit" type="button" class="btn btn-success btn-lg">Edit Information</button>
+                          </a>
+                        </div>
+                      </div>
+
+                    <?php 
+                    }else{
+                    ?>
+                      <input type="text" name="city" value="<?php echo $row['shelter_city']; ?>" class="prod_title">
+                    <?php } ?>
                   <!-- <div class="">
                         <h2>Size <small>Please select one</small></h2>
                         <ul class="list-inline prod_size">
