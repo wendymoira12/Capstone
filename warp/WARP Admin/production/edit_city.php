@@ -8,23 +8,30 @@ if (!isset($_SESSION['email-login'])) {
 ?>
 
 <?php
-// Form submit for City Creation
-if (isset($_POST['submit'])) {
+// Form submit for shelter update
+if (isset($_POST['submit-update'])) {
 
-  //Get the values
-  $city = $_POST['city'];
-  $contact = $_POST['contact'];
-  $about = $_POST['about'];
-  //$img = $_POST['city'];
 
-  $sql = "INSERT INTO city_tbl(city_name, city_contact, city_about) VALUES ('$city','$contact','$about')";
-  if (mysqli_query($conn, $sql)){
-    //success
+  // Store in variables other data to be updated
+  $name = $_POST['city_name'];
+  $about = $_POST['city_about'];
+  $contact = $_POST['city_contact'];
+  $city_id = $_SESSION['city_id'];
+
+  //If there are no errors the function will execute
+
+  // Query to update the shelter_tbl first
+  $sql = "UPDATE city_tbl SET city_name='$name', city_about='$about', city_contact='$contact' WHERE city_id='$city_id'";
+  // If true then the query will be executed and another query will be executed
+  if (mysqli_query($conn, $sql) === TRUE) {
+    //Success
     header('location:manage_city.php');
-  } else{
-    echo 'Error'. mysqli_error($conn);
+  } else {
+    echo "Error" . mysqli_error($conn);
   }
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +44,7 @@ if (isset($_POST['submit'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" type="image/x-icon" href="/warp/img/WARP_LOGO copy.png">
 
-  <title>Manage City</title>
+  <title>Edit City </title>
 
   <!-- Bootstrap -->
   <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -156,7 +163,7 @@ if (isset($_POST['submit'])) {
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
-                  <li><a href="logout.php?logout"><i class="fa fa-sign-out pull-right"></i>Log Out</a></li>
+                  <li><a href="logout.php?logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                 </ul>
               </li>
             </ul>
@@ -166,133 +173,85 @@ if (isset($_POST['submit'])) {
       <!-- /top navigation -->
 
       <!-- page content -->
+
+
       <div class="right_col" role="main">
         <div class="">
           <div class="page-title">
             <div class="title_left">
-              <h3>Manage City</h3><br>
+              <h3>Edit City</h3><br>
             </div>
             <div class="clearfix"></div>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Create City</h2>
+                    <h2>Edit City</h2>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
                     <br />
-                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">City Name: <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="city" class="form-control col-md-7 col-xs-12" required="required" type="text" name="city">
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Contact <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="contact" name="contact" required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">About <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="about" name="about" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Image <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="img" name="img" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
+                    <?php
+                    //Check if naget ung id sa URL
+                    if (isset($_GET['id'])) {
+                      //istotore sa $shelteruser_id ung id na nakuha sa url parameter
+                      $id = $_GET['id'];
+                      //Kukunin ung info ng both tables kung saan ung shelter_tbl.id = $shelteruser_id
+                      $sql = "SELECT * FROM city_tbl WHERE city_id='$id'";
+                      $result = mysqli_query($conn, $sql);
+                      //If successful ung query ilalagay sa array ung data
+                      if ($result->num_rows > 0) {
+                        $row = mysqli_fetch_assoc($result);
+                        foreach ($result as $rows) {
+                          $_SESSION['city_id'] = $row['city_id'];
+                    ?>
+                          <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12">City<span class="required">*</span>
+                              </label>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="city_name" class="form-control col-md-7 col-xs-12" required="required" type="text" name="city_name" value="<?= $row['city_name']; ?>">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="city">About<span class="required">*</span>
+                              </label>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="city_about" name="city_about" required="required" class="form-control col-md-7 col-xs-12" value="<?= $row['city_about']; ?>">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Contact<span class="required">*</span>
+                              </label>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="city_contact" name="city_contact" required="required" class="form-control col-md-7 col-xs-12" value="<?= $row['city_contact']; ?>">
+                              </div>
+                            </div>
+                      <?php
+                        }}
+
+                      } else {
+                        echo 'Error' . mysqli_error($conn);
+                      }
+                    
+                      ?>
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                           <button class="btn btn-primary" type="reset">Reset</button>
-                          <button type="submit" class="btn btn-success" name="submit">Submit</button>
+                          <button type="submit" class="btn btn-success" name="submit-update">Submit</button>
+                          <a href="manage_city.php" class="btn btn-danger" name="cancel-update">Cancel</a>
                         </div>
                       </div>
-                    </form>
+                          </form>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
-
-          <?php
-          $sql = "SELECT * FROM city_tbl";
-          $result = mysqli_query($conn, $sql);
-          $i = 1
-          ?>
-          <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="x_panel">
-              <div class="x_title">
-                <h2>List of Registered Cities</h2>
-                <ul class="nav navbar-right panel_toolbox">
-                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                  </li>
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                    <ul class="dropdown-menu" role="menu">
-                      <li><a href="#">Settings 1</a>
-                      </li>
-                      <li><a href="#">Settings 2</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li><a class="close-link"><i class="fa fa-close"></i></a>
-                  </li>
-                </ul>
-                <div class="clearfix"></div>
-              </div>
-              <div class="x_content">
-                <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
-                  <thead>
-                    <tr>
-                      <th>No.</th>
-                      <th>City ID</th>
-                      <th>City</th>
-                      <th>Contact Number</th>
-                      <th>About</th>
-                      <th>Image</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <?php
-                  if ($result->num_rows > 0) {
-                    foreach ($result as $row) {
-                  ?>
-                      <tbody>
-                        <tr>
-                          <td><?= $i++?></td>
-                          <td><?php echo $row['city_id']; ?></td>
-                          <td><?php echo $row['city_name']; ?></td>
-                          <td><?php echo $row['city_contact']; ?></td>
-                          <td><?php echo $row['city_about']; ?></td>
-                          <td><?php echo $row['city_img']; ?></td>
-                          <td>
-                          <a href="edit_city.php?id=<?= $row['city_id']?>" type="submit" class="btn btn-round btn-success">Update</a>
-                            <button type="button" class="btn btn-round btn-danger">Delete</button>
-                          </td>
-                        </tr>
-                    <?php
-                    }
-                  }
-                    ?>
-                      </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
+    </div>
       <!-- /page content -->
 
       <!-- footer content -->
