@@ -92,6 +92,7 @@ if (!isset($_SESSION['email-login'])) {
                   <ul class="nav child_menu">
                     <li><a href="manage_shelter.php">Shelter</a></li>
                     <li><a href="manage_adopter.php">Adopter</a></li>
+                    <li><a href="manage_city.php">City</a></li>
                   </ul>
                 </li>
               </ul>

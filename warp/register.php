@@ -147,10 +147,9 @@ if (isset($_POST["register"])) {
       <div class="panel left-panel">
         <div class="content">
           <h3>Already one of us?</h3><br>
-          <a href="index.php">
+          <a href="login.php">
             <button class="btn transparent">Sign in</button>
           </a>
-
         </div>
         <img src="img/WARP_Logo_Orange.png" class="image" alt="" />
       </div>

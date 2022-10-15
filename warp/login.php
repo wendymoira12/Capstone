@@ -4,37 +4,6 @@ include 'config.php';
 
 error_reporting(0);
 
-if (isset($_POST['submit-signup'])) {
-  $email_signup = $_POST['email-signup'];
-  $pass_signup = md5($_POST['pass-signup']);
-  $cpass_signup = md5($_POST['cpass-signup']);
-
-  if ($pass_signup == $cpass_signup) {
-    $sql = "SELECT * FROM user_tbl WHERE user_email='$email_signup'";
-    $result = mysqli_query($conn, $sql);
-    $role = 1;
-    if (!$result->num_rows > 0) {
-
-      $sql = "INSERT INTO user_tbl (user_email, user_password, role_id)
-                VALUES ('$email_signup', '$pass_signup','$role')";
-      $result = mysqli_query($conn, $sql);
-      header("Location: login2.php");
-      if ($result) {
-        echo "<script>alert('Registration complete')</script>";
-        $email_signup = "";
-        $_POST['pass-signup'] = "";
-        $_POST['cpass-signup'] = "";
-      } else {
-        echo "<script>alert('Oops! Something went wrong')</script>";
-      }
-    } else {
-      echo "<script>alert('Oops! Email already used')</script>";
-    }
-  } else {
-    echo "<script>alert('Password doesnt Match')</script>";
-  }
-}
-
 session_start();
 
 if (isset($_POST['submit-login'])) {
@@ -121,40 +90,20 @@ if (isset($_POST['submit-login'])) {
               </a>
             </div>-->
         </form>
-        <form action="" method="POST" class="sign-up-form">
-          <h2 class="title">Sign up</h2>
-
-          <div class="input-field">
-            <i class="fas fa-envelope"></i>
-            <input type="email" placeholder="Email" name="email-signup" value="<?php echo $email_signup; ?>" required />
-          </div>
-          <div class="input-field">
-            <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Password" name="pass-signup" value="<?php echo $_POST['pass-signup']; ?>" required />
-          </div>
-          <div class="input-field">
-            <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Confirm Password" name="cpass-signup" value="<?php echo $_POST['cpass-signup']; ?>" required />
-          </div>
-          <button name="submit-signup" class="btn solid" type="submit">Sign Up</button>
-          <p class="social-text"></p>
-          <div class="social-media">
-
-          </div>
-        </form>
       </div>
     </div>
 
     <div class="panels-container">
       <div class="panel left-panel">
-        <!-- <div class="content">
+        <div class="content">
           <h3>New here?</h3>
           <p>
           </p>
-          <button class="btn transparent" id="sign-up-btn">
+          <a href="register.php">
+          <button name class="btn transparent" id="sign-up-btn">
             Sign up
-          </button>
-        </div> -->
+          </button></a>
+        </div>
         <img src="img/WARP_Logo_Orange.png" class="image" alt="" />
       </div>
       <div class="panel right-panel">
