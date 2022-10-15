@@ -6776,3 +6776,134 @@ h6 {
 .checked {
   color: #f94cff;
 }
+.container{
+  max-width: 1140px;
+  margin: auto;
+}
+.row{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.section-title{
+  flex: 0 0 100%;
+  max-width: 100%;
+  margin-bottom: 40px;
+}
+.section-title h1{
+  display: inline-block;
+  font-size: 35px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #000000;
+  margin: 0 0 5px;
+  position: relative;
+}
+.section-title h1:before{
+  content: '';
+  left: 0;
+  position: absolute;
+  height: 2px;
+  right: 32%;
+  background-color: #febd01;
+  bottom: 0px;
+}
+.text-center{
+  text-align: center!important;
+}
+.text-right{
+  text-align: right!important;
+}
+.portfolio{
+  background-color: white;
+  padding: 100px 7px;
+}
+.portfolio .section-title h1:before{
+  left: 30%;
+}
+.portfolio .filter-buttons{
+  flex: 0 0 100%;
+  max-width: 100%;
+  margin-bottom: 20px;
+}
+.portfolio .filter-buttons ul{
+  list-style: none;
+  text-align: center;
+  padding: 0;
+}
+.portfolio .filter-buttons ul li{
+  cursor: pointer;
+  display: inline-block;
+  padding: 8px 15px 10px 15px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #444444;
+  margin-bottom: 5px;
+  transition: all 0.3s ease-in-out;
+  border-radius: 3px;
+}
+.portfolio .filter-buttons ul li.active{
+  color: #151515;
+  background: #ff843a;
+}
+.portfolio .portfolio-gallery{
+  flex: 0 0 100%;
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.crop {
+  height: 300px;
+  width: 400px;
+  overflow: hidden;
+ }
+ .crop img {
+  height: auto;
+  width: 400px;
+ }
+.portfolio .portfolio-gallery .item{
+  flex: 0 0 33.33%;
+  max-width: 33.33%;
+  position: relative;
+  padding: 70px 25px 65px 25px;
+  border: 1px solid #ffc5c2;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+
+}
+.portfolio .portfolio-gallery .item .inner{
+  position: relative;
+}
+.portfolio .portfolio-gallery .item img{
+  width:220px;
+  height:220px;
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media(max-width:767px){
+
+  .portfolio .portfolio-gallery .item{
+      flex:0 0 50% ;
+      max-width: 50%;
+      position: relative;
+      padding:8px ;
+  }
+
+}
+@media(max-width:500px){
+
+  .portfolio .portfolio-gallery .item{
+      flex:0 0 100% ;
+      max-width: 100%; }
+}
