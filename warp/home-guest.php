@@ -57,7 +57,7 @@
                     <div class="row align-items-center">
                         <div class="col-xl-3 col-lg-3">
                             <div class="logo">
-                                <a href="home.html">
+                                <a href="home.php">
                                     <img src="img/logo.png" alt="">
                                 </a>
                             </div>
@@ -66,10 +66,10 @@
                             <div class="main-menu  d-none d-lg-block">
                                 <nav>
                                     <ul id="navigation">
-                                        <li><a href="home.html">Home</a></li>
-                                        <li><a href="about.html">About Us </i></a>
-                                        <li><a href="newpage.html">Pets for Adoption </i></a>
-                                        <li><a href="contact.html">Contact</a></li>
+                                        <li><a href="home.php">Home</a></li>
+                                        <li><a href="about.php">About Us </i></a>
+                                        <li><a href="newpage.php">Pets for Adoption </i></a>
+                                        <li><a href="contact.php">Contact</a></li>
                                     
 
                                     </ul>
@@ -94,7 +94,7 @@
                         <div class="slider_text">
                             <h3>Adopt from<br> <span>Animal Shelters</span></h3>
                             <p>Browse pets from our network in Metro Manila shelters and rescues.</p>
-                            <a href="contact.html" class="boxed-btn4">Contact Us</a>
+                            <a href="contact.php" class="boxed-btn4">Contact Us</a>
                         </div>
                     </div>
                 </div>
@@ -141,7 +141,7 @@
                             </div>
                         </div>
                         <div class="service_content text-center">
-                            <a href="Las-Pinas-Animal-Shelter.html">
+                            <a href="Las-Pinas-Animal-Shelter.php">
                                 <h3>Las Piñas</h3>
                             </a>
                         </div>
@@ -353,7 +353,7 @@
                                     incididunt ut labore et dolore magna aliqua. <br> Quis ipsum suspendisse ultrices
                                     gravida. Risus commodo <br>
                                     viverra maecenas accumsan.</p>
-                                <a href="about.html" class="boxed-btn3">About Us</a>
+                                <a href="about.php" class="boxed-btn3">About Us</a>
                             </div>
                         </div>
                     </div>
@@ -373,7 +373,7 @@
                                     help Adopt Us</h3>
                                 <p>Lorem ipsum dolor sit , consectetur adipiscing elit, sed do iusmod tempor incididunt
                                     ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices.</p>
-                                <a href="contact.html" class="boxed-btn3">Contact Us</a>
+                                <a href="contact.php" class="boxed-btn3">Contact Us</a>
                             </div>
                         </div>
                     </div>
@@ -426,7 +426,7 @@
                                     it. 24/7 tech support.</p>
                             </div>
                             <div class="contact_btn d-flex align-items-center justify-content-center">
-                                <a href="contact.html" class="boxed-btn4">Contact Us</a>
+                                <a href="contact.php" class="boxed-btn4">Contact Us</a>
                                 <p>Or <a href="#"> +880 4664 216</a></p>
                             </div>
                         </div>

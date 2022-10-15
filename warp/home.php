@@ -52,7 +52,7 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
                     <div class="row align-items-center">
                         <div class="col-xl-3 col-lg-3">
                             <div class="logo">
-                                <a href="home.html">
+                                <a href="home.php">
                                     <img src="img/logo.png" alt="">
                                 </a>
                             </div>
@@ -61,10 +61,10 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
                             <div class="main-menu  d-none d-lg-block">
                                 <nav>
                                     <ul id="navigation">
-                                        <li><a href="home.html">Home</a></li>
-                                        <li> <a href="about.html">About Us </i></a>
+                                        <li><a href="home.php">Home</a></li>
+                                        <li> <a href="about.php">About Us </i></a>
                                         <li> <a href="newpage.php">Pets for Adoption </i></a>
-                                        <li><a href="contact.html">Contact</a></li>
+                                        <li><a href="contact.php">Contact</a></li>
                                         <li><a href="getroleid.php?id=<?= $_SESSION['user-role-id'] ?>">
                                                 <i class="fa-solid fa-user" style="font-size:20px;color:rgb(4, 4, 41);"></i></a>
                                         </li>
@@ -91,7 +91,7 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
                         <div class="slider_text">
                             <h3>Adopt from<br> <span>Animal Shelters</span></h3>
                             <p>Browse pets from our network in Metro Manila shelters and rescues.</p>
-                            <a href="contact.html" class="boxed-btn4">Contact Us</a>
+                            <a href="contact.php" class="boxed-btn4">Contact Us</a>
                         </div>
                     </div>
                 </div>
@@ -116,6 +116,7 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
             </div>
 
             <div class="row justify-content-center">
+                
                 <div class="col-lg-4 col-md-6">
                     <div class="single_service">
                         <div class="service_thumb service_icon_bg_1 d-flex align-items-center justify-content-center">
@@ -130,12 +131,13 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
                         </div>
                     </div>
                 </div>
+
                 <div class="col-lg-4 col-md-6">
                     <div class="single_service active">
                         <div class="service_thumb service_icon_bg_2 d-flex align-items-center justify-content-center">
                         </div>
                         <div class="service_content text-center">
-                            <a href="Las-Pinas-Animal-Shelter.html">
+                            <a href="Las-Pinas-Animal-Shelter.php">
                                 <h3>Las Piñas</h3>
                             </a>
                         </div>
@@ -300,7 +302,7 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
                                 <h3><span>We care your pet </span> <br>
                                     As you care</h3>
                                 <p></p>
-                                <a href="about.html" class="boxed-btn3">About Us</a>
+                                <a href="about.php" class="boxed-btn3">About Us</a>
                             </div>
                         </div>
                     </div>
@@ -319,7 +321,7 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
                                 <h3><span>We need your</span>
                                     help Adopt Us</h3>
                                 <p></p>
-                                <a href="contact.html" class="boxed-btn3">Contact Us</a>
+                                <a href="contact.php" class="boxed-btn3">Contact Us</a>
                             </div>
                         </div>
                     </div>
@@ -371,7 +373,7 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
                                 <p>We provide a safe and secured Animal Adoption Process. <br> For any concerns or suggestions contact us anytime!</p>
                             </div>
                             <div class="contact_btn d-flex align-items-center justify-content-center">
-                                <a href="contact.html" class="boxed-btn4">Contact Us</a>
+                                <a href="contact.php" class="boxed-btn4">Contact Us</a>
                             </div>
                         </div>
                     </div>
