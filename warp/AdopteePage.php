@@ -84,7 +84,7 @@
                                         <ul id="navigation">
                                             <li><a href="home.php">Home</a></li>
                                             <li> <a href="about.php">About Us </i></a>
-                                            <li> <a href="newpage.php">Pets for Adoption </i></a>
+                                            <li> <a href="pets-for-adoption.php">Pets for Adoption </i></a>
                                             <li><a href="contact.php">Contact</a></li>
                                             <li><a href="../warp/shelter/production/adopter_user_page.php"><i class="fa-solid fa-user" style="font-size:20px;color:rgb(4, 4, 41);"></i></a></li>
 

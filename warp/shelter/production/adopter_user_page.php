@@ -107,7 +107,7 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
                     <ul id="navigation">
                       <li><a href="/warp/home.php">Home</a></li>
                       <li> <a href="/warp/about.html">About Us </i></a>
-                      <li> <a href="/warp/newpage.php">Pets for Adoption </i></a>
+                      <li> <a href="/warp/pets-for-adoption.php">Pets for Adoption </i></a>
                       <li><a href="/warp/contact.html">Contact</a></li>
                       <li></li>
                     </ul>
