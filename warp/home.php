@@ -1,11 +1,17 @@
 <?php
 include 'config.php';
+include('connect/connection.php');
 session_start();
 
 //if hindi nakaset si user-email and user-role-id babalik sya sa login.php
 if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
     header('Location: login.php');
 }
+
+$sql = "SELECT * FROM city_tbl";
+$result = mysqli_query($conn, $sql);
+
+$row = mysqli_fetch_assoc($result);
 ?>
 
 <!doctype html>
@@ -116,23 +122,35 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
             </div>
 
             <div class="row justify-content-center">
+                <!-- Check if may existing na shelter na ishoshow -->
+                <?php
+                if(mysqli_num_rows($result) > 0) {
+                    foreach($result as $row) {
+                ?>
                 
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_service">
-                        <div class="service_thumb service_icon_bg_1 d-flex align-items-center justify-content-center">
-                            <div class="service_icon">
-                                <img src="" alt="">
-                            </div>
-                        </div>
-                        <div class="service_content text-center">
-                            <a href="#">
-                                <h3>Manila</h3>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="single_service">
+                            <a href="animal-shelter-page.php?id=<?php echo $row['city_id']; ?>">
+                                <div class="service_thumb service_icon_bg_1 d-flex align-items-center justify-content-center">
+                                    <div class="service_icon">
+                                        <img src="shelter/production/images/logo/<?= $row['city_img']; ?>" alt="Shelter logo" height="100" width="100">
+                                    </div>
+                                </div>
+                                <div class="service_content text-center">
+                                        <h3><?php echo $row['city_name']; ?></h3>
+                                </div>
                             </a>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-lg-4 col-md-6">
+                <?php
+                    }
+                } else {
+                    echo "No records found";
+                }
+                ?>
+
+                <!-- <div class="col-lg-4 col-md-6">
                     <div class="single_service active">
                         <div class="service_thumb service_icon_bg_2 d-flex align-items-center justify-content-center">
                         </div>
@@ -281,7 +299,7 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
                             <h3>Pateros</h3>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
 
