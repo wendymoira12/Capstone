@@ -116,6 +116,7 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
             </div>
 
             <div class="row justify-content-center">
+                
                 <div class="col-lg-4 col-md-6">
                     <div class="single_service">
                         <div class="service_thumb service_icon_bg_1 d-flex align-items-center justify-content-center">
@@ -130,6 +131,7 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
                         </div>
                     </div>
                 </div>
+
                 <div class="col-lg-4 col-md-6">
                     <div class="single_service active">
                         <div class="service_thumb service_icon_bg_2 d-flex align-items-center justify-content-center">

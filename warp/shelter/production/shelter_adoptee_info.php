@@ -37,7 +37,7 @@ if (isset($_POST['pet-submit'])) {
   $pet_img = $_FILES['pet-img']['name'];
   $pet_img_tmp_name = $_FILES['pet-img']['tmp_name'];
   // upload image to folder named images/
-  $pet_img_folder = 'images/' . $pet_img;
+  $pet_img_folder = 'images/pet_img' . $pet_img;
   // $pet_img_name = $_FILES['pet-img']['name'];
   // $pet_img_size = $_FILES['pet-img']['size'];
   // $pet_img_error = $_FILES['pet-img']['error'];
@@ -70,7 +70,7 @@ if (isset($_POST['pet-submit'])) {
   $pet_vid = $_FILES['pet-vid']['name'];
   $pet_vid_tmp_name = $_FILES['pet-vid']['tmp_name'];
   // upload video to folder named images/
-  $pet_vid_folder = 'images/' . $pet_vid;
+  $pet_vid_folder = 'images/pet_vid' . $pet_vid;
 
   if (empty($pet_img) && ($pet_vid) && empty($pet_name) && empty($pet_age) && empty($color) && empty($breed) && empty($specie) && empty($gender) && empty($neuter) &&  empty($chkstr) && empty($weight) && empty($size) && empty($medrec) && empty($sociability) && empty($energy) && empty($affection) && empty($description)) {
     $message[] = 'Please fill ouT all fieldS';
@@ -88,7 +88,8 @@ if (isset($_POST['pet-submit'])) {
       $sql = "INSERT INTO adoptee_tbl(pet_img, pet_vid, pet_name, pet_age, pet_color, pet_breed, pet_specie, pet_gender, pet_neuter, pet_vax, pet_weight, pet_size, pet_medrec, pet_lsoc, pet_lene, pet_laff, pet_desc, shelter_id) VALUES('$pet_img', '$pet_vid', '$pet_name', '$pet_age', '$color', '$breed', '$specie', '$gender', '$neuter', '$chkstr', '$weight', '$size', '$medrec', '$sociability', '$energy', '$affection', '$description', '$shelter_id')";
 
       $result = mysqli_query($conn, $sql);
-
+      
+// UPLOAD THE IMAGES AND VIDEOS IN THE IMAGES FOLDER
       if ($result) {
         move_uploaded_file($pet_img_tmp_name, $pet_img_folder);
         move_uploaded_file($pet_vid_tmp_name, $pet_vid_folder);

@@ -37,11 +37,11 @@ if (isset($_GET['id']) && isset($_POST['edit-pet-submit'])) {
 
     $pet_img = $_FILES['pet-img']['name'];
     $pet_img_tmp_name = $_FILES['pet-img']['tmp_name'];
-    $pet_img_folder = 'images/' . $pet_img;
+    $pet_img_folder = 'images/pet_img' . $pet_img;
 
     $pet_vid = $_FILES['pet-vid']['name'];
     $pet_vid_tmp_name = $_FILES['pet-vid']['tmp_name'];
-    $pet_vid_folder = 'images/' . $pet_vid;
+    $pet_vid_folder = 'images/pet_vid' . $pet_vid;
 
     if (!empty($pet_name) && !empty($pet_age) && !empty($color) && !empty($breed) && !empty($specie) && !empty($gender) && !empty($neuter) && !empty($chkstr) && !empty($weight) && !empty($size) && !empty($medrec) && !empty($sociability) && !empty($energy) && !empty($affection) && !empty($pet_img) && !empty($pet_vid) && !empty($description)) {
 
@@ -61,5 +61,17 @@ if (isset($_GET['id']) && isset($_POST['edit-pet-submit'])) {
 } else {
     echo "Id is invalid";
 }
+
+// UPLOAD THE IMAGES AND VIDEOS IN THE IMAGES FOLDER
+if ($result) {
+    move_uploaded_file($pet_img_tmp_name, $pet_img_folder);
+    move_uploaded_file($pet_vid_tmp_name, $pet_vid_folder);
+
+    echo "<script>alert('Adoptee added successfully')</script>";
+    header("Location: shelter_adoptee_info.php");
+  } else {
+    echo "<script>alert('Oops! Something went wrong')</script>";
+    header("Location: shelter_adoptee_info.php");
+  }
 
 ?>

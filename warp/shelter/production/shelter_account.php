@@ -22,20 +22,6 @@ $sql = "SELECT * FROM shelter_tbl WHERE user_id ='$user_id'";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 $shelter_id = $row['shelter_id'];
-$edit = false;
-
-// Edit the account information
-if(isset($_GET['edit'])){
-  $id = $_GET['shelter_id'];
-  $edit = true;
-  $result = $mysqli->query("SELECT * FROM shelter_tbl WHERE shelter_id = $id") or die($mysqli->error());
-
-  $row = $result->mysqli_fetch_assoc();
-  $about = $row['shelter_about'];
-  $city = $row['shelter_city'];
-  $contact = $row['shelter_contact'];
-
-}
 
 ?>
 <!DOCTYPE html>
@@ -47,7 +33,7 @@ if(isset($_GET['edit'])){
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" type="image/x-icon" href="/warp/img/WARP_LOGO copy.png">
+  <link rel="shortcut icon" type="image/x-icon" href="/Capstone/warp/img/WARP_LOGO copy.png">
 
   <title>Animal Shelter | Account</title>
 
@@ -60,10 +46,11 @@ if(isset($_GET['edit'])){
   <!-- iCheck -->
   <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet"><!-- Dropzone.js -->
   <link href="../vendors/dropzone/dist/min/dropzone.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/warp/shelter/production/css/style.css">
+  <link rel="stylesheet" href="/Capstone/warp/shelter/production/css/style.css">
 
   <!-- Custom Theme Style -->
   <link href="../build/css/custom.min.css" rel="stylesheet">
+
 </head>
 
 <body class="nav-md">
@@ -72,8 +59,8 @@ if(isset($_GET['edit'])){
       <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
           <div class="logo">
-            <a href="home.html">
-              <img src="/warp/img/logo.png" alt="">
+            <a href="home.php">
+              <img src="/images/logo.png" alt="">
             </a>
           </div>
           <div class="clearfix"></div>
@@ -82,7 +69,7 @@ if(isset($_GET['edit'])){
           <!-- menu profile quick info -->
           <div class="profile clearfix">
             <div class="profile_pic">
-              <img src="../../img/shelters/Las_Piñas_City_seal.png" alt="..." class="img-circle profile_img">
+              <img src="images/logo/<?= $row['shelter_img']; ?>" alt="..." class="img-circle profile_img">
             </div>
             <div class="profile_info">
               <span>Welcome,</span>
@@ -140,7 +127,7 @@ if(isset($_GET['edit'])){
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="/Capstone/warp/img/City Logo/last_pinas.png" alt=""><?php echo $_SESSION['user-email']?>
+                  <img src="images/logo/<?= $row['shelter_img']; ?> " alt=""><?php echo $_SESSION['user-email']?>
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -174,16 +161,16 @@ if(isset($_GET['edit'])){
         <div class="row">
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
-              <div class="x_title">
-                <!-- <h2>E-commerce page design</h2> -->
+              <!-- <div class="x_title">
+                <h2>E-commerce page design</h2>
 
                 <div class="clearfix"></div>
-              </div>
+              </div> -->
               <div class="x_content">
 
-                <div class="col-md-7 col-sm-7 col-xs-12">
+                <div class="col-md-5 col-sm-5 col-xs-12">
                   <div class="product-image">
-                    <img src="../../img/shelters/Las_Piñas_City_seal.png" alt="..." />
+                  <?php echo '<img src="images/logo/' . $row['shelter_img'] . '" alt="shelter logo"'; ?>
                   </div>
                   <!-- <div class="product_gallery">
                         <a>
@@ -201,13 +188,10 @@ if(isset($_GET['edit'])){
                       </div> -->
                 </div>
 
-                <div class="col-md-5 col-sm-5 col-xs-12" style="border:0px solid #e5e5e5;">
-
-                    <?php
-                    if($edit == false){ 
-                    ?>
+                <div class="col-md-6 col-sm-6 col-xs-12" style="border:0px solid #e5e5e5;">
                       <h1 class="prod_title"> <?php echo $row['shelter_city']; ?> </h1>
 
+                      <h2>About us</h2>
                       <p><?php echo $row['shelter_about']; ?></p>
                       <br />
 
@@ -215,28 +199,25 @@ if(isset($_GET['edit'])){
                         <h2>Contact us</h2>
                         <div class="x_content">
                           <p><?php echo $row['shelter_contact']; ?></p>
-                          <form action="form_upload.html" class="dropzone"></form>
+
+                  <!-- COMMENT KO MUNA YUNG DROPZONE BAKA GAMITIN NEXT TIME -->
+                          <!-- <form action="form_upload.html" class="dropzone"></form>
                           <br />
                           <br />
                           <br />
                           <br />
                         </div>
                       </div>
-                      <br />
+                      <br /> -->
 
                       <div class="x_content">
                         <div class="buttons">
-                          <a href="shelter_account.php?shelter_id=<?php echo $row['shelter_id']; ?>">
-                          <button name="edit" type="button" class="btn btn-success btn-lg">Edit Information</button>
+                          <a href="shelter_account_edit.php?shelter_id=<?php echo $row['shelter_id']; ?>">
+                          <button type="button" class="btn btn-success btn-primary">Edit Information</button>
                           </a>
                         </div>
                       </div>
 
-                    <?php 
-                    }else{
-                    ?>
-                      <input type="text" name="city" value="<?php echo $row['shelter_city']; ?>" class="prod_title">
-                    <?php } ?>
                   <!-- <div class="">
                         <h2>Size <small>Please select one</small></h2>
                         <ul class="list-inline prod_size">
