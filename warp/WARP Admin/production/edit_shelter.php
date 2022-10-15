@@ -18,37 +18,17 @@ if (isset($_POST['submit-update'])) {
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
   }
 
-  // Validate City
-  if (empty($_POST['city'])) {
-    $cityErr = 'City is required';
-  } else {
-    $city = filter_input(
-      INPUT_POST,
-      'city',
-      FILTER_SANITIZE_FULL_SPECIAL_CHARS
-    );
-  }
-
-  // Validate Contact
-  if (empty($_POST['contact'])) {
-    $contactErr = 'contact is required';
-  } else {
-    $contact = filter_input(
-      INPUT_POST,
-      'contact',
-      FILTER_SANITIZE_FULL_SPECIAL_CHARS
-    );
-  }
   // Store in variables other data to be updated
+  $name = $_POST['name'];
   $user_id = $_SESSION['user_id'];
-  $shelter_id = $_SESSION['shelter_id'];
+  $shelteruser_id = $_SESSION['shelteruser_id'];
   $about = $_POST['about'];
   $position = $_POST['position'];
 
   //If there are no errors the function will execute
-  if (empty($emailErr) && empty($cityErr) && empty($contactErr)) {
+  if (empty($emailErr)) {
     // Query to update the shelter_tbl first
-    $sql = "UPDATE shelter_tbl SET shelter_city='$city', shelter_contact='$contact', shelter_about='$about', shelter_position='$position' WHERE shelter_id='$shelter_id'";
+    $sql = "UPDATE shelteruser_tbl SET shelteruser_name='$name', shelteruser_position='$position' WHERE shelteruser_id='$shelteruser_id'";
     // If true then the query will be executed and another query will be executed
     if (mysqli_query($conn, $sql) === TRUE) {
       $sql = "UPDATE user_tbl SET user_email='$email' WHERE user_id='$user_id'";
@@ -76,7 +56,7 @@ if (isset($_POST['submit-update'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" type="image/x-icon" href="/warp/img/WARP_LOGO copy.png">
 
-  <title>Manage Accounts </title>
+  <title>Edit Shelter </title>
 
   <!-- Bootstrap -->
   <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -151,6 +131,7 @@ if (isset($_POST['submit-update'])) {
                   <ul class="nav child_menu">
                     <li><a href="manage_shelter.php">Shelter</a></li>
                     <li><a href="manage_adopter.php">Adopter</a></li>
+                    <li><a href="manage_city.php">City</a></li>
                   </ul>
                 </li>
               </ul>
@@ -225,11 +206,11 @@ if (isset($_POST['submit-update'])) {
                     <?php
                     //Check if naget ung id sa URL
                     if (isset($_GET['id'])) {
-                      //istotore sa $shelter_id ung id na nakuha sa url parameter
+                      //istotore sa $shelteruser_id ung id na nakuha sa url parameter
                       $id = $_GET['id'];
-                      //Kukunin ung info ng both tables kung saan ung shelter_tbl.id = $shelter_id
-                      $sql = "SELECT shelter_tbl.shelter_id, shelter_tbl.shelter_city, shelter_tbl.shelter_contact, shelter_tbl.shelter_about, shelter_tbl.shelter_position,
-                       user_tbl.user_email, user_tbl.user_id FROM user_tbl INNER JOIN shelter_tbl ON user_tbl.user_id = shelter_tbl.user_id WHERE shelter_tbl.shelter_id='$id'";
+                      //Kukunin ung info ng both tables kung saan ung shelter_tbl.id = $shelteruser_id
+                      $sql = "SELECT shelteruser_tbl.shelteruser_id, shelteruser_tbl.shelteruser_name, shelteruser_tbl.shelteruser_position,
+                       user_tbl.user_email, user_tbl.user_id FROM user_tbl INNER JOIN shelteruser_tbl ON user_tbl.user_id = shelteruser_tbl.user_id WHERE shelteruser_tbl.shelteruser_id='$id'";
                       $result = mysqli_query($conn, $sql);
                       //If successful ung query ilalagay sa array ung data
                       if ($result->num_rows > 0) {
@@ -237,7 +218,7 @@ if (isset($_POST['submit-update'])) {
                         foreach ($result as $rows) {
                           $_SESSION['rows'] = $rows;
                           $_SESSION['user_id'] = $rows['user_id'];
-                          $_SESSION['shelter_id'] = $rows['shelter_id'];
+                          $_SESSION['shelteruser_id'] = $rows['shelteruser_id'];
 
                     ?>
                           <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
@@ -250,31 +231,17 @@ if (isset($_POST['submit-update'])) {
                               </div>
                             </div>
                             <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="city">City<span class="required">*</span>
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="city">Full Name<span class="required">*</span>
                               </label>
                               <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" id="city" name="city" required="required" class="form-control col-md-7 col-xs-12 <?php echo !$cityErr ?: 'is-invalid'; ?>" value="<?= $row['shelter_city']; ?>">
+                                <input type="text" id="name" name="name" required="required" class="form-control col-md-7 col-xs-12" value="<?= $row['shelteruser_name']; ?>">
                               </div>
                             </div>
                             <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Contact Number<span class="required">*</span>
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Position<span class="required">*</span>
                               </label>
                               <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" id="contact" name="contact" required="required" class="form-control col-md-7 col-xs-12 <?php echo !$contactErr ?: 'is-invalid'; ?>" value="<?= $row['shelter_contact']; ?>">
-                              </div>
-                            </div>
-                            <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">About/Bio<span class="required">*</span>
-                              </label>
-                              <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" id="about" name="about" class="form-control col-md-7 col-xs-12" value="<?= $row['shelter_about']; ?>">
-                              </div>
-                            </div>
-                            <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="position">Position<span class="required">*</span>
-                              </label>
-                              <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" id="position" name="position" required="required" class="form-control col-md-7 col-xs-12" value="<?= $row['shelter_position']; ?>">
+                                <input type="text" id="position" name="position" required="required" class="form-control col-md-7 col-xs-12" value="<?= $row['shelteruser_position']; ?>">
                               </div>
                             </div>
                       <?php
