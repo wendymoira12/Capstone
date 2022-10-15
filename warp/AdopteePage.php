@@ -155,6 +155,8 @@
                     <div class="col-lg-4">
                         <div class="blog_right_sidebar">
 
+              <!-- STAR RATINGS IN LEVEL OF SOCABILITY, ENERGY, AFFECTION -->
+
                                     <aside class="single_sidebar_widget instagram_feeds">
                                       <h4>Sociability</h4>
                                       <div class="star-rating">
