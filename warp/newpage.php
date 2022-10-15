@@ -111,43 +111,49 @@ $data = mysqli_fetch_assoc($result);
         <br>
 
         <!-- ======= Portfolio Section ======= -->
-        <section class="portfolio" id="Portfolio">
-  <div class="container">
-      
-      <div class="row">
-        
-          <div class="filter-buttons">
-              <ul id="filter-btns">
-                  <li class="active" data-target="all">ALL</li>
-                  <li data-target="cat">CAT</li>
-                  <li data-target="dog">DOG</li>
-              </ul>
-          </div>
-      </div>
-      <div class="row">
-      <?php
-           if (mysqli_num_rows($result) > 0) {
-                foreach ($result as $data) {
-        ?>
-          <div class="portfolio-gallery">
-              <div class="item" data-id="dog">
-                  <div class="inner">
-                  <a href="AdopteePage.php?id=<?php echo $data['pet_id']; ?>">
-                         <img src="shelter/production/images/<?= $data['pet_img']; ?>" width="220" height="220"> </a>
-                     <div class="service_content text-center">
-                     <a href="AdopteePage.php?id=<?php echo $data['pet_id']; ?>">
-                        <h3><?= $data['pet_name']; ?></h3>
-                             </a>
-                             <h5>Gender: <?= $data['pet_gender']; ?> <br>
-                                 Age: <?= $data['pet_age']; ?> <br>
-                                 Size: <?= $data['pet_size']; ?> <br>
-                                Neutered: <?= $data['pet_neuter']; ?>
-                             </h5>
-                   </div>
-                  </div>
-              </div>
-              <?php
-                     }
+        <div class="service_area">
+            <div class="container">
+                <section id="portfolio" class="portfolio">
+                    <div class="container" data-aos="fade-up">
+
+                        <div class="row" data-aos="fade-up" data-aos-delay="100">
+                            <div class="col-lg-12 d-flex justify-content-center">
+                                <ul id="portfolio-flters">
+                                    <li data-filter="*" class="filter-active">All</li>
+                                    <li data-filter=".filter-Dog">DOG</li>
+                                    <li data-filter=".filter-Cat">CAT</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-center">
+                            <?php
+                            if (mysqli_num_rows($result) > 0) {
+                                foreach ($result as $data) {
+                            ?>
+                                    <div class="col-lg-4 col-md-6 portfolio-item filter-Cat">
+                                        <div class="single_service">
+                                            <div class="service_thumb service_icon_bg_1 d-flex align-items-center justify-content-center">
+                                                <div class="service_icon">
+                                                    <a href="AdopteePage.php?id=<?php echo $data['pet_id']; ?>">
+                                                        <img src="shelter/production/images/<?= $data['pet_img']; ?>" width="220" height="220">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="service_content text-center">
+                                                <a href="AdopteePage.php?id=<?php echo $data['pet_id']; ?>">
+                                                    <h3><?= $data['pet_name']; ?></h3>
+                                                </a>
+                                                <h5>Gender: <?= $data['pet_gender']; ?> <br>
+                                                    Age: <?= $data['pet_age']; ?> <br>
+                                                    Size: <?= $data['pet_size']; ?> <br>
+                                                    Neutered: <?= $data['pet_neuter']; ?>
+                                                </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                            <?php
+                                }
                             } else {
                                 echo "No records found";
                             }
