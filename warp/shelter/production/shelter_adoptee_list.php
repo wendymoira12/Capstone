@@ -19,20 +19,21 @@ if (isset($_GET['pet-delete'])) {
   mysqli_query($conn, "DELETE FROM adoptee_tbl WHERE pet_id = $id");
   header('Location: shelter_adoptee_list.php');
 }
-
+?>
+<?php
 $i = 1;
 
 // Get the user ID from the login sesh
 $user_id = $_SESSION['user_id'];
-// Query to check if user_id from the login shesh to get the shelter user (will be replacing user_id to Shelter City as WHERE for multiple access)
-$sql = "SELECT * FROM shelter_tbl WHERE user_id ='$user_id'";
+// Query to check if user_id from the login shesh = shelteruser_id to get the city 
+$sql = "SELECT * FROM shelteruser_tbl WHERE user_id ='$user_id'";
 $result = mysqli_query($conn, $sql);
 
 // If true get shelter id from the shelter table para maspecify kung alin adoptee ang ishoshow based sa shelter_id 
 if ($result->num_rows > 0) {
   $row = mysqli_fetch_assoc($result);
-  $shelter_id = $row['shelter_id'];
-  $sql = "SELECT shelter_tbl.shelter_id, adoptee_tbl.pet_id, adoptee_tbl.pet_name, adoptee_tbl.pet_age, adoptee_tbl.pet_color, adoptee_tbl.pet_breed, adoptee_tbl.pet_specie, adoptee_tbl.pet_gender, adoptee_tbl.pet_neuter, adoptee_tbl.pet_vax, adoptee_tbl.pet_weight, adoptee_tbl.pet_size, adoptee_tbl.pet_medrec, adoptee_tbl.pet_lsoc, adoptee_tbl.pet_lene, adoptee_tbl.pet_laff, adoptee_tbl.pet_desc, adoptee_tbl.pet_img FROM adoptee_tbl INNER JOIN shelter_tbl ON adoptee_tbl.shelter_id = shelter_tbl.shelter_id WHERE adoptee_tbl.shelter_id = '$shelter_id'";
+  $city_id = $row['city_id'];
+  $sql = "SELECT city_tbl.city_id, adoptee_tbl.pet_id, adoptee_tbl.pet_name, adoptee_tbl.pet_age, adoptee_tbl.pet_color, adoptee_tbl.pet_breed, adoptee_tbl.pet_specie, adoptee_tbl.pet_gender, adoptee_tbl.pet_neuter, adoptee_tbl.pet_vax, adoptee_tbl.pet_weight, adoptee_tbl.pet_size, adoptee_tbl.pet_medrec, adoptee_tbl.pet_lsoc, adoptee_tbl.pet_lene, adoptee_tbl.pet_laff, adoptee_tbl.pet_desc, adoptee_tbl.pet_img FROM adoptee_tbl INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id WHERE adoptee_tbl.city_id = '$city_id'";
   $result = mysqli_query($conn, $sql);
   if ($result) {
 
@@ -258,6 +259,9 @@ if ($result->num_rows > 0) {
                   <?php
                       }
                     }
+                  } 
+                  else {
+                    header('Location:shelter_account.php');
                   }
                   ?>
                     </tbody>

@@ -73,7 +73,7 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
             <div class="menu_section">
               <h3>Adopter</h3>
               <ul class="nav side-menu">
-                <li><a href="adopter_user_page.html"><i class="fa fa-folder-open"></i> My Applications </a>
+                <li><a href="adopter_user_page.php"><i class="fa fa-folder-open"></i> My Applications </a>
                 </li>
               </ul>
             </div>

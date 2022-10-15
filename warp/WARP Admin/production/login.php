@@ -62,6 +62,7 @@ if (isset($_POST['submit-login'])) {
   if ($result->num_rows > 0) {
     $row = mysqli_fetch_assoc($result);
     $_SESSION['email-login'] = $row['user_email'];
+    $_SESSION['user-role-id'] = $row['role_id'];
     // The password will be stored in the session variable
     $_SESSION['password-login'] = $row['user_password'];
     $hashpass = $_SESSION['password-login'];

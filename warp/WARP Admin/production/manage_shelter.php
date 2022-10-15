@@ -155,6 +155,7 @@ if (isset($_POST['submit'])) {
                   <ul class="nav child_menu">
                     <li><a href="manage_shelter.php">Shelter</a></li>
                     <li><a href="manage_adopter.php">Adopter</a></li>
+                    <li><a href="manage_city.php">City</a></li>
                   </ul>
                 </li>
               </ul>
@@ -265,8 +266,9 @@ if (isset($_POST['submit'])) {
 
 
           <?php
-          $sql = "SELECT shelter_tbl.shelter_id, shelter_tbl.shelter_city, shelter_tbl.shelter_contact, shelter_tbl.shelter_position, user_tbl.user_email FROM user_tbl INNER JOIN shelter_tbl ON user_tbl.user_id = shelter_tbl.user_id";
+          $sql = "SELECT shelteruser_tbl.shelteruser_name, shelteruser_tbl.shelteruser_position, shelteruser_tbl.shelteruser_id, city_tbl.city_name, city_tbl.city_contact, user_tbl.user_email FROM shelteruser_tbl INNER JOIN city_tbl ON shelteruser_tbl.city_id = city_tbl.city_id INNER JOIN user_tbl ON shelteruser_tbl.user_id = user_tbl.user_id";
           $result = mysqli_query($conn, $sql);
+          $i = 1;
           ?>
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
@@ -293,10 +295,11 @@ if (isset($_POST['submit'])) {
                 <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                   <thead>
                     <tr>
-                      <th>Shelter ID.</th>
-                      <th>City</th>
-                      <th>Contact Number</th>
+                      <th>No.</th>
+                      <th>Full Name</th>
                       <th>Position</th>
+                      <th>City</th>
+                      <th>City Contact Number</th>
                       <th>E-mail Address</th>
                       <th>Action</th>
                     </tr>
@@ -307,13 +310,14 @@ if (isset($_POST['submit'])) {
                   ?>
                       <tbody>
                         <tr>
-                          <td><?php echo $row['shelter_id']; ?></td>
-                          <td><?php echo $row['shelter_city']; ?></td>
-                          <td><?php echo $row['shelter_contact']; ?></td>
-                          <td><?php echo $row['shelter_position']; ?></td>
+                          <td><?= $i++ ?></td>
+                          <td><?php echo $row['shelteruser_name']; ?></td>
+                          <td><?php echo $row['shelteruser_position']; ?></td>
+                          <td><?php echo $row['city_name']; ?></td>
+                          <td><?php echo $row['city_contact']; ?></td>
                           <td><?php echo $row['user_email']; ?></td>
                           <td>
-                          <a href="edit_shelter.php?id=<?= $row['shelter_id']?>" type="submit" class="btn btn-round btn-success">Update</a>
+                          <a href="edit_shelter.php?id=<?= $row['shelteruser_id']?>" type="submit" class="btn btn-round btn-success">Update</a>
                             <button type="button" class="btn btn-round btn-danger">Delete</button>
                           </td>
                         </tr>

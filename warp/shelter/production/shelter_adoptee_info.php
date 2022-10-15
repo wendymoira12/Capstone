@@ -74,13 +74,13 @@ if (isset($_POST['pet-submit'])) {
 
     // Query to check if user_id from the login sesh == user id in the shelter table
     // If true get the shelter ID and insert into adoptee table as foreign key
-    $sql = "SELECT * FROM shelter_tbl WHERE user_id ='$user_id'";
+    $sql = "SELECT * FROM shelteruser_tbl WHERE user_id ='$user_id'";
     $result = mysqli_query($conn, $sql);
     // If true get shelter id from the shelter table to be inserted in adoptee table
     if ($result->num_rows > 0) {
       $row = mysqli_fetch_assoc($result);
-      $shelter_id = $row['shelter_id'];
-      $sql = "INSERT INTO adoptee_tbl(pet_img, pet_vid, pet_name, pet_age, pet_color, pet_breed, pet_specie, pet_gender, pet_neuter, pet_vax, pet_weight, pet_size, pet_medrec, pet_lsoc, pet_lene, pet_laff, pet_desc, shelter_id) VALUES('$pet_img', '$pet_vid', '$pet_name', '$pet_age', '$color', '$breed', '$specie', '$gender', '$neuter', '$chkstr', '$weight', '$size', '$medrec', '$sociability', '$energy', '$affection', '$description', '$shelter_id')";
+      $city_id = $row['city_id'];
+      $sql = "INSERT INTO adoptee_tbl(pet_img, pet_vid, pet_name, pet_age, pet_color, pet_breed, pet_specie, pet_gender, pet_neuter, pet_vax, pet_weight, pet_size, pet_medrec, pet_lsoc, pet_lene, pet_laff, pet_desc, city_id) VALUES('$pet_img', '$pet_vid', '$pet_name', '$pet_age', '$color', '$breed', '$specie', '$gender', '$neuter', '$chkstr', '$weight', '$size', '$medrec', '$sociability', '$energy', '$affection', '$description', '$city_id')";
 
       $result = mysqli_query($conn, $sql);
 

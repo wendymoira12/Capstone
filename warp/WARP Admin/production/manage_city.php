@@ -8,63 +8,24 @@ if (!isset($_SESSION['email-login'])) {
 ?>
 
 <?php
-// Form submit
+// Form submit for City Creation
 if (isset($_POST['submit'])) {
 
-  // Validate City
-  if (empty($_POST['name'])) {
-    $nameErr = 'Full Name is required';
-  } else {
-    $name = filter_input(
-      INPUT_POST,
-      'name',
-      FILTER_SANITIZE_FULL_SPECIAL_CHARS
-    );
-  }
+  //Get the values
+  $city = $_POST['city'];
+  $contact = $_POST['contact'];
+  $about = $_POST['about'];
+  //$img = $_POST['city'];
 
-  // Validate Contact
-  if (empty($_POST['position'])) {
-    $positionErr = 'Position is required';
-  } else {
-    $position = filter_input(
-      INPUT_POST,
-      'position',
-      FILTER_SANITIZE_FULL_SPECIAL_CHARS
-    );
-  }
-  // Get About info
-  $city = $_POST['select_city'];
-  $roleno = $_SESSION['role_id'];
-  $email = $_SESSION['user_email'];
-
-  if (empty($cityErr) && empty($contactErr)) {
-    //Check if stored Session variable(user_email, role_id) is == to the query and it exists
-    //To do that need ifetch ung user id
-    $sql = "SELECT * FROM user_tbl WHERE user_email='$email' AND role_id='$roleno'";
-    $result = mysqli_query($conn, $sql);
-    //If true then iistore in temp variable si user id to save in shelter table
-    if ($result->num_rows > 0) {
-      $row = mysqli_fetch_assoc($result);
-      $_SESSION['user_id'] = $row['user_id'];
-      $userid = $_SESSION['user_id'];
-      $sql3 = "INSERT INTO shelteruser_tbl (shelteruser_name, shelteruser_position, user_id, city_id) VALUES ('$name','$position','$userid','$city')";
-      //then insert na ung values ng additional info ng shelter pati narin ung id ng user_email na may role#2 as foreign key na sa shelter table
-      if (mysqli_query($conn, $sql3)) {
-        header('Location: manage_shelter.php');
-      } else {
-        echo 'Error' . mysqli_error($conn);
-      }
-    } else {
-      echo 'Error' . mysqli_error($conn);
-    }
-
-    //To verify ifefetch ung data from 2 tables with JOIN sa query then ishoshow sa table
-    //Then ung nafetch na data ipapasok sa foreach loop
-
+  $sql = "INSERT INTO city_tbl(city_name, city_contact, city_about) VALUES ('$city','$contact','$about')";
+  if (mysqli_query($conn, $sql)){
+    //success
+    header('location:manage_city.php');
+  } else{
+    echo 'Error'. mysqli_error($conn);
   }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -76,7 +37,8 @@ if (isset($_POST['submit'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" type="image/x-icon" href="/warp/img/WARP_LOGO copy.png">
 
-  <title>Manage Accounts </title>
+  <title>Manage City</title>
+
   <!-- Bootstrap -->
   <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Font Awesome -->
@@ -95,6 +57,7 @@ if (isset($_POST['submit'])) {
   <link href="../vendors/starrr/dist/starrr.css" rel="stylesheet">
   <!-- bootstrap-daterangepicker -->
   <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+
   <!-- Custom Theme Style -->
   <link href="../build/css/custom.min.css" rel="stylesheet">
   <!-- Datatables -->
@@ -102,7 +65,7 @@ if (isset($_POST['submit'])) {
   <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
   <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
   <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
-  <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+
 </head>
 
 <body class="nav-md">
@@ -149,6 +112,7 @@ if (isset($_POST['submit'])) {
                   <ul class="nav child_menu">
                     <li><a href="manage_shelter.php">Shelter</a></li>
                     <li><a href="manage_adopter.php">Adopter</a></li>
+                    <li><a href="manage_city.php">City</a></li>
                   </ul>
                 </li>
               </ul>
@@ -192,7 +156,7 @@ if (isset($_POST['submit'])) {
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
-                  <li><a href="logout.php?logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                  <li><a href="logout.php?logout"><i class="fa fa-sign-out pull-right"></i>Log Out</a></li>
                 </ul>
               </li>
             </ul>
@@ -200,68 +164,53 @@ if (isset($_POST['submit'])) {
         </div>
       </div>
       <!-- /top navigation -->
-      <!--======================================================== FORM =========================================================================-->
+
       <!-- page content -->
       <div class="right_col" role="main">
         <div class="">
           <div class="page-title">
             <div class="title_left">
-              <h3>Manage Shelter</h3><br>
+              <h3>Manage City</h3><br>
             </div>
             <div class="clearfix"></div>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Create Shelter Account</h2>
+                    <h2>Create City</h2>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
                     <br />
                     <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">City*</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">City Name: <span class="required">*</span>
+                        </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <?php
-                          //To query the city names and id from city table
-                          $sql = "SELECT * FROM city_tbl";
-                          $result = mysqli_query($conn, $sql);
-                          ?>
-                          <select class="select2_single form-control" tabindex="-1" name="select_city">
-                            <?php
-                            if ($result->num_rows > 0) {
-                              foreach ($result as $row) {
-                            ?>
-                                <option value="<?= $row['city_id'] ?>"><?= $row['city_name'] ?></option>
-                            <?php
-                              }
-                            }
-                            ?>
-                          </select>
+                          <input id="city" class="form-control col-md-7 col-xs-12" required="required" type="text" name="city">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Full Name<span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Contact <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="name" name="name" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="contact" name="contact" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="position">Position<span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">About <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="position" name="position" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="about" name="about" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
-                      <!-- ADD IMAGE INPUT FORM HERE FOR LATER -->
-                      <!-- <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Insert Image<span class="required">*</span>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Image <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="last-name" name="last-name" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="img" name="img" class="form-control col-md-7 col-xs-12">
                         </div>
-                      </div> -->
+                      </div>
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
@@ -276,27 +225,43 @@ if (isset($_POST['submit'])) {
             </div>
           </div>
 
-          <!--======================================================== END OF FORM =========================================================================-->
-          <!--=========================================================   TABLE   ==========================================================================-->
+
           <?php
-          //$sql = "SELECT shelter_tbl.shelter_id, shelter_tbl.shelter_city, shelter_tbl.shelter_contact, shelter_tbl.shelter_position, user_tbl.user_email FROM user_tbl INNER JOIN shelter_tbl ON user_tbl.user_id = shelter_tbl.user_id";
-          //$result = mysqli_query($conn, $sql);
+          $sql = "SELECT * FROM city_tbl";
+          $result = mysqli_query($conn, $sql);
+          $i = 1
           ?>
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
               <div class="x_title">
-                <h2>List of Shelter Accounts<small>Users</small></h2>
+                <h2>List of Registered Cities</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                  </li>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="#">Settings 1</a>
+                      </li>
+                      <li><a href="#">Settings 2</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li><a class="close-link"><i class="fa fa-close"></i></a>
+                  </li>
+                </ul>
                 <div class="clearfix"></div>
               </div>
               <div class="x_content">
                 <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                   <thead>
                     <tr>
-                      <th>Shelter ID.</th>
+                      <th>No.</th>
+                      <th>City ID</th>
                       <th>City</th>
                       <th>Contact Number</th>
-                      <th>Position</th>
-                      <th>E-mail Address</th>
+                      <th>About</th>
+                      <th>Image</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -306,14 +271,15 @@ if (isset($_POST['submit'])) {
                   ?>
                       <tbody>
                         <tr>
-                          <td><?= $row['shelter_id']; ?></td>
-                          <td><?= $row['shelter_city']; ?></td>
-                          <td><?= $row['shelter_contact']; ?></td>
-                          <td><?= $row['shelter_position']; ?></td>
-                          <td><?= $row['user_email']; ?></td>
+                          <td><?= $i++?></td>
+                          <td><?php echo $row['city_id']; ?></td>
+                          <td><?php echo $row['city_name']; ?></td>
+                          <td><?php echo $row['city_contact']; ?></td>
+                          <td><?php echo $row['city_about']; ?></td>
+                          <td><?php echo $row['city_img']; ?></td>
                           <td>
-                            <a href="edit_shelter.php?id=<?= $row['shelter_id'] ?>" type="submit" class="btn btn-round btn-success">Update</a>
-                            <button type="submit" class="btn btn-round btn-danger">Delete</button>
+                          <a href="edit_shelter.php?id=<?= $row['shelter_id']?>" type="submit" class="btn btn-round btn-success">Update</a>
+                            <button type="button" class="btn btn-round btn-danger">Delete</button>
                           </td>
                         </tr>
                     <?php
@@ -327,9 +293,6 @@ if (isset($_POST['submit'])) {
           </div>
         </div>
       </div>
-
-
-      <!--=========================================================   END OF TABLE   ==========================================================================-->
       <!-- /page content -->
 
       <!-- footer content -->
