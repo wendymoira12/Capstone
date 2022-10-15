@@ -122,11 +122,9 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
                   </div>
                 </div>
               </div>
-              
             </nav>
           </div>
         </div>
-        
 
       <!-- page content -->
       <div class="right_col" role="main">
