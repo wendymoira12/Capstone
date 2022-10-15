@@ -148,7 +148,7 @@ $row = mysqli_fetch_assoc($result);
                                             <div class="service_thumb service_icon_bg_1 d-flex align-items-center justify-content-center">
                                                 <div class="service_icon">
                                                     <a href="AdopteePage.php?id=<?php echo $row['pet_id']; ?>">
-                                                        <img src="shelter/production/images/<?= $row['pet_img']; ?>" width="220" height="220">
+                                                        <img src="shelter/production/images/pet_img/<?= $row['pet_img']; ?>" width="220" height="220">
                                                     </a>
                                                 </div>
                                             </div>

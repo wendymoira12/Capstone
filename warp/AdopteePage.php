@@ -123,7 +123,7 @@
                     <div class="col-lg-8 posts-list">
                         <div class="single-post">
                             <div class="feature-img">
-                                <img class="img-fluid" src="shelter/production/images/<?= $data['pet_img']; ?>" width="400" height="600">
+                                <img class="img-fluid" src="shelter/production/images/pet_img/<?= $data['pet_img']; ?>" width="400" height="600">
                             </div>
                             <div class="blog_details">
                                 <h2><?php echo $data['pet_name']; ?>

@@ -15,8 +15,8 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
     }
 }
 
-if (isset($_GET['shelter_id']) && isset($_POST['edit-shelter-submit'])) {
-    $id = $_GET['shelter_id'];
+if (isset($_GET['city_id']) && isset($_POST['edit-shelter-submit'])) {
+    $id = $_GET['city_id'];
     $city = $_POST['city'];
     $contact = $_POST['contact'];
     $about = $_POST['about'];
@@ -28,7 +28,7 @@ if (isset($_GET['shelter_id']) && isset($_POST['edit-shelter-submit'])) {
 
     if (!empty($city) && !empty($contact) && !empty($about) && !empty($img)) {
 
-        $sql = "UPDATE shelter_tbl SET shelter_city = '$city', shelter_contact = '$contact', shelter_about = '$about', shelter_img = '$img' WHERE shelter_id = '$id'";
+        $sql = "UPDATE city_tbl SET city_name = '$city', city_contact = '$contact', city_about = '$about', city_img = '$img' WHERE city_id = '$id'";
 
         $result = $conn->query($sql);
 

@@ -15,12 +15,12 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
   }
 }
 
-if (!isset($_GET['shelter_id'])) {
+if (!isset($_GET['city_id'])) {
   die('Id not provided');
 }
 
-$id = $_GET['shelter_id'];
-$sql = "SELECT * FROM shelter_tbl WHERE shelter_id = $id";
+$id = $_GET['city_id'];
+$sql = "SELECT * FROM city_tbl WHERE city_id = $id";
 $result = $conn->query($sql);
 
 
@@ -80,7 +80,7 @@ $data = mysqli_fetch_assoc($result);
           <!-- menu profile quick info -->
           <div class="profile clearfix">
             <div class="profile_pic">
-              <img src="../../img/shelters/Las_Piñas_City_seal.png" alt="..." class="img-circle profile_img">
+              <img src="images/logo/<?= $row['city_img']; ?>" alt="..." class="img-circle profile_img">
             </div>
             <div class="profile_info">
               <span>Welcome,</span>
@@ -136,7 +136,7 @@ $data = mysqli_fetch_assoc($result);
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="/warp/img/City Logo/last_pinas.png" alt=""><?php echo $_SESSION['user-email']?>
+                  <img src="images/logo/<?= $row['city_img']; ?>" alt=""><?php echo $_SESSION['user-email']?>
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -200,13 +200,13 @@ $data = mysqli_fetch_assoc($result);
                           </div>
                         </div> -->
 
-                  <form enctype="multipart/form-data" action="modify_shelter.php?shelter_id=<?= $id ?>" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                  <form enctype="multipart/form-data" action="modify_shelter.php?city_id=<?= $id ?>" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="city">Shelter City <span class="required">*</span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="city">Shelter City name <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" name="city" value="<?= $data['shelter_city'] ?>" required class="form-control col-md-7 col-xs-12">
+                        <input type="text" name="city" value="<?= $data['city_name'] ?>" required class="form-control col-md-7 col-xs-12">
                       </div>
                     </div>
 
@@ -214,7 +214,7 @@ $data = mysqli_fetch_assoc($result);
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="contact">Contact Number <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" name="contact" value="<?= $data['shelter_contact'] ?>" required class="form-control col-md-7 col-xs-12">
+                        <input type="text" name="contact" value="<?= $data['city_contact'] ?>" required class="form-control col-md-7 col-xs-12">
                       </div>
                     </div>
 
@@ -222,14 +222,14 @@ $data = mysqli_fetch_assoc($result);
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">Shelter About <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <textarea name="about" class="form-control col-md-7 col-xs-12" required> <?= $data['shelter_about'] ?> </textarea>
+                        <textarea name="about" class="form-control col-md-7 col-xs-12" required> <?= $data['city_about'] ?> </textarea>
                       </div>
                     </div>
 
                     <div class="form-group">
                       <label for="pet-img" class="control-label col-md-3 col-sm-3 col-xs-12">Upload Shelter Logo<span class="required">*</label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="file" name="logo" value="<?= $data['shelter_img'] ?>" required>
+                        <input class="form-control col-md-7 col-xs-12" type="file" name="logo" value="<?= $data['city_img'] ?>" required>
                       </div>
                     </div>
 

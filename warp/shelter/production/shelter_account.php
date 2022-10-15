@@ -18,10 +18,11 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
 // Get the user ID from the login sesh
 $user_id = $_SESSION['user_id'];
 // Query to check if user_id from the login shesh to get the shelter user (will be replacing user_id to Shelter City as WHERE for multiple access)
-$sql = "SELECT * FROM shelter_tbl WHERE user_id ='$user_id'";
+$sql = "SELECT shelteruser_tbl.shelteruser_id, shelteruser_tbl.shelteruser_name, shelteruser_tbl.shelteruser_position, city_tbl.city_id, city_tbl.city_name, city_tbl.city_img, city_tbl.city_about, city_tbl.city_contact, user_tbl.user_email FROM shelteruser_tbl INNER JOIN city_tbl ON shelteruser_tbl.city_id = city_tbl.city_id INNER JOIN user_tbl ON shelteruser_tbl.user_id = user_tbl.user_id";
 $result = mysqli_query($conn, $sql);
+
 $row = mysqli_fetch_assoc($result);
-$shelter_id = $row['shelter_id'];
+$shelter_id = $row['city_id'];
 
 ?>
 <!DOCTYPE html>
@@ -69,7 +70,7 @@ $shelter_id = $row['shelter_id'];
           <!-- menu profile quick info -->
           <div class="profile clearfix">
             <div class="profile_pic">
-              <img src="images/logo/<?= $row['shelter_img']; ?>" alt="..." class="img-circle profile_img">
+              <img src="images/logo/<?= $row['city_img']; ?>" alt="..." class="img-circle profile_img">
             </div>
             <div class="profile_info">
               <span>Welcome,</span>
@@ -77,7 +78,7 @@ $shelter_id = $row['shelter_id'];
                 <?php
                 //DISPLAY SESSION
                 if (isset($_SESSION['user-email'])) {
-                  echo $row['shelter_city'] . " Animal Shelter";
+                  echo $row['shelteruser_name'];
                 } else {
                   header('Location:/Capstone/warp/login.php');
                 }
@@ -127,7 +128,7 @@ $shelter_id = $row['shelter_id'];
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="images/logo/<?= $row['shelter_img']; ?> " alt=""><?php echo $_SESSION['user-email']?>
+                  <img src="images/logo/<?= $row['city_img']; ?>" alt=""><?php echo $_SESSION['user-email']?>
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -170,7 +171,7 @@ $shelter_id = $row['shelter_id'];
 
                 <div class="col-md-5 col-sm-5 col-xs-12">
                   <div class="product-image">
-                  <?php echo '<img src="images/logo/' . $row['shelter_img'] . '" alt="shelter logo"'; ?>
+                  <?php echo '<img src="images/logo/' . $row['city_img'] . '" alt="shelter logo"'; ?>
                   </div>
                   <!-- <div class="product_gallery">
                         <a>
@@ -189,16 +190,16 @@ $shelter_id = $row['shelter_id'];
                 </div>
 
                 <div class="col-md-6 col-sm-6 col-xs-12" style="border:0px solid #e5e5e5;">
-                      <h1 class="prod_title"> <?php echo $row['shelter_city']; ?> </h1>
+                      <h1 class="prod_title"> <?php echo $row['city_name']; ?> </h1>
 
                       <h2>About us</h2>
-                      <p><?php echo $row['shelter_about']; ?></p>
+                      <p><?php echo $row['city_about']; ?></p>
                       <br />
 
                       <div class="">
                         <h2>Contact us</h2>
                         <div class="x_content">
-                          <p><?php echo $row['shelter_contact']; ?></p>
+                          <p><?php echo $row['city_contact']; ?></p>
 
                   <!-- COMMENT KO MUNA YUNG DROPZONE BAKA GAMITIN NEXT TIME -->
                           <!-- <form action="form_upload.html" class="dropzone"></form>
@@ -212,7 +213,7 @@ $shelter_id = $row['shelter_id'];
 
                       <div class="x_content">
                         <div class="buttons">
-                          <a href="shelter_account_edit.php?shelter_id=<?php echo $row['shelter_id']; ?>">
+                          <a href="shelter_account_edit.php?city_id=<?php echo $row['city_id']; ?>">
                           <button type="button" class="btn btn-success btn-primary">Edit Information</button>
                           </a>
                         </div>
