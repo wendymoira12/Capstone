@@ -174,25 +174,24 @@ if ($result->num_rows > 0) {
                     <?php echo '<img src="images/logo/' . $row['city_img'] . '" alt="shelter logo"'; ?>
                   </div>
                 </div>
+              </div>
+              <div class="col-md-6 col-sm-6 col-xs-12" style="border:0px solid #e5e5e5;">
+                <h1 class="prod_title"> <?php echo $row['city_name']; ?> </h1>
 
-                <div class="col-md-6 col-sm-6 col-xs-12" style="border:0px solid #e5e5e5;">
-                  <h1 class="prod_title"> <?php echo $row['city_name']; ?> </h1>
+                <h2>About us</h2>
+                <p><?php echo $row['city_about']; ?></p>
+                <br />
 
-                  <h2>About us</h2>
-                  <p><?php echo $row['city_about']; ?></p>
-                  <br />
+                <div class="">
+                  <h2>Contact us</h2>
+                  <div class="x_content">
+                    <p><?php echo $row['city_contact']; ?></p>
 
-                  <div class="">
-                    <h2>Contact us</h2>
                     <div class="x_content">
-                      <p><?php echo $row['city_contact']; ?></p>
-
-                      <div class="x_content">
-                        <div class="buttons">
-                          <a href="shelter_account_edit.php?city_id=<?php echo $row['city_id']; ?>">
-                            <button type="button" class="btn btn-success btn-primary">Edit Information</button>
-                          </a>
-                        </div>
+                      <div class="buttons">
+                        <a href="shelter_account_edit.php?city_id=<?php echo $row['city_id']; ?>">
+                          <button type="button" class="btn btn-success btn-primary">Edit Information</button>
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -201,6 +200,7 @@ if ($result->num_rows > 0) {
             </div>
           </div>
         </div>
+
       </div>
       <!-- /page content -->
 
