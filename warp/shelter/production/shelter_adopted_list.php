@@ -6,7 +6,7 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
   header('Location:/Capstone/warp/login.php');
 } else {
   $role_id = $_SESSION['user-role-id'];
-  if ($role_id == 2){
+  if ($role_id == 2) {
     htmlspecialchars($_SERVER['PHP_SELF']);
   } else {
     header('Location:/Capstone/warp/home.php');
@@ -69,8 +69,8 @@ if ($result->num_rows > 0) {
       <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
           <div class="logo">
-            <a href="home.html">
-              <img src="/warp/img/logo.png" alt="">
+            <a href="../../home.php">
+              <img src="/Capstone/warp/img/logo.png" alt="">
             </a>
           </div>
           <div class="clearfix"></div>
@@ -79,7 +79,7 @@ if ($result->num_rows > 0) {
           <!-- menu profile quick info -->
           <div class="profile clearfix">
             <div class="profile_pic">
-            <img src="/Capstone/warp/WARP Admin/production/images/<?= $row['city_img']; ?>" alt="..." class="img-circle profile_img">
+              <img src="/Capstone/warp/WARP Admin/production/images/<?= $row['city_img']; ?>" alt="..." class="img-circle profile_img">
             </div>
             <div class="profile_info">
               <span>Welcome,</span>
@@ -137,7 +137,7 @@ if ($result->num_rows > 0) {
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                <img src="/Capstone/warp/WARP Admin/production/images/<?= $row['city_img']; ?>" alt=""><?php echo $_SESSION['user-email']?>
+                  <img src="/Capstone/warp/WARP Admin/production/images/<?= $row['city_img']; ?>" alt=""><?php echo $_SESSION['user-email'] ?>
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">

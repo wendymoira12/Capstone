@@ -13,7 +13,8 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
     header('Location:/Capstone/warp/home.php');
   }
 }
-
+?>
+<?php
 // Delete pet from adoptee table
 if (isset($_GET['pet-delete'])) {
   $id = $_GET['pet-delete'];
@@ -78,8 +79,8 @@ if ($result->num_rows > 0) {
             <div class="col-md-3 left_col">
               <div class="left_col scroll-view">
                 <div class="logo">
-                  <a href="home.html">
-                    <img src="/warp/img/logo.png" alt="">
+                  <a href="../../home.php">
+                    <img src="/Capstone/warp/img/logo.png" alt="">
                   </a>
                 </div>
                 <div class="clearfix"></div>

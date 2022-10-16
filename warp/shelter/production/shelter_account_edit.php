@@ -85,8 +85,8 @@ if ($result1->num_rows > 0) {
       <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
           <div class="logo">
-            <a href="home.html">
-              <img src="/warp/img/logo.png" alt="">
+            <a href="../../home.php">
+              <img src="/Capstone/warp/img/logo.png" alt="">
             </a>
           </div>
           <div class="clearfix"></div>
@@ -151,7 +151,7 @@ if ($result1->num_rows > 0) {
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                <img src="/Capstone/warp/WARP Admin/production/images/<?= $row['city_img']; ?>" alt=""><?php echo $_SESSION['user-email'] ?>
+                  <img src="/Capstone/warp/WARP Admin/production/images/<?= $row['city_img']; ?>" alt=""><?php echo $_SESSION['user-email'] ?>
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
