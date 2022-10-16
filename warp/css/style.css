@@ -6867,11 +6867,11 @@ h6 {
   flex: 0 0 33.33%;
   max-width: 33.33%;
   position: relative;
-  padding: 70px 25px 65px 25px;
+  padding: 40px 25px 45px 25px;
   border: 1px solid #ffc5c2;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
-  border-radius: 10px;
+  border-radius: 20px;
   margin-bottom: 30px;
   -webkit-transition: 0.5s;
   -moz-transition: 0.5s;

@@ -161,84 +161,64 @@ $data = mysqli_fetch_assoc($result);
             </div>
             <!-- footer_start  -->
             <footer class="footer">
-                <div class="footer_top">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xl-3 col-md-6 col-lg-3">
-                                <div class="footer_widget">
-                                    <h3 class="footer_title">
-                                        Contact Us
-                                    </h3>
-                                    <ul class="address_line">
+        <div class="footer_top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-3 col-md-6 col-lg-3">
+                        <div class="footer_widget">
+                            <h3 class="footer_title">
+                                Contact Us
+                            </h3>
+                            <ul class="address_line">
+                                <li></li>
+                                <li>warp.pup@gmail.com</a></li>
+                                <li>Metro Manila, Philippines</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-3  col-md-6 col-lg-3">
+                        <div class="footer_widget">
+                           
+                        </div>
+                    </div>
+                    <div class="col-xl-3  col-md-6 col-lg-3">
+                        <div class="footer_widget">
+                            <h3 class="footer_title">
 
-                                        <li><a href="#">warp.pup@gmail.com</a></li>
-                                        <li>Metro Manila, Philippines</li>
-                                    </ul>
-                                </div>
+                            </h3>
+                            <ul class="links">
+                                <br>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 col-lg-3 ">
+                        <div class="footer_widget">
+                            <div class="footer_logo">
+                                <a href="#">
+                                    <img src="img/logo.png" alt="">
+                                </a>
                             </div>
-                            <div class="col-xl-3  col-md-6 col-lg-3">
-                                <div class="footer_widget">
-                                    <h3 class="footer_title">
+                            
 
-                                    </h3>
-                                    <ul class="links">
-                                        <br>
-
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6 col-lg-3 ">
-                                <div class="footer_widget">
-                                    <div class="footer_logo">
-                                        <a href="#">
-                                            <img src="img/logo.png" alt="">
-                                        </a>
-                                    </div>
-                                    <p class="address_text">Metro Manila, Philippines
-                                    </p>
-                                    <div class="socail_links">
-                                        <ul>
-                                            <li>
-                                                <a href="#">
-                                                    <i class="ti-facebook"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <i class="ti-pinterest"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <i class="fa fa-google-plus"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <i class="fa fa-linkedin"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="copy-right_text">
-                    <div class="container">
-                        <div class="bordered_1px"></div>
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <p class="copy_right text-center">
+            </div>
+        </div>
+        <div class="copy-right_text">
+            <div class="container">
+                <div class="bordered_1px"></div>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <p class="copy_right text-center">
 
-                                </p>
-                            </div>
-                        </div>
+                        </p>
                     </div>
                 </div>
-            </footer>
+            </div>
+        </div>
+    </footer>
             <!-- footer_end  -->
 
 
