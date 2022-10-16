@@ -1,3 +1,13 @@
+<?php
+include 'config.php';
+include('connect/connection.php');
+
+$sql = "SELECT * FROM city_tbl";
+$result = mysqli_query($conn, $sql);
+
+$row = mysqli_fetch_assoc($result);
+?>
+
 <!doctype html>
 <html class="no-js" lang="zxx">
 
@@ -119,217 +129,33 @@
             </div>
 
             <div class="row justify-content-center">
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_service">
-                        <div class="service_thumb service_icon_bg_1 d-flex align-items-center justify-content-center">
-                            <div class="service_icon">
-                                <img src="img/service/service_icon_1.png" alt="">
-                            </div>
-                        </div>
-                        <div class="service_content text-center">
-                            <a href="#">
-                                <h3>Manila</h3>
+                <!-- Check if may existing na shelter na ishoshow -->
+                <?php
+                if(mysqli_num_rows($result) > 0) {
+                    foreach($result as $row) {
+                ?>
+                
+                    <div class="col-lg-4 col-md-6">
+                        <div class="single_service">
+                            <a href="animal-shelter-page.php?id=<?php echo $row['city_id']; ?>">
+                                <div class="service_thumb service_icon_bg_1 d-flex align-items-center justify-content-center">
+                                    <div class="service_icon">
+                                        <img src="shelter/production/images/logo/<?= $row['city_img']; ?>" alt="Shelter logo" height="200" width="200">
+                                    </div>
+                                </div>
+                                <div class="service_content text-center">
+                                        <h3><?php echo $row['city_name']; ?></h3>
+                                </div>
                             </a>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_service active">
-                        <div class="service_thumb service_icon_bg_1 d-flex align-items-center justify-content-center">
-                            <div class="service_icon">
-                                <img src="img/service/service_icon_2.png" alt="">
-                            </div>
-                        </div>
-                        <div class="service_content text-center">
-                            <a href="Las-Pinas-Animal-Shelter.php">
-                                <h3>Las Piñas</h3>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_service">
-                        <div class="service_thumb service_icon_bg_1 d-flex align-items-center justify-content-center">
-                            <div class="service_icon">
-                                <img src="img/service/service_icon_3.png" alt="">
-                            </div>
-                        </div>
-                        <div class="service_content text-center">
-                            <h3>Quezon City</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_service">
-                        <div class="service_thumb service_icon_bg_1 d-flex align-items-center justify-content-center">
-                            <div class="service_icon">
-                                <img src="img/service/service_icon_1.png" alt="">
-                            </div>
-                        </div>
-                        <div class="service_content text-center">
-                            <h3>Caloocan</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_service">
-                        <div class="service_thumb service_icon_bg_1 d-flex align-items-center justify-content-center">
-                            <div class="service_icon">
-                                <img src="img/service/service_icon_2.png" alt="">
-                            </div>
-                        </div>
-                        <div class="service_content text-center">
-                            <h3>Makati</h3>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_service">
-                        <div class="service_thumb service_icon_bg_1 d-flex align-items-center justify-content-center">
-                            <div class="service_icon">
-                                <img src="img/service/service_icon_3.png" alt="">
-                            </div>
-                        </div>
-                        <div class="service_content text-center">
-                            <h3>Malabon</h3>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_service">
-                        <div class="service_thumb service_icon_bg_1 d-flex align-items-center justify-content-center">
-                            <div class="service_icon">
-                                <img src="img/service/service_icon_2.png" alt="">
-                            </div>
-                        </div>
-                        <div class="service_content text-center">
-                            <h3>Mandaluyong</h3>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_service">
-                        <div class="service_thumb service_icon_bg_1 d-flex align-items-center justify-content-center">
-                            <div class="service_icon">
-                                <img src="img/service/service_icon_3.png" alt="">
-                            </div>
-                        </div>
-                        <div class="service_content text-center">
-                            <h3>Marikina</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_service">
-                        <div class="service_thumb service_icon_bg_1 d-flex align-items-center justify-content-center">
-                            <div class="service_icon">
-                                <img src="img/service/service_icon_1.png" alt="">
-                            </div>
-                        </div>
-                        <div class="service_content text-center">
-                            <h3>Muntinlupa</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_service">
-                        <div class="service_thumb service_icon_bg_1 d-flex align-items-center justify-content-center">
-                            <div class="service_icon">
-                                <img src="img/service/service_icon_2.png" alt="">
-                            </div>
-                        </div>
-                        <div class="service_content text-center">
-                            <h3>Navotas</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_service">
-                        <div class="service_thumb service_icon_bg_1 d-flex align-items-center justify-content-center">
-                            <div class="service_icon">
-                                <img src="img/service/service_icon_3.png" alt="">
-                            </div>
-                        </div>
-                        <div class="service_content text-center">
-                            <h3>Parañaque</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_service">
-                        <div class="service_thumb service_icon_bg_1 d-flex align-items-center justify-content-center">
-                            <div class="service_icon">
-                                <img src="img/service/service_icon_1.png" alt="">
-                            </div>
-                        </div>
-                        <div class="service_content text-center">
-                            <h3>Pasay</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_service">
-                        <div class="service_thumb service_icon_bg_1 d-flex align-items-center justify-content-center">
-                            <div class="service_icon">
-                                <img src="img/service/service_icon_2.png" alt="">
-                            </div>
-                        </div>
-                        <div class="service_content text-center">
-                            <h3>Pasig</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_service">
-                        <div class="service_thumb service_icon_bg_1 d-flex align-items-center justify-content-center">
-                            <div class="service_icon">
-                                <img src="img/service/service_icon_3.png" alt="">
-                            </div>
-                        </div>
-                        <div class="service_content text-center">
-                            <h3>San Juan</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_service">
-                        <div class="service_thumb service_icon_bg_1 d-flex align-items-center justify-content-center">
-                            <div class="service_icon">
-                                <img src="img/service/service_icon_2.png" alt="">
-                            </div>
-                        </div>
-                        <div class="service_content text-center">
-                            <h3>Taguig</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_service">
-                        <div class="service_thumb service_icon_bg_1 d-flex align-items-center justify-content-center">
-                            <div class="service_icon">
-                                <img src="img/service/service_icon_1.png" alt="">
-                            </div>
-                        </div>
-                        <div class="service_content text-center">
-                            <h3>Valenzuela</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_service">
-                        <div class="service_thumb service_icon_bg_1 d-flex align-items-center justify-content-center">
-                            <div class="service_icon">
-                                <img src="img/service/service_icon_2.png" alt="">
-                            </div>
-                        </div>
-                        <div class="service_content text-center">
-                            <h3>Pateros</h3>
-                        </div>
-                    </div>
-                </div>
+                <?php
+                    }
+                } else {
+                    echo "No records found";
+                }
+                ?>
             </div>
         </div>
 

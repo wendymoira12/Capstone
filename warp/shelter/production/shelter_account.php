@@ -207,16 +207,6 @@ if ($result->num_rows > 0) {
                     <div class="x_content">
                       <p><?php echo $row['city_contact']; ?></p>
 
-                      <!-- COMMENT KO MUNA YUNG DROPZONE BAKA GAMITIN NEXT TIME -->
-                      <!-- <form action="form_upload.html" class="dropzone"></form>
-                          <br />
-                          <br />
-                          <br />
-                          <br />
-                        </div>
-                      </div>
-                      <br /> -->
-
                       <div class="x_content">
                         <div class="buttons">
                           <a href="shelter_account_edit.php?city_id=<?php echo $row['city_id']; ?>">
