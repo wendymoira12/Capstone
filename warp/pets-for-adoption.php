@@ -111,11 +111,12 @@ $data = mysqli_fetch_assoc($result);
         <br>
 
         <!-- ======= Portfolio Section ======= -->
-        <section class="portfolio" id="Portfolio">
+    
+              <section class="portfolio" id="Portfolio">
   <div class="container">
       
       <div class="row">
-        
+     
           <div class="filter-buttons">
               <ul id="filter-btns">
                   <li class="active" data-target="all">ALL</li>
@@ -124,29 +125,31 @@ $data = mysqli_fetch_assoc($result);
               </ul>
           </div>
       </div>
+      
       <div class="row">
-      <?php
+        
+          <div class="portfolio-gallery">
+          <?php
            if (mysqli_num_rows($result) > 0) {
                 foreach ($result as $data) {
         ?>
-          <div class="portfolio-gallery">
-              <div class="item" data-id="<?php echo $data['pet_specie']; ?>">
+          <div class="item" data-id="<?php echo $data['pet_specie']; ?>">
                   <div class="inner">
                   <a href="AdopteePage.php?id=<?php echo $data['pet_id']; ?>">
-                         <img src="shelter/production/images/<?= $data['pet_img']; ?>"> </a>
+                  <img src="shelter/production/images/<?= $data['pet_img']; ?>"> </a>
                      <div class="service_content text-center">
                      <a href="AdopteePage.php?id=<?php echo $data['pet_id']; ?>">
                         <h3><?= $data['pet_name']; ?></h3>
                              </a>
-                             <h5>Gender: <?= $data['pet_gender']; ?> <br>
-                                 Age: <?= $data['pet_age']; ?> <br>
-                                 Size: <?= $data['pet_size']; ?> <br>
-                                Neutered: <?= $data['pet_neuter']; ?>
+                             <h5> <b> Gender:</b> <?= $data['pet_gender']; ?> <br>
+                             <b> Age:</b> <?= $data['pet_age']; ?> <br>
+                             <b>  Size:</b> <?= $data['pet_size']; ?> <br>
+                             <b>  Neutered:</b> <?= $data['pet_neuter']; ?>
                              </h5>
                    </div>
                   </div>
               </div>
-              
+
               <?php
                      }
                             } else {
