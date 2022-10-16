@@ -19,7 +19,7 @@ if (isset($_POST['submit-update'])) {
   $city_id = $_SESSION['city_id'];
   $img = $_FILES['city_img']['name'];
   $img_tmp_name= $_FILES['city_img']['tmp_name'];
-  $city_img_folder = 'images/' . $img;
+  $city_img_folder = '../../shelter/production/images/logo/' . $img;
   //If there are no errors the function will execute
 
   // Query to update the shelter_tbl first
