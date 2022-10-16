@@ -12,16 +12,24 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
     header('Location:/Capstone/warp/home.php');
   }
 }
+?>
 
+<?php
 // Get the user ID from the login sesh
 $user_id = $_SESSION['user_id'];
-// Query to check if user_id from the login shesh to get the shelter user (will be replacing user_id to Shelter City as WHERE for multiple access)
-$sql = "SELECT shelteruser_tbl.shelteruser_id, shelteruser_tbl.shelteruser_name, shelteruser_tbl.shelteruser_position, city_tbl.city_id, city_tbl.city_name, city_tbl.city_img, city_tbl.city_about, city_tbl.city_contact, user_tbl.user_email FROM shelteruser_tbl INNER JOIN city_tbl ON shelteruser_tbl.city_id = city_tbl.city_id INNER JOIN user_tbl ON shelteruser_tbl.user_id = user_tbl.user_id";
+// Query to check if user_id from the login shesh = shelteruser_id to get the city 
+$sql = "SELECT * FROM shelteruser_tbl WHERE user_id ='$user_id'";
 $result = mysqli_query($conn, $sql);
 
-$row = mysqli_fetch_assoc($result);
-$shelter_id = $row['city_id'];
-
+if ($result->num_rows > 0) {
+  $row = mysqli_fetch_assoc($result);
+  $city_id = $row['city_id'];
+  $sql = "SELECT * FROM city_tbl WHERE city_id='$city_id'";
+  $result = mysqli_query($conn, $sql);
+  if ($result == TRUE) {
+    $row = mysqli_fetch_assoc($result);
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -68,7 +76,7 @@ $shelter_id = $row['city_id'];
           <!-- menu profile quick info -->
           <div class="profile clearfix">
             <div class="profile_pic">
-              <img src="images/logo/<?= $row['city_img']; ?>" alt="..." class="img-circle profile_img">
+            <img src="/Capstone/warp/WARP Admin/production/images/<?= $row['city_img']; ?>" alt="..." class="img-circle profile_img">
             </div>
             <div class="profile_info">
               <span>Welcome,</span>
@@ -76,7 +84,7 @@ $shelter_id = $row['city_id'];
                 <?php
                 //DISPLAY SESSION
                 if (isset($_SESSION['user-email'])) {
-                  echo $row['shelteruser_name'];
+                  echo $_SESSION['user-email'];
                 } else {
                   header('Location:/Capstone/warp/login.php');
                 }
@@ -126,7 +134,7 @@ $shelter_id = $row['city_id'];
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="images/logo/<?= $row['city_img']; ?>" alt=""><?php echo $_SESSION['user-email'] ?>
+                <img src="/Capstone/warp/WARP Admin/production/images/<?= $row['city_img']; ?>" alt=""><?php echo $_SESSION['user-email'] ?>
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
