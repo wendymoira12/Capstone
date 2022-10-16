@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 use LDAP\Result;
 
 include('connect/connection.php');
@@ -116,7 +117,7 @@ $data = mysqli_fetch_assoc($result);
             <div class="container">
 
                 <div class="row">
-                    
+
                     <div class="filter-buttons">
                         <ul id="filter-btns">
                             <li class="active" data-target="all">ALL</li>
