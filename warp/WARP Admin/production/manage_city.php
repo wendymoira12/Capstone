@@ -15,11 +15,13 @@ if (isset($_POST['submit'])) {
   $city = $_POST['city'];
   $contact = $_POST['contact'];
   $about = $_POST['about'];
-  //$img = $_POST['city'];
-
-  $sql = "INSERT INTO city_tbl(city_name, city_contact, city_about) VALUES ('$city','$contact','$about')";
+  $img = $_FILES['img']['name'];
+  $img_tmp_name= $_FILES['img']['tmp_name'];
+  $city_img_folder = 'images/' . $img;
+  $sql = "INSERT INTO city_tbl(city_name, city_contact, city_about, city_img) VALUES ('$city','$contact','$about','$img')";
   if (mysqli_query($conn, $sql)){
     //success
+    move_uploaded_file($img_tmp_name, $city_img_folder);
     header('location:manage_city.php');
   } else{
     echo 'Error'. mysqli_error($conn);
@@ -182,7 +184,7 @@ if (isset($_POST['submit'])) {
                   </div>
                   <div class="x_content">
                     <br />
-                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data">
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">City Name: <span class="required">*</span>
                         </label>
@@ -208,7 +210,7 @@ if (isset($_POST['submit'])) {
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Image <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="img" name="img" class="form-control col-md-7 col-xs-12">
+                        <input class="form-control col-md-7 col-xs-12" type="file" name="img" required>
                         </div>
                       </div>
                       <div class="ln_solid"></div>

@@ -17,14 +17,17 @@ if (isset($_POST['submit-update'])) {
   $about = $_POST['city_about'];
   $contact = $_POST['city_contact'];
   $city_id = $_SESSION['city_id'];
-
+  $img = $_FILES['city_img']['name'];
+  $img_tmp_name= $_FILES['city_img']['tmp_name'];
+  $city_img_folder = 'images/' . $img;
   //If there are no errors the function will execute
 
   // Query to update the shelter_tbl first
-  $sql = "UPDATE city_tbl SET city_name='$name', city_about='$about', city_contact='$contact' WHERE city_id='$city_id'";
+  $sql = "UPDATE city_tbl SET city_name='$name', city_contact='$contact', city_about='$about', city_img='$img' WHERE city_id='$city_id'";
   // If true then the query will be executed and another query will be executed
   if (mysqli_query($conn, $sql) === TRUE) {
     //Success
+    move_uploaded_file($img_tmp_name, $city_img_folder);
     header('location:manage_city.php');
   } else {
     echo "Error" . mysqli_error($conn);
@@ -205,12 +208,19 @@ if (isset($_POST['submit-update'])) {
                         foreach ($result as $rows) {
                           $_SESSION['city_id'] = $row['city_id'];
                     ?>
-                          <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+                          <form id="demo-form2" enctype="multipart/form-data" data-parsley-validate class="form-horizontal form-label-left" method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
                             <div class="form-group">
                               <label class="control-label col-md-3 col-sm-3 col-xs-12">City<span class="required">*</span>
                               </label>
                               <div class="col-md-6 col-sm-6 col-xs-12">
                                 <input id="city_name" class="form-control col-md-7 col-xs-12" required="required" type="text" name="city_name" value="<?= $row['city_name']; ?>">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Contact<span class="required">*</span>
+                              </label>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="city_contact" name="city_contact" required="required" class="form-control col-md-7 col-xs-12" value="<?= $row['city_contact']; ?>">
                               </div>
                             </div>
                             <div class="form-group">
@@ -221,19 +231,18 @@ if (isset($_POST['submit-update'])) {
                               </div>
                             </div>
                             <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Contact<span class="required">*</span>
-                              </label>
+                              <label for="pet-img" class="control-label col-md-3 col-sm-3 col-xs-12">Upload Adoptee Image<span class="required">*</label>
                               <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" id="city_contact" name="city_contact" required="required" class="form-control col-md-7 col-xs-12" value="<?= $row['city_contact']; ?>">
+                                <input class="form-control col-md-7 col-xs-12" type="file"  name="city_img" value="<?= $row['city_img'] ?>" required>
                               </div>
                             </div>
                       <?php
-                        }}
-
-                      } else {
-                        echo 'Error' . mysqli_error($conn);
+                        }
                       }
-                    
+                    } else {
+                      echo 'Error' . mysqli_error($conn);
+                    }
+
                       ?>
                       <div class="ln_solid"></div>
                       <div class="form-group">
@@ -252,17 +261,17 @@ if (isset($_POST['submit-update'])) {
         </div>
       </div>
     </div>
-      <!-- /page content -->
+    <!-- /page content -->
 
-      <!-- footer content -->
-      <footer>
-        <!-- <div class="pull-right">
+    <!-- footer content -->
+    <footer>
+      <!-- <div class="pull-right">
         Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
       </div> -->
-        <div class="clearfix"></div>
-      </footer>
-      <!-- /footer content -->
-    </div>
+      <div class="clearfix"></div>
+    </footer>
+    <!-- /footer content -->
+  </div>
   </div>
 
   <!-- jQuery -->

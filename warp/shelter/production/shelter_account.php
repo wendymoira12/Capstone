@@ -6,9 +6,7 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
   header('Location:/Capstone/warp/login.php');
 } else {
   $role_id = $_SESSION['user-role-id'];
-
-  
-  if ($role_id == 2){
+  if ($role_id == 2) {
     htmlspecialchars($_SERVER['PHP_SELF']);
   } else {
     header('Location:/Capstone/warp/home.php');
@@ -128,7 +126,7 @@ $shelter_id = $row['city_id'];
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="images/logo/<?= $row['city_img']; ?>" alt=""><?php echo $_SESSION['user-email']?>
+                  <img src="images/logo/<?= $row['city_img']; ?>" alt=""><?php echo $_SESSION['user-email'] ?>
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -171,7 +169,7 @@ $shelter_id = $row['city_id'];
 
                 <div class="col-md-5 col-sm-5 col-xs-12">
                   <div class="product-image">
-                  <?php echo '<img src="images/logo/' . $row['city_img'] . '" alt="shelter logo"'; ?>
+                    <?php echo '<img src="images/logo/' . $row['city_img'] . '" alt="shelter logo"'; ?>
                   </div>
                   <!-- <div class="product_gallery">
                         <a>
@@ -190,19 +188,19 @@ $shelter_id = $row['city_id'];
                 </div>
 
                 <div class="col-md-6 col-sm-6 col-xs-12" style="border:0px solid #e5e5e5;">
-                      <h1 class="prod_title"> <?php echo $row['city_name']; ?> </h1>
+                  <h1 class="prod_title"> <?php echo $row['city_name']; ?> </h1>
 
-                      <h2>About us</h2>
-                      <p><?php echo $row['city_about']; ?></p>
-                      <br />
+                  <h2>About us</h2>
+                  <p><?php echo $row['city_about']; ?></p>
+                  <br />
 
-                      <div class="">
-                        <h2>Contact us</h2>
-                        <div class="x_content">
-                          <p><?php echo $row['city_contact']; ?></p>
+                  <div class="">
+                    <h2>Contact us</h2>
+                    <div class="x_content">
+                      <p><?php echo $row['city_contact']; ?></p>
 
-                  <!-- COMMENT KO MUNA YUNG DROPZONE BAKA GAMITIN NEXT TIME -->
-                          <!-- <form action="form_upload.html" class="dropzone"></form>
+                      <!-- COMMENT KO MUNA YUNG DROPZONE BAKA GAMITIN NEXT TIME -->
+                      <!-- <form action="form_upload.html" class="dropzone"></form>
                           <br />
                           <br />
                           <br />
@@ -214,12 +212,12 @@ $shelter_id = $row['city_id'];
                       <div class="x_content">
                         <div class="buttons">
                           <a href="shelter_account_edit.php?city_id=<?php echo $row['city_id']; ?>">
-                          <button type="button" class="btn btn-success btn-primary">Edit Information</button>
+                            <button type="button" class="btn btn-success btn-primary">Edit Information</button>
                           </a>
                         </div>
                       </div>
 
-                  <!-- <div class="">
+                      <!-- <div class="">
                         <h2>Size <small>Please select one</small></h2>
                         <ul class="list-inline prod_size">
                           <li>
@@ -238,7 +236,7 @@ $shelter_id = $row['city_id'];
                       </div>
                       <br /> -->
 
-                  <!-- <div class="">
+                      <!-- <div class="">
                         <div class="product_price">
                           <h1 class="price">Ksh80.00</h1>
                           <span class="price-tax">Ex Tax: Ksh80.00</span>
@@ -246,12 +244,12 @@ $shelter_id = $row['city_id'];
                         </div>
                       </div> -->
 
-                  <!-- <div class="">
+                      <!-- <div class="">
                         <button type="button" class="btn btn-default btn-lg">Add to Cart</button>
                         <button type="button" class="btn btn-default btn-lg">Add to Wishlist</button>
                       </div> -->
 
-                  <!-- <div class="product_social">
+                      <!-- <div class="product_social">
                         <ul class="list-inline">
                           <li><a href="#"><i class="fa fa-facebook-square"></i></a>
                           </li>
@@ -264,10 +262,10 @@ $shelter_id = $row['city_id'];
                         </ul>
                       </div> -->
 
-                </div>
+                    </div>
 
 
-                <!-- <div class="col-md-12">
+                    <!-- <div class="col-md-12">
 
                       <div class="" role="tabpanel" data-example-id="togglable-tabs">
                         <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
@@ -295,38 +293,38 @@ $shelter_id = $row['city_id'];
                       </div>
 
                     </div> -->
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            <!-- Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a> -->
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
       </div>
     </div>
-    <!-- /page content -->
 
-    <!-- footer content -->
-    <footer>
-      <div class="pull-right">
-        <!-- Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a> -->
-      </div>
-      <div class="clearfix"></div>
-    </footer>
-    <!-- /footer content -->
-  </div>
-  </div>
+    <!-- jQuery -->
+    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Dropzone.js -->
+    <script src="../vendors/dropzone/dist/min/dropzone.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="../vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../vendors/nprogress/nprogress.js"></script>
 
-  <!-- jQuery -->
-  <script src="../vendors/jquery/dist/jquery.min.js"></script>
-  <!-- Dropzone.js -->
-  <script src="../vendors/dropzone/dist/min/dropzone.min.js"></script>
-  <!-- Bootstrap -->
-  <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-  <!-- FastClick -->
-  <script src="../vendors/fastclick/lib/fastclick.js"></script>
-  <!-- NProgress -->
-  <script src="../vendors/nprogress/nprogress.js"></script>
-
-  <!-- Custom Theme Scripts -->
-  <script src="../build/js/custom.min.js"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="../build/js/custom.min.js"></script>
 </body>
 
 </html>

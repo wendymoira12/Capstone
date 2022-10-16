@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 use LDAP\Result;
 
 include('connect/connection.php');
@@ -78,7 +78,7 @@ $data = mysqli_fetch_assoc($result);
                                             <li> <a href="about.html">About Us </i></a>
                                             <li> <a href="pets-for-adoption.php">Pets for Adoption </i></a>
                                             <li><a href="contact.html">Contact</a></li>
-                                            <li><a href="../warp/shelter/production/adopter_user_page.php"><i class="fa-solid fa-user" style="font-size:20px;color:rgb(4, 4, 41);"></i></a></li>
+                                            <li><a href="getroleid.php?id=<?= $_SESSION['user-role-id'] ?>"><i class="fa-solid fa-user" style="font-size:20px;color:rgb(4, 4, 41);"></i></a></li>
                                             <li><a href="logout.php?logout">Logout </a></li>
 
                                         </ul>
@@ -111,114 +111,114 @@ $data = mysqli_fetch_assoc($result);
         <br>
 
         <!-- ======= Portfolio Section ======= -->
-    
-              <section class="portfolio" id="Portfolio">
-  <div class="container">
-      
-      <div class="row">
-     
-          <div class="filter-buttons">
-              <ul id="filter-btns">
-                  <li class="active" data-target="all">ALL</li>
-                  <li data-target="Cat">CAT</li>
-                  <li data-target="Dog">DOG</li>
-              </ul>
-          </div>
-      </div>
-      
-      <div class="row">
-        
-          <div class="portfolio-gallery">
-          <?php
-           if (mysqli_num_rows($result) > 0) {
-                foreach ($result as $data) {
-        ?>
-          <div class="item" data-id="<?php echo $data['pet_specie']; ?>">
-                  <div class="inner">
-                  <a href="AdopteePage.php?id=<?php echo $data['pet_id']; ?>">
-                  <img src="shelter/production/images/<?= $data['pet_img']; ?>"> </a>
-                     <div class="service_content text-center">
-                     <a href="AdopteePage.php?id=<?php echo $data['pet_id']; ?>">
-                        <h3><?= $data['pet_name']; ?></h3>
-                             </a>
-                             <h5> <b> Gender:</b> <?= $data['pet_gender']; ?> <br>
-                             <b> Age:</b> <?= $data['pet_age']; ?> <br>
-                             <b>  Size:</b> <?= $data['pet_size']; ?> <br>
-                             <b>  Neutered:</b> <?= $data['pet_neuter']; ?>
-                             </h5>
-                   </div>
-                  </div>
-              </div>
 
-              <?php
-                     }
-                            } else {
-                                echo "No records found";
-                            }
-                            ?>
-                        </div>
+        <section class="portfolio" id="Portfolio">
+            <div class="container">
+
+                <div class="row">
+                    
+                    <div class="filter-buttons">
+                        <ul id="filter-btns">
+                            <li class="active" data-target="all">ALL</li>
+                            <li data-target="Cat">CAT</li>
+                            <li data-target="Dog">DOG</li>
+                        </ul>
                     </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="portfolio-gallery">
+                        <?php
+                        if (mysqli_num_rows($result) > 0) {
+                            foreach ($result as $data) {
+                        ?>
+                                <div class="item" data-id="<?php echo $data['pet_specie']; ?>">
+                                    <div class="inner">
+                                        <a href="AdopteePage.php?id=<?php echo $data['pet_id']; ?>">
+                                            <img src="shelter/production/images/<?= $data['pet_img']; ?>"> </a>
+                                        <div class="service_content text-center">
+                                            <a href="AdopteePage.php?id=<?php echo $data['pet_id']; ?>">
+                                                <h3><?= $data['pet_name']; ?></h3>
+                                            </a>
+                                            <h5> <b> Gender:</b> <?= $data['pet_gender']; ?> <br>
+                                                <b> Age:</b> <?= $data['pet_age']; ?> <br>
+                                                <b> Size:</b> <?= $data['pet_size']; ?> <br>
+                                                <b> Neutered:</b> <?= $data['pet_neuter']; ?>
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </div>
+
+                        <?php
+                            }
+                        } else {
+                            echo "No records found";
+                        }
+                        ?>
+                    </div>
+                </div>
             </div>
             <!-- footer_start  -->
             <footer class="footer">
-        <div class="footer_top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-3 col-md-6 col-lg-3">
-                        <div class="footer_widget">
-                            <h3 class="footer_title">
-                                Contact Us
-                            </h3>
-                            <ul class="address_line">
-                                <li></li>
-                                <li>warp.pup@gmail.com</a></li>
-                                <li>Metro Manila, Philippines</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xl-3  col-md-6 col-lg-3">
-                        <div class="footer_widget">
-                           
-                        </div>
-                    </div>
-                    <div class="col-xl-3  col-md-6 col-lg-3">
-                        <div class="footer_widget">
-                            <h3 class="footer_title">
-
-                            </h3>
-                            <ul class="links">
-                                <br>
-
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6 col-lg-3 ">
-                        <div class="footer_widget">
-                            <div class="footer_logo">
-                                <a href="#">
-                                    <img src="img/logo.png" alt="">
-                                </a>
+                <div class="footer_top">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-3 col-md-6 col-lg-3">
+                                <div class="footer_widget">
+                                    <h3 class="footer_title">
+                                        Contact Us
+                                    </h3>
+                                    <ul class="address_line">
+                                        <li></li>
+                                        <li>warp.pup@gmail.com</a></li>
+                                        <li>Metro Manila, Philippines</li>
+                                    </ul>
+                                </div>
                             </div>
-                            
+                            <div class="col-xl-3  col-md-6 col-lg-3">
+                                <div class="footer_widget">
 
+                                </div>
+                            </div>
+                            <div class="col-xl-3  col-md-6 col-lg-3">
+                                <div class="footer_widget">
+                                    <h3 class="footer_title">
+
+                                    </h3>
+                                    <ul class="links">
+                                        <br>
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6 col-lg-3 ">
+                                <div class="footer_widget">
+                                    <div class="footer_logo">
+                                        <a href="#">
+                                            <img src="img/logo.png" alt="">
+                                        </a>
+                                    </div>
+
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="copy-right_text">
-            <div class="container">
-                <div class="bordered_1px"></div>
-                <div class="row">
-                    <div class="col-xl-12">
-                        <p class="copy_right text-center">
+                <div class="copy-right_text">
+                    <div class="container">
+                        <div class="bordered_1px"></div>
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <p class="copy_right text-center">
 
-                        </p>
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </footer>
+            </footer>
             <!-- footer_end  -->
 
 
