@@ -14,10 +14,6 @@ $sql = "SELECT * FROM city_tbl WHERE city_id='$city_id'";
 $result = mysqli_query($conn, $sql);
 if ($result->num_rows > 0) {
     $row = mysqli_fetch_assoc($result);
-    $sql = "SELECT * FROM adoptee_tbl WHERE city_id='$city_id'";
-    $result = mysqli_query($conn, $sql);
-    if (mysqli_num_rows($result) > 0) {
-        foreach ($result as $data) {
 ?>
 
     <!doctype html>
@@ -128,7 +124,12 @@ if ($result->num_rows > 0) {
 
                             <div class="row">
                                 <div class="portfolio-gallery">
-
+                                    <?php
+                                    $sql = "SELECT * FROM adoptee_tbl WHERE city_id='$city_id'";
+                                    $result = mysqli_query($conn, $sql);
+                                    if (mysqli_num_rows($result) > 0) {
+                                        foreach ($result as $data) {
+                                    ?>
                                             <div class="item" data-id="<?php echo $data['pet_specie']; ?>">
                                                 <div class="inner">
                                                     <a href="AdopteePage.php?id=<?php echo $data['pet_id']; ?>">
@@ -147,11 +148,11 @@ if ($result->num_rows > 0) {
                                             </div>
 
                                 <?php
-                                        } 
-                                    }else {
+                                        }
+                                    } else {
                                         echo "No records found";
+                                    }
                                 }
-                            }
                                 ?>
                                 </div>
                             </div>

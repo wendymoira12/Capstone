@@ -76,7 +76,7 @@ if ($result->num_rows > 0) {
           <!-- menu profile quick info -->
           <div class="profile clearfix">
             <div class="profile_pic">
-              <img src="/Capstone/warp/WARP Admin/production/images/<?= $row['city_img']; ?>" alt="..." class="img-circle profile_img">
+              <img src="/Capstone/warp/WARP Admin/production/images/<?= $row['city_img']; ?> " alt="..." class="img-circle profile_img">
             </div>
             <div class="profile_info">
               <span>Welcome,</span>
@@ -177,7 +177,7 @@ if ($result->num_rows > 0) {
 
                 <div class="col-md-5 col-sm-5 col-xs-12">
                   <div class="product-image">
-                    <?php echo '<img src="images/logo/' . $row['city_img'] . '" alt="shelter logo"'; ?>
+                    <?php echo '<img src="/Capstone/warp/WARP Admin/production/images/' . $row['city_img'] . '" alt="shelter logo"'; ?>
                   </div>
                   <!-- <div class="product_gallery">
                         <a>
