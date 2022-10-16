@@ -8,7 +8,7 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
   header('Location:/Capstone/warp/login.php');
 } else {
   $role_id = $_SESSION['user-role-id'];
-  if ($role_id == 2){
+  if ($role_id == 2) {
     htmlspecialchars($_SERVER['PHP_SELF']);
   } else {
     header('Location:/Capstone/warp/home.php');
@@ -22,12 +22,27 @@ if (!isset($_GET['city_id'])) {
 $id = $_GET['city_id'];
 $sql = "SELECT * FROM city_tbl WHERE city_id = $id";
 $result = $conn->query($sql);
-
-
 $data = mysqli_fetch_assoc($result);
 
 ?>
 
+<?php
+// Get the user ID from the login sesh
+$user_id = $_SESSION['user_id'];
+// Query to check if user_id from the login shesh = shelteruser_id to get the city 
+$sql1 = "SELECT * FROM shelteruser_tbl WHERE user_id ='$user_id'";
+$result1 = mysqli_query($conn, $sql);
+
+if ($result1->num_rows > 0) {
+  $row = mysqli_fetch_assoc($result);
+  $city_id = $row['city_id'];
+  $sql2 = "SELECT city_img FROM city_tbl WHERE city_id='$city_id'";
+  $result = mysqli_query($conn, $sql);
+  if ($result == TRUE) {
+    $row = mysqli_fetch_assoc($result);
+  }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -80,7 +95,7 @@ $data = mysqli_fetch_assoc($result);
           <!-- menu profile quick info -->
           <div class="profile clearfix">
             <div class="profile_pic">
-              <img src="images/logo/<?= $row['city_img']; ?>" alt="..." class="img-circle profile_img">
+              <img src="/Capstone/warp/WARP Admin/production/images/<?= $row['city_img']; ?>" alt="..." class="img-circle profile_img">
             </div>
             <div class="profile_info">
               <span>Welcome,</span>
@@ -136,7 +151,7 @@ $data = mysqli_fetch_assoc($result);
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="images/logo/<?= $row['city_img']; ?>" alt=""><?php echo $_SESSION['user-email']?>
+                  <img src="images/logo/<?= $row['city_img']; ?>" alt=""><?php echo $_SESSION['user-email'] ?>
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">

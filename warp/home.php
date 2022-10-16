@@ -124,24 +124,25 @@ $row = mysqli_fetch_assoc($result);
             <div class="row justify-content-center">
                 <!-- Check if may existing na shelter na ishoshow -->
                 <?php
-                if(mysqli_num_rows($result) > 0) {
-                    foreach($result as $row) {
+                if (mysqli_num_rows($result) > 0) {
+                    foreach ($result as $row) {
                 ?>
-                
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single_service">
-                            <a href="animal-shelter-page.php?id=<?php echo $row['city_id']; ?>">
-                                <div class="service_thumb service_icon_bg_1 d-flex align-items-center justify-content-center">
-                                    <div class="service_icon">
-                                        <img src="shelter/production/images/logo/<?= $row['city_img']; ?>" alt="Shelter logo" height="100" width="100">
+
+                        <div class="col-lg-4 col-md-6">
+                            <div class="single_service">
+                                <a href="animal-shelter-page.php?id=<?php echo $row['city_id']; ?>">
+                                    <!-- removed service_icon_bg_1 -->
+                                    <div class="service_thumb d-flex align-items-center justify-content-center">
+                                        <div class="service_icon">
+                                            <img src="/Capstone/warp/WARP Admin/production/images/<?= $row['city_img']; ?>" alt="Shelter logo" height="100" width="100">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="service_content text-center">
+                                    <div class="service_content text-center">
                                         <h3><?php echo $row['city_name']; ?></h3>
-                                </div>
-                            </a>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                    </div>
 
                 <?php
                     }

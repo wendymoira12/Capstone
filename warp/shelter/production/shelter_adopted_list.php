@@ -13,6 +13,24 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
   }
 }
 ?>
+
+<?php
+// Get the user ID from the login sesh
+$user_id = $_SESSION['user_id'];
+// Query to check if user_id from the login shesh = shelteruser_id to get the city 
+$sql = "SELECT * FROM shelteruser_tbl WHERE user_id ='$user_id'";
+$result = mysqli_query($conn, $sql);
+
+if ($result->num_rows > 0) {
+  $row = mysqli_fetch_assoc($result);
+  $city_id = $row['city_id'];
+  $sql = "SELECT city_img FROM city_tbl WHERE city_id='$city_id'";
+  $result = mysqli_query($conn, $sql);
+  if ($result == TRUE) {
+    $row = mysqli_fetch_assoc($result);
+  }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -61,7 +79,7 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
           <!-- menu profile quick info -->
           <div class="profile clearfix">
             <div class="profile_pic">
-              <img src="../../img/shelters/Las_Piñas_City_seal.png" alt="..." class="img-circle profile_img">
+            <img src="/Capstone/warp/WARP Admin/production/images/<?= $row['city_img']; ?>" alt="..." class="img-circle profile_img">
             </div>
             <div class="profile_info">
               <span>Welcome,</span>
@@ -119,7 +137,7 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="/warp/img/City Logo/last_pinas.png" alt=""><?php echo $_SESSION['user-email']?>
+                <img src="/Capstone/warp/WARP Admin/production/images/<?= $row['city_img']; ?>" alt=""><?php echo $_SESSION['user-email']?>
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
