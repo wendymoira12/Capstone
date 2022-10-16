@@ -220,7 +220,7 @@ if ($result->num_rows > 0) {
                         <tr>
                           <td><?php echo $i++; ?></td>
                           <td><?php echo $row['pet_id']; ?></td>
-                          <td><?php echo '<img src="images/pet_img' . $row['pet_img'] . '" alt="pet" width="100">'; ?></td>
+                          <td><?php echo '<img src="images/pet_img/' . $row['pet_img'] . '" alt="pet" width="100">'; ?></td>
                           <td><?php echo $row['pet_name']; ?></td>
                           <td><?php echo $row['pet_age']; ?></td>
                           <td><?php echo $row['pet_color']; ?></td>

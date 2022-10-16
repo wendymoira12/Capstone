@@ -17,7 +17,7 @@ if (isset($_POST['submit'])) {
   $about = $_POST['about'];
   $img = $_FILES['img']['name'];
   $img_tmp_name= $_FILES['img']['tmp_name'];
-  $city_img_folder = 'images/' . $img;
+  $city_img_folder = '../../shelter/production/images/logo/' . $img;
   $sql = "INSERT INTO city_tbl(city_name, city_contact, city_about, city_img) VALUES ('$city','$contact','$about','$img')";
   if (mysqli_query($conn, $sql)){
     //success

@@ -15,6 +15,10 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
 
 // Get the user ID from the login sesh
 $user_id = $_SESSION['user_id'];
+// Query to check if user_id from the login shesh = shelteruser_id to get the city 
+$sql = "SELECT * FROM shelteruser_tbl WHERE user_id ='$user_id'";
+$result = mysqli_query($conn, $sql);
+
 // Query to check if user_id from the login shesh to get the shelter user (will be replacing user_id to Shelter City as WHERE for multiple access)
 $sql = "SELECT shelteruser_tbl.shelteruser_id, shelteruser_tbl.shelteruser_name, shelteruser_tbl.shelteruser_position, city_tbl.city_id, city_tbl.city_name, city_tbl.city_img, city_tbl.city_about, city_tbl.city_contact, user_tbl.user_email FROM shelteruser_tbl INNER JOIN city_tbl ON shelteruser_tbl.city_id = city_tbl.city_id INNER JOIN user_tbl ON shelteruser_tbl.user_id = user_tbl.user_id";
 $result = mysqli_query($conn, $sql);
@@ -198,16 +202,6 @@ $shelter_id = $row['city_id'];
                     <h2>Contact us</h2>
                     <div class="x_content">
                       <p><?php echo $row['city_contact']; ?></p>
-
-                      <!-- COMMENT KO MUNA YUNG DROPZONE BAKA GAMITIN NEXT TIME -->
-                      <!-- <form action="form_upload.html" class="dropzone"></form>
-                          <br />
-                          <br />
-                          <br />
-                          <br />
-                        </div>
-                      </div>
-                      <br /> -->
 
                       <div class="x_content">
                         <div class="buttons">
