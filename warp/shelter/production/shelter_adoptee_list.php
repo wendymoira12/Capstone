@@ -35,10 +35,6 @@ $result = mysqli_query($conn, $sql);
 if ($result->num_rows > 0) {
   $row = mysqli_fetch_assoc($result);
   $city_id = $row['city_id'];
-  $sql = "SELECT city_tbl.city_id, city_tbl.city_img, adoptee_tbl.pet_id, adoptee_tbl.pet_name, adoptee_tbl.pet_age, adoptee_tbl.pet_color, adoptee_tbl.pet_breed, adoptee_tbl.pet_specie, adoptee_tbl.pet_gender, adoptee_tbl.pet_neuter, adoptee_tbl.pet_vax, adoptee_tbl.pet_weight, adoptee_tbl.pet_size, adoptee_tbl.pet_medrec, adoptee_tbl.pet_lsoc, adoptee_tbl.pet_lene, adoptee_tbl.pet_laff, adoptee_tbl.pet_desc, adoptee_tbl.pet_img FROM adoptee_tbl INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id WHERE adoptee_tbl.city_id = '$city_id'";
-  $result = mysqli_query($conn, $sql);
-  if ($result) {
-    while ($row = $result->fetch_assoc()) {
 
 ?>
       <!DOCTYPE html>
@@ -215,7 +211,12 @@ if ($result->num_rows > 0) {
                           <th>Action</th>
                         </tr>
                       </thead>
-
+                      <?php
+                          $sql = "SELECT city_tbl.city_id, city_tbl.city_img, adoptee_tbl.pet_id, adoptee_tbl.pet_name, adoptee_tbl.pet_age, adoptee_tbl.pet_color, adoptee_tbl.pet_breed, adoptee_tbl.pet_specie, adoptee_tbl.pet_gender, adoptee_tbl.pet_neuter, adoptee_tbl.pet_vax, adoptee_tbl.pet_weight, adoptee_tbl.pet_size, adoptee_tbl.pet_medrec, adoptee_tbl.pet_lsoc, adoptee_tbl.pet_lene, adoptee_tbl.pet_laff, adoptee_tbl.pet_desc, adoptee_tbl.pet_img FROM adoptee_tbl INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id WHERE adoptee_tbl.city_id = '$city_id'";
+                          $result = mysqli_query($conn, $sql);
+                          if ($result->num_rows>0) {
+                            while ($row = $result->fetch_assoc()) {
+                      ?>
 
                       <tbody>
                         <tr>
