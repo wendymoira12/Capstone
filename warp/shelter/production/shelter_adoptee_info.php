@@ -38,34 +38,6 @@ if (isset($_POST['pet-submit'])) {
   $pet_img_tmp_name = $_FILES['pet-img']['tmp_name'];
   // upload image to folder named images/
   $pet_img_folder = 'images/pet_img/' . $pet_img;
-  // $pet_img_name = $_FILES['pet-img']['name'];
-  // $pet_img_size = $_FILES['pet-img']['size'];
-  // $pet_img_error = $_FILES['pet-img']['error'];
-
-  // if($pet_img_error == 0)
-  // {
-  //   $img_ex = pathinfo($pet_img_name, PATHINFO_EXTENSION);
-  //   $img_ex_to_lc = strtolower($img_ex);
-
-  //   $allowed_exs = array('jpg', 'jpeg', 'png');
-  //   if (in_array($img_ex_to_lc, $allowed_exs))
-  //   {
-
-  // RENAME PET IMAGE WITH THEIR NAME FIRST THEN ID (pero di ko tinuloy kase di ko magets)
-  //     $new_img_name = uniqid("$pet_name", true). '.'.$img_ex_to_lc;
-  //     move_uploaded_file($pet_img_tmp_name, $pet_img_folder);
-  //   }else 
-  //   {
-  //     $message[] = "This file type is unavailable.";
-  //     header("Locatiion: shelter_adoptee_info.php");
-  //     exit;
-  //   }
-  // }else
-  // {
-  //   $message[] = 'Error occured';
-  //   header("Locatiion: shelter_adoptee_info.php");
-  //   exit;
-  // }
 
   $pet_vid = $_FILES['pet-vid']['name'];
   $pet_vid_tmp_name = $_FILES['pet-vid']['tmp_name'];
@@ -126,7 +98,7 @@ $result = mysqli_query($conn, $sql);
 if ($result->num_rows > 0) {
   $row = mysqli_fetch_assoc($result);
   $city_id = $row['city_id'];
-  $sql = "SELECT city_img FROM city_tbl WHERE city_id='$city_id'";
+  $sql = "SELECT * FROM city_tbl INNER JOIN shelteruser_tbl ON city_tbl.city_id = shelteruser_tbl.city_id WHERE city_tbl.city_id AND shelteruser_tbl.city_id ='$city_id'";
   $result = mysqli_query($conn, $sql);
   if ($result == TRUE) {
     $row = mysqli_fetch_assoc($result);
@@ -196,12 +168,11 @@ if ($result->num_rows > 0) {
               <span>Welcome,</span>
               <h2>
                 <?php
-                //DISPLAY SESSION
-                if (isset($_SESSION['user-email'])) {
-                  echo $_SESSION['user-email'];
-                } else {
-                  header('Location:/Capstone/warp/login.php');
-                }
+                  echo $row['shelteruser_name'] . ',';
+                  ?>
+                  <br>
+                  <?php
+                  echo $row['shelteruser_position'];
                 ?>
               </h2>
             </div>

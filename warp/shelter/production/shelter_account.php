@@ -24,7 +24,7 @@ $result = mysqli_query($conn, $sql);
 if ($result->num_rows > 0) {
   $row = mysqli_fetch_assoc($result);
   $city_id = $row['city_id'];
-  $sql = "SELECT * FROM city_tbl WHERE city_id='$city_id'";
+  $sql = "SELECT * FROM city_tbl INNER JOIN shelteruser_tbl ON city_tbl.city_id = shelteruser_tbl.city_id WHERE city_tbl.city_id AND shelteruser_tbl.city_id ='$city_id'";
   $result = mysqli_query($conn, $sql);
   if ($result == TRUE) {
     $row = mysqli_fetch_assoc($result);
@@ -84,12 +84,11 @@ if ($result->num_rows > 0) {
               <span>Welcome,</span>
               <h2>
                 <?php
-                //DISPLAY SESSION
-                if (isset($_SESSION['user-email'])) {
-                  echo $_SESSION['user-email'];
-                } else {
-                  header('Location:/Capstone/warp/login.php');
-                }
+                echo $row['shelteruser_name'] . ',';
+                ?>
+                <br>
+                <?php
+                echo $row['shelteruser_position'];
                 ?>
               </h2>
             </div>
@@ -150,24 +149,40 @@ if ($result->num_rows > 0) {
       <!-- page content -->
       <div class="right_col" role="main">
 
-        <div class="">
-          <div class="page-title">
-            <div class="title_left">
-              <h3>Account Page</h3>
+        <!-- top tiles -->
+          <div class="row tile_count">
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-paw"></i> Total Adoptee Pets</span>
+              <div class="count">2500</div>
+              <!-- <span class="count_bottom"><i class="green">4% </i> From last Week</span> -->
             </div>
-
-            <div class="title_right">
-
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-paw"></i> Total Adopted Pets</span>
+              <div class="count">123.50</div>
+              <!-- <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span> -->
             </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-user"></i> Total Applications</span>
+              <div class="count">2,500</div>
+              <!-- <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span> -->
           </div>
-        </div>
 
         <div class="clearfix"></div>
 
         <div class="row">
+
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
               <div class="x_content">
+                
+                <div class="title_left">
+                    <h3>Shelter Account Page</h3>
+                  </div>
+
+                  <div class="title_right">
+
+                  </div>
+                </div>
 
                 <div class="col-md-5 col-sm-5 col-xs-12">
                   <div class="product-image">

@@ -24,7 +24,7 @@ $result = mysqli_query($conn, $sql);
 if ($result->num_rows > 0) {
   $row = mysqli_fetch_assoc($result);
   $city_id = $row['city_id'];
-  $sql = "SELECT city_img FROM city_tbl WHERE city_id='$city_id'";
+  $sql = "SELECT * FROM city_tbl INNER JOIN shelteruser_tbl ON city_tbl.city_id = shelteruser_tbl.city_id WHERE city_tbl.city_id AND shelteruser_tbl.city_id ='$city_id'";
   $result = mysqli_query($conn, $sql);
   if ($result == TRUE) {
     $row = mysqli_fetch_assoc($result);
@@ -85,12 +85,11 @@ if ($result->num_rows > 0) {
               <span>Welcome,</span>
               <h2>
                 <?php
-                //DISPLAY SESSION
-                if (isset($_SESSION['user-email'])) {
-                  echo $_SESSION['user-email'];
-                } else {
-                  header('Location:/Capstone/warp/login.php');
-                }
+                echo $row['shelteruser_name'] . ',';
+                ?>
+                <br>
+                <?php
+                echo $row['shelteruser_position'];
                 ?>
               </h2>
             </div>

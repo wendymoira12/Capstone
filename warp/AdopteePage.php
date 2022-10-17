@@ -1,6 +1,7 @@
 <?php
 
     include 'config.php';
+    session_start();
 
     if (!isset($_GET['id']))
     {
@@ -86,7 +87,7 @@
                                             <li> <a href="about.php">About Us </i></a>
                                             <li> <a href="pets-for-adoption.php">Pets for Adoption </i></a>
                                             <li><a href="contact.php">Contact</a></li>
-                                            <li><a href="../warp/shelter/production/adopter_user_page.php"><i class="fa-solid fa-user" style="font-size:20px;color:rgb(4, 4, 41);"></i></a></li>
+                                            <li><a href="getroleid.php?id=<?= $_SESSION['user-role-id'] ?>"><i class="fa-solid fa-user" style="font-size:20px;color:rgb(4, 4, 41);"></i></a></li>
 
                                         </ul>
                                     </nav>

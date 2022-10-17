@@ -1,6 +1,7 @@
 <?php
 
 include('connect/connection.php');
+session_start();
 
 ?>
 <?php
