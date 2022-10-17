@@ -59,7 +59,7 @@ $chkvalues = explode(", ", $data["pet_vax"]);
   <link rel="stylesheet" href="../../css/animate.css">
   <link rel="stylesheet" href="../../css/slicknav.css">
   <link rel="stylesheet" href="../../css/style.css">
-  <link rel="stylesheet" href="../../AF.css">
+  <link rel="stylesheet" href="../../css/AF.css">
 
   <!-- <link rel="stylesheet" href="css/responsive.css"> -->
 </head>
@@ -127,7 +127,7 @@ $chkvalues = explode(", ", $data["pet_vax"]);
         <div class="col-lg-8 posts-list">
           <div class="single-post">
             <div class="feature-img">
-              <img class="img-fluid" src="images/<?= $data['pet_img']; ?>" width="400" height="600">
+              <img class="img-fluid" src="images/pet_img/<?= $data['pet_img']; ?>" width="400" height="600">
             </div>
             <div class="blog_details">
               <h2><?php echo $data['pet_name']; ?>
