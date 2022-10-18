@@ -311,11 +311,11 @@ if (isset($_POST['submit'])) {
                       <tbody>
                         <tr>
                           <td><?= $i++ ?></td>
-                          <td><?php echo $row['shelteruser_name']; ?></td>
-                          <td><?php echo $row['shelteruser_position']; ?></td>
-                          <td><?php echo $row['city_name']; ?></td>
-                          <td><?php echo $row['city_contact']; ?></td>
-                          <td><?php echo $row['user_email']; ?></td>
+                          <td><?= $row['shelteruser_name']; ?></td>
+                          <td><?= $row['shelteruser_position']; ?></td>
+                          <td><?= $row['city_name']; ?></td>
+                          <td><?=$row['city_contact']; ?></td>
+                          <td><?= $row['user_email']; ?></td>
                           <td>
                           <a href="edit_shelter.php?id=<?= $row['shelteruser_id']?>" type="submit" class="btn btn-round btn-success">Update</a>
                             <button type="button" class="btn btn-round btn-danger">Delete</button>
