@@ -87,7 +87,7 @@ if ($result->num_rows > 0) {
 <body class="nav-md">
   <div class="container body">
     <div class="main_container">
-      <div class="col-md-3 left_col">
+      <div class="col-md-3 left_col menu_fixed">
         <div class="left_col scroll-view">
           <div class="logo">
           <a href="../../home.php">
@@ -175,7 +175,7 @@ if ($result->num_rows > 0) {
         <div class="">
           <div class="page-title">
             <div class="title_left">
-              <h3>EditAdoptee</h3>
+              <h3>Edit Adoptee</h3>
             </div>
 
             <div class="title_right">
@@ -470,10 +470,10 @@ if ($result->num_rows > 0) {
                     <div class="form-group">
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                         <a href="shelter_adoptee_list.php">
-                          <button name="pet-cancel" class="btn-round btn-primary" type="button">Cancel</button>
+                          <button name="pet-cancel" class="btn btn-round btn-danger" type="button">Cancel</button>
                         </a>
-                        <button name="pet-reset" class="btn-round btn-primary" type="reset">Reset</button>
-                        <button name="edit-pet-submit" class="btn-round btn-success">Submit</button>
+                        <button name="pet-reset" class="btn btn-round btn-primary" type="reset">Reset</button>
+                        <button name="edit-pet-submit" class="btn btn-round btn-success">Submit</button>
                       </div>
                     </div>
 

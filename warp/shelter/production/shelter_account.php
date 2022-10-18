@@ -28,6 +28,15 @@ if ($result->num_rows > 0) {
   $result = mysqli_query($conn, $sql);
   if ($result == TRUE) {
     $row = mysqli_fetch_assoc($result);
+    
+    // Make a query to get the total registered adoptees by COUNTing all the adoptees with city id == which shelter city id
+    $sql = "SELECT COUNT(pet_id) AS totaladoptee FROM adoptee_tbl WHERE city_id = '$city_id'";
+    $result = mysqli_query($conn, $sql);
+    if ($result){
+      $data = mysqli_fetch_assoc($result);
+      $totaladoptee = $data['totaladoptee'];
+    }
+    
   }
 }
 ?>
@@ -65,7 +74,7 @@ if ($result->num_rows > 0) {
 <body class="nav-md">
   <div class="container body">
     <div class="main_container">
-      <div class="col-md-3 left_col">
+      <div class="col-md-3 left_col menu_fixed">
         <div class="left_col scroll-view">
           <div class="logo">
             <a href="../../home.php">
@@ -150,32 +159,31 @@ if ($result->num_rows > 0) {
       <div class="right_col" role="main">
 
         <!-- top tiles -->
-          <div class="row tile_count">
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-paw"></i> Total Adoptee Pets</span>
-              <div class="count">2500</div>
-              <!-- <span class="count_bottom"><i class="green">4% </i> From last Week</span> -->
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-paw"></i> Total Adopted Pets</span>
-              <div class="count">123.50</div>
-              <!-- <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span> -->
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Total Applications</span>
-              <div class="count">2,500</div>
-              <!-- <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span> -->
+        <div class="row tile_count">
+          <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+            <span class="count_top"><i class="fa fa-paw"></i> Total Adoptee Pets</span>
+            <div class="count"><?= $totaladoptee ?></div>
+          </div>
+          <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+            <span class="count_top"><i class="fa fa-paw"></i> Total Adopted Pets</span>
+            <div class="count">123.50</div>
+            <!-- <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span> -->
+          </div>
+          <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+            <span class="count_top"><i class="fa fa-user"></i> Total Applications</span>
+            <div class="count">2,500</div>
+            <!-- <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span> -->
           </div>
 
-        <div class="clearfix"></div>
+          <div class="clearfix"></div>
 
-        <div class="row">
+          <div class="row">
 
-          <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="x_panel">
-              <div class="x_content">
-                
-                <div class="title_left">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                <div class="x_content">
+
+                  <div class="title_left">
                     <h3>Shelter Account Page</h3>
                   </div>
 

@@ -75,7 +75,7 @@ if ($result->num_rows > 0) {
     <body class="nav-md">
       <div class="container body">
         <div class="main_container">
-          <div class="col-md-3 left_col">
+          <div class="col-md-3 left_col menu_fixed">
             <div class="left_col scroll-view">
               <div class="logo">
                 <a href="../../home.php">
@@ -242,7 +242,7 @@ if ($result->num_rows > 0) {
                             <td><?php echo $row['pet_desc']; ?></td>
                             <td>
                               <a href="shelter_adoptee_view.php?id=<?php echo $row['pet_id']; ?>">
-                                <button type="button" class="btn btn-round btn-info">view</button>
+                                <button type="button" class="btn btn-round btn-info">View</button>
                               </a>
 
                               <a href="shelter_adoptee_edit.php?id=<?php echo $row['pet_id']; ?>">
