@@ -131,9 +131,9 @@ if ($result->num_rows > 0) {
                 </li>
                 <li><a href="#"><i class="fa fa-paw"></i> Pet Adoptee List </a>
                 </li>
-                <li><a href="#"><i class="fa fa-paw"></i> Adopted Pet List </a>
-                </li>
                 <li><a href="#"><i class="fa fa-paw"></i> Application List </a>
+                </li>
+                <li><a href="#"><i class="fa fa-paw"></i> Adopted Pet List </a>
                 </li>
               </ul>
             </div>
