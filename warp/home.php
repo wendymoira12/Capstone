@@ -180,6 +180,7 @@ $row = mysqli_fetch_assoc($result);
         <!-- pet_care_area_end  -->
 
         <!-- adapt_area_start  -->
+
         <div class="adapt_area">
             <div class="container">
                 <div class="row justify-content-between align-items-center">
@@ -206,17 +207,35 @@ $row = mysqli_fetch_assoc($result);
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6">
+                                    <?php
+                                    // Make a query to get the total registered shelter accounts by COUNTing all the user with role id == 2
+                                    $sql = "SELECT COUNT(pet_id) AS totalcats FROM adoptee_tbl WHERE pet_specie ='Cat'";
+                                    $result = mysqli_query($conn, $sql);
+                                    if ($result) {
+                                        $row = mysqli_fetch_assoc($result);
+                                        $totalcats = $row['totalcats'];
+                                    }
+                                    ?>
                                     <div class="single_adapt text-center">
                                         <img src="img/adapt_icon/3.png" alt="">
                                         <div class="adapt_content">
-                                            <h3><span class="counter">52</span>+</h3>
+                                            <h3><span class="counter"><?= $totalcats ?></span>+</h3>
                                             <p>Cats Available</p>
                                         </div>
                                     </div>
+                                    <?php
+                                    // Make a query to get the total registered shelter accounts by COUNTing all the user with role id == 2
+                                    $sql = "SELECT COUNT(pet_id) AS totaldogs FROM adoptee_tbl WHERE pet_specie ='Dog'";
+                                    $result = mysqli_query($conn, $sql);
+                                    if ($result) {
+                                        $row = mysqli_fetch_assoc($result);
+                                        $totaldogs = $row['totaldogs'];
+                                    }
+                                    ?>
                                     <div class="single_adapt text-center">
                                         <img src="img/adapt_icon/2.png" alt="">
                                         <div class="adapt_content">
-                                            <h3><span class="counter">52</span>+</h3>
+                                            <h3><span class="counter"><?= $totaldogs?></span>+</h3>
                                             <p>Dogs Available</p>
                                         </div>
                                     </div>
