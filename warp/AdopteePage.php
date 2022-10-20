@@ -1,8 +1,9 @@
 <?php
-
     include 'config.php';
-    session_start();
+    
+?>
 
+<?php
     if (!isset($_GET['id']))
     {
         die('Id not provided');
@@ -10,18 +11,55 @@
 
     $id = $_GET['id'];
     $sql = "SELECT * FROM adoptee_tbl WHERE pet_id = $id";
+    
     $result = $conn->query($sql);
 
     if ($result->num_rows != 1)
     {
         die('id not found');
     }
-
+    
+    
     $data = mysqli_fetch_assoc($result);
     $chkvalues = explode(", ", $data["pet_vax"]);
+    
+    $sql1 = "SELECT * FROM adopter_tbl,user_tbl";
+    $result1 = $conn->query($sql1);
+    $data1 = mysqli_fetch_assoc($result1);
+  
 
 ?>
+<?php 
 
+if (isset($_POST['submit']))
+    {
+  
+  $valid_id = $_FILES['valid_id']['name'];
+  $valid_id_tmp_name = $_FILES['valid_id']['tmp_name'];
+  $valid_id_folder = 'images/valid_id/' . $valid_id;
+  
+
+  $occupation= $_POST['occupation'];
+  $civilstatus = $_POST['civilstatus'];
+  $children = $_POST['children'];
+  $pets = $_POST['pets'];
+  $pastpets = $_POST['pastpets'];
+  $housing = $_POST['housing'];
+  $allergy = $_POST['allergy'];
+  $wellness = $_POST['wellness'];
+  $finance = $_POST['finance'];
+  $emergency = $_POST['emergency'];
+  $alone = $_POST['alone'];
+  $support = $_POST['support'];
+  $rent = $_POST['rent'];
+  $allow = $_POST['allow'];
+  $spending = $_POST['spending'];
+
+  $row = "INSERT INTO applicationform1 (valid_id,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15) VALUES ('$valid_id','$occupation','$civilstatus','$children','$pets','$pastpets','$housing','$allergy','$wellness','$finance','$emergency','$alone','$support','$rent','$allow','$spending');";
+  $query3 = mysqli_query($conn,$row);
+    }
+//header("location: AdopteePage.php?id=1");
+?>
 <!doctype html>
 <html lang="en">
 
@@ -263,343 +301,470 @@
                           <div class="modal-content clearfix">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                               <div class="modal-body">
+                                <form method="post" action="" enctype="multipart/form-data">
                                 <h3 class="title">Application Form</h3>
                                 <p class="description">All fields are required</p>
                                 
                                 <div class="form-group">
                                     <span class="input-icon"><i class="fa fa-user"></i></span>
-                                    <input type="email" class="form-control" placeholder="First Name" disabled>
+                                    <input type="text" class="form-control" value="<?php echo $data1['adopter_fname']; ?>" disabled>
                                 </div>
                                 
                                 <div class="form-group">
                                   <span class="input-icon"><i class="fa fa-user"></i></span>
-                                  <input type="email" class="form-control" placeholder="Last Name" disabled>
+                                  <input type="text" class="form-control" value="<?php echo $data1['adopter_lname']; ?>" disabled>
                                 </div>
                                 
                                 <div class="form-group">
                                     <span class="input-icon"><i class="fa fa-user"></i></span>
-                                    <input type="email" class="form-control" placeholder="Age" disabled> 
+                                    <input type="text" class="form-control" value="<?php echo $data1['adopter_age']; ?>" disabled> 
                                 </div>
 
                                 <div class="form-group">
                                   <span class="input-icon"><i class="fa fa-compass"></i></span>
-                                  <input type="email" class="form-control" placeholder="Home Address" disabled> 
+                                  <input type="text" class="form-control" value="<?php echo $data1['adopter_city']; ?>, <?php echo $data1['adopter_region']; ?>" disabled> 
                                 </div>
 
                                 <div class="form-group">
                                   <span class="input-icon"><i class="fa fa-phone"></i></span>
-                                  <input type="password" class="form-control" placeholder="Contact Number" disabled> 
+                                  <input type="text" class="form-control" value="<?php echo $data1['adopter_cnum']; ?>" disabled> 
                                 </div>
 
                                 <div class="form-group checkbox">
                                   <span class="input-icon"><i class="fa fa-at"></i></span>
-                                  <input type="password" class="form-control" placeholder="E-mail Address" disabled> 
+                                  <input type="email" class="form-control" value="<?php echo $data1['user_email']; ?>" disabled> 
                                 </div>
 
 
                                   <!--Valid ID Picture-->
                                 <div class="form-group">
                                   <p>Please upload your Valid ID here for verification purposes:</p>
-                                  <input type="file" id="myfile" name="">
+                                  <input class="form-control" type="file" name="valid_id" required>
                                 </div>
                   
                                   <!-- QUESTIONAIRRE -->
-                                
-                                  <div class="form-group checkbox">
-                                    <label>
-                                      <b> Occupation</b>
+                                  
+
+                                <!-- q1: Occupation -->
+                                <div class="form-group checkbox">
+                                  <label>
+                                    <!-- display ONLY q1 record (appplicationquestion table) from database-->
+                                    <b><?php $sql = "SELECT * FROM applicationquestions where questionID = '1'" ; $result = $conn->query($sql); $question = $result->fetch_assoc(); echo $question['questions'];?></b>
+                                  </label><br>
+
+                                    <label for="recommed-1">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '1' AND id ='1'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-1" name="occupation" value="1" required> <?php echo $choice['choices']; ?></input>
                                     </label><br>
+
+                                    <label for="recommed-2">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '1' AND id ='2'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-2" name="occupation" value="2"> <?php echo $choice ['choices'] ?> </input>
+                                    </label><br>
+
+                                    <label for="recommed-3">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '1' AND id ='3'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-3" name="occupation" value="3"> <?php echo $choice ['choices'] ?> </input>
+                                    </label><br>
+
+                                    <label for="recommed-4">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '1' AND id ='4'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-4" name="occupation" value="4"> <?php echo $choice ['choices'] ?> </input>
+                                    </label><br>
+
+                                  </div>
+                                
+                                  <!-- q2: Civil Status -->
+                                  <div class="form-group checkbox">
+                                  <label>
+                                    <!-- display ONLY q2 record (appplicationquestion table) from database-->
+                                    <b><?php $sql = "SELECT * FROM applicationquestions where questionID = '2'" ; $result = $conn->query($sql); $question = $result->fetch_assoc(); echo $question['questions'];?></b>
+                                  </label><br>
                             
                                     <!-- Input Type Radio Button -->
-                                    <label for="recommed-1">
-                                      <input type="radio" id="recommed-1" name="occupation"> Student </input>
+                                    <label for="recommed-1">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '2' AND id ='5'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-1" name="civilstatus" value="5"required> <?php echo $choice ['choices'] ?> </input>
                                     </label><br>
-                                    <label for="recommed-2">
-                                      <input type="radio" id="recommed-2" name="occupation"> Employed</input>
+
+                                    <label for="recommed-2">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '2' AND id ='6'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-2" name="civilstatus" value="6"required> <?php echo $choice ['choices'] ?> </input>
                                     </label><br>
-                                    <label for="recommed-3">
-                                      <input type="radio" id="recommed-3" name="occupation"> Self-emlpoyed</input>
+
+                                    <label for="recommed-3">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '2' AND id ='7'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-3" name="civilstatus" value="7"required> <?php echo $choice ['choices'] ?> </input>
                                     </label><br>
                                   </div>
 
+                            
+                                  <!-- q3: Children below 8 -->
                                   <div class="form-group checkbox">
-                                    <label>
-                                      <b> Civil Status </b>
-                                    </label><br>
+                                  <label>
+                                    <!-- display ONLY q3 record (appplicationquestion table) from database-->
+                                    <b><?php $sql = "SELECT * FROM applicationquestions where questionID = '3'" ; $result = $conn->query($sql); $question = $result->fetch_assoc(); echo $question['questions'];?></b>
+                                  </label><br>
                             
                                     <!-- Input Type Radio Button -->
-                                    <label for="recommed-1">
-                                      <input type="radio" id="recommed-1" name="Civil Status"> Single</input>
+                                    <label for="recommed-1">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '3' AND id ='8'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-1" name="children" value="8"required> <?php echo $choice ['choices'] ?> </input>
                                     </label><br>
-                                    <label for="recommed-2">
-                                      <input type="radio" id="recommed-2" name="Civil Status"> Married</input>
+
+                                    <label for="recommed-2">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '3' AND id ='9'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-2" name="children" value="9"> <?php echo $choice ['choices'] ?> </input>
                                     </label><br>
-                                    <label for="recommed-3">
-                                      <input type="radio" id="recommed-3" name="Civil Status"> Widowed</input>
-                                    </label><br>
-                                    <label for="recommed-4">
-                                      <input type="radio" id="recommed-4" name="Civil Status"> Separated</input>
-                                    </label><br>
-                                    <label for="recommed-5">
-                                      <input type="radio" id="recommed-5" name="Civil Status"> Annuled</input>
-                                    </label><br>
-                                    <label for="recommed-6">
-                                      <input type="radio" id="recommed-6" name="Civil Status"> CommonLaw</input>
+
+                                    <label for="recommed-3">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '3' AND id ='10'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-3" name="children" value="10"> <?php echo $choice ['choices'] ?> </input>
                                     </label><br>
                                   </div>
                             
-                            
+                                  <!-- q4: other pets -->
                                   <div class="form-group checkbox">
-                                    <label>
-                                      <b> Are there children (below 18) in the house? If yes how old are they? </b>
-                                    </label><br>
+                                  <label>
+                                    <!-- display ONLY q6 record (appplicationquestion table) from database-->
+                                    <b><?php $sql = "SELECT * FROM applicationquestions where questionID = '4'" ; $result = $conn->query($sql); $question = $result->fetch_assoc(); echo $question['questions'];?></b>
+                                  </label><br>
                             
                                     <!-- Input Type Radio Button -->
-                                    <label for="old-1">
-                                      <input type="radio" id="old-1" name="old"> There is a/are children below 8 years old</input>
+                                    <label for="recommed-1">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '4' AND id ='11'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-1" name="pets" value="11"required> <?php echo $choice ['choices'] ?> </input>
                                     </label><br>
-                                    <label for="old-2">
-                                      <input type="radio" id="old-2" name="old"> All children in our house are older than 8 years old</input>
-                                    </label><br>
-                                    <label for="old-3">
-                                      <input type="radio" id="old-3" name="old"> There is no children living in our house</input>
+
+                                    <label for="recommed-2">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '4' AND id ='12'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-2" name="pets" value="12"> <?php echo $choice ['choices'] ?> </input>
                                     </label><br>
                                   </div>
                             
+                                  <!-- q5: past pets -->
                                   <div class="form-group checkbox">
-                                    <label>
-                                      <b> Do you have other children? </b>
-                                    </label><br>
+                                  <label>
+                                    <!-- display ONLY q5 record (appplicationquestion table) from database-->
+                                    <b><?php $sql = "SELECT * FROM applicationquestions where questionID = '5'" ; $result = $conn->query($sql); $question = $result->fetch_assoc(); echo $question['questions'];?></b>
+                                  </label><br>
                             
                                     <!-- Input Type Radio Button -->
-                                    <label for="recommed-1">
-                                      <input type="radio" id="recommed-1" name="children"> Yes</input>
+                                    <label for="recommed-1">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '5' AND id ='13'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-1" name="pastpets" value="13"required> <?php echo $choice ['choices'] ?> </input>
                                     </label><br>
-                                    <label for="recommed-2">
-                                      <input type="radio" id="recommed-2" name="children"> No</input>
+
+                                    <label for="recommed-2">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '5' AND id ='14'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-2" name="pastpets" value="14"> <?php echo $choice ['choices'] ?> </input>
+                                    </label><br>
+                                  </div>
+
+                                  <!-- q6: living condition -->
+                                  <div class="form-group checkbox">
+                                  <label>
+                                    <!-- display ONLY q6 record (appplicationquestion table) from database-->
+                                    <b><?php $sql = "SELECT * FROM applicationquestions where questionID = '6'" ; $result = $conn->query($sql); $question = $result->fetch_assoc(); echo $question['questions'];?></b>
+                                  </label><br>
+                                    <!-- Input Type Radio Button -->
+                                    <label for="recommed-1">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '6' AND id ='15'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-1" name="housing" value="15"required> <?php echo $choice ['choices'] ?> </input>
+                                    </label><br>
+
+                                    <label for="recommed-2">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '6' AND id ='16'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-2" name="housing" value="16"> <?php echo $choice ['choices'] ?> </input>
+                                    </label><br>
+                                    <label for="recommed-3">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '6' AND id ='17'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-3" name="housing" value="17"> <?php echo $choice ['choices'] ?> </input>
+                                    </label><br>
+                                    <label for="recommed-4">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '6' AND id ='18'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-4" name="housing" value="18"> <?php echo $choice ['choices'] ?> </input>
+                                    </label><br>
+                                    <label for="recommed-5">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '6' AND id ='19'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-5" name="housing" value="19"> <?php echo $choice ['choices'] ?> </input>
                                     </label><br>
                                   </div>
                             
+                                  <!-- q7: allergy -->
                                   <div class="form-group checkbox">
                                     <label>
-                                      <b> Have you had pets in the past? </b>
+                                    <!-- display ONLY q7 record (appplicationquestion table) from database-->
+                                      <b><?php $sql = "SELECT * FROM applicationquestions where questionID = '7'" ; $result = $conn->query($sql); $question = $result->fetch_assoc(); echo $question['questions']; ?></b>
                                     </label><br>
-                            
                                     <!-- Input Type Radio Button -->
-                                    <label for="recommed-1">
-                                      <input type="radio" id="recommed-1" name="past"> Yes</input>
+                                    <label for="recommed-1">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '7' AND id ='20'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-1" name="allergy" value="20"required> <?php echo $choice ['choices'] ?> </input>
                                     </label><br>
-                                    <label for="recommed-2">
-                                      <input type="radio" id="recommed-2" name="past"> No</input>
+
+                                    <label for="recommed-2">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '7' AND id ='21'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-2" name="allergy" value="21"> <?php echo $choice ['choices'] ?> </input>
+                                    </label><br>
+                                    <label for="recommed-3">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '7' AND id ='22'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-3" name="allergy" value="22"> <?php echo $choice ['choices'] ?> </input>
                                     </label><br>
                                   </div>
                             
+                                  <!-- q8: in charge of wellness -->
                                   <div class="form-group checkbox">
                                     <label>
-                                      <b> Who else do you live with? </b>
+                                    <!-- display ONLY q8 record (appplicationquestion table) from database-->
+                                      <b><?php $sql = "SELECT * FROM applicationquestions where questionID = '8'" ; $result = $conn->query($sql); $question = $result->fetch_assoc(); echo $question['questions'];?></b>
                                     </label><br>
-                            
-                                    <!-- Input Type Radio Button -->
-                                    <label for="recommed-1">
-                                      <input type="radio" id="recommed-1" name="live"> I live by myself</input>
+                      
+                                                          <!-- Input Type Radio Button -->
+                                     <label for="recommed-1">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '8' AND id ='23'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-1" name="wellness" value="23"required> <?php echo $choice ['choices'] ?> </input>
                                     </label><br>
-                                    <label for="recommed-2">
-                                      <input type="radio" id="recommed-2" name="live"> Spouse/Partner</input>
+
+                                    <label for="recommed-2">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '8' AND id ='24'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-2" name="wellness" value="24"> <?php echo $choice ['choices'] ?> </input>
                                     </label><br>
-                                    <label for="recommed-3">
-                                      <input type="radio" id="recommed-3" name="live"> Parents</input>
-                                    </label><br>
-                                    <label for="recommed-4">
-                                      <input type="radio" id="recommed-4" name="live"> Roommate (s)</input>
-                                    </label><br>
-                                    <label for="recommed-5">
-                                      <input type="radio" id="recommed-5" name="live"> Other Relatives</input>
+                                    <label for="recommed-3">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '8' AND id ='25'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-3" name="wellness" value="25"> <?php echo $choice ['choices'] ?> </input>
                                     </label><br>
                                   </div>
                             
+                                  <!-- q9: in charge financially -->
                                   <div class="form-group checkbox">
-                                    <label>
-                                      <b> Are any members of your household allergic to animals? </b>
+                                  <label>
+                                    <!-- display ONLY q9 record (appplicationquestion table) from database-->
+                                      <b><?php $sql = "SELECT * FROM applicationquestions where questionID = '9'" ; $result = $conn->query($sql); $question = $result->fetch_assoc(); echo $question['questions'];?></b>
                                     </label><br>
                             
+                            
                                     <!-- Input Type Radio Button -->
-                                    <label for="recommed-1">
-                                      <input type="radio" id="members-1" name="members"> Yes</input>
+                                    <label for="recommed-1">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '9' AND id ='26'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-1" name="finance" value="26"required> <?php echo $choice ['choices'] ?> </input>
                                     </label><br>
-                                    <label for="recommed-2">
-                                      <input type="radio" id="members-2" name="members"> No</input>
+
+                                    <label for="recommed-2">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '9' AND id ='27'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-2" name="finance" value="27"> <?php echo $choice ['choices'] ?> </input>
                                     </label><br>
-                                    <label for="recommed-3">
-                                      <input type="radio" id="members-3" name="members"> I don’t Know</input>
+                                    <label for="recommed-3">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '9' AND id ='28'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-3" name="finance" value="28"> <?php echo $choice ['choices'] ?> </input>
                                     </label><br>
                                   </div>
                             
+                                  <!-- q10: in charge during vacation/emergency -->
                                   <div class="form-group checkbox">
-                                    <label>
-                                      <b> Who will be responsible for feeding, grooming, and generally caring for your pet? </b>
+                                  <label>
+                                    <!-- display ONLY q10 record (appplicationquestion table) from database-->
+                                      <b><?php $sql = "SELECT * FROM applicationquestions where questionID = '10'" ; $result = $conn->query($sql); $question = $result->fetch_assoc(); echo $question['questions'];?></b>
                                     </label><br>
                             
+                            
                                     <!-- Input Type Radio Button -->
-                                    <label for="responsible-1">
-                                      <input type="radio" id="responsible-1" name="responsible"> Myself</input>
+                                    <label for="recommed-1">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '10' AND id ='29'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-1" name="emergency" value="29"required> <?php echo $choice ['choices'] ?> </input>
                                     </label><br>
-                                    <label for="responsible-2">
-                                      <input type="radio" id="responsible-2" name="responsible"> My partner</input>
+                                    <label for="recommed-2">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '10' AND id ='30'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-2" name="emergency" value="30"> <?php echo $choice ['choices'] ?> </input>
                                     </label><br>
-                                    <label for="recommed-3">
-                                      <input type="radio" id="recommed-3" name="responsible"> My Family</input>
+                                    <label for="recommed-3">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '10' AND id ='31'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-3" name="emergency" value="31"> <?php echo $choice ['choices'] ?> </input>
+                                    </label><br>
+                                    <label for="recommed-4">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '10' AND id ='32'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-4" name="emergency" value="32"> <?php echo $choice ['choices'] ?> </input>
                                     </label><br>
                                   </div>
                             
+                                  <!-- q11: alone hours -->
                                   <div class="form-group checkbox">
-                                    <label>
-                                      <b>
-                                        Who will be financially responsible for your pet's needs </b>
+                                  <label>
+                                    <!-- display ONLY q11 record (appplicationquestion table) from database-->
+                                      <b><?php $sql = "SELECT * FROM applicationquestions where questionID = '11'" ; $result = $conn->query($sql); $question = $result->fetch_assoc(); echo $question['questions'];?></b>
                                     </label><br>
                             
+                            
                                     <!-- Input Type Radio Button -->
-                                    <label for="recommed-1">
-                                      <input type="radio" id="financially-1" name="financially"> Myself</input>
+                                    <label for="recommed-1">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '11' AND id ='33'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-1" name="alone" value="33"> <?php echo $choice ['choices'] ?> </input>
                                     </label><br>
-                                    <label for="recommed-2">
-                                      <input type="radio" id="financially-2" name="financially"> My partner</input>
+                                    <label for="recommed-2">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '11' AND id ='34'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-2" name="alone" value="34"required> <?php echo $choice ['choices'] ?> </input>
                                     </label><br>
-                                    <label for="recommed-3">
-                                      <input type="radio" id="financially-3" name="financially"> My Family</input>
+                                    <label for="recommed-3">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '11' AND id ='35'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-3" name="alone" value="35"> <?php echo $choice ['choices'] ?> </input>
+                                    </label><br>
+                                    <label for="recommed-4">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '11' AND id ='36'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-4" name= "alone" value="36"> <?php echo $choice ['choices'] ?> </input>
                                     </label><br>
                                   </div>
                             
+                                  <!-- q12: support decision -->
                                   <div class="form-group checkbox">
-                                    <label>
-                                      <b> Who will look after your pet if you go on vacation or in case of emergency? </b>
+                                  <label>
+                                    <!-- display ONLY q12 record (appplicationquestion table) from database-->
+                                      <b><?php $sql = "SELECT * FROM applicationquestions where questionID = '12'" ; $result = $conn->query($sql); $question = $result->fetch_assoc(); echo $question['questions'];?></b>
                                     </label><br>
                             
+                            
                                     <!-- Input Type Radio Button -->
-                                    <label for="vacation-1">
-                                      <input type="radio" id="vacation-1" name="vacation"> Partner</input>
+                                    <label for="recommed-1">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '12' AND id ='37'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-1" name="support" value="37"required> <?php echo $choice ['choices'] ?> </input>
                                     </label><br>
-                                    <label for="vacation-2">
-                                      <input type="radio" id="vacation-2" name="vacation"> Family</input>
+                                    <label for="recommed-2">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '12' AND id ='38'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-2" name="support" value="38"> <?php echo $choice ['choices'] ?> </input>
                                     </label><br>
-                                    <label for="vacation-3">
-                                      <input type="radio" id="vacation-3" name="vacation"> Friends</input>
+                                    <label for="recommed-3">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '12' AND id ='39'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-3" name="support" value="39"> <?php echo $choice ['choices'] ?> </input>
                                     </label><br>
                                   </div>
                             
+                                  <!-- q13: Housing -->
                                   <div class="form-group checkbox">
                                     <label>
-                                      <b> How many hours in an average workday will your pet be left alone? </b>
+                                      <!-- display ONLY q13 record (appplicationquestion table) from database-->
+                                      <b><?php $sql = "SELECT * FROM applicationquestions where questionID = '13'" ; $result = $conn->query($sql); $question = $result->fetch_assoc(); echo $question['questions'];?></b>
                                     </label><br>
                             
+                            
                                     <!-- Input Type Radio Button -->
-                                    <label for="hours-1">
-                                      <input type="radio" id="hours-1" name="hours"> 1-4</input>
+                                    <label for="recommed-1">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '13' AND id ='40'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-1" name="rent" value="40"required> <?php echo $choice ['choices'] ?> </input>
                                     </label><br>
-                                    <label for="hours-2">
-                                      <input type="radio" id="hours-2" name="hours"> 4-8</input>
+                                    <label for="recommed-2">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '13' AND id ='41'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-2" name="rent" value="41"> <?php echo $choice ['choices'] ?> </input>
                                     </label><br>
-                                    <label for="hours-3">
-                                      <input type="radio" id="hours-3" name="hours"> More than 8hrs</input>
-                                    </label><br>
-                                    <label for="hours-4">
-                                      <input type="radio" id="hours-4" name="hours"> I work remotely </input>
+                                    <label for="recommed-3">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '13' AND id ='42'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-3" name="rent" value="42"> <?php echo $choice ['choices'] ?> </input>
                                     </label><br>
                                   </div>
                             
+                                  <!-- q14: permission -->
                                   <div class="form-group checkbox">
                                     <label>
-                                      <b> Does everyone in the family support your decision to adopt a pet? </b>
+                                      <!-- display ONLY q14 record (appplicationquestion table) from database-->
+                                      <b><?php $sql = "SELECT * FROM applicationquestions where questionID = '14'" ; $result = $conn->query($sql); $question = $result->fetch_assoc(); echo $question['questions'];?></b>
                                     </label><br>
                             
                                     <!-- Input Type Radio Button -->
-                                    <label for="support-1">
-                                      <input type="radio" id="support-1" name="support"> Yes</input>
+                                    <label for="recommed-1">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '14' AND id ='43'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-1" name="allow" value="43"required> <?php echo $choice ['choices'] ?> </input>
                                     </label><br>
-                                    <label for="support-2">
-                                      <input type="radio" id="support-2" name="support"> No</input>
+                                    <label for="recommed-2">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '14' AND id ='44'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-2" name="allow" value="44"> <?php echo $choice ['choices'] ?> </input>
+                                    </label><br>
+                                    <label for="recommed-3">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '14' AND id ='45'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-3" name="allow" value="45"> <?php echo $choice ['choices'] ?> </input>
                                     </label><br>
                                   </div>
                             
+                                  <!-- q15: spend -->
                                   <div class="form-group checkbox">
                                     <label>
-                                      <b> What type of building do you live in? </b>
+                                      <!-- display ONLY q15 record (appplicationquestion table) from database-->
+                                      <b><?php $sql = "SELECT * FROM applicationquestions where questionID = '15'" ; $result = $conn->query($sql); $question = $result->fetch_assoc(); echo $question['questions'];?></b>
                                     </label><br>
                             
-                                    <!-- Input Type Radio Button -->
-                                    <label for="building-1">
-                                      <input type="radio" id="building-1" name="building"> House </input>
-                                    </label><br>
-                                    <label for="building-2">
-                                      <input type="radio" id="building-2" name="building"> Condo</input>
-                                    </label><br>
-                                    <label for="building-3">
-                                      <input type="radio" id="building-3" name="building"> Apartment</input>
-                                    </label><br>
-                                  </div>
                             
-                                  <div class="form-group checkbox">
-                                    <label>
-                                      <b> If you rent, do you have permission from your landlord to have an animal? </b>
+                                    <!-- Input Type Radio Button name: spending-->
+                                    <label for="recommed-1">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '15' AND id ='46'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-1" name="spending" value="46"required> <?php echo $choice ['choices'] ?> </input>
                                     </label><br>
-                            
-                                    <!-- Input Type Radio Button -->
-                                    <label for="permission-1">
-                                      <input type="radio" id="permission-1" name="permission"> Yes </input>
+                                    <label for="recommed-2">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '15' AND id ='47'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-2" name="spending" value="47"> <?php echo $choice ['choices'] ?> </input>
                                     </label><br>
-                                    <label for="permission-2">
-                                      <input type="radio" id="permission-2" name="permission"> No</input>
+                                    <label for="recommed-3">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '15' AND id ='48'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-3" name="spending" value="48"> <?php echo $choice ['choices'] ?> </input>
                                     </label><br>
-                                    <label for="permission-3">
-                                      <input type="radio" id="permission-3" name="permission"> I own</input>
-                                    </label><br>
-                                  </div>
-                            
-                                  <div class="form-group checkbox">
-                                    <label>
-                                      <b> Are you prepared to spend for the wellness of your pet? If so, how much
-                                        are you willing to spend in a year? </b>
-                                    </label><br>
-                            
-                                    <!-- Input Type Radio Button -->
-                                    <label for="prepared-1">
-                                      <input type="radio" id="prepared-1" name="prepared"> Under 10,000 </input>
-                                    </label><br>
-                                    <label for="prepared-2">
-                                      <input type="radio" id="prepared-2" name="prepared"> 10,000 - 20,000</input>
-                                    </label><br>
-                                    <label for="prepared-3">
-                                      <input type="radio" id="prepared-3" name="prepared"> 20,001 – 40,000</input>
-                                    </label><br>
-                                    <label for="prepared-4">
-                                      <input type="radio" id="prepared-4" name="prepared"> 40,001 – 60,000</input>
-                                    </label><br>
-                                    <label for="prepared-5">
-                                      <input type="radio" id="prepared-5" name="prepared"> 60,001 – 80,000</input>
+                                    <label for="recommed-4">  
+                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '15' AND id ='49'" ;  
+                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
+                                          <input type="radio" id="recommed-4" name="spending" value="49"> <?php echo $choice ['choices'] ?> </input>
                                     </label><br>
                                   </div>
                                   
-                                <button class="btn" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span> Cancel </button>
-                                <a class="trigger_popup_fricc">
-                                  <button class="btn"> Submit </button>
-                                </a>
+                                  <button class="btn" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span> Cancel </button>
+                                <input class = "btn" type="submit" name="submit" value="submit"onclick="return confirm('Are you sure you want to proceed?');">
 
                               </div>
-                                                                                                <!--start popup confirmation message-->
-                                                                                                <div class="hover_bkgr_fricc">
-                                    <span class="helper"></span>
-                                    <div>
-                                        <div class="popupCloseButton">&times;</div>
-                                          <p>
-                                            <img src=img/logo.png>
-                                            <h4><b>Are you sure you want to proceed with your application?</h4><br/>
-                                          </p>
-                                          <form action="#">
-                                            <button class="button1" value="submit" formaction="submit.html"> Yes, I want to proceed </button>
-                                          <button class="button1" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span> Go Back </button>
-                                              <!--end ConfirmationMessage-->  
-                                    </div>
-                                </div>
+                               
                           </div>
+</form>
                         </div>
                       </div>
                       
