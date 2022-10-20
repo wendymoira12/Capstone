@@ -99,9 +99,6 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
                 <div id="sticky-header" class="main-header-area">
                   <div class="container">
                     <div class="row align-items-center">
-                      <div class="col-xl-3 col-lg-3">
-                        
-                      </div>
                       <div class="col-xl-9 col-lg-9">
                         <div class="main-menu  d-none d-lg-block">
                           <nav>
