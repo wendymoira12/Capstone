@@ -104,10 +104,10 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
                           <nav>
                             <ul id="navigation">
                               <li><a href="/Capstone/warp/home.php">Home</a></li>
-                              <li> <a href="/Capstone/warp/about.html">About Us </i></a>
-                              <li> <a href="/Capstone/warp/pets-for-adoption.php">Pets for Adoption </i></a>
+                              <li><a href="/Capstone/warp/about.html">About Us </a></li>
+                              <li><a href="/Capstone/warp/pets-for-adoption.php">Pets for Adoption </a></li>
                               <li><a href="/Capstone/warp/contact.php">Contact</a></li>
-                              <li></li>
+
                             </ul>
                           </nav>
                         </div>
