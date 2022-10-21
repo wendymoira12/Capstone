@@ -38,7 +38,7 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
 
   <!-- Custom Theme Style -->
   <link href="../build/css/custom.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/Capstone/warp/shelter/production/css/style.css">
+  <link rel="stylesheet" href="Capstone/warp/shelter/production/css/style.css">
 
 </head>
 
