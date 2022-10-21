@@ -120,6 +120,8 @@ if ($result->num_rows > 0) {
                     </li>
                     <li><a href="shelter_application_list.php"><i class="fa fa-paw"></i> Application List </a>
                     </li>
+                    <li><a href="shelter_schedule_list.php"><i class="fa fa-paw"></i> Schedule List </a>
+                    </li>
                     <li><a href="shelter_adopted_list.php"><i class="fa fa-paw"></i> Adopted Pet List </a>
                     </li>
 
