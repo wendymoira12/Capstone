@@ -231,7 +231,7 @@ if (isset($_POST['submit'])) {
           <?php
           $sql = "SELECT * FROM city_tbl";
           $result = mysqli_query($conn, $sql);
-          $i = 1
+          $i = 1;
           ?>
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
