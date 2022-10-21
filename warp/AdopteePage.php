@@ -1,5 +1,6 @@
 <?php
 include 'config.php';
+
 include('connect/connection.php');
 session_start();
 
@@ -61,65 +62,49 @@ $chkvalues = explode(", ", $data["pet_vax"]);
 
 if (isset($_POST['submit']))
     {
+
   $valid_id = $_FILES['valid_id']['name'];
   $valid_id_tmp_name = $_FILES['valid_id']['tmp_name'];
-  $valid_id_folder = 'images/valid_id/' . $valid_id;
+  $valid_id_folder = 'shelter/production/images/valid_id/' . $valid_id;
   
-
-  $occupation= $_POST['occupation'];
-  $civilstatus = $_POST['civilstatus'];
-  $children = $_POST['children'];
-  $pets = $_POST['pets'];
-  $pastpets = $_POST['pastpets'];
-  $housing = $_POST['housing'];
-  $allergy = $_POST['allergy'];
-  $wellness = $_POST['wellness'];
-  $finance = $_POST['finance'];
-  $emergency = $_POST['emergency'];
-  $alone = $_POST['alone'];
-  $support = $_POST['support'];
-  $rent = $_POST['rent'];
-  $allow = $_POST['allow'];
-  $spending = $_POST['spending'];
-
+ $q1 = $_POST['occupation'];
+ $q2 = $_POST["civilstatus"];
+ $q3 = $_POST["children"];
+ $q4 = $_POST["pets"];
+ $q5 = $_POST["pastpets"];
+ $q6 = $_POST["housing"];
+ $q7 = $_POST["allergy"];
+ $q8 = $_POST["wellness"];
+ $q9 = $_POST["finance"];
+ $q10 = $_POST["emergency"];
+ $q11 = $_POST["alone"];
+ $q12 = $_POST["support"];
+ $q13 = $_POST["rent"];
+ $q14 = $_POST['allow'];
+ $q15 = $_POST['spending'];
   //$adopter = "SELECT * FROM a.adopter_tbl,u.user_tbl WHERE a.user_id=$_SESSION['user_id']";
 
-  $row = "INSERT INTO applicationform1 (adopter_id,pet_id,valid_id,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15) VALUES ('$adopter_id','$id','$valid_id','$occupation','$civilstatus','$children','$pets','$pastpets','$housing','$allergy','$wellness','$finance','$emergency','$alone','$support','$rent','$allow','$spending');";
-  $query3 = mysqli_query($conn,$row);  
-
-    {
-
-      $q1 = $_POST['occupation'];
-      $q2 = $_POST["civilstatus"];
-      $q3 = $_POST["children"];
-      $q4 = $_POST["pets"];
-      $q5 = $_POST["pastpets"];
-      $q6 = $_POST["housing"];
-      $q7 = $_POST["allergy"];
-      $q8 = $_POST["wellness"];
-      $q9 = $_POST["finance"];
-      $q10 = $_POST["emergency"];
-      $q11 = $_POST["alone"];
-      $q12 = $_POST["support"];
-      $q13 = $_POST["rent"];
-      $q14 = $_POST["allow"];
-      $q15 = $_POST["spending"];
-
-      if(($q1 != "1" OR '4' ))
-      {
-        print "hello";
-      }
-      else {print "hi";}
-      //print $i;
-    }
+  $row = "INSERT INTO applicationform1 (adopter_id,pet_id,valid_id,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15) VALUES ('$adopter_id','$id','$valid_id','$q1','$q2','$q3','$q4','$q5','$q6','$q7','$q8','$q9','$q10','$q11','$q12','$q13','$q14','$q15');";
+  $query3 = mysqli_query($conn,$row); 
+  {
+  if(($q1 == "2" or $q1=="3")&&($q2=="5"or $q2=="6"or$q2=="7")&&($q3=="9"or $q3=="10")&&($q4 == "12")&&($q5=="13")&&($q6=="15"or $q6=="16"or $q6=="17"or $q6=="19")&&($q7 == "21")&&($q8=="23"or $q8=="24")&&($q9=="26")&&($q10 !== "32")&&($q11!=="35")&&($q12=="37")&&($q13=="40"or $q13=="41"or$q13=="42")&&($q14!=="44")&&($q15=="48"or$q15=="49"))
+  {
+    
+    //sample data pa lang chineck lang kung papasok sa database
+    $row1 = "INSERT INTO applicationresult_details (application_id, application_result, application_status) VALUES ('9','qualified','sample');";
+    $query4 = mysqli_query($conn,$row1); 
+  }
+  else {
+    //$notqualified = 'Not qualified';
+    $row2 = "INSERT INTO applicationresult_details (application_id, application_result, application_status) VALUES ('9','qualified','sample');";
+    $query5 = mysqli_query($conn,$row2); 
+  }
+ 
+ }
 }
-      
-          
-        //("location: AdopteePage.php?id=1");
+
+    
 ?>
-
-
-
 <!doctype html>
 <html lang="en">
 
@@ -354,7 +339,7 @@ if (isset($_POST['submit']))
                           <div class="modal-content clearfix">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                               <div class="modal-body">
-                                <form method="post" action="" enctype="multipart/form-data">
+                                <form type="submit" method="post" action="" enctype="multipart/form-data">
                                 <h3 class="title">Application Form</h3>
                                 <p class="description"> Please make sure that al the details below are correct. Thank you!</p>
                                 
@@ -409,32 +394,21 @@ if (isset($_POST['submit']))
                                     <!-- display ONLY q1 record (appplicationquestion table) from database-->
                                     <b><?php $sql = "SELECT * FROM applicationquestions where questionID = '1'" ; $result = $conn->query($sql); $question = $result->fetch_assoc(); echo $question['questions'];?></b>
                                   </label><br>
-
-                                    <label for="recommed-1">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '1' AND id ='1'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-1" name="occupation" value="1" required> <?php echo $choice['choices']; ?></input>
-                                    </label><br>
-
-                                    <label for="recommed-2">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '1' AND id ='2'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-2" name="occupation" value="2"> <?php echo $choice ['choices'] ?> </input>
-                                    </label><br>
-
-                                    <label for="recommed-3">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '1' AND id ='3'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-3" name="occupation" value="3"> <?php echo $choice ['choices'] ?> </input>
-                                    </label><br>
-
-                                    <label for="recommed-4">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '1' AND id ='4'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-4" name="occupation" value="4"> <?php echo $choice ['choices'] ?> </input>
+                                                <!-- Radio Button Start: q1 - OCCUPATION -->
+                                  <label>  
+                                       <?php
+                                          $sql = "SELECT * from questionchoices where questionID = '1'";
+                                          $data1 = mysqli_query($conn,$sql);
+                                          while($row = mysqli_fetch_assoc($data1)){
+                                            ?>
+                                              <input type="radio" name='occupation' value = "<?php echo $row['id']?>" required> <?php echo $row['choices']?> </input><br>
+                                            <?php
+                                              }
+                                            ?> 
                                     </label><br>
 
                                   </div>
+                                  <!-- END: q1-->
                                 
                                   <!-- q2: Civil Status -->
                                   <div class="form-group checkbox">
@@ -443,74 +417,65 @@ if (isset($_POST['submit']))
                                     <b><?php $sql = "SELECT * FROM applicationquestions where questionID = '2'" ; $result = $conn->query($sql); $question = $result->fetch_assoc(); echo $question['questions'];?></b>
                                   </label><br>
                             
-                                    <!-- Input Type Radio Button -->
-                                    <label for="recommed-1">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '2' AND id ='5'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-1" name="civilstatus" value="5"required> <?php echo $choice ['choices'] ?> </input>
-                                    </label><br>
-
-                                    <label for="recommed-2">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '2' AND id ='6'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-2" name="civilstatus" value="6"required> <?php echo $choice ['choices'] ?> </input>
-                                    </label><br>
-
-                                    <label for="recommed-3">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '2' AND id ='7'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-3" name="civilstatus" value="7"required> <?php echo $choice ['choices'] ?> </input>
+                                              <!-- Radio Button Start: q2 - civilstatus -->
+                                    <label>  
+                                       <?php
+                                          $sql = "SELECT * from questionchoices where questionID = '2'";
+                                          $data1 = mysqli_query($conn,$sql);
+                                          while($row = mysqli_fetch_assoc($data1)){
+                                            ?>
+                                              <input type="radio" name='civilstatus' value = "<?php echo $row['id']?>" required> <?php echo $row['choices']?> </input><br>
+                                            <?php
+                                              }
+                                            ?> 
                                     </label><br>
                                   </div>
+                                  <!-- END: q2-->
 
                             
-                                  <!-- q3: Children below 8 -->
+                                  <!-- q3: CHILDREN -->
                                   <div class="form-group checkbox">
                                   <label>
                                     <!-- display ONLY q3 record (appplicationquestion table) from database-->
                                     <b><?php $sql = "SELECT * FROM applicationquestions where questionID = '3'" ; $result = $conn->query($sql); $question = $result->fetch_assoc(); echo $question['questions'];?></b>
                                   </label><br>
                             
-                                    <!-- Input Type Radio Button -->
-                                    <label for="recommed-1">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '3' AND id ='8'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-1" name="children" value="8"required> <?php echo $choice ['choices'] ?> </input>
-                                    </label><br>
-
-                                    <label for="recommed-2">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '3' AND id ='9'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-2" name="children" value="9"> <?php echo $choice ['choices'] ?> </input>
-                                    </label><br>
-
-                                    <label for="recommed-3">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '3' AND id ='10'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-3" name="children" value="10"> <?php echo $choice ['choices'] ?> </input>
+                                              <!-- Radio Button Start: q3 - CHILDREN -->
+                                    <label>  
+                                       <?php
+                                          $sql = "SELECT * from questionchoices where questionID = '3'";
+                                          $data1 = mysqli_query($conn,$sql);
+                                          while($row = mysqli_fetch_assoc($data1)){
+                                            ?>
+                                              <input type="radio" name='children' value = "<?php echo $row['id']?>" required> <?php echo $row['choices']?> </input><br>
+                                            <?php
+                                              }
+                                            ?> 
                                     </label><br>
                                   </div>
+                                  <!-- END: q3-->
                             
-                                  <!-- q4: other pets -->
+                                  <!-- q4: PETS -->
                                   <div class="form-group checkbox">
                                   <label>
-                                    <!-- display ONLY q6 record (appplicationquestion table) from database-->
+                                    <!-- display ONLY q4 record (appplicationquestion table) from database-->
                                     <b><?php $sql = "SELECT * FROM applicationquestions where questionID = '4'" ; $result = $conn->query($sql); $question = $result->fetch_assoc(); echo $question['questions'];?></b>
                                   </label><br>
                             
-                                    <!-- Input Type Radio Button -->
-                                    <label for="recommed-1">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '4' AND id ='11'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-1" name="pets" value="11"required> <?php echo $choice ['choices'] ?> </input>
-                                    </label><br>
-
-                                    <label for="recommed-2">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '4' AND id ='12'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-2" name="pets" value="12"> <?php echo $choice ['choices'] ?> </input>
+                                              <!-- Radio Button Start: q4 - PETS -->
+                                    <label>  
+                                       <?php
+                                          $sql = "SELECT * from questionchoices where questionID = '4'";
+                                          $data1 = mysqli_query($conn,$sql);
+                                          while($row = mysqli_fetch_assoc($data1)){
+                                            ?>
+                                              <input type="radio" name='pets' value = "<?php echo $row['id']?>" required> <?php echo $row['choices']?> </input><br>
+                                            <?php
+                                              }
+                                            ?> 
                                     </label><br>
                                   </div>
+                                  <!-- END: 4-->
                             
                                   <!-- q5: past pets -->
                                   <div class="form-group checkbox">
@@ -519,54 +484,41 @@ if (isset($_POST['submit']))
                                     <b><?php $sql = "SELECT * FROM applicationquestions where questionID = '5'" ; $result = $conn->query($sql); $question = $result->fetch_assoc(); echo $question['questions'];?></b>
                                   </label><br>
                             
-                                    <!-- Input Type Radio Button -->
-                                    <label for="recommed-1">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '5' AND id ='13'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-1" name="pastpets" value="13"required> <?php echo $choice ['choices'] ?> </input>
-                                    </label><br>
-
-                                    <label for="recommed-2">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '5' AND id ='14'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-2" name="pastpets" value="14"> <?php echo $choice ['choices'] ?> </input>
+                                              <!-- Radio Button Start: q5 - PASTPETS -->
+                                    <label>  
+                                       <?php
+                                          $sql = "SELECT * from questionchoices where questionID = '5'";
+                                          $data1 = mysqli_query($conn,$sql);
+                                          while($row = mysqli_fetch_assoc($data1)){
+                                            ?>
+                                              <input type="radio" name='pastpets' value = "<?php echo $row['id']?>" required> <?php echo $row['choices']?> </input><br>
+                                            <?php
+                                              }
+                                            ?> 
                                     </label><br>
                                   </div>
+                                  <!-- END: q5-->
 
-                                  <!-- q6: living condition -->
+                                  <!-- q6: housing -->
                                   <div class="form-group checkbox">
                                   <label>
                                     <!-- display ONLY q6 record (appplicationquestion table) from database-->
                                     <b><?php $sql = "SELECT * FROM applicationquestions where questionID = '6'" ; $result = $conn->query($sql); $question = $result->fetch_assoc(); echo $question['questions'];?></b>
                                   </label><br>
-                                    <!-- Input Type Radio Button -->
-                                    <label for="recommed-1">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '6' AND id ='15'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-1" name="housing" value="15"required> <?php echo $choice ['choices'] ?> </input>
-                                    </label><br>
-
-                                    <label for="recommed-2">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '6' AND id ='16'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-2" name="housing" value="16"> <?php echo $choice ['choices'] ?> </input>
-                                    </label><br>
-                                    <label for="recommed-3">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '6' AND id ='17'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-3" name="housing" value="17"> <?php echo $choice ['choices'] ?> </input>
-                                    </label><br>
-                                    <label for="recommed-4">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '6' AND id ='18'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-4" name="housing" value="18"> <?php echo $choice ['choices'] ?> </input>
-                                    </label><br>
-                                    <label for="recommed-5">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '6' AND id ='19'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-5" name="housing" value="19"> <?php echo $choice ['choices'] ?> </input>
+                                              <!-- Radio Button Start: q6 - HOUSING -->
+                                    <label>  
+                                       <?php
+                                          $sql = "SELECT * from questionchoices where questionID = '6'";
+                                          $data1 = mysqli_query($conn,$sql);
+                                          while($row = mysqli_fetch_assoc($data1)){
+                                            ?>
+                                              <input type="radio" name='housing' value = "<?php echo $row['id']?>" required> <?php echo $row['choices']?> </input><br>
+                                            <?php
+                                              }
+                                            ?> 
                                     </label><br>
                                   </div>
+                                  <!-- END: q6 -->
                             
                                   <!-- q7: allergy -->
                                   <div class="form-group checkbox">
@@ -574,24 +526,20 @@ if (isset($_POST['submit']))
                                     <!-- display ONLY q7 record (appplicationquestion table) from database-->
                                       <b><?php $sql = "SELECT * FROM applicationquestions where questionID = '7'" ; $result = $conn->query($sql); $question = $result->fetch_assoc(); echo $question['questions']; ?></b>
                                     </label><br>
-                                    <!-- Input Type Radio Button -->
-                                    <label for="recommed-1">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '7' AND id ='20'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-1" name="allergy" value="20"required> <?php echo $choice ['choices'] ?> </input>
-                                    </label><br>
-
-                                    <label for="recommed-2">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '7' AND id ='21'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-2" name="allergy" value="21"> <?php echo $choice ['choices'] ?> </input>
-                                    </label><br>
-                                    <label for="recommed-3">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '7' AND id ='22'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-3" name="allergy" value="22"> <?php echo $choice ['choices'] ?> </input>
+                                                <!-- Radio Button Start: q7 - ALLERGY-->
+                                    <label>  
+                                       <?php
+                                          $sql = "SELECT * from questionchoices where questionID = '7'";
+                                          $data1 = mysqli_query($conn,$sql);
+                                          while($row = mysqli_fetch_assoc($data1)){
+                                            ?>
+                                              <input type="radio" name='allergy' value = "<?php echo $row['id']?>" required> <?php echo $row['choices']?> </input><br>
+                                            <?php
+                                              }
+                                            ?> 
                                     </label><br>
                                   </div>
+                                  <!-- END: q7-->
                             
                                   <!-- q8: in charge of wellness -->
                                   <div class="form-group checkbox">
@@ -600,24 +548,20 @@ if (isset($_POST['submit']))
                                       <b><?php $sql = "SELECT * FROM applicationquestions where questionID = '8'" ; $result = $conn->query($sql); $question = $result->fetch_assoc(); echo $question['questions'];?></b>
                                     </label><br>
                       
-                                                          <!-- Input Type Radio Button -->
-                                     <label for="recommed-1">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '8' AND id ='23'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-1" name="wellness" value="23"required> <?php echo $choice ['choices'] ?> </input>
-                                    </label><br>
-
-                                    <label for="recommed-2">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '8' AND id ='24'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-2" name="wellness" value="24"> <?php echo $choice ['choices'] ?> </input>
-                                    </label><br>
-                                    <label for="recommed-3">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '8' AND id ='25'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-3" name="wellness" value="25"> <?php echo $choice ['choices'] ?> </input>
+                                                       <!-- Radio Button Start: q7 - WELLNESS -->
+                                    <label>  
+                                       <?php
+                                          $sql = "SELECT * from questionchoices where questionID = '8'";
+                                          $data1 = mysqli_query($conn,$sql);
+                                          while($row = mysqli_fetch_assoc($data1)){
+                                            ?>
+                                              <input type="radio" name='wellness' value = "<?php echo $row['id']?>" required> <?php echo $row['choices']?> </input><br>
+                                            <?php
+                                              }
+                                            ?> 
                                     </label><br>
                                   </div>
+                                   <!-- END: q8 -->
                             
                                   <!-- q9: in charge financially -->
                                   <div class="form-group checkbox">
@@ -627,26 +571,22 @@ if (isset($_POST['submit']))
                                     </label><br>
                             
                             
-                                    <!-- Input Type Radio Button -->
-                                    <label for="recommed-1">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '9' AND id ='26'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-1" name="finance" value="26"required> <?php echo $choice ['choices'] ?> </input>
-                                    </label><br>
-
-                                    <label for="recommed-2">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '9' AND id ='27'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-2" name="finance" value="27"> <?php echo $choice ['choices'] ?> </input>
-                                    </label><br>
-                                    <label for="recommed-3">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '9' AND id ='28'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-3" name="finance" value="28"> <?php echo $choice ['choices'] ?> </input>
+                                                <!-- Radio Button Start: q9 - FINANCE -->
+                                    <label>  
+                                       <?php
+                                          $sql = "SELECT * from questionchoices where questionID = '9'";
+                                          $data1 = mysqli_query($conn,$sql);
+                                          while($row = mysqli_fetch_assoc($data1)){
+                                            ?>
+                                              <input type="radio" name='finance' value = "<?php echo $row['id']?>" required> <?php echo $row['choices']?> </input><br>
+                                            <?php
+                                              }
+                                            ?> 
                                     </label><br>
                                   </div>
+                                  <!-- END: q9-->
                             
-                                  <!-- q10: in charge during vacation/emergency -->
+                                  <!-- q10: VACATION-->
                                   <div class="form-group checkbox">
                                   <label>
                                     <!-- display ONLY q10 record (appplicationquestion table) from database-->
@@ -654,30 +594,22 @@ if (isset($_POST['submit']))
                                     </label><br>
                             
                             
-                                    <!-- Input Type Radio Button -->
-                                    <label for="recommed-1">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '10' AND id ='29'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-1" name="emergency" value="29"required> <?php echo $choice ['choices'] ?> </input>
-                                    </label><br>
-                                    <label for="recommed-2">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '10' AND id ='30'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-2" name="emergency" value="30"> <?php echo $choice ['choices'] ?> </input>
-                                    </label><br>
-                                    <label for="recommed-3">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '10' AND id ='31'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-3" name="emergency" value="31"> <?php echo $choice ['choices'] ?> </input>
-                                    </label><br>
-                                    <label for="recommed-4">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '10' AND id ='32'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-4" name="emergency" value="32"> <?php echo $choice ['choices'] ?> </input>
+                                                <!-- Radio Button Start: q10 - VACATION -->
+                                    <label>  
+                                       <?php
+                                          $sql = "SELECT * from questionchoices where questionID = '10'";
+                                          $data1 = mysqli_query($conn,$sql);
+                                          while($row = mysqli_fetch_assoc($data1)){
+                                            ?>
+                                              <input type="radio" name='emergency' value = "<?php echo $row['id']?>" required> <?php echo $row['choices']?> </input><br>
+                                            <?php
+                                              }
+                                            ?> 
                                     </label><br>
                                   </div>
+                                  <!-- END q10-->
                             
-                                  <!-- q11: alone hours -->
+                                  <!-- q11: alone-->
                                   <div class="form-group checkbox">
                                   <label>
                                     <!-- display ONLY q11 record (appplicationquestion table) from database-->
@@ -685,30 +617,22 @@ if (isset($_POST['submit']))
                                     </label><br>
                             
                             
-                                    <!-- Input Type Radio Button -->
-                                    <label for="recommed-1">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '11' AND id ='33'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-1" name="alone" value="33"> <?php echo $choice ['choices'] ?> </input>
-                                    </label><br>
-                                    <label for="recommed-2">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '11' AND id ='34'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-2" name="alone" value="34"required> <?php echo $choice ['choices'] ?> </input>
-                                    </label><br>
-                                    <label for="recommed-3">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '11' AND id ='35'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-3" name="alone" value="35"> <?php echo $choice ['choices'] ?> </input>
-                                    </label><br>
-                                    <label for="recommed-4">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '11' AND id ='36'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-4" name= "alone" value="36"> <?php echo $choice ['choices'] ?> </input>
+                                              <!-- Radio Button Start: q11 - ALONE -->
+                                    <label>  
+                                       <?php
+                                          $sql = "SELECT * from questionchoices where questionID = '11'";
+                                          $data1 = mysqli_query($conn,$sql);
+                                          while($row = mysqli_fetch_assoc($data1)){
+                                            ?>
+                                              <input type="radio" name='alone' value = "<?php echo $row['id']?>" required> <?php echo $row['choices']?> </input><br>
+                                            <?php
+                                              }
+                                            ?> 
                                     </label><br>
                                   </div>
-                            
-                                  <!-- q12: support decision -->
+                                <!-- END: q11-->
+
+                                  <!-- q12: SUPPORT -->
                                   <div class="form-group checkbox">
                                   <label>
                                     <!-- display ONLY q12 record (appplicationquestion table) from database-->
@@ -716,25 +640,22 @@ if (isset($_POST['submit']))
                                     </label><br>
                             
                             
-                                    <!-- Input Type Radio Button -->
-                                    <label for="recommed-1">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '12' AND id ='37'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-1" name="support" value="37"required> <?php echo $choice ['choices'] ?> </input>
-                                    </label><br>
-                                    <label for="recommed-2">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '12' AND id ='38'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-2" name="support" value="38"> <?php echo $choice ['choices'] ?> </input>
-                                    </label><br>
-                                    <label for="recommed-3">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '12' AND id ='39'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-3" name="support" value="39"> <?php echo $choice ['choices'] ?> </input>
+                                                <!-- Radio Button Start: q12 - SUPPORT -->
+                                    <label>  
+                                       <?php
+                                          $sql = "SELECT * from questionchoices where questionID = '12'";
+                                          $data1 = mysqli_query($conn,$sql);
+                                          while($row = mysqli_fetch_assoc($data1)){
+                                            ?>
+                                              <input type="radio" name='support' value = "<?php echo $row['id']?>" required> <?php echo $row['choices']?> </input><br>
+                                            <?php
+                                              }
+                                            ?> 
                                     </label><br>
                                   </div>
+                                  <!-- END: q12 -->
                             
-                                  <!-- q13: Housing -->
+                                  <!-- q13: rent -->
                                   <div class="form-group checkbox">
                                     <label>
                                       <!-- display ONLY q13 record (appplicationquestion table) from database-->
@@ -742,24 +663,21 @@ if (isset($_POST['submit']))
                                     </label><br>
                             
                             
-                                    <!-- Input Type Radio Button -->
-                                    <label for="recommed-1">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '13' AND id ='40'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-1" name="rent" value="40"required> <?php echo $choice ['choices'] ?> </input>
-                                    </label><br>
-                                    <label for="recommed-2">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '13' AND id ='41'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-2" name="rent" value="41"> <?php echo $choice ['choices'] ?> </input>
-                                    </label><br>
-                                    <label for="recommed-3">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '13' AND id ='42'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-3" name="rent" value="42"> <?php echo $choice ['choices'] ?> </input>
+                                          <!-- Radio Button Start: q13 - RENT -->
+                                    <label>  
+                                       <?php
+                                          $sql = "SELECT * from questionchoices where questionID = '13'";
+                                          $data1 = mysqli_query($conn,$sql);
+                                          while($row = mysqli_fetch_assoc($data1)){
+                                            ?>
+                                              <input type="radio" name='rent' value = "<?php echo $row['id']?>" required> <?php echo $row['choices']?> </input><br>
+                                            <?php
+                                              }
+                                            ?> 
                                     </label><br>
                                   </div>
-                            
+                                <!-- END: q13-->
+                                              
                                   <!-- q14: permission -->
                                   <div class="form-group checkbox">
                                     <label>
@@ -767,25 +685,23 @@ if (isset($_POST['submit']))
                                       <b><?php $sql = "SELECT * FROM applicationquestions where questionID = '14'" ; $result = $conn->query($sql); $question = $result->fetch_assoc(); echo $question['questions'];?></b>
                                     </label><br>
                             
-                                    <!-- Input Type Radio Button -->
-                                    <label for="recommed-1">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '14' AND id ='43'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-1" name="allow" value="43"required> <?php echo $choice ['choices'] ?> </input>
-                                    </label><br>
-                                    <label for="recommed-2">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '14' AND id ='44'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-2" name="allow" value="44"> <?php echo $choice ['choices'] ?> </input>
-                                    </label><br>
-                                    <label for="recommed-3">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '14' AND id ='45'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-3" name="allow" value="45"> <?php echo $choice ['choices'] ?> </input>
+                                            <!-- Radio Button Start: q14 - ALLOW -->
+
+                                    <label>  
+                                       <?php
+                                          $sql = "SELECT * from questionchoices where questionID = '14'";
+                                          $data1 = mysqli_query($conn,$sql);
+                                          while($row = mysqli_fetch_assoc($data1)){
+                                            ?>
+                                              <input type="radio" name='allow' value = "<?php echo $row['id']?>" required> <?php echo $row['choices']?> </input><br>
+                                            <?php
+                                              }
+                                            ?> 
                                     </label><br>
                                   </div>
+                                <!-- END q14 -->
                             
-                                  <!-- q15: spend -->
+                                <!-- Radio Button Start: q15 - spending -->
                                   <div class="form-group checkbox">
                                     <label>
                                       <!-- display ONLY q15 record (appplicationquestion table) from database-->
@@ -793,27 +709,19 @@ if (isset($_POST['submit']))
                                     </label><br>
                             
                             
-                                    <!-- Input Type Radio Button name: spending-->
-                                    <label for="recommed-1">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '15' AND id ='46'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-1" name="spending" value="46"required> <?php echo $choice ['choices'] ?> </input>
-                                    </label><br>
-                                    <label for="recommed-2">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '15' AND id ='47'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-2" name="spending" value="47"> <?php echo $choice ['choices'] ?> </input>
-                                    </label><br>
-                                    <label for="recommed-3">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '15' AND id ='48'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-3" name="spending" value="48"> <?php echo $choice ['choices'] ?> </input>
-                                    </label><br>
-                                    <label for="recommed-4">  
-                                        <?php $sql = "SELECT * FROM questionchoices where questionID = '15' AND id ='49'" ;  
-                                        $choices = $conn->query($sql); $choice = $choices->fetch_assoc()?>
-                                          <input type="radio" id="recommed-4" name="spending" value="49"> <?php echo $choice ['choices'] ?> </input>
-                                    </label><br>
+                                            <!-- Input Type Radio Button name: spending-->
+                                    <label>  
+                                       <?php
+                                          $sql = "SELECT * from questionchoices where questionID = '15'";
+                                          $data1 = mysqli_query($conn,$sql);
+                                          while($row = mysqli_fetch_assoc($data1)){
+                                            ?>
+                                              <input type="radio" name='spending' value = "<?php echo $row['id']?>" required> <?php echo $row['choices']?> </input><br>
+                                            <?php
+                                              }
+                                            ?> 
+                                    </label>
+                                <!-- END q15-->
                                   </div>
                                   
                                   <button class="btn" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span> Cancel </button>
@@ -830,7 +738,7 @@ if (isset($_POST['submit']))
       </div>
     </div>
   </div>
-    <!-- JS of the application form-->
+<!-- JS of the application form-->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <!-- JS of the application form - then confirmation message after submitting-->
