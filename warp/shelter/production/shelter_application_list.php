@@ -170,31 +170,25 @@ if ($result->num_rows > 0) {
               <div class="x_panel">
                 <div class="x_title">
                   <h4>This table shows all the list of applications </h4>
-
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                  <p class="text-muted font-13 m-b-30">
-
-                    <!-- DataTables has most features enabled by default, so all you need to do to use it with your own tables is to call the construction function: <code>$().DataTable();</code> -->
-                  </p>
                   <table id="datatable" class="table table-striped table-bordered">
                     <thead>
                       <tr>
                         <th>No.</th>
-                        <th>Application ID</th>
-                        <th>Adopter Name</th>
-                        <th>Adoptee Name</th>
-                        <th>Location</th>
+                        <th>Adopter</th>
+                        <th>Adoptee</th>
+                        <th>Adopter Address</th>
+                        <th>Date Submitted</th>
+                        <th>System Assessment</th>
                         <th>Application Status</th>
                         <th>Action</th>
                       </tr>
                     </thead>
-
-
                     <tbody>
-
                       <tr>
+                        <td></td>
                         <td>1</td>
                         <td>A001</td>
                         <td>Juan</td>
@@ -203,7 +197,6 @@ if ($result->num_rows > 0) {
                         <td>Pending</td>
                         <td><button type="button" class="btn btn-round btn-success">Update</button></td>
                       </tr>
-
                     </tbody>
                   </table>
                 </div>

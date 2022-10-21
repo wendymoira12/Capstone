@@ -28,7 +28,7 @@ $result = mysqli_query($conn, $sql);
 if ($result->num_rows > 0) {
   $row = mysqli_fetch_assoc($result);
   $adopter_id = $row['adopter_id'];
-  $sql = "SELECT * FROM user_tbl,adopter_tbl INNER JOIN adopter_tbl ON user_tbl.user_id = adopter_tbl.user_id WHERE user_tbl.user_id AND adopter_tbl.user_id ='$adopter_id'";
+  $sql = "SELECT * FROM user_tbl INNER JOIN adopter_tbl ON user_tbl.user_id = adopter_tbl.user_id WHERE user_tbl.user_id AND adopter_tbl.user_id ='$adopter_id'";
   $result = mysqli_query($conn, $sql);
   if ($result == TRUE) {
     $adopterresult = mysqli_fetch_assoc($result);
@@ -830,7 +830,7 @@ if (isset($_POST['submit']))
       </div>
     </div>
   </div>
-<!-- JS of the application form-->
+    <!-- JS of the application form-->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <!-- JS of the application form - then confirmation message after submitting-->
