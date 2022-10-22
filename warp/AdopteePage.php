@@ -141,42 +141,42 @@ if (isset($_POST['submit']))
 
 <body>
 
-        <header>
-            <div class="header-area ">
-
-                <div id="sticky-header" class="main-header-area">
-                    <div class="container">
-                        <div class="row align-items-center">
-                            <div class="col-xl-3 col-lg-3">
-                                <div class="logo">
-                                    <a href="home.php">
-                                        <img src="img/logo.png" alt="">
-                                    </a>
-                                </div>
+<header>
+        <div class="header-area ">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-xl-3 col-lg-3">
+                            <div class="logo">
+                                <a href="home.php">
+                                    <img src="img/logo.png" alt="">
+                                </a>
                             </div>
-                            <div class="col-xl-9 col-lg-9">
-                                <div class="main-menu  d-none d-lg-block">
-                                    <nav>
-                                        <ul id="navigation">
-                                            <li><a href="home.php">Home</a></li>
-                                            <li> <a href="about.php">About Us </i></a>
-                                            <li> <a href="pets-for-adoption.php">Pets for Adoption </i></a>
-                                            <li><a href="contact.php">Contact</a></li>
-                                            <li><a href="getroleid.php?id=<?= $_SESSION['user-role-id'] ?>"><i class="fa-solid fa-user" style="font-size:20px;color:rgb(4, 4, 41);"></i></a></li>
-       
+                        </div>
+                        <div class="col-xl-9 col-lg-9">
+                            <div class="main-menu  d-none d-lg-block">
+                                <nav>
+                                    <ul id="navigation">
+                                        <li><a href="home.php">Home</a></li>
+                                        <li> <a href="about.php">About Us </i></a>
+                                        <li> <a href="pets-for-adoption.php">Pets for Adoption </i></a>
+                                        <li><a href="contact.php">Contact</a></li>
+                                        <li><a href="getroleid.php?id=<?= $_SESSION['user-role-id'] ?>">
+                                                <i class="fa-solid fa-user" style="font-size:20px;color:rgb(4, 4, 41);"></i></a>
+                                        </li>
                                         <li><a href="logout.php?logout">Logout </a></li>
-                                        </ul>
-                                    </nav>
-                                </div>
+                                    </ul>
+                                </nav>
                             </div>
-                            <div class="col-12">
-                                <div class="mobile_menu d-block d-lg-none"></div>
-                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
                         </div>
                     </div>
                 </div>
             </div>
-        </header>
+        </div>
+    </header>
         <!-- header_start  -->
         <!-- bradcam_area_start -->
         <div class="bradcam_area breadcam_bg">
