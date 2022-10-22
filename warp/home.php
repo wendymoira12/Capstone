@@ -46,13 +46,8 @@ $row = mysqli_fetch_assoc($result);
 </head>
 
 <body>
-    <!--[if lte IE 9]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-        <![endif]-->
-
     <header>
         <div class="header-area ">
-
             <div id="sticky-header" class="main-header-area">
                 <div class="container">
                     <div class="row align-items-center">
@@ -280,8 +275,7 @@ $row = mysqli_fetch_assoc($result);
                                     Contact Us
                                 </h3>
                                 <ul class="address_line">
-                                    <li></li>
-                                    <li>warp.pup@gmail.com</a></li>
+                                    <li>warp.pup@gmail.com</li>
                                     <li>Metro Manila, Philippines</li>
                                 </ul>
                             </div>

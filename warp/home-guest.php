@@ -273,15 +273,14 @@ $row = mysqli_fetch_assoc($result);
                                     Contact Us
                                 </h3>
                                 <ul class="address_line">
-                                    <li></li>
-                                    <li>warp.pup@gmail.com</a></li>
+                                    <li>warp.pup@gmail.com</li>
                                     <li>Metro Manila, Philippines</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="col-xl-3  col-md-6 col-lg-3">
                             <div class="footer_widget">
-                               
+
                             </div>
                         </div>
                         <div class="col-xl-3  col-md-6 col-lg-3">
@@ -302,7 +301,7 @@ $row = mysqli_fetch_assoc($result);
                                         <img src="img/logo.png" alt="">
                                     </a>
                                 </div>
-                                
+
 
                             </div>
                         </div>

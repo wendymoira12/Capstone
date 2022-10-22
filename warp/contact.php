@@ -5,7 +5,7 @@
     <script src="https://kit.fontawesome.com/b6742a828f.js" crossorigin="anonymous"></script>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>About Us</title>
+    <title>Contact</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -73,7 +73,6 @@
                 </div>
             </div>
         </header>
-
         <!-- header_start  -->
 
         <!-- bradcam_area_start -->
@@ -82,202 +81,84 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="bradcam_text text-center">
-                            <h3>About Us</h3>
+                            <h3>We are always happy to hear from you</h3>
+                            <br>
+                            <h5>We value your comments and suggestions.</h5>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <!-- bradcam_area_end -->
 
-        <!-- pet_care_area_start  -->
-        <div class="pet_care_area">
+        <!-- ================ contact section start ================= -->
+        <!--
+    <section class="contact-section">
             <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-5 col-md-6">
-                        <div class="pet_thumb">
-                            <img src="img/about/pet_care.png" alt="">
-                        </div>
+                
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="contact-title">Message us here:</h2>
                     </div>
-                    <div class="col-lg-6 offset-lg-1 col-md-6">
-                        <div class="pet_info">
-                            <div class="section_title">
-                                <h3><span>We care your pet </span> <br>
-                                    As you care</h3>
-                                <p>Lorem ipsum dolor sit , consectetur adipiscing elit, sed do <br> iusmod tempor incididunt ut labore et dolore magna aliqua. <br> Quis ipsum suspendisse ultrices gravida. Risus commodo <br>
-                                    viverra maecenas accumsan.</p>
-                                <a href="about.html" class="boxed-btn3">About Us</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- pet_care_area_end  -->
-
-        <!-- adapt_area_start  -->
-        <div class="adapt_area">
-            <div class="container">
-                <div class="row justify-content-between align-items-center">
-                    <div class="col-lg-5">
-                        <div class="adapt_help">
-                            <div class="section_title">
-                                <h3><span>We need your</span>
-                                    help Adopt Us</h3>
-                                <p>Lorem ipsum dolor sit , consectetur adipiscing elit, sed do iusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices.</p>
-                                <a href="contact.html" class="boxed-btn3">Contact Us</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="adapt_about">
-                            <div class="row align-items-center">
-                                <div class="col-lg-6 col-md-6">
-                                    <div class="single_adapt text-center">
-                                        <img src="img/adapt_icon/1.png" alt="">
-                                        <div class="adapt_content">
-                                            <h3 class="counter">452</h3>
-                                            <p>Pets Available</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6">
-                                    <div class="single_adapt text-center">
-                                        <img src="img/adapt_icon/3.png" alt="">
-                                        <div class="adapt_content">
-                                            <h3><span class="counter">52</span>+</h3>
-                                            <p>Pets Available</p>
-                                        </div>
-                                    </div>
-                                    <div class="single_adapt text-center">
-                                        <img src="img/adapt_icon/2.png" alt="">
-                                        <div class="adapt_content">
-                                            <h3><span class="counter">52</span>+</h3>
-                                            <p>Pets Available</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- adapt_area_end  -->
-
-        <!-- testmonial_area_start  -->
-        <div class="testmonial_area">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-10">
-                        <div class="textmonial_active owl-carousel">
-                            <div class="testmonial_wrap">
-                                <div class="single_testmonial d-flex align-items-center">
-                                    <div class="test_thumb">
-                                        <img src="img/testmonial/1.png" alt="">
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="testmonial_wrap">
-                                <div class="single_testmonial d-flex align-items-center">
-                                    <div class="test_thumb">
-                                        <img src="img/testmonial/1.png" alt="">
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="testmonial_wrap">
-                                <div class="single_testmonial d-flex align-items-center">
-                                    <div class="test_thumb">
-                                        <img src="img/testmonial/1.png" alt="">
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <!-- testmonial_area_end  -->
-
-        <!-- team_area_start  -->
-        <div class="team_area">
-            <div class="container">
-                <div class="row justify-content-center ">
-                    <div class="col-lg-6 col-md-10">
-                        <div class="section_title text-center mb-95">
-                            <h3>Our Team</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single_team">
-                            <div class="thumb">
-                                <img src="img/team/1.png" alt="">
-                            </div>
-                            <div class="member_name text-center">
-                                <div class="mamber_inner">
-                                    <h4>Rala Emaia</h4>
-                                    <p>Senior Director</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single_team">
-                            <div class="thumb">
-                                <img src="img/team/2.png" alt="">
-                            </div>
-                            <div class="member_name text-center">
-                                <div class="mamber_inner">
-                                    <h4>jhon Smith</h4>
-                                    <p>Senior Director</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single_team">
-                            <div class="thumb">
-                                <img src="img/team/3.png" alt="">
-                            </div>
-                            <div class="member_name text-center">
-                                <div class="mamber_inner">
-                                    <h4>Rala Emaia</h4>
-                                    <p>Senior Director</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- team_area_start  -->
-
-        <div class="contact_anipat anipat_bg_1">
-            <div class="container">
-                <div class="row justify-content-center">
                     <div class="col-lg-8">
-                        <div class="contact_text text-center">
-                            <div class="section_title text-center">
-                                <h3>Why go with WARP?</h3>
-                                <p>We provide a safe and secured Animal Adoption Process. <br> For any concerns or suggestions contact us anytime!</p>
+                        <form class="form-contact contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <textarea class="form-control w-100" name="message" id="message" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'" placeholder=" Name"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input class="form-control valid" name="name" id="name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'" placeholder="Enter your name">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input class="form-control valid" name="email" id="email" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" placeholder="Email">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <input class="form-control" name="subject" id="subject" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Subject'" placeholder="Enter Subject">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="contact_btn d-flex align-items-center justify-content-center">
-                                <a href="contact.html" class="boxed-btn4">Contact Us</a>
+                            <div class="form-group mt-3">
+                                <button type="submit" class="button button-contactForm boxed-btn">Send</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-3 offset-lg-1">
+                        <div class="media contact-info">
+                            <span class="contact-info__icon"><i class="ti-home"></i></span>
+                            <div class="media-body">
+                                <h3>Metro Manila, Philippines</h3>
+                              
+                            </div>
+                        </div>
+                        <div class="media contact-info">
+                            <span class="contact-info__icon"><i class="ti-tablet"></i></span>
+                            <div class="media-body">
+                                <h3>+1 253 565 2365</h3>
+                                <p>Mon to Fri 9am to 6pm</p>
+                            </div>
+                        </div>
+                        <div class="media contact-info">
+                            <span class="contact-info__icon"><i class="ti-email"></i></span>
+                            <div class="media-body">
+                                <h3>warp@gmail.com</h3>
+                                <p>Send us your query anytime!</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
+-->
+        <!-- ================ contact section end ================= -->
 
-        <!-- footer_start  -->
         <footer class="footer">
             <div class="footer_top">
                 <div class="container">
