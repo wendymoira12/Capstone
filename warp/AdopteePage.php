@@ -86,7 +86,7 @@ if (isset($_POST['submit']))
 
   $row = "INSERT INTO applicationform1 (adopter_id,pet_id,valid_id,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15) VALUES ('$adopter_id','$id','$valid_id','$q1','$q2','$q3','$q4','$q5','$q6','$q7','$q8','$q9','$q10','$q11','$q12','$q13','$q14','$q15');";
   $query3 = mysqli_query($conn,$row); 
-  {
+  /*{
   if(($q1 == "2" or $q1=="3")&&($q2=="5"or $q2=="6"or$q2=="7")&&($q3=="9"or $q3=="10")&&($q4 == "12")&&($q5=="13")&&($q6=="15"or $q6=="16"or $q6=="17"or $q6=="19")&&($q7 == "21")&&($q8=="23"or $q8=="24")&&($q9=="26")&&($q10 !== "32")&&($q11!=="35")&&($q12=="37")&&($q13=="40"or $q13=="41"or$q13=="42")&&($q14!=="44")&&($q15=="48"or$q15=="49"))
   {
     
@@ -94,16 +94,15 @@ if (isset($_POST['submit']))
     $row1 = "INSERT INTO applicationresult_details (application_id, application_result, application_status) VALUES ('9','qualified','sample');";
     $query4 = mysqli_query($conn,$row1); 
   }
-  else {
+  //else {
     //$notqualified = 'Not qualified';
     $row2 = "INSERT INTO applicationresult_details (application_id, application_result, application_status) VALUES ('9','qualified','sample');";
     $query5 = mysqli_query($conn,$row2); 
   }
  
- }
+ }*/
 }
-
-    
+ 
 ?>
 <!doctype html>
 <html lang="en">
@@ -339,7 +338,7 @@ if (isset($_POST['submit']))
                           <div class="modal-content clearfix">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                               <div class="modal-body">
-                                <form type="submit" method="post" action="" enctype="multipart/form-data">
+                                <form method="post" action="" enctype="multipart/form-data">
                                 <h3 class="title">Application Form</h3>
                                 <p class="description"> Please make sure that al the details below are correct. Thank you!</p>
                                 
@@ -406,16 +405,15 @@ if (isset($_POST['submit']))
                                               }
                                             ?> 
                                     </label><br>
-
-                                  </div>
+                                </div>
                                   <!-- END: q1-->
                                 
                                   <!-- q2: Civil Status -->
                                   <div class="form-group checkbox">
-                                  <label>
+                                    <label>
                                     <!-- display ONLY q2 record (appplicationquestion table) from database-->
                                     <b><?php $sql = "SELECT * FROM applicationquestions where questionID = '2'" ; $result = $conn->query($sql); $question = $result->fetch_assoc(); echo $question['questions'];?></b>
-                                  </label><br>
+                                    </label><br>
                             
                                               <!-- Radio Button Start: q2 - civilstatus -->
                                     <label>  
@@ -435,13 +433,13 @@ if (isset($_POST['submit']))
                             
                                   <!-- q3: CHILDREN -->
                                   <div class="form-group checkbox">
-                                  <label>
+                                    <label>
                                     <!-- display ONLY q3 record (appplicationquestion table) from database-->
                                     <b><?php $sql = "SELECT * FROM applicationquestions where questionID = '3'" ; $result = $conn->query($sql); $question = $result->fetch_assoc(); echo $question['questions'];?></b>
-                                  </label><br>
+                                    </label><br>
                             
                                               <!-- Radio Button Start: q3 - CHILDREN -->
-                                    <label>  
+                                      <label>  
                                        <?php
                                           $sql = "SELECT * from questionchoices where questionID = '3'";
                                           $data1 = mysqli_query($conn,$sql);
@@ -451,16 +449,16 @@ if (isset($_POST['submit']))
                                             <?php
                                               }
                                             ?> 
-                                    </label><br>
+                                      </label><br>
                                   </div>
                                   <!-- END: q3-->
                             
                                   <!-- q4: PETS -->
                                   <div class="form-group checkbox">
-                                  <label>
+                                    <label>
                                     <!-- display ONLY q4 record (appplicationquestion table) from database-->
                                     <b><?php $sql = "SELECT * FROM applicationquestions where questionID = '4'" ; $result = $conn->query($sql); $question = $result->fetch_assoc(); echo $question['questions'];?></b>
-                                  </label><br>
+                                    </label><br>
                             
                                               <!-- Radio Button Start: q4 - PETS -->
                                     <label>  
@@ -479,10 +477,10 @@ if (isset($_POST['submit']))
                             
                                   <!-- q5: past pets -->
                                   <div class="form-group checkbox">
-                                  <label>
+                                    <label>
                                     <!-- display ONLY q5 record (appplicationquestion table) from database-->
                                     <b><?php $sql = "SELECT * FROM applicationquestions where questionID = '5'" ; $result = $conn->query($sql); $question = $result->fetch_assoc(); echo $question['questions'];?></b>
-                                  </label><br>
+                                    </label><br>
                             
                                               <!-- Radio Button Start: q5 - PASTPETS -->
                                     <label>  
@@ -501,10 +499,10 @@ if (isset($_POST['submit']))
 
                                   <!-- q6: housing -->
                                   <div class="form-group checkbox">
-                                  <label>
+                                    <label>
                                     <!-- display ONLY q6 record (appplicationquestion table) from database-->
                                     <b><?php $sql = "SELECT * FROM applicationquestions where questionID = '6'" ; $result = $conn->query($sql); $question = $result->fetch_assoc(); echo $question['questions'];?></b>
-                                  </label><br>
+                                    </label><br>
                                               <!-- Radio Button Start: q6 - HOUSING -->
                                     <label>  
                                        <?php
@@ -565,7 +563,7 @@ if (isset($_POST['submit']))
                             
                                   <!-- q9: in charge financially -->
                                   <div class="form-group checkbox">
-                                  <label>
+                                    label>
                                     <!-- display ONLY q9 record (appplicationquestion table) from database-->
                                       <b><?php $sql = "SELECT * FROM applicationquestions where questionID = '9'" ; $result = $conn->query($sql); $question = $result->fetch_assoc(); echo $question['questions'];?></b>
                                     </label><br>
@@ -588,7 +586,7 @@ if (isset($_POST['submit']))
                             
                                   <!-- q10: VACATION-->
                                   <div class="form-group checkbox">
-                                  <label>
+                                    <label>
                                     <!-- display ONLY q10 record (appplicationquestion table) from database-->
                                       <b><?php $sql = "SELECT * FROM applicationquestions where questionID = '10'" ; $result = $conn->query($sql); $question = $result->fetch_assoc(); echo $question['questions'];?></b>
                                     </label><br>
@@ -611,7 +609,7 @@ if (isset($_POST['submit']))
                             
                                   <!-- q11: alone-->
                                   <div class="form-group checkbox">
-                                  <label>
+                                    <label>
                                     <!-- display ONLY q11 record (appplicationquestion table) from database-->
                                       <b><?php $sql = "SELECT * FROM applicationquestions where questionID = '11'" ; $result = $conn->query($sql); $question = $result->fetch_assoc(); echo $question['questions'];?></b>
                                     </label><br>
@@ -634,7 +632,7 @@ if (isset($_POST['submit']))
 
                                   <!-- q12: SUPPORT -->
                                   <div class="form-group checkbox">
-                                  <label>
+                                    <label>
                                     <!-- display ONLY q12 record (appplicationquestion table) from database-->
                                       <b><?php $sql = "SELECT * FROM applicationquestions where questionID = '12'" ; $result = $conn->query($sql); $question = $result->fetch_assoc(); echo $question['questions'];?></b>
                                     </label><br>
@@ -721,16 +719,17 @@ if (isset($_POST['submit']))
                                               }
                                             ?> 
                                     </label>
-                                <!-- END q15-->
                                   </div>
+                                <!-- END q15-->
                                   
-                                  <button class="btn" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span> Cancel </button>
+                                  
+                                <button class="btn" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span> Cancel </button>
                                 <input class = "btn" type="submit" name="submit" value="submit"onclick="return confirm('Are you sure you want to proceed?');">
-
+                                
                               </div>
-                               
+                              </form>
                           </div>
-                          </form>
+                          
                         </div>
                       </div>
                      
