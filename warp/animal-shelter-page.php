@@ -52,42 +52,42 @@ if ($result->num_rows > 0) {
         </head>
 
         <body>
-        <header>
-        <div class="header-area ">
-            <div id="sticky-header" class="main-header-area">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-xl-3 col-lg-3">
-                            <div class="logo">
-                                <a href="home.php">
-                                    <img src="img/logo.png" alt="">
-                                </a>
+            <header>
+                <div class="header-area ">
+                    <div id="sticky-header" class="main-header-area">
+                        <div class="container">
+                            <div class="row align-items-center">
+                                <div class="col-xl-3 col-lg-3">
+                                    <div class="logo">
+                                        <a href="home.php">
+                                            <img src="img/logo.png" alt="">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-xl-9 col-lg-9">
+                                    <div class="main-menu  d-none d-lg-block">
+                                        <nav>
+                                            <ul id="navigation">
+                                                <li><a href="home.php">Home</a></li>
+                                                <li> <a href="about.php">About Us </i></a>
+                                                <li> <a href="pets-for-adoption.php">Pets for Adoption </i></a>
+                                                <li><a href="contact.php">Contact</a></li>
+                                                <li><a href="getroleid.php?id=<?= $_SESSION['user-role-id'] ?>">
+                                                        <i class="fa-solid fa-user" style="font-size:20px;color:rgb(4, 4, 41);"></i></a>
+                                                </li>
+                                                <li><a href="logout.php?logout">Logout </a></li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="mobile_menu d-block d-lg-none"></div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-xl-9 col-lg-9">
-                            <div class="main-menu  d-none d-lg-block">
-                                <nav>
-                                    <ul id="navigation">
-                                        <li><a href="home.php">Home</a></li>
-                                        <li> <a href="about.php">About Us </i></a>
-                                        <li> <a href="pets-for-adoption.php">Pets for Adoption </i></a>
-                                        <li><a href="contact.php">Contact</a></li>
-                                        <li><a href="getroleid.php?id=<?= $_SESSION['user-role-id'] ?>">
-                                                <i class="fa-solid fa-user" style="font-size:20px;color:rgb(4, 4, 41);"></i></a>
-                                        </li>
-                                        <li><a href="logout.php?logout">Logout </a></li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="mobile_menu d-block d-lg-none"></div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </header>
+            </header>
 
             <div class="bradcam_area breadcam_bg">
                 <div class="container">
@@ -101,11 +101,15 @@ if ($result->num_rows > 0) {
                 </div>
             </div>
 
+            
+                    <div class="section_title text-center mb-95">
+                        <br>
+                        <h4><?php echo $row['city_about']; ?></h4>
+                        <h4><b>Shelter Contact: </b> <?php echo $row['city_contact']; ?></h4>
+                    </div>
+
             <!-- service_area_start  -->
-            <div class="service_area">
-                <div class="container">
-                    <div class="row justify-content-center ">
-                        <div class="col-lg-7 col-md-10">
+           
                             <div class="section_title text-center mb-95">
                                 <h3>Pets Available for Adoption</h3>
                             </div>
@@ -163,63 +167,63 @@ if ($result->num_rows > 0) {
                         <!-- ================ footer ================= -->
 
                         <footer class="footer">
-            <div class="footer_top">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-3 col-md-6 col-lg-3">
-                            <div class="footer_widget">
-                                <h3 class="footer_title">
-                                    Contact Us
-                                </h3>
-                                <ul class="address_line">
-                                    <li>warp.pup@gmail.com</li>
-                                    <li>Metro Manila, Philippines</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-xl-3  col-md-6 col-lg-3">
-                            <div class="footer_widget">
+                            <div class="footer_top">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-xl-3 col-md-6 col-lg-3">
+                                            <div class="footer_widget">
+                                                <h3 class="footer_title">
+                                                    Contact Us
+                                                </h3>
+                                                <ul class="address_line">
+                                                    <li>warp.pup@gmail.com</li>
+                                                    <li>Metro Manila, Philippines</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3  col-md-6 col-lg-3">
+                                            <div class="footer_widget">
 
-                            </div>
-                        </div>
-                        <div class="col-xl-3  col-md-6 col-lg-3">
-                            <div class="footer_widget">
-                                <h3 class="footer_title">
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3  col-md-6 col-lg-3">
+                                            <div class="footer_widget">
+                                                <h3 class="footer_title">
 
-                                </h3>
-                                <ul class="links">
-                                    <br>
+                                                </h3>
+                                                <ul class="links">
+                                                    <br>
 
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-md-6 col-lg-3 ">
-                            <div class="footer_widget">
-                                <div class="footer_logo">
-                                    <a href="#">
-                                        <img src="img/logo.png" alt="">
-                                    </a>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-md-6 col-lg-3 ">
+                                            <div class="footer_widget">
+                                                <div class="footer_logo">
+                                                    <a href="#">
+                                                        <img src="img/logo.png" alt="">
+                                                    </a>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-
-
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="copy-right_text">
-                <div class="container">
-                    <div class="bordered_1px"></div>
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <p class="copy_right text-center">
+                            <div class="copy-right_text">
+                                <div class="container">
+                                    <div class="bordered_1px"></div>
+                                    <div class="row">
+                                        <div class="col-xl-12">
+                                            <p class="copy_right text-center">
 
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </footer>
                         <!-- footer_end  -->
 
                         <!-- JS here -->
