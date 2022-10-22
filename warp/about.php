@@ -288,9 +288,14 @@
                                     Contact Us
                                 </h3>
                                 <ul class="address_line">
-                                    <li><a href="#">warp.pup@gmail.com</a></li>
+                                    <li>warp.pup@gmail.com</li>
                                     <li>Metro Manila, Philippines</li>
                                 </ul>
+                            </div>
+                        </div>
+                        <div class="col-xl-3  col-md-6 col-lg-3">
+                            <div class="footer_widget">
+
                             </div>
                         </div>
                         <div class="col-xl-3  col-md-6 col-lg-3">
@@ -300,6 +305,7 @@
                                 </h3>
                                 <ul class="links">
                                     <br>
+
                                 </ul>
                             </div>
                         </div>
@@ -310,32 +316,7 @@
                                         <img src="img/logo.png" alt="">
                                     </a>
                                 </div>
-                                <p class="address_text">Metro Manila, Philippines
-                                </p>
-                                <div class="socail_links">
-                                    <ul>
-                                        <li>
-                                            <a href="#">
-                                                <i class="ti-facebook"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="ti-pinterest"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-google-plus"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-linkedin"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
+
 
                             </div>
                         </div>

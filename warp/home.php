@@ -275,8 +275,7 @@ $row = mysqli_fetch_assoc($result);
                                     Contact Us
                                 </h3>
                                 <ul class="address_line">
-                                    <li></li>
-                                    <li>warp.pup@gmail.com</a></li>
+                                    <li>warp.pup@gmail.com</li>
                                     <li>Metro Manila, Philippines</li>
                                 </ul>
                             </div>
