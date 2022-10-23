@@ -182,10 +182,11 @@ $row = mysqli_fetch_assoc($result);
                     <div class="col-lg-5">
                         <div class="adapt_help">
                             <div class="section_title">
-                                <h3><span>We need your help</span>
-                                     Adopt Us</h3>
-                                <p></p>
-                                <a href="contact.php" class="boxed-btn3">Contact Us</a>
+                                <h3>We need your help</h3>
+                                <p>Adopt, don't shop. Save a life by adopting
+                                    a pet from your local shelter.
+                                </p>
+                                <a href="pets-for-adoption.php" class="boxed-btn3">Adopt Us</a>
                             </div>
                         </div>
                     </div>
