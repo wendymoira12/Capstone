@@ -1,4 +1,4 @@
-<!-- <?php
+<?php
 error_reporting(0);
 
 session_start();
@@ -15,22 +15,35 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
   }
 }
 
-// if (!isset($_GET['id'])) {
-//   die('Id not provided');
-// }
+if (!isset($_GET['id'])) {
+  die('Id not provided');
+}
 
-// $id = $_GET['id'];
-// $sql = "SELECT * FROM adoptee_tbl WHERE pet_id = $id";
-// $result = $conn->query($sql);
+// Kukunin yung answers from application form na equivalent sa questionchoices
+$id = $_GET['id'];
+// $sql = "SELECT * FROM applicationform1 INNER JOIN questionchoices ON applicationform1.q1 = questionchoices.id, applicationform1.q2 = questionchoices.id, applicationform1.q3 = questionchoices.id, applicationform1.q4 = questionchoices.id, applicationform1.q5 = questionchoices.id, applicationform1.q6 = questionchoices.id, applicationform1.q7 = questionchoices.id, applicationform1.q8 = questionchoices.id, applicationform1.q9 = questionchoices.id, applicationform1.q10 = questionchoices.id, applicationform1.q11 = questionchoices.id, applicationform1.q12 = questionchoices.id, applicationform1.q13 = questionchoices.id, applicationform1.q14 = questionchoices.id, applicationform1.q15 = questionchoices.id WHERE application_id = $id";
 
-// if ($result->num_rows != 1) {
-//   die('id not found');
-// }
+$sql = "SELECT * FROM applicationform1 WHERE application_id = $id";
+$result = $conn->query($sql);
 
-// $data = mysqli_fetch_assoc($result);
-// $chkvalues = explode(", ", $data["pet_vax"]);
+if ($result->num_rows != 1) {
+  die('id not found');
+}
+
+$qdata = mysqli_fetch_assoc($result);
+
+// Kukunin yung adopter info na ishoshow sa view form
+$sql = "SELECT * FROM adopter_tbl INNER JOIN user_tbl ON adopter_tbl.user_id = user_tbl.user_id WHERE adopter_id = '$id'";
+$result = $conn->query($sql);
+
+if ($result->num_rows != 1) {
+  die('id not found');
+}
+
+$adata = mysqli_fetch_assoc($result);
 
 ?>
+
 <?php
 // Get the user ID from the login sesh
 $user_id = $_SESSION['user_id'];
@@ -41,13 +54,13 @@ $result = mysqli_query($conn, $sql);
 if ($result->num_rows > 0) {
   $row = mysqli_fetch_assoc($result);
   $city_id = $row['city_id'];
-  $sql = "SELECT city_img FROM city_tbl WHERE city_id='$city_id'";
+  $sql = "SELECT * FROM city_tbl INNER JOIN shelteruser_tbl ON city_tbl.city_id = shelteruser_tbl.city_id WHERE city_tbl.city_id AND shelteruser_tbl.city_id ='$city_id'";
   $result = mysqli_query($conn, $sql);
   if ($result == TRUE) {
     $row = mysqli_fetch_assoc($result);
   }
 }
-?> -->
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -108,14 +121,13 @@ if ($result->num_rows > 0) {
             <div class="profile_info">
               <span>Welcome,</span>
               <h2>
-                <!-- <?php
-                //DISPLAY SESSION
-                if (isset($_SESSION['user-email'])) {
-                  echo $_SESSION['user-email'];
-                } else {
-                  header('Location:/Capstone/warp/login.php');
-                }
-                ?> -->
+                <?php
+                echo $row['shelteruser_name'] . ',';
+                ?>
+                <br>
+                <?php
+                echo $row['shelteruser_position'];
+                ?>
               </h2>
             </div>
           </div>
@@ -202,171 +214,222 @@ if ($result->num_rows > 0) {
                   <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">Adopter I.D</label>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">Adopter I.D: </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <img src="" alt="Adopter Identification Card">
+                        <img src="shelter/production/images/valid_id/<?= $data['valid_id']; ?>" alt="Adopter Identification Card">
+                      </div>
+                    </div>
+                    
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">First Name: </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" name="" value="<?= $adata['adopter_fname'] ?>" class="form-control col-md-7 col-xs-12" disabled>
                       </div>
                     </div>
 
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">First Name</label>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">Last Name: </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" name="pet-name" value="<?= $data['pet_name'] ?>" class="form-control col-md-7 col-xs-12">
+                        <input type="text" name="" value="<?= $adata['adopter_lname'] ?>" class="form-control col-md-7 col-xs-12" disabled>
                       </div>
                     </div>
 
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">First Name</label>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">Age: </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" name="pet-name" value="<?= $data['pet_name'] ?>" class="form-control col-md-7 col-xs-12">
+                        <input type="text" name="" value="<?= $adata['adopter_age'] ?>" class="form-control col-md-7 col-xs-12" disabled>
                       </div>
                     </div>
 
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">Last Name</label>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">Home Address: </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" name="pet-name" value="<?= $data['pet_name'] ?>" class="form-control col-md-7 col-xs-12">
+                        <input type="text" name="" value="<?= $adata['adopter_city'] ?>" class="form-control col-md-7 col-xs-12" disabled>
                       </div>
                     </div>
 
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">Age</label>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">Contact Number: </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" name="pet-name" value="<?= $data['pet_name'] ?>" class="form-control col-md-7 col-xs-12">
+                        <input type="text" name="" value="<?= $adata['adopter_cnum'] ?>" class="form-control col-md-7 col-xs-12" disabled>
                       </div>
                     </div>
 
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">Home Address</label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" name="pet-name" value="<?= $data['pet_name'] ?>" class="form-control col-md-7 col-xs-12">
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">Contact Number</label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" name="pet-name" value="<?= $data['pet_name'] ?>" class="form-control col-md-7 col-xs-12">
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-age">E-mail Address</span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-age">E-mail Address: </span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" name="pet-age" value="<?= $data['pet_age'] ?>" class="form-control col-md-7 col-xs-12">
+                        <input type="text" name="" value="<?= $adata['user_email'] ?>" class="form-control col-md-7 col-xs-12" disabled>
                       </div>
                     </div>
 
                     <div class="form-group">
-                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Occupation</label>
+                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Occupation: </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" name="color" value="<?= $data['pet_color'] ?>">
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?php
+                      if($qdata['q1']= '1'){
+                        echo 'Student';
+                      }else if($qdata['q1']= '2'){
+                        echo 'Employed';
+                      }else if($qdata['q1']= '3'){
+                        echo 'Self-Employed';
+                      }else if($qdata['q1']= '4'){
+                        echo 'None';
+                      }
+                      ?>" disabled>
+                        </div>
                       </div>
-                    </div>
 
                     <div class="form-group">
-                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Civil Status</label>
+                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Civil Status: </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" name="breed" value="<?= $data['pet_breed'] ?>">
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?php
+                      if($qdata['q2']= '5'){
+                        echo 'Single';
+                      }else if($qdata['q2']= '6'){
+                        echo 'Married';
+                      }else if($qdata['q2']= '7'){
+                        echo 'Other';
+                      }
+                      ?>" disabled>
                       </div>
                     </div>
                     
                     <div class="form-group">
-                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Are there children (below 18) in the house? If yes how old are they?</label>
+                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Are there children (below 18) in the house? If yes how old are they? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" name="breed" value="<?= $data['pet_breed'] ?>">
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?php
+                      if($qdata['q3']= '8'){
+                        echo 'There are children below 8 years old.';
+                      }else if($qdata['q3']= '9'){
+                        echo 'All children in our house are older than 8 years old';
+                      }else if($qdata['q3']= '10'){
+                        echo 'There are no children living in our house';
+                      }
+                      ?>" disabled>
                       </div>
                     </div>
                     
                     <div class="form-group">
-                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Do you have other children?</label>
+                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Do you have other children? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" name="breed" value="<?= $data['pet_breed'] ?>">
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?php
+                      if($qdata['q4']= '11'){
+                        echo 'Yes';
+                      }else if($qdata['q4']= '12'){
+                        echo 'None';
+                      }
+                      ?>" disabled>
                       </div>
                     </div>
                     
                     <div class="form-group">
-                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Have you had pets in the past?</label>
+                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Have you had pets in the past? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" name="breed" value="<?= $data['pet_breed'] ?>">
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?php
+                      if($qdata['q5']= '13'){
+                        echo 'Yes';
+                      }else if($qdata['q5']= '14'){
+                        echo 'No';
+                      }
+                      ?>" disabled>
                       </div>
                     </div>
                     
                     <div class="form-group">
-                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Who else do you live with?</label>
+                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Who else do you live with? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" name="breed" value="<?= $data['pet_breed'] ?>">
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?php
+                      if($qdata['q6']= '15'){
+                        echo 'I live by myself';
+                      }else if($qdata['q6']= '16'){
+                        echo 'Spouse/Partner';
+                      }else if($qdata['q6']= '17'){
+                        echo 'Parents';
+                      }else if($qdata['q6']= '18'){
+                        echo 'Roommate/s';
+                      }else if($qdata['q6']= '19'){
+                        echo 'Other Relatives';
+                      }
+                      ?>" disabled>
                       </div>
                     </div>
                     
                     <div class="form-group">
-                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Are any members of your household allergic to animals?</label>
+                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Are any members of your household allergic to animals? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" name="breed" value="<?= $data['pet_breed'] ?>">
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?php
+                      if($qdata['q7']= '20'){
+                        echo 'Yes';
+                      }else if($qdata['q7']= '21'){
+                        echo 'No';
+                      }else if($qdata['q7']= '22'){
+                        echo 'I don\'t know';
+                      }
+                      ?>" disabled>
                       </div>
                     </div>
                     
                     <div class="form-group">
-                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Who will be responsible for feeding, grooming, and generally caring for your pet?</label>
+                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Who will be responsible for feeding, grooming, and generally caring for your pet? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" name="breed" value="<?= $data['pet_breed'] ?>">
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q8'] ?>" disabled>
                       </div>
                     </div>
                     
                     <div class="form-group">
-                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Who will be financially responsible for your pet's needs</label>
+                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Who will be financially responsible for your pet's needs? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" name="breed" value="<?= $data['pet_breed'] ?>">
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q9'] ?>" disabled>
                       </div>
                     </div>
                     
                     <div class="form-group">
-                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Who will look after your pet if you go on vacation or in case of emergency?</label>
+                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Who will look after your pet if you go on vacation or in case of emergency? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" name="breed" value="<?= $data['pet_breed'] ?>">
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q10'] ?>" disabled>
                       </div>
                     </div>
                     
                     <div class="form-group">
-                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">How many hours in an average workday will your pet be left alone?</label>
+                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">How many hours in an average workday will your pet be left alone? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" name="breed" value="<?= $data['pet_breed'] ?>">
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q11'] ?>" disabled>
                       </div>
                     </div>
                     
                     <div class="form-group">
-                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Does everyone in the family support your decision to adopt a pet?</label>
+                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Does everyone in the family support your decision to adopt a pet? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" name="breed" value="<?= $data['pet_breed'] ?>">
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q12'] ?>" disabled>
                       </div>
                     </div>
                     
                     <div class="form-group">
-                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">What type of building do you live in?</label>
+                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">What type of building do you live in? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" name="breed" value="<?= $data['pet_breed'] ?>">
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q13'] ?>" disabled>
                       </div>
                     </div>
                     
                     <div class="form-group">
-                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">If you rent, do you have permission from your landlord to have an animal?</label>
+                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">If you rent, do you have permission from your landlord to have an animal? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" name="breed" value="<?= $data['pet_breed'] ?>">
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q14'] ?>" disabled>
                       </div>
                     </div>
                     
                     <div class="form-group">
-                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Are you prepared to spend for the wellness of your pet? If so, how much are you willing to spend in a year?</label>
+                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Are you prepared to spend for the wellness of your pet? If so, how much are you willing to spend in a year? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" name="breed" value="<?= $data['pet_breed'] ?>">
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q15'] ?>" disabled>
                       </div>
                     </div>
 
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                        <a href="shelter_adoptee_list.php">
+                        <a href="shelter_application_list.php">
                           <button name="pet-cancel" class="btn btn-round btn-primary" type="button">Cancel</button>
                         </a>
                         <button name="pet-reset" class="btn btn-round btn-danger" type="reset">Reject</button>

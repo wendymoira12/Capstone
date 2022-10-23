@@ -195,30 +195,6 @@ if ($result->num_rows > 0) {
                 <div class="x_content">
                   <br />
 
-                  <!---------------------- TINANGGAL KO MUNA YUNG DROPZONE ---------------------->
-
-                  <!-- <div class="clearfix"></div>
-
-                        <div class="row">
-                          <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="x_panel">
-                              <div class="x_title">
-                                <h3>Add Adoptee Images and Videos</h3>
-                                
-                                <div class="clearfix"></div>
-                              </div>
-                              <div class="x_content">
-                                <p>Drag multiple files to the box below for multi upload or click to select files. This is for demonstration purposes only, the files are not uploaded to any server.</p>
-                                <form action="shelter_adoptee_info.php" class="dropzone"></form>
-                                <br />
-                                <br />
-                                <br />
-                                <br /> 
-                              </div>
-                            </div>
-                          </div>
-                        </div> -->
-
                   <form enctype="multipart/form-data" action="modify.php?id=<?= $id ?>" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
                     <div class="form-group">
