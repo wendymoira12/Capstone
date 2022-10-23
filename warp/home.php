@@ -182,8 +182,8 @@ $row = mysqli_fetch_assoc($result);
                     <div class="col-lg-5">
                         <div class="adapt_help">
                             <div class="section_title">
-                                <h3><span>We need your</span>
-                                    help Adopt Us</h3>
+                                <h3><span>We need your help</span>
+                                     Adopt Us</h3>
                                 <p></p>
                                 <a href="contact.php" class="boxed-btn3">Contact Us</a>
                             </div>
