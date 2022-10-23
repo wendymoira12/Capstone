@@ -61,47 +61,50 @@ $chkvalues = explode(", ", $data["pet_vax"]);
 <?php 
 
 if (isset($_POST['submit']))
-    {
+  {
 
   $valid_id = $_FILES['valid_id']['name'];
   $valid_id_tmp_name = $_FILES['valid_id']['tmp_name'];
   $valid_id_folder = 'shelter/production/images/valid_id/' . $valid_id;
   
- $q1 = $_POST['occupation'];
- $q2 = $_POST["civilstatus"];
- $q3 = $_POST["children"];
- $q4 = $_POST["pets"];
- $q5 = $_POST["pastpets"];
- $q6 = $_POST["housing"];
- $q7 = $_POST["allergy"];
- $q8 = $_POST["wellness"];
- $q9 = $_POST["finance"];
- $q10 = $_POST["emergency"];
- $q11 = $_POST["alone"];
- $q12 = $_POST["support"];
- $q13 = $_POST["rent"];
- $q14 = $_POST['allow'];
- $q15 = $_POST['spending'];
+ 
+  $q1 = $_POST['occupation'];
+  $q2 = $_POST["civilstatus"];
+  $q3 = $_POST["children"];
+  $q4 = $_POST["pets"];
+  $q5 = $_POST["pastpets"];
+  $q6 = $_POST["housing"];
+  $q7 = $_POST["allergy"];
+  $q8 = $_POST["wellness"];
+  $q9 = $_POST["finance"];
+  $q10 = $_POST["emergency"];
+  $q11 = $_POST["alone"];
+  $q12 = $_POST["support"];
+  $q13 = $_POST["rent"];
+  $q14 = $_POST['allow'];
+  $q15 = $_POST['spending'];
+
+  
   //$adopter = "SELECT * FROM a.adopter_tbl,u.user_tbl WHERE a.user_id=$_SESSION['user_id']";
 
   $row = "INSERT INTO applicationform1 (adopter_id,pet_id,valid_id,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15) VALUES ('$adopter_id','$id','$valid_id','$q1','$q2','$q3','$q4','$q5','$q6','$q7','$q8','$q9','$q10','$q11','$q12','$q13','$q14','$q15');";
   $query3 = mysqli_query($conn,$row); 
-  /*{
+
+/* CHANGE THIS NO LONGER APPLICABLE - find solution na pagtama hindi na base sa value 'id'
+  {
   if(($q1 == "2" or $q1=="3")&&($q2=="5"or $q2=="6"or$q2=="7")&&($q3=="9"or $q3=="10")&&($q4 == "12")&&($q5=="13")&&($q6=="15"or $q6=="16"or $q6=="17"or $q6=="19")&&($q7 == "21")&&($q8=="23"or $q8=="24")&&($q9=="26")&&($q10 !== "32")&&($q11!=="35")&&($q12=="37")&&($q13=="40"or $q13=="41"or$q13=="42")&&($q14!=="44")&&($q15=="48"or$q15=="49"))
   {
     
     //sample data pa lang chineck lang kung papasok sa database
-    $row1 = "INSERT INTO applicationresult_details (application_id, application_result, application_status) VALUES ('9','qualified','sample');";
-    $query4 = mysqli_query($conn,$row1); 
+    echo "correct";
   }
   //else {
     //$notqualified = 'Not qualified';
-    $row2 = "INSERT INTO applicationresult_details (application_id, application_result, application_status) VALUES ('9','qualified','sample');";
-    $query5 = mysqli_query($conn,$row2); 
+    echo "not correct";
   }
- 
- }*/
-}
+ */
+ }
+
  
 ?>
 <!doctype html>
@@ -400,7 +403,7 @@ if (isset($_POST['submit']))
                                           $data1 = mysqli_query($conn,$sql);
                                           while($row = mysqli_fetch_assoc($data1)){
                                             ?>
-                                              <input type="radio" name='occupation' value = "<?php echo $row['id']?>" required> <?php echo $row['choices']?> </input><br>
+                                              <input type="radio" name='occupation' value = "<?php echo $row['choices']?>" required> <?php echo $row['choices']?> </input><br>
                                             <?php
                                               }
                                             ?> 
@@ -422,7 +425,7 @@ if (isset($_POST['submit']))
                                           $data1 = mysqli_query($conn,$sql);
                                           while($row = mysqli_fetch_assoc($data1)){
                                             ?>
-                                              <input type="radio" name='civilstatus' value = "<?php echo $row['id']?>" required> <?php echo $row['choices']?> </input><br>
+                                              <input type="radio" name='civilstatus' value = "<?php echo $row['choices']?>" required> <?php echo $row['choices']?> </input><br>
                                             <?php
                                               }
                                             ?> 
@@ -445,7 +448,7 @@ if (isset($_POST['submit']))
                                           $data1 = mysqli_query($conn,$sql);
                                           while($row = mysqli_fetch_assoc($data1)){
                                             ?>
-                                              <input type="radio" name='children' value = "<?php echo $row['id']?>" required> <?php echo $row['choices']?> </input><br>
+                                              <input type="radio" name='children' value = "<?php echo $row['choices']?>" required> <?php echo $row['choices']?> </input><br>
                                             <?php
                                               }
                                             ?> 
@@ -467,7 +470,7 @@ if (isset($_POST['submit']))
                                           $data1 = mysqli_query($conn,$sql);
                                           while($row = mysqli_fetch_assoc($data1)){
                                             ?>
-                                              <input type="radio" name='pets' value = "<?php echo $row['id']?>" required> <?php echo $row['choices']?> </input><br>
+                                              <input type="radio" name='pets' value = "<?php echo $row['choices']?>" required> <?php echo $row['choices']?> </input><br>
                                             <?php
                                               }
                                             ?> 
@@ -489,7 +492,7 @@ if (isset($_POST['submit']))
                                           $data1 = mysqli_query($conn,$sql);
                                           while($row = mysqli_fetch_assoc($data1)){
                                             ?>
-                                              <input type="radio" name='pastpets' value = "<?php echo $row['id']?>" required> <?php echo $row['choices']?> </input><br>
+                                              <input type="radio" name='pastpets' value = "<?php echo $row['choices']?>" required> <?php echo $row['choices']?> </input><br>
                                             <?php
                                               }
                                             ?> 
@@ -510,7 +513,7 @@ if (isset($_POST['submit']))
                                           $data1 = mysqli_query($conn,$sql);
                                           while($row = mysqli_fetch_assoc($data1)){
                                             ?>
-                                              <input type="radio" name='housing' value = "<?php echo $row['id']?>" required> <?php echo $row['choices']?> </input><br>
+                                              <input type="radio" name='housing' value = "<?php echo $row['choices']?>" required> <?php echo $row['choices']?> </input><br>
                                             <?php
                                               }
                                             ?> 
@@ -531,7 +534,7 @@ if (isset($_POST['submit']))
                                           $data1 = mysqli_query($conn,$sql);
                                           while($row = mysqli_fetch_assoc($data1)){
                                             ?>
-                                              <input type="radio" name='allergy' value = "<?php echo $row['id']?>" required> <?php echo $row['choices']?> </input><br>
+                                              <input type="radio" name='allergy' value = "<?php echo $row['choices']?>" required> <?php echo $row['choices']?> </input><br>
                                             <?php
                                               }
                                             ?> 
@@ -553,7 +556,7 @@ if (isset($_POST['submit']))
                                           $data1 = mysqli_query($conn,$sql);
                                           while($row = mysqli_fetch_assoc($data1)){
                                             ?>
-                                              <input type="radio" name='wellness' value = "<?php echo $row['id']?>" required> <?php echo $row['choices']?> </input><br>
+                                              <input type="radio" name='wellness' value = "<?php echo $row['choices']?>" required> <?php echo $row['choices']?> </input><br>
                                             <?php
                                               }
                                             ?> 
@@ -576,7 +579,7 @@ if (isset($_POST['submit']))
                                           $data1 = mysqli_query($conn,$sql);
                                           while($row = mysqli_fetch_assoc($data1)){
                                             ?>
-                                              <input type="radio" name='finance' value = "<?php echo $row['id']?>" required> <?php echo $row['choices']?> </input><br>
+                                              <input type="radio" name='finance' value = "<?php echo $row['choices']?>" required> <?php echo $row['choices']?> </input><br>
                                             <?php
                                               }
                                             ?> 
@@ -599,7 +602,7 @@ if (isset($_POST['submit']))
                                           $data1 = mysqli_query($conn,$sql);
                                           while($row = mysqli_fetch_assoc($data1)){
                                             ?>
-                                              <input type="radio" name='emergency' value = "<?php echo $row['id']?>" required> <?php echo $row['choices']?> </input><br>
+                                              <input type="radio" name='emergency' value = "<?php echo $row['choices']?>" required> <?php echo $row['choices']?> </input><br>
                                             <?php
                                               }
                                             ?> 
@@ -622,7 +625,7 @@ if (isset($_POST['submit']))
                                           $data1 = mysqli_query($conn,$sql);
                                           while($row = mysqli_fetch_assoc($data1)){
                                             ?>
-                                              <input type="radio" name='alone' value = "<?php echo $row['id']?>" required> <?php echo $row['choices']?> </input><br>
+                                              <input type="radio" name='alone' value = "<?php echo $row['choices']?>" required> <?php echo $row['choices']?> </input><br>
                                             <?php
                                               }
                                             ?> 
@@ -645,7 +648,7 @@ if (isset($_POST['submit']))
                                           $data1 = mysqli_query($conn,$sql);
                                           while($row = mysqli_fetch_assoc($data1)){
                                             ?>
-                                              <input type="radio" name='support' value = "<?php echo $row['id']?>" required> <?php echo $row['choices']?> </input><br>
+                                              <input type="radio" name='support' value = "<?php echo $row['choices']?>" required> <?php echo $row['choices']?> </input><br>
                                             <?php
                                               }
                                             ?> 
@@ -668,7 +671,7 @@ if (isset($_POST['submit']))
                                           $data1 = mysqli_query($conn,$sql);
                                           while($row = mysqli_fetch_assoc($data1)){
                                             ?>
-                                              <input type="radio" name='rent' value = "<?php echo $row['id']?>" required> <?php echo $row['choices']?> </input><br>
+                                              <input type="radio" name='rent' value = "<?php echo $row['choices']?>" required> <?php echo $row['choices']?> </input><br>
                                             <?php
                                               }
                                             ?> 
@@ -691,7 +694,7 @@ if (isset($_POST['submit']))
                                           $data1 = mysqli_query($conn,$sql);
                                           while($row = mysqli_fetch_assoc($data1)){
                                             ?>
-                                              <input type="radio" name='allow' value = "<?php echo $row['id']?>" required> <?php echo $row['choices']?> </input><br>
+                                              <input type="radio" name='allow' value = "<?php echo $row['choices']?>" required> <?php echo $row['choices']?> </input><br>
                                             <?php
                                               }
                                             ?> 
@@ -714,7 +717,7 @@ if (isset($_POST['submit']))
                                           $data1 = mysqli_query($conn,$sql);
                                           while($row = mysqli_fetch_assoc($data1)){
                                             ?>
-                                              <input type="radio" name='spending' value = "<?php echo $row['id']?>" required> <?php echo $row['choices']?> </input><br>
+                                              <input type="radio" name='spending' value = "<?php echo $row['choices']?>" required> <?php echo $row['choices']?> </input><br>
                                             <?php
                                               }
                                             ?> 
