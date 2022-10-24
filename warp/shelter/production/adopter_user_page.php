@@ -1,8 +1,10 @@
 <?php
-session_start();
 include 'config.php';
+session_start();
 
-if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
+//if hindi nakaset si user-email and user-role-id babalik sya sa login.php
+
+if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'],$_SESSION['user_id'])) {
   header('Location:/Capstone/warp/login.php');
 } else {
   $role_id = $_SESSION['user-role-id'];
@@ -12,6 +14,58 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
     header('Location:/Capstone/warp/home.php');
   }
 }
+
+$user_id = $_SESSION['user_id'];
+$sql = "SELECT * FROM user_tbl WHERE user_id ='$user_id'";
+$result = mysqli_query($conn, $sql);
+$row1 = mysqli_fetch_assoc($result);
+
+$user_id = $_SESSION['user_id'];
+$sql = "SELECT * FROM adopter_tbl WHERE user_id ='$user_id'";
+$result = mysqli_query($conn, $sql);
+
+if ($result->num_rows > 0) {
+  $row = mysqli_fetch_assoc($result);
+  $adopter_id = $row['adopter_id'];
+  $sql = "SELECT * FROM user_tbl INNER JOIN adopter_tbl ON user_tbl.user_id = adopter_tbl.user_id WHERE user_tbl.user_id AND adopter_tbl.user_id ='$adopter_id'";
+  $result = mysqli_query($conn, $sql);
+  if ($result == TRUE) {
+    $adopterresult = mysqli_fetch_assoc($result);
+  }
+}
+?>
+
+<?php
+$sqlapp= "SELECT * FROM applicationform1, applicationresult_details WHERE adopter_id ='$adopter_id';";
+
+$result = mysqli_query($conn, $sqlapp);
+
+if ($result) {
+    if (mysqli_num_rows($result) > 0) {
+      $row1 = mysqli_fetch_assoc($result);
+    } else {
+        echo 'not found';
+    }
+} else {
+    echo 'Error: ' . mysqli_error();
+}
+
+//mysqli_close($mysqli);
+
+?>
+<?php
+
+$sql = "SELECT pet_name FROM adoptee_tbl, applicationform1 WHERE adoptee_tbl.pet_id = applicationform1.pet_id;";
+$result = $conn->query($sql);
+$data = mysqli_fetch_assoc($result);
+
+
+?>
+<?php
+
+
+//mysqli_close($mysqli);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,7 +115,7 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
             </div>
             <div class="profile_info">
               <span>Welcome,</span>
-              <h2>User</h2>
+              <h2><?php echo $row['adopter_fname']; ?></h2>
             </div>
           </div>
           <!-- /menu profile quick info -->
@@ -144,11 +198,11 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
                       <tbody>
                         <tr>
                           <th scope="row">1</th>
-                          <th scope="row">A001</th>
-                          <td>Brownie</td>
-                          <td>02/09/2022</td>
-                          <td>Under Assessment</td>
-                          <td><button type="button" class="btn btn-round btn-danger">Cancel</button></td>
+                          <th scope="row"><?php echo $row1['application_id']; ?></th>
+                          <th scope="row"><?php echo $data['pet_name']; ?></th>
+                          <td><?php echo $row1['date_submitted']; ?></td>
+                          <td><?php echo $row1['application_status']; ?></td>
+                          <td><input type="button" value="cancel" class="btn btn-round btn-danger"></button></td>
                         </tr>
                       </tbody>
                     </table>
