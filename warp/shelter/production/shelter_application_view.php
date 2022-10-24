@@ -21,26 +21,29 @@ if (!isset($_GET['id'])) {
 
 // Kukunin yung answers from application form na equivalent sa questionchoices
 $id = $_GET['id'];
-// $sql = "SELECT * FROM applicationform1 INNER JOIN questionchoices ON applicationform1.q1 = questionchoices.id, applicationform1.q2 = questionchoices.id, applicationform1.q3 = questionchoices.id, applicationform1.q4 = questionchoices.id, applicationform1.q5 = questionchoices.id, applicationform1.q6 = questionchoices.id, applicationform1.q7 = questionchoices.id, applicationform1.q8 = questionchoices.id, applicationform1.q9 = questionchoices.id, applicationform1.q10 = questionchoices.id, applicationform1.q11 = questionchoices.id, applicationform1.q12 = questionchoices.id, applicationform1.q13 = questionchoices.id, applicationform1.q14 = questionchoices.id, applicationform1.q15 = questionchoices.id WHERE application_id = $id";
-
 $sql = "SELECT * FROM applicationform1 WHERE application_id = $id";
 $result = $conn->query($sql);
-
-if ($result->num_rows != 1) {
-  die('id not found');
-}
-
 $qdata = mysqli_fetch_assoc($result);
 
-// Kukunin yung adopter info na ishoshow sa view form
-$sql = "SELECT * FROM adopter_tbl INNER JOIN user_tbl ON adopter_tbl.user_id = user_tbl.user_id WHERE adopter_id = '$id'";
-$result = $conn->query($sql);
-
 if ($result->num_rows != 1) {
   die('id not found');
 }
 
-$adata = mysqli_fetch_assoc($result);
+if ($result->num_rows > 0) {
+  $adopter_id = $qdata['adopter_id'];
+  // Kukunin yung adopter info na ishoshow sa view form
+  $sql = "SELECT * FROM adopter_tbl INNER JOIN user_tbl ON adopter_tbl.user_id = user_tbl.user_id WHERE adopter_id = '$adopter_id'";
+  $result = $conn->query($sql);
+  if ($result == TRUE){
+    $adata = mysqli_fetch_assoc($result);
+  }
+
+  if ($result->num_rows != 1) {
+    die('found no id');
+  }
+
+}
+
 
 ?>
 
@@ -216,7 +219,7 @@ if ($result->num_rows > 0) {
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">Adopter I.D: </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <img src="shelter/production/images/valid_id/<?= $data['valid_id']; ?>" alt="Adopter Identification Card">
+                        <img src="images/valid_id/<?= $qdata['valid_id']; ?>" alt="Adopter Identification Card" height="150" width="150">
                       </div>
                     </div>
                     
@@ -266,107 +269,49 @@ if ($result->num_rows > 0) {
                     <div class="form-group">
                       <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Occupation: </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?php
-                      if($qdata['q1']= '1'){
-                        echo 'Student';
-                      }else if($qdata['q1']= '2'){
-                        echo 'Employed';
-                      }else if($qdata['q1']= '3'){
-                        echo 'Self-Employed';
-                      }else if($qdata['q1']= '4'){
-                        echo 'None';
-                      }
-                      ?>" disabled>
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q1'] ?>" disabled>
                         </div>
                       </div>
 
                     <div class="form-group">
                       <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Civil Status: </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?php
-                      if($qdata['q2']= '5'){
-                        echo 'Single';
-                      }else if($qdata['q2']= '6'){
-                        echo 'Married';
-                      }else if($qdata['q2']= '7'){
-                        echo 'Other';
-                      }
-                      ?>" disabled>
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q2'] ?>" disabled>
                       </div>
                     </div>
                     
                     <div class="form-group">
                       <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Are there children (below 18) in the house? If yes how old are they? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?php
-                      if($qdata['q3']= '8'){
-                        echo 'There are children below 8 years old.';
-                      }else if($qdata['q3']= '9'){
-                        echo 'All children in our house are older than 8 years old';
-                      }else if($qdata['q3']= '10'){
-                        echo 'There are no children living in our house';
-                      }
-                      ?>" disabled>
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q3'] ?>" disabled>
                       </div>
                     </div>
                     
                     <div class="form-group">
                       <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Do you have other children? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?php
-                      if($qdata['q4']= '11'){
-                        echo 'Yes';
-                      }else if($qdata['q4']= '12'){
-                        echo 'None';
-                      }
-                      ?>" disabled>
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q4'] ?>" disabled>
                       </div>
                     </div>
                     
                     <div class="form-group">
                       <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Have you had pets in the past? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?php
-                      if($qdata['q5']= '13'){
-                        echo 'Yes';
-                      }else if($qdata['q5']= '14'){
-                        echo 'No';
-                      }
-                      ?>" disabled>
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q5'] ?>" disabled>
                       </div>
                     </div>
                     
                     <div class="form-group">
                       <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Who else do you live with? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?php
-                      if($qdata['q6']= '15'){
-                        echo 'I live by myself';
-                      }else if($qdata['q6']= '16'){
-                        echo 'Spouse/Partner';
-                      }else if($qdata['q6']= '17'){
-                        echo 'Parents';
-                      }else if($qdata['q6']= '18'){
-                        echo 'Roommate/s';
-                      }else if($qdata['q6']= '19'){
-                        echo 'Other Relatives';
-                      }
-                      ?>" disabled>
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q6'] ?>" disabled>
                       </div>
                     </div>
                     
                     <div class="form-group">
                       <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Are any members of your household allergic to animals? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?php
-                      if($qdata['q7']= '20'){
-                        echo 'Yes';
-                      }else if($qdata['q7']= '21'){
-                        echo 'No';
-                      }else if($qdata['q7']= '22'){
-                        echo 'I don\'t know';
-                      }
-                      ?>" disabled>
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q7'] ?>" disabled>
                       </div>
                     </div>
                     
@@ -394,7 +339,7 @@ if ($result->num_rows > 0) {
                     <div class="form-group">
                       <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">How many hours in an average workday will your pet be left alone? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q11'] ?>" disabled>
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q11'] ?>. hour/s" disabled>
                       </div>
                     </div>
                     
@@ -430,9 +375,9 @@ if ($result->num_rows > 0) {
                     <div class="form-group">
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                         <a href="shelter_application_list.php">
-                          <button name="pet-cancel" class="btn btn-round btn-primary" type="button">Cancel</button>
+                          <button class="btn btn-round btn-primary" type="button" onclick="return confirm('Are you sure you want to cancel?');">Cancel</button>
                         </a>
-                        <button name="pet-reset" class="btn btn-round btn-danger" type="reset">Reject</button>
+                        <button class="btn btn-round btn-danger" type="reset" onclick="return confirm('Are you sure you want to reject this application?');">Reject</button>
                         <a href="#" data-toggle="modal" data-target="#modalDate"><button name="edit-pet-submit" class="btn btn-round btn-success">Accept</button></a>
                       </div>
 
@@ -447,7 +392,7 @@ if ($result->num_rows > 0) {
                               <input type="date">
                             </div>
                             <div class="modal-footer">
-                              <button class="btn btn-success">Submit
+                              <button class="btn btn-success" onclick="return confirm('Are you sure you want to accept this application and proceed with the scheduled date?');">Submit
                               </button>
                             </div>
                           </div> 

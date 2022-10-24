@@ -253,7 +253,7 @@ if ($result->num_rows > 0) {
                               </a>
 
                               <a href="shelter_adoptee.delete.php?id=<?php echo $row['pet_id']; ?>">
-                                <button type="button" class="btn btn-round btn-danger" onclick="submitData(<?php echo $row['pet_id']; ?>);">Delete</button>
+                                <button type="button" class="btn btn-round btn-danger" onclick="return confirm('Are you sure you want to accept this application?'); submitData(<?php echo $row['pet_id']; ?>);">Delete</button>
                               </a>
                             </td>
                           </tr>
