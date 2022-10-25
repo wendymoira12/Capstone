@@ -8,7 +8,7 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'],$_SESSION['user_id
   header('Location:/Capstone/warp/login.php');
 } else {
   $role_id = $_SESSION['user-role-id'];
-  if ($role_id == 1) {
+  if ($role_id == 1 or $role_id == 2) {
     htmlspecialchars($_SERVER['PHP_SELF']);
   } else {
     header('Location:/Capstone/warp/home.php');
