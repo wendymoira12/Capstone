@@ -87,7 +87,9 @@ if (isset($_POST['submit']))
 
   $row = "INSERT INTO applicationform1 (adopter_id,pet_id,valid_id,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15) VALUES ('$adopter_id','$id','$valid_id','$q1','$q2','$q3','$q4','$q5','$q6','$q7','$q8','$q9','$q10','$q11','$q12','$q13','$q14','$q15');";
   $query3 = mysqli_query($conn,$row); 
-  move_uploaded_file($valid_id_tmp_name, $valid_id_folder);
+  if(query3 == TRUE){
+    move_uploaded_file($valid_id_tmp_name, $valid_id_folder);
+  }
   //$insert = $mysqli -> affected_rows;
   //mysqli_close($conn);
   usleep(250000);
