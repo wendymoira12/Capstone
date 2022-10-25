@@ -155,6 +155,72 @@ if ($result->num_rows > 0) {
                     </ul>
                   </li>
                   <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
+              <!-- Notification bell -->
+              
+              <li role="presentation" class="dropdown">
+                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-bell-o"></i>
+                    <span class="badge bg-green">6</span>
+                  </a>
+                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <div class="text-center">
+                        <a>
+                          <strong>See All Alerts</strong>
+                          <i class="fa fa-angle-right"></i>
+                        </a>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
 
               </nav>
             </div>
@@ -245,15 +311,15 @@ if ($result->num_rows > 0) {
                             <td><?php echo $row['pet_desc']; ?></td>
                             <td>
                               <a href="shelter_adoptee_view.php?id=<?php echo $row['pet_id']; ?>">
-                                <button type="button" class="btn btn-round btn-info">View</button>
+                                <button type="button" class="btn btn-round btn-info" onclick="return confirm('Do you wish to view the adoptee page?');">View</button>
                               </a>
 
                               <a href="shelter_adoptee_edit.php?id=<?php echo $row['pet_id']; ?>">
-                                <button type="button" class="btn btn-round btn-success">Edit</button>
+                                <button type="button" class="btn btn-round btn-success" onclick="return confirm('Do you wish to edit the adoptee info');">Edit</button>
                               </a>
 
                               <a href="shelter_adoptee.delete.php?id=<?php echo $row['pet_id']; ?>">
-                                <button type="button" class="btn btn-round btn-danger" onclick="return confirm('Are you sure you want to accept this application?'); submitData(<?php echo $row['pet_id']; ?>);">Delete</button>
+                                <button type="button" class="btn btn-round btn-danger" onclick="return confirm('Are you sure you want to delete this adoptee?'); submitData(<?php echo $row['pet_id']; ?>);">Delete</button>
                               </a>
                             </td>
                           </tr>

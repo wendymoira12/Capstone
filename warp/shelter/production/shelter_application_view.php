@@ -39,10 +39,20 @@ if ($result->num_rows > 0) {
   }
 
   if ($result->num_rows != 1) {
-    die('found no id');
+    die('id not found');
   }
 
 }
+// Pag naclick si reject button, mapapalitan yung reject sa application list
+  if(isset($_POST['reject'])) {
+    $id = $_GET['id'];
+    $reject = 'Rejected';
+    $sql = "UPDATE applicationresult_tbl SET application_status='$reject' WHERE application_id = '$id'";
+    $result = $conn->query($sql);
+    if($result == TRUE){
+      header('Location: shelter_application_list.php');
+    }
+  }
 
 
 ?>
@@ -182,6 +192,72 @@ if ($result->num_rows > 0) {
                 </ul>
               </li>
               <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
+              <!-- Notification bell -->
+              
+              <li role="presentation" class="dropdown">
+                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-bell-o"></i>
+                    <span class="badge bg-green">6</span>
+                  </a>
+                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <div class="text-center">
+                        <a>
+                          <strong>See All Alerts</strong>
+                          <i class="fa fa-angle-right"></i>
+                        </a>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
 
           </nav>
         </div>
@@ -214,7 +290,7 @@ if ($result->num_rows > 0) {
                 <div class="x_content">
                   <br />
 
-                  <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                  <form method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">Adopter I.D: </label>
@@ -377,10 +453,11 @@ if ($result->num_rows > 0) {
                         <a href="shelter_application_list.php">
                           <button class="btn btn-round btn-primary" type="button" onclick="return confirm('Are you sure you want to cancel?');">Cancel</button>
                         </a>
-                        <button class="btn btn-round btn-danger" type="reset" onclick="return confirm('Are you sure you want to reject this application?');">Reject</button>
+
+                          <button name="reject" class="btn btn-round btn-danger" onclick="return confirm('Are you sure you want to reject this application?');">Reject</button>
+
                         <a href="#" data-toggle="modal" data-target="#modalDate"><button name="edit-pet-submit" class="btn btn-round btn-success">Accept</button></a>
                       </div>
-
                       
                       <div class="modal fade" id="modalDate">
                         <div class="modal-dialog modal-sm">
