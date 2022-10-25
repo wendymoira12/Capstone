@@ -8,7 +8,7 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'],$_SESSION['user_id
   header('Location:/Capstone/warp/login.php');
 } else {
   $role_id = $_SESSION['user-role-id'];
-  if ($role_id == 1) {
+  if ($role_id == 1 or $role_id == 2) {
     htmlspecialchars($_SERVER['PHP_SELF']);
   } else {
     header('Location:/Capstone/warp/home.php');
@@ -87,7 +87,7 @@ if (isset($_POST['submit']))
 
   $row = "INSERT INTO applicationform1 (adopter_id,pet_id,valid_id,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15) VALUES ('$adopter_id','$id','$valid_id','$q1','$q2','$q3','$q4','$q5','$q6','$q7','$q8','$q9','$q10','$q11','$q12','$q13','$q14','$q15');";
   $query3 = mysqli_query($conn,$row); 
-  if(query3 == TRUE){
+  if($query3 == TRUE){
     move_uploaded_file($valid_id_tmp_name, $valid_id_folder);
   }
   //$insert = $mysqli -> affected_rows;
