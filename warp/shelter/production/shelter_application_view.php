@@ -34,25 +34,24 @@ if ($result->num_rows > 0) {
   // Kukunin yung adopter info na ishoshow sa view form
   $sql = "SELECT * FROM adopter_tbl INNER JOIN user_tbl ON adopter_tbl.user_id = user_tbl.user_id WHERE adopter_id = '$adopter_id'";
   $result = $conn->query($sql);
-  if ($result == TRUE){
+  if ($result == TRUE) {
     $adata = mysqli_fetch_assoc($result);
   }
 
   if ($result->num_rows != 1) {
     die('id not found');
   }
-
 }
 // Pag naclick si reject button, mapapalitan yung reject sa application list
-  if(isset($_POST['reject'])) {
-    $id = $_GET['id'];
-    $reject = 'Rejected';
-    $sql = "UPDATE applicationresult_tbl SET application_status='$reject' WHERE application_id = '$id'";
-    $result = $conn->query($sql);
-    if($result == TRUE){
-      header('Location: shelter_application_list.php');
-    }
+if (isset($_POST['reject'])) {
+  $id = $_GET['id'];
+  $reject = 'Rejected';
+  $sql = "UPDATE applicationresult_tbl SET application_status='$reject' WHERE application_id = '$id'";
+  $result = $conn->query($sql);
+  if ($result == TRUE) {
+    header('Location: shelter_application_list.php');
   }
+}
 
 
 ?>
@@ -119,7 +118,7 @@ if ($result->num_rows > 0) {
       <div class="col-md-3 left_col menu_fixed">
         <div class="left_col scroll-view">
           <div class="logo">
-          <a href="../../home.php">
+            <a href="../../home.php">
               <img src="/Capstone/warp/img/logo.png" alt="">
             </a>
           </div>
@@ -192,72 +191,72 @@ if ($result->num_rows > 0) {
                 </ul>
               </li>
               <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
-              <!-- Notification bell -->
-              
+                <!-- Notification bell -->
+
               <li role="presentation" class="dropdown">
-                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-bell-o"></i>
-                    <span class="badge bg-green">6</span>
-                  </a>
-                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                    <li>
+                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                  <i class="fa fa-bell-o"></i>
+                  <span class="badge bg-green">6</span>
+                </a>
+                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                  <li>
+                    <a>
+                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                      <span>
+                        <span>John Smith</span>
+                        <span class="time">3 mins ago</span>
+                      </span>
+                      <span class="message">
+                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                      <span>
+                        <span>John Smith</span>
+                        <span class="time">3 mins ago</span>
+                      </span>
+                      <span class="message">
+                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                      <span>
+                        <span>John Smith</span>
+                        <span class="time">3 mins ago</span>
+                      </span>
+                      <span class="message">
+                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                      <span>
+                        <span>John Smith</span>
+                        <span class="time">3 mins ago</span>
+                      </span>
+                      <span class="message">
+                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <div class="text-center">
                       <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
+                        <strong>See All Alerts</strong>
+                        <i class="fa fa-angle-right"></i>
                       </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <div class="text-center">
-                        <a>
-                          <strong>See All Alerts</strong>
-                          <i class="fa fa-angle-right"></i>
-                        </a>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
+                    </div>
+                  </li>
+                </ul>
+              </li>
 
           </nav>
         </div>
@@ -298,7 +297,7 @@ if ($result->num_rows > 0) {
                         <img src="images/valid_id/<?= $qdata['valid_id']; ?>" alt="Adopter Identification Card" height="150" width="150">
                       </div>
                     </div>
-                    
+
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">First Name: </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
@@ -346,8 +345,8 @@ if ($result->num_rows > 0) {
                       <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Occupation: </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q1'] ?>" disabled>
-                        </div>
                       </div>
+                    </div>
 
                     <div class="form-group">
                       <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Civil Status: </label>
@@ -355,91 +354,91 @@ if ($result->num_rows > 0) {
                         <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q2'] ?>" disabled>
                       </div>
                     </div>
-                    
+
                     <div class="form-group">
                       <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Are there children (below 18) in the house? If yes how old are they? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q3'] ?>" disabled>
                       </div>
                     </div>
-                    
+
                     <div class="form-group">
                       <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Do you have other children? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q4'] ?>" disabled>
                       </div>
                     </div>
-                    
+
                     <div class="form-group">
                       <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Have you had pets in the past? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q5'] ?>" disabled>
                       </div>
                     </div>
-                    
+
                     <div class="form-group">
                       <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Who else do you live with? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q6'] ?>" disabled>
                       </div>
                     </div>
-                    
+
                     <div class="form-group">
                       <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Are any members of your household allergic to animals? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q7'] ?>" disabled>
                       </div>
                     </div>
-                    
+
                     <div class="form-group">
                       <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Who will be responsible for feeding, grooming, and generally caring for your pet? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q8'] ?>" disabled>
                       </div>
                     </div>
-                    
+
                     <div class="form-group">
                       <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Who will be financially responsible for your pet's needs? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q9'] ?>" disabled>
                       </div>
                     </div>
-                    
+
                     <div class="form-group">
                       <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Who will look after your pet if you go on vacation or in case of emergency? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q10'] ?>" disabled>
                       </div>
                     </div>
-                    
+
                     <div class="form-group">
                       <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">How many hours in an average workday will your pet be left alone? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q11'] ?>. hour/s" disabled>
                       </div>
                     </div>
-                    
+
                     <div class="form-group">
                       <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Does everyone in the family support your decision to adopt a pet? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q12'] ?>" disabled>
                       </div>
                     </div>
-                    
+
                     <div class="form-group">
                       <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">What type of building do you live in? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q13'] ?>" disabled>
                       </div>
                     </div>
-                    
+
                     <div class="form-group">
                       <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">If you rent, do you have permission from your landlord to have an animal? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q14'] ?>" disabled>
                       </div>
                     </div>
-                    
+
                     <div class="form-group">
                       <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Are you prepared to spend for the wellness of your pet? If so, how much are you willing to spend in a year? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
@@ -454,25 +453,54 @@ if ($result->num_rows > 0) {
                           <button class="btn btn-round btn-primary" type="button" onclick="return confirm('Are you sure you want to cancel?');">Cancel</button>
                         </a>
 
-                          <button name="reject" class="btn btn-round btn-danger" onclick="return confirm('Are you sure you want to reject this application?');">Reject</button>
+                        <button name="reject" class="btn btn-round btn-danger" onclick="return confirm('Are you sure you want to reject this application?');">Reject</button>
 
                         <a href="#" data-toggle="modal" data-target="#modalDate"><button name="edit-pet-submit" class="btn btn-round btn-success">Accept</button></a>
                       </div>
-                      
+
+                      <?php
+                      //Form Submission for date
+                      if (isset($_POST['submit-date'])) {
+                        $date = $_POST['date'];
+                        //If date is not empty code will execute
+                        if (!empty($date)) {
+                          $sql = "INSERT INTO schedule_tbl(schedule_date, application_id) VALUES ('$date', '$id')";
+                          // If the query execute proceed to next query
+                          if (mysqli_query($conn, $sql)) {
+                            $scheduled = 'Scheduled';
+                            $sql4 = "UPDATE applicationresult_tbl SET application_status='$scheduled' WHERE application_id = '$id'";
+                            // If the query execute show Input success message and redirect to shelter_application_list
+                            if (mysqli_query($conn, $sql4)) {
+                              echo "<script>alert('Date Input Success')</script>";
+                              echo "<script>window.location.href='shelter_application_list.php';</script>";
+                            } else {
+                              echo "<script>alert('Data Input Fail')</script>";
+                            }
+                          }
+                        } else {
+                          echo "<script>alert('No date input')</script>";
+                        }
+                      }
+
+                      ?>
                       <div class="modal fade" id="modalDate">
                         <div class="modal-dialog modal-sm">
                           <div class="modal-content">
-                            <div class="modal-header">
-                              Schedule a date for interview
-                            </div>
-                            <div class="modal-body">
-                              <input type="date">
-                            </div>
-                            <div class="modal-footer">
-                              <button class="btn btn-success" onclick="return confirm('Are you sure you want to accept this application and proceed with the scheduled date?');">Submit
-                              </button>
-                            </div>
-                          </div> 
+                            <form action="/Capstone/warp/shelter/production/shelter_application_view.php?id=<?= $id ?>" method="POST">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                                </button>
+                                <h4 class="modal-title">Schedule a date for interview</h4>
+                              </div>
+                              <div class="modal-body">
+                                <input type="date" name="date">
+                              </div>
+                              <div class="modal-footer">
+                                <button class="btn btn-success" name="submit-date" onclick="return confirm('Are you sure you want to accept this application and proceed with the scheduled date?');">Submit
+                                </button>
+                              </div>
+                            </form>
+                          </div>
                         </div>
                       </div>
 
