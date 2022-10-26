@@ -17,4 +17,5 @@ if (password_verify($_SESSION['password2'], $_SESSION['password-login'])) {
 print_r($_SESSION['user-email']);
 print_r($_SESSION['user-role-id']);
 print_r($_SESSION['user_id']);
-print_r($_SESSION['city_name']);
+echo '<br>';
+print_r($_SESSION['sched_id']);

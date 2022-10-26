@@ -464,17 +464,25 @@ if ($result->num_rows > 0) {
                         $date = $_POST['date'];
                         //If date is not empty code will execute
                         if (!empty($date)) {
-                          $sql = "INSERT INTO schedule_tbl(schedule_date, application_id) VALUES ('$date', '$id')";
-                          // If the query execute proceed to next query
-                          if (mysqli_query($conn, $sql)) {
-                            $scheduled = 'Scheduled';
-                            $sql4 = "UPDATE applicationresult_tbl SET application_status='$scheduled' WHERE application_id = '$id'";
-                            // If the query execute show Input success message and redirect to shelter_application_list
-                            if (mysqli_query($conn, $sql4)) {
-                              echo "<script>alert('Date Input Success')</script>";
-                              echo "<script>window.location.href='shelter_application_list.php';</script>";
-                            } else {
-                              echo "<script>alert('Data Input Fail')</script>";
+                          //Sql query to check if data exist with same applicatin id in sched table
+                          $sql = "SELECT * FROM schedule_tbl WHERE application_id = '$id' LIMIT 1";
+                          $result = mysqli_query($conn, $sql);
+                          if ($result->num_rows > 0) {
+                            echo "<script>alert('Record Exists!')</script>";
+                            echo "<script>window.location.href='shelter_application_list.php';</script>";
+                          } else {
+                            $sql = "INSERT INTO schedule_tbl(schedule_date, application_id) VALUES ('$date', '$id')";
+                            // If the query execute proceed to next query
+                            if (mysqli_query($conn, $sql)) {
+                              $scheduled = 'Scheduled';
+                              $sql4 = "UPDATE applicationresult_tbl SET application_status='$scheduled' WHERE application_id = '$id'";
+                              // If the query execute show Input success message and redirect to shelter_application_list
+                              if (mysqli_query($conn, $sql4)) {
+                                echo "<script>alert('Date Input Success')</script>";
+                                echo "<script>window.location.href='shelter_application_list.php';</script>";
+                              } else {
+                                echo "<script>alert('Data Input Fail')</script>";
+                              }
                             }
                           }
                         } else {

@@ -146,72 +146,72 @@ if ($result->num_rows > 0) {
                 </ul>
               </li>
               <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
-              <!-- Notification bell -->
-              
+                <!-- Notification bell -->
+
               <li role="presentation" class="dropdown">
-                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-bell-o"></i>
-                    <span class="badge bg-green">6</span>
-                  </a>
-                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                    <li>
+                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                  <i class="fa fa-bell-o"></i>
+                  <span class="badge bg-green">6</span>
+                </a>
+                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                  <li>
+                    <a>
+                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                      <span>
+                        <span>John Smith</span>
+                        <span class="time">3 mins ago</span>
+                      </span>
+                      <span class="message">
+                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                      <span>
+                        <span>John Smith</span>
+                        <span class="time">3 mins ago</span>
+                      </span>
+                      <span class="message">
+                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                      <span>
+                        <span>John Smith</span>
+                        <span class="time">3 mins ago</span>
+                      </span>
+                      <span class="message">
+                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                      <span>
+                        <span>John Smith</span>
+                        <span class="time">3 mins ago</span>
+                      </span>
+                      <span class="message">
+                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <div class="text-center">
                       <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
+                        <strong>See All Alerts</strong>
+                        <i class="fa fa-angle-right"></i>
                       </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <div class="text-center">
-                        <a>
-                          <strong>See All Alerts</strong>
-                          <i class="fa fa-angle-right"></i>
-                        </a>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
+                    </div>
+                  </li>
+                </ul>
+              </li>
 
           </nav>
         </div>
@@ -244,38 +244,86 @@ if ($result->num_rows > 0) {
                 <div class="clearfix"></div>
               </div>
               <div class="x_content">
-              <table id="datatable" class="table table-striped table-bordered">
-                <thead>
-                  <tr>
-                    <th>No.</th>
-                    <th>Pet ID</th>
-                    <th>Transaction ID</th>
-                    <th>Image</th>
-                    <th>Name</th>
-                    <th>Date Adopted</th>
-                    <th>Monitoring Date</th>
-                    <th>Monitoring Status</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
+                <table id="datatable" class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th>No.</th>
+                      <th>Scheduled Date</th>
+                      <th>Adopter Name</th>
+                      <th>Adoptee Name</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <?php
+                  $i = 1;
+                  $sql = "SELECT schedule_tbl.schedule_id, schedule_tbl.schedule_date, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_name FROM schedule_tbl INNER JOIN applicationform1 ON schedule_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id ='$city_id'";
+                  $result = mysqli_query($conn, $sql);
+                  if ($result->num_rows > 0) {
+                    foreach ($result as $data) {
 
+                  ?>
+                      <tbody>
+                        <tr>
+                          <td><?= $i++; ?></td>
+                          <td><?= $data['schedule_date'] ?></td>
+                          <td><?= $data['adopter_fname'] . ' ' . $data['adopter_lname']; ?></td>
+                          <td><?= $data['pet_name']; ?></td>
+                          <td>
+                            <a href="shelter_schedule_list.php?id=<?=$data['schedule_id']?>" >
+                              <button type="submit" class="btn btn-round btn-primary">Edit</button>
+                            </a>
+                            <button type="button" class="btn btn-round btn-success">Update</button>
+                          </td>
 
-                <tbody>
+                        </tr>
+                      </tbody>
+                  <?php
+                    }
+                  }
+                  ?>
+                </table>
 
-                  <tr>
-                    <td>1</td>
-                    <td>P001</td>
-                    <td>001</td>
-                    <td><img src="../../img/adoption/pet (2).jfif" alt="pet" width="100"></td>
-                    <td>Brownie</td>
-                    <td>01/06/2022</td>
-                    <td>02/10/2022</td>
-                    <td>Pending</td>
-                    <td><button type="button" class="btn btn-round btn-success">Update</button></td>
-                  </tr>
-
-                </tbody>
-              </table>
+                <?php
+                //Form Submission for date
+                if (isset($_POST['submit-date'])) {
+                  $date = $_POST['date'];
+                  $sched_id = $_SESSION['sched_id'];
+                  //If date is not empty code will execute
+                  if (!empty($date)) {
+                    $sql = "UPDATE schedule_tbl SET schedule_date='$date' WHERE schedule_id = '$sched_id'";
+                    if (mysqli_query($conn, $sql)) {
+                      // If the query execute show Input success message and redirect to shelter_application_list
+                      echo "<script>alert('Date Input Success')</script>";
+                      echo "<script>window.location.href='shelter_schedule_list.php';</script>";
+                    } else {
+                      echo "<script>alert('Data Input Fail')</script>";
+                    }
+                  } else {
+                    echo "<script>alert('No date input')</script>";
+                  }
+                }
+                ?>
+                <div class="modal fade" id="modalEditDate">
+                  <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                      <!-- <iframe name="edit_schedule" style="display:none;"></iframe> -->
+                      <form action="#" method="POST">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                          </button>
+                          <h4 class="modal-title">Schedule a date for interview</h4>
+                        </div>
+                        <div class="modal-body">
+                          <input type="date" name="date">
+                        </div>
+                        <div class="modal-footer">
+                          <button class="btn btn-success" name="submit-date" onclick="return confirm('Are you sure you want to edit the scheduled date?');">Submit
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

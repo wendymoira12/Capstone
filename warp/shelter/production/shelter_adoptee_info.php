@@ -554,7 +554,7 @@ if ($result->num_rows > 0) {
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <button name="pet-reset" class="btn-round  btn-primary" type="reset">Reset</button>
+                          <button name="pet-reset" class="btn btn-round  btn-primary" type="reset">Reset</button>
                           <button name="pet-submit" class="btn btn-round  btn-success" onclick="return confirm('Are you sure you want to submit this pet information?');">Submit</button>
                         </div>
                       </div>
