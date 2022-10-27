@@ -15,6 +15,12 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
 ?>
 
 <?php
+if (!isset($_GET['id'])) {
+  die('Id not provided');
+}
+
+// Kukunin yung answers from application form na equivalent sa questionchoices
+$id = $_GET['id'];
 // Get the user ID from the login sesh
 $user_id = $_SESSION['user_id'];
 // Query to check if user_id from the login shesh = shelteruser_id to get the city 
@@ -269,8 +275,8 @@ if ($result->num_rows > 0) {
                           <td><?= $data['adopter_fname'] . ' ' . $data['adopter_lname']; ?></td>
                           <td><?= $data['pet_name']; ?></td>
                           <td>
-                            <a href="shelter_schedule_list2.php?id=<?=$data['schedule_id']?>" >
-                              <button type="submit" class="btn btn-round btn-primary">Edit</button>
+                            <a href="#" >
+                              <button type="submit" class="btn btn-round btn-primary" data-toggle="modal" data-target="#modalEditDate">Edit</button>
                             </a>
                             <button type="button" class="btn btn-round btn-success">Update</button>
                           </td>
@@ -282,6 +288,48 @@ if ($result->num_rows > 0) {
                   }
                   ?>
                 </table>
+
+                <?php
+                //Form Submission for date
+                if (isset($_POST['submit-date'])) {
+                  $date = $_POST['date'];
+                  
+                  //If date is not empty code will execute
+                  if (!empty($date)) {
+                    $sql = "UPDATE schedule_tbl SET schedule_date='$date' WHERE schedule_id = '$id'";
+                    if (mysqli_query($conn, $sql)) {
+                      // If the query execute show Input success message and redirect to shelter_application_list
+                      echo "<script>alert('Date Input Success')</script>";
+                      echo "<script>window.location.href='shelter_schedule_list.php';</script>";
+                    } else {
+                      echo "<script>alert('Data Input Fail')</script>";
+                    }
+                  } else {
+                    echo "<script>alert('No date input')</script>";
+                  }
+                }
+                ?>
+                <div class="modal fade" id="modalEditDate">
+                  <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                      <!-- <iframe name="edit_schedule" style="display:none;"></iframe> -->
+                      <form action="#" method="POST">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                          </button>
+                          <h4 class="modal-title">Schedule a date for interview</h4>
+                        </div>
+                        <div class="modal-body">
+                          <input type="date" name="date">
+                        </div>
+                        <div class="modal-footer">
+                          <button class="btn btn-success" name="submit-date" onclick="return confirm('Are you sure you want to edit the scheduled date?');">Submit
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -332,6 +380,11 @@ if ($result->num_rows > 0) {
 
   <!-- Custom Theme Scripts -->
   <script src="../build/js/custom.min.js"></script>
+  <script>
+    $(document).ready(function(){
+        $("#modalEditDate").modal('show');
+    });
+</script>
 
 </body>
 
