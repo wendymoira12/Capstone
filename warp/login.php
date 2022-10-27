@@ -168,7 +168,7 @@ if (isset($_POST["register"])) {
           <form action="#" class="sign-up-form" method="POST">
           <h2 class="title">Register to WARP</h2>
             <div class="input-field">
-              <i class="fas fa-user"></i>
+              <i class="fas fa-envelope"></i>
               <input type="text" id="email_address" class="form-control <?php echo !$emailErr ?: 'is-invalid'; ?>" placeholder="Email Address" name="email" required autofocus>
               <label for="email_address"></label>
             </div>
