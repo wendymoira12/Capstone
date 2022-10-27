@@ -127,14 +127,6 @@ if (isset($_POST["register"])) {
               <input type="text" id="email_address" class="form-control <?php echo !$emailErr ?: 'is-invalid'; ?>" placeholder="Email Address" name="email" required autofocus>
               <label for="email_address"></label>
             </div>
-            <!-- <div class="input-field">
-              <i class="fas fa-lock"></i>
-              <input type="password" id="password" class="form-control <?php echo !$passErr ?: 'is-invalid'; ?>" placeholder="Password" name="password" required>
-              <label for="password"></label>
-            </div> -->
-            <!--
-            <input type="submit" value="Login" action="home.html" class="btn solid" /> -->
-
             <button class="btn solid" input type="submit" value="Register" name="register">Register</button>
         </div>
 
