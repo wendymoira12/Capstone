@@ -1,22 +1,18 @@
 <?php
-error_reporting(0);
-
-session_start();
 include 'config.php';
+session_start();
 
-if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
+//if hindi nakaset si user-email and user-role-id babalik sya sa login.php
+
+if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'],$_SESSION['user_id'])) {
   header('Location:/Capstone/warp/login.php');
 } else {
   $role_id = $_SESSION['user-role-id'];
-  if ($role_id == 2) {
+  if ($role_id == 1) {
     htmlspecialchars($_SERVER['PHP_SELF']);
   } else {
     header('Location:/Capstone/warp/home.php');
   }
-}
-
-if (!isset($_GET['id'])) {
-  die('Id not provided');
 }
 
 // Kukunin yung answers from application form na equivalent sa questionchoices
@@ -43,16 +39,15 @@ if ($result->num_rows > 0) {
   }
 }
 // Pag naclick si reject button, mapapalitan yung application status sa application list
-if (isset($_POST['reject'])) {
+if (isset($_POST['cancel'])) {
   $id = $_GET['id'];
-  $reject = 'Rejected';
-  $sql = "UPDATE applicationresult_tbl SET application_status='$reject' WHERE application_id = '$id'";
+  $cancel = 'Cancelled by adopter';
+  $sql = "UPDATE applicationresult_tbl SET application_status='$cancel' WHERE application_id = '$id'";
   $result = $conn->query($sql);
   if ($result == TRUE) {
-    header('Location: shelter_application_list.php');
+    header('Location: adopter_user_page.php');
   }
 }
-
 
 ?>
 
@@ -72,18 +67,22 @@ if ($result->num_rows > 0) {
     $row = mysqli_fetch_assoc($result);
   }
 }
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+  <script src="https://kit.fontawesome.com/b6742a828f.js" crossorigin="anonymous"></script>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <!-- Meta, title, CSS, favicons, etc. -->
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" type="image/x-icon" href="/warp/img/WARP_LOGO copy.png">
-  <title>Animal Shelter | Adoptee Pet Information</title>
+  <link rel="shortcut icon" type="image/x-icon" href="/Capstone/warp/img/WARP_LOGO copy.png">
+  <title>Adopter | My Application | </title>
 
   <!-- Bootstrap -->
   <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -93,22 +92,10 @@ if ($result->num_rows > 0) {
   <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
   <!-- iCheck -->
   <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-  <!-- bootstrap-wysiwyg -->
-  <link href="../vendors/google-code-prettify/bin/prettify.min.css" rel="stylesheet">
-  <!-- Select2 -->
-  <link href="../vendors/select2/dist/css/select2.min.css" rel="stylesheet">
-  <!-- Switchery -->
-  <link href="../vendors/switchery/dist/switchery.min.css" rel="stylesheet">
-  <!-- starrr -->
-  <link href="../vendors/starrr/dist/starrr.css" rel="stylesheet">
-  <!-- bootstrap-daterangepicker -->
-  <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-  <!-- Dropzone.js -->
-  <link href="../vendors/dropzone/dist/min/dropzone.min.css" rel="stylesheet"> <!-- Custom Theme Style -->
-  <link href="../build/css/custom.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/warp/shelter/production/css/style.css">
 
-  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous"> -->
+  <!-- Custom Theme Style -->
+  <link href="../build/css/custom.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="Capstone/warp/shelter/production/css/style.css">
 
 </head>
 
@@ -118,29 +105,20 @@ if ($result->num_rows > 0) {
       <div class="col-md-3 left_col menu_fixed">
         <div class="left_col scroll-view">
           <div class="logo">
-            <a href="../../home.php">
-              <img src="/Capstone/warp/img/logo.png" alt="">
+            <a href="">
+              <img src="images/logo.png" alt="">
             </a>
           </div>
           <div class="clearfix"></div>
 
-
           <!-- menu profile quick info -->
           <div class="profile clearfix">
             <div class="profile_pic">
-              <img src="/Capstone/warp/WARP Admin/production/images/<?= $row['city_img']; ?>" alt="..." class="img-circle profile_img">
+              <img src="images/img2.jpg" alt="..." class="img-circle profile_img">
             </div>
             <div class="profile_info">
               <span>Welcome,</span>
-              <h2>
-                <?php
-                echo $row['shelteruser_name'] . ',';
-                ?>
-                <br>
-                <?php
-                echo $row['shelteruser_position'];
-                ?>
-              </h2>
+              <h2><?php echo $adata['adopter_fname']; ?></h2>
             </div>
           </div>
           <!-- /menu profile quick info -->
@@ -150,17 +128,9 @@ if ($result->num_rows > 0) {
           <!-- sidebar menu -->
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
-              <h3>General</h3>
+              <h3>Adopter</h3>
               <ul class="nav side-menu">
-                <li><a href="#"><i class="fa fa-home"></i> Account </a>
-                </li>
-                <li><a href="#"><i class="fa fa-edit"></i> Add Adoptee info </a>
-                </li>
-                <li><a href="#"><i class="fa fa-paw"></i> Pet Adoptee List </a>
-                </li>
-                <li><a href="#"><i class="fa fa-paw"></i> Application List </a>
-                </li>
-                <li><a href="#"><i class="fa fa-paw"></i> Adopted Pet List </a>
+                <li><a href="adopter_user_page.php"><i class="fa fa-folder-open"></i> My Applications </a>
                 </li>
               </ul>
             </div>
@@ -169,100 +139,100 @@ if ($result->num_rows > 0) {
           <!-- /sidebar menu -->
 
           <!-- /menu footer buttons -->
+
+          <!-- /menu footer buttons -->
         </div>
       </div>
 
       <!-- top navigation -->
-      <div class="top_nav">
-        <div class="nav_menu">
-          <nav>
-            <div class="nav toggle">
-              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-            </div>
+        <div class="top_nav">
+            <div class="nav_menu">
+              <nav>
+                <div class="nav toggle">
+                  <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                </div>
 
-            <ul class="nav navbar-nav navbar-right">
-              <li class="">
-                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="/Capstone/warp/WARP Admin/production/images/<?= $row['city_img']; ?>" alt=""><?php echo $_SESSION['user-email'] ?>
-                  <span class=" fa fa-angle-down"></span>
-                </a>
-                <ul class="dropdown-menu dropdown-usermenu pull-right">
-                  <li><a href="logout.php?logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-                </ul>
-              </li>
-              <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
-                <!-- Notification bell -->
-
+                <ul class="nav navbar-nav navbar-right">
+                  <li class="">
+                    
+                    <ul class="dropdown-menu dropdown-usermenu pull-right">
+                      <li><a href="logout.php?logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="logout.php?logout">Logout </i></a>
+                  <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
+              <!-- Notification bell -->
+              
               <li role="presentation" class="dropdown">
-                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                  <i class="fa fa-bell-o"></i>
-                  <span class="badge bg-green">6</span>
-                </a>
-                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                  <li>
-                    <a>
-                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <div class="text-center">
+                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-bell-o"></i>
+                    <span class="badge bg-green">6</span>
+                  </a>
+                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                    <li>
                       <a>
-                        <strong>See All Alerts</strong>
-                        <i class="fa fa-angle-right"></i>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
                       </a>
-                    </div>
-                  </li>
-                </ul>
-              </li>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <div class="text-center">
+                        <a>
+                          <strong>See All Alerts</strong>
+                          <i class="fa fa-angle-right"></i>
+                        </a>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
 
-          </nav>
-        </div>
-      </div>
-      <!-- /top navigation -->
-
+                  
+              </nav>
+            </div>
+          </div>
+          
       <!-- page content -->
       <div class="right_col" role="main">
         <div class="">
@@ -449,69 +419,7 @@ if ($result->num_rows > 0) {
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                        <a href="shelter_application_list.php">
-                          <button class="btn btn-round btn-primary" type="button" onclick="return confirm('Are you sure you want to cancel?');">Cancel</button>
-                        </a>
-
-                        <button name="reject" class="btn btn-round btn-danger" onclick="return confirm('Are you sure you want to reject this application?');">Reject</button>
-
-                        <a href="#" data-toggle="modal" data-target="#modalDate"><button name="edit-pet-submit" class="btn btn-round btn-success">Accept</button></a>
-                      </div>
-
-                      <?php
-                      //Form Submission for date
-                      if (isset($_POST['submit-date'])) {
-                        $date = $_POST['date'];
-                        //If date is not empty code will execute
-                        if (!empty($date)) {
-                          //Sql query to check if data exist with same applicatin id in sched table
-                          $sql = "SELECT * FROM schedule_tbl WHERE application_id = '$id' LIMIT 1";
-                          $result = mysqli_query($conn, $sql);
-                          if ($result->num_rows > 0) {
-                            echo "<script>alert('Record Exists!')</script>";
-                            echo "<script>window.location.href='shelter_application_list.php';</script>";
-                          } else {
-                            $sql = "INSERT INTO schedule_tbl(schedule_date, application_id) VALUES ('$date', '$id')";
-                            // If the query execute proceed to next query
-                            if (mysqli_query($conn, $sql)) {
-                              $scheduled = 'Scheduled';
-                              $sql4 = "UPDATE applicationresult_tbl SET application_status='$scheduled' WHERE application_id = '$id'";
-                              // If the query execute show Input success message and redirect to shelter_application_list
-                              if (mysqli_query($conn, $sql4)) {
-                                echo "<script>alert('Date Input Success')</script>";
-                                echo "<script>window.location.href='shelter_application_list.php';</script>";
-                              } else {
-                                echo "<script>alert('Data Input Fail')</script>";
-                              }
-                            }
-                          }
-                        } else {
-                          echo "<script>alert('No date input')</script>";
-                        }
-                      }
-
-                      ?>
-                      <div class="modal fade" id="modalDate">
-                        <div class="modal-dialog modal-sm">
-                          <div class="modal-content">
-                            <form action="/Capstone/warp/shelter/production/shelter_application_view.php?id=<?= $id ?>" method="POST">
-                              <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-                                </button>
-                                <h4 class="modal-title">Schedule a date for interview</h4>
-                              </div>
-                              <div class="modal-body">
-                                <input type="date" name="date">
-                              </div>
-                              <div class="modal-footer">
-                                <button class="btn btn-success" name="submit-date" onclick="return confirm('Are you sure you want to accept this application and proceed with the scheduled date?');">Submit
-                                </button>
-                              </div>
-                            </form>
-                          </div>
-                        </div>
-                      </div>
-
+                        <button name="cancel" class="btn btn-round btn-danger" onclick="return confirm('Are you sure you want to cacncel this application?');">Cancel Application</button>
                     </div>
 
                   </form>
@@ -524,61 +432,31 @@ if ($result->num_rows > 0) {
       </div>
       <!-- /page content -->
 
-      <!-- footer content -->
-      <footer>
-        <div class="pull-right">
-          <!-- Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a> -->
-        </div>
-        <div class="clearfix"></div>
-      </footer>
-      <!-- /footer content -->
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            <!-- Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a> -->
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
     </div>
-  </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <!-- jQuery -->
+    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="../vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../vendors/nprogress/nprogress.js"></script>
+    <!-- iCheck -->
+    <script src="../vendors/iCheck/icheck.min.js"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
-
-  <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-
-  <!-- jQuery -->
-  <script src="../vendors/jquery/dist/jquery.min.js"></script>
-  <!-- Bootstrap -->
-  <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-  <!-- FastClick -->
-  <script src="../vendors/fastclick/lib/fastclick.js"></script>
-  <!-- NProgress -->
-  <script src="../vendors/nprogress/nprogress.js"></script>
-  <!-- Dropzone.js -->
-  <script src="../vendors/dropzone/dist/min/dropzone.min.js"></script>
-  <!-- bootstrap-progressbar -->
-  <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-  <!-- iCheck -->
-  <script src="../vendors/iCheck/icheck.min.js"></script>
-  <!-- bootstrap-daterangepicker -->
-  <script src="../vendors/moment/min/moment.min.js"></script>
-  <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
-  <!-- bootstrap-wysiwyg -->
-  <script src="../vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
-  <script src="../vendors/jquery.hotkeys/jquery.hotkeys.js"></script>
-  <script src="../vendors/google-code-prettify/src/prettify.js"></script>
-  <!-- jQuery Tags Input -->
-  <script src="../vendors/jquery.tagsinput/src/jquery.tagsinput.js"></script>
-  <!-- Switchery -->
-  <script src="../vendors/switchery/dist/switchery.min.js"></script>
-  <!-- Select2 -->
-  <script src="../vendors/select2/dist/js/select2.full.min.js"></script>
-  <!-- Parsley -->
-  <script src="../vendors/parsleyjs/dist/parsley.min.js"></script>
-  <!-- Autosize -->
-  <script src="../vendors/autosize/dist/autosize.min.js"></script>
-  <!-- jQuery autocomplete -->
-  <script src="../vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
-  <!-- starrr -->
-  <script src="../vendors/starrr/dist/starrr.js"></script>
-  <!-- Custom Theme Scripts -->
-  <script src="../build/js/custom.min.js"></script>
-
+    <!-- Custom Theme Scripts -->
+    <script src="../build/js/custom.min.js"></script>
 </body>
 
 </html>

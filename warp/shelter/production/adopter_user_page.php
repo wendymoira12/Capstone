@@ -36,7 +36,7 @@ if ($result->num_rows > 0) {
 ?>
 
 <?php
-$sqlapp= "SELECT * FROM applicationform1, applicationresult_details WHERE adopter_id ='$adopter_id';";
+$sqlapp= "SELECT * FROM applicationform1, applicationresult_tbl WHERE adopter_id ='$adopter_id';";
 
 $result = mysqli_query($conn, $sqlapp);
 
@@ -55,10 +55,10 @@ if ($result) {
 ?>
 <?php
 
-$sql = "SELECT pet_name FROM adoptee_tbl, applicationform1 WHERE adoptee_tbl.pet_id = applicationform1.pet_id;";
+$i = 1;
+$sql = "SELECT * FROM adoptee_tbl, applicationform1 WHERE adoptee_tbl.pet_id = applicationform1.pet_id;";
 $result = $conn->query($sql);
 $data = mysqli_fetch_assoc($result);
-
 
 ?>
 <?php
@@ -158,6 +158,73 @@ $data = mysqli_fetch_assoc($result);
                   </li>
                   <li><a href="logout.php?logout">Logout </i></a>
                   <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
+              <!-- Notification bell -->
+              
+              <li role="presentation" class="dropdown">
+                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-bell-o"></i>
+                    <span class="badge bg-green">6</span>
+                  </a>
+                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <div class="text-center">
+                        <a>
+                          <strong>See All Alerts</strong>
+                          <i class="fa fa-angle-right"></i>
+                        </a>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+
                   
               </nav>
             </div>
@@ -195,16 +262,30 @@ $data = mysqli_fetch_assoc($result);
                           <th>Action</th>
                         </tr>
                       </thead>
+                      <?php
+                      if ($result->num_rows > 0) {
+                        foreach ($result as $data) {
+
+                      ?>
                       <tbody>
                         <tr>
-                          <th scope="row">1</th>
-                          <th scope="row"><?php echo $row1['application_id']; ?></th>
-                          <th scope="row"><?php echo $data['pet_name']; ?></th>
-                          <td><?php echo $row1['date_submitted']; ?></td>
+                          <th><?= $i++ ; ?></th>
+                          <th><?php echo $row1['application_id']; ?></th>
+                          <th><?php echo $data['pet_name']; ?></th>
+                          <td><?php echo $data['date_submitted']; ?></td>
                           <td><?php echo $row1['application_status']; ?></td>
-                          <td><input type="button" value="cancel" class="btn btn-round btn-danger"></button></td>
+                          <td>
+                            <a href="adopter_application_view.php?id=<?= $row1['application_id']; ?>">
+                              <button type="button" class="btn btn-round btn-success">View</button>
+                            </a>
+                          </td>
                         </tr>
                       </tbody>
+                        <?php
+                      }
+                    } 
+                     
+                    ?>
                     </table>
 
                   </div>

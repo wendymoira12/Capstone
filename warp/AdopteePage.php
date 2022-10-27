@@ -220,7 +220,7 @@ if (isset($_POST['submit']))
 
       else 
          {
-          $row5 = "INSERT INTO applicationresult_details (application_id,application_result,application_status)                
+          $row5 = "INSERT INTO applicationresult_tbl (application_id,application_result,application_status)                
           VALUES ('$final1','Not Qualified','Pending');";
           $query5 = mysqli_query($conn,$row5);                 
         }                               
