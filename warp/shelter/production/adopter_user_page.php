@@ -242,7 +242,7 @@ $result = mysqli_query($conn, $sqlapp);
                               <td><?php echo $data['date_submitted']; ?></td>
                               <td><?php echo $data['application_status']; ?></td>
                               <td>
-                                <a href="adopter_application_view.php?id=<?= $row1['application_id']; ?>">
+                                <a href="adopter_application_view.php?id=<?= $data['application_id']; ?>">
                                   <button type="button" class="btn btn-round btn-success">View</button>
                                 </a>
                               </td>
