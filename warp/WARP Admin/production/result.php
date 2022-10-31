@@ -19,3 +19,4 @@ print_r($_SESSION['user-role-id']);
 print_r($_SESSION['user_id']);
 echo '<br>';
 print_r($_SESSION['sched_id']);
+phpinfo();

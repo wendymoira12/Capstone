@@ -50,9 +50,9 @@ if (isset($_POST['submit'])) {
 
 <?php
 session_start();
-
+session_regenerate_id();
 if (isset($_POST['submit-login'])) {
-  $email_login = $_POST['email-login'];//johnkevin@gmail.com
+  $email_login = $_POST['email-login'];
   $pass_login = $_POST['password-login'];
   $role_login = 3;
   //Fetch muna si user_email pati role_id to check if the user exist

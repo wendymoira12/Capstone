@@ -5,7 +5,7 @@ include 'config.php';
 error_reporting(0);
 
 session_start();
-
+session_regenerate_id();
 if (isset($_POST['submit-login'])) {
   $email_login = $_POST['email-login'];
   $pass_login = $_POST['pass-login'];

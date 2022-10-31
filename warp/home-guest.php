@@ -1,11 +1,12 @@
 <?php
 include 'config.php';
 include('connect/connection.php');
-
+session_start();
 $sql = "SELECT * FROM city_tbl";
 $result = mysqli_query($conn, $sql);
 
 $row = mysqli_fetch_assoc($result);
+session_regenerate_id();
 ?>
 
 <!doctype html>
