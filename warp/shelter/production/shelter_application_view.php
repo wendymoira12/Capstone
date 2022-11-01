@@ -289,10 +289,10 @@ if ($result->num_rows > 0) {
                 <div class="x_content">
                   <br />
 
-                  <form method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                  <form method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="report_generation.php">
 
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">Adopter I.D: </label>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" name="id" for="pet-name">Adopter I.D: </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <img src="images/valid_id/<?= $qdata['valid_id']; ?>" alt="Adopter Identification Card" height="150" width="150">
                       </div>
@@ -301,35 +301,35 @@ if ($result->num_rows > 0) {
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">First Name: </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" name="" value="<?= $adata['adopter_fname'] ?>" class="form-control col-md-7 col-xs-12" disabled>
+                        <input type="text" name="adopter_fname" value="<?= $adata['adopter_fname'] ?>" class="form-control col-md-7 col-xs-12" disabled>
                       </div>
                     </div>
 
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">Last Name: </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" name="" value="<?= $adata['adopter_lname'] ?>" class="form-control col-md-7 col-xs-12" disabled>
+                        <input type="text" name="adopter_lname" value="<?= $adata['adopter_lname'] ?>" class="form-control col-md-7 col-xs-12" disabled>
                       </div>
                     </div>
 
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">Age: </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" name="" value="<?= $adata['adopter_age'] ?>" class="form-control col-md-7 col-xs-12" disabled>
+                        <input type="text" name="adopter_age" value="<?= $adata['adopter_age'] ?>" class="form-control col-md-7 col-xs-12" disabled>
                       </div>
                     </div>
 
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">Home Address: </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" name="" value="<?= $adata['adopter_city'] ?>" class="form-control col-md-7 col-xs-12" disabled>
+                        <input type="text" name="adopter_city" value="<?= $adata['adopter_city'] ?>" class="form-control col-md-7 col-xs-12" disabled>
                       </div>
                     </div>
 
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">Contact Number: </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" name="" value="<?= $adata['adopter_cnum'] ?>" class="form-control col-md-7 col-xs-12" disabled>
+                        <input type="text" name="adopter_cnum" value="<?= $adata['adopter_cnum'] ?>" class="form-control col-md-7 col-xs-12" disabled>
                       </div>
                     </div>
 
@@ -337,112 +337,112 @@ if ($result->num_rows > 0) {
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-age">E-mail Address: </span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" name="" value="<?= $adata['user_email'] ?>" class="form-control col-md-7 col-xs-12" disabled>
+                        <input type="text" name="user_email" value="<?= $adata['user_email'] ?>" class="form-control col-md-7 col-xs-12" disabled>
                       </div>
                     </div>
 
                     <div class="form-group">
                       <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Occupation: </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q1'] ?>" disabled>
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="q1" value="<?= $qdata['q1'] ?>" disabled>
                       </div>
                     </div>
 
                     <div class="form-group">
                       <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Civil Status: </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q2'] ?>" disabled>
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="q2" value="<?= $qdata['q2'] ?>" disabled>
                       </div>
                     </div>
 
                     <div class="form-group">
                       <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Are there children (below 18) in the house? If yes how old are they? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q3'] ?>" disabled>
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="q3" value="<?= $qdata['q3'] ?>" disabled>
                       </div>
                     </div>
 
                     <div class="form-group">
                       <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Do you have other children? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q4'] ?>" disabled>
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="q4" value="<?= $qdata['q4'] ?>" disabled>
                       </div>
                     </div>
 
                     <div class="form-group">
                       <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Have you had pets in the past? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q5'] ?>" disabled>
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="q5" value="<?= $qdata['q5'] ?>" disabled>
                       </div>
                     </div>
 
                     <div class="form-group">
                       <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Who else do you live with? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q6'] ?>" disabled>
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="q6" value="<?= $qdata['q6'] ?>" disabled>
                       </div>
                     </div>
 
                     <div class="form-group">
                       <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Are any members of your household allergic to animals? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q7'] ?>" disabled>
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="q7" value="<?= $qdata['q7'] ?>" disabled>
                       </div>
                     </div>
 
                     <div class="form-group">
                       <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Who will be responsible for feeding, grooming, and generally caring for your pet? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q8'] ?>" disabled>
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="q8" value="<?= $qdata['q8'] ?>" disabled>
                       </div>
                     </div>
 
                     <div class="form-group">
                       <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Who will be financially responsible for your pet's needs? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q9'] ?>" disabled>
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="q9" value="<?= $qdata['q9'] ?>" disabled>
                       </div>
                     </div>
 
                     <div class="form-group">
                       <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Who will look after your pet if you go on vacation or in case of emergency? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q10'] ?>" disabled>
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="q10" value="<?= $qdata['q10'] ?>" disabled>
                       </div>
                     </div>
 
                     <div class="form-group">
                       <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">How many hours in an average workday will your pet be left alone? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q11'] ?>. hour/s" disabled>
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="q11" value="<?= $qdata['q11'] ?>. hour/s" disabled>
                       </div>
                     </div>
 
                     <div class="form-group">
                       <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Does everyone in the family support your decision to adopt a pet? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q12'] ?>" disabled>
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="q12" value="<?= $qdata['q12'] ?>" disabled>
                       </div>
                     </div>
 
                     <div class="form-group">
                       <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">What type of building do you live in? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q13'] ?>" disabled>
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="q13" value="<?= $qdata['q13'] ?>" disabled>
                       </div>
                     </div>
 
                     <div class="form-group">
                       <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">If you rent, do you have permission from your landlord to have an animal? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q14'] ?>" disabled>
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="q14" value="<?= $qdata['q14'] ?>" disabled>
                       </div>
                     </div>
 
                     <div class="form-group">
                       <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Are you prepared to spend for the wellness of your pet? If so, how much are you willing to spend in a year? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q15'] ?>" disabled>
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="q15" value="<?= $qdata['q15'] ?>" disabled>
                       </div>
                     </div>
 
@@ -456,6 +456,7 @@ if ($result->num_rows > 0) {
                         <button name="reject" class="btn btn-round btn-danger" onclick="return confirm('Are you sure you want to reject this application?');">Reject</button>
 
                         <a href="#" data-toggle="modal" data-target="#modalDate"><button name="edit-pet-submit" class="btn btn-round btn-success">Accept</button></a>
+                        <input type="submit" name ="pdf" class="btn btn-round btn-success" value="Report Generation" formaction="report_generation.php">
                       </div>
 
                       <?php
