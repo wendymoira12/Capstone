@@ -1,78 +1,20 @@
 <?php
-error_reporting(0);
 
-session_start();
 include 'config.php';
 
-if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
-  header('Location:/Capstone/warp/login.php');
-} else {
-  $role_id = $_SESSION['user-role-id'];
-  if ($role_id == 2) {
-    htmlspecialchars($_SERVER['PHP_SELF']);
-  } else {
-    header('Location:/Capstone/warp/home.php');
-  }
-}
-
-if (!isset($_GET['id'])) {
-  die('Id not provided');
-}
-
-// Kukunin yung answers from application form na equivalent sa questionchoices
-$id = $_GET['id'];
-$sql = "SELECT * FROM applicationform1 WHERE application_id = $id";
-$result = $conn->query($sql);
-$qdata = mysqli_fetch_assoc($result);
-
-if ($result->num_rows != 1) {
-  die('id not found');
-}
-
-if ($result->num_rows > 0) {
-  $adopter_id = $qdata['adopter_id'];
   // Kukunin yung adopter info na ishoshow sa view form
-  $sql = "SELECT * FROM adopter_tbl INNER JOIN user_tbl ON adopter_tbl.user_id = user_tbl.user_id WHERE adopter_id = '$adopter_id'";
+  $sql = "SELECT * FROM adopter_tbl INNER JOIN user_tbl ON adopter_tbl.user_id = user_tbl.user_id WHERE adopter_id";
   $result = $conn->query($sql);
   if ($result == TRUE) {
     $adata = mysqli_fetch_assoc($result);
   }
 
-  if ($result->num_rows != 1) {
-    die('id not found');
-  }
-}
-// Pag naclick si reject button, mapapalitan yung application status sa application list
-if (isset($_POST['reject'])) {
-  $id = $_GET['id'];
-  $reject = 'Rejected';
-  $sql = "UPDATE applicationresult_tbl SET application_status='$reject' WHERE application_id = '$id'";
+  $sql = "SELECT * FROM applicationform1 WHERE application_id";
   $result = $conn->query($sql);
-  if ($result == TRUE) {
-    header('Location: shelter_application_list.php');
-  }
-}
-
+  $qdata = mysqli_fetch_assoc($result);
 
 ?>
 
-<?php
-// Get the user ID from the login sesh
-$user_id = $_SESSION['user_id'];
-// Query to check if user_id from the login shesh = shelteruser_id to get the city 
-$sql = "SELECT * FROM shelteruser_tbl WHERE user_id ='$user_id'";
-$result = mysqli_query($conn, $sql);
-
-if ($result->num_rows > 0) {
-  $row = mysqli_fetch_assoc($result);
-  $city_id = $row['city_id'];
-  $sql = "SELECT * FROM city_tbl INNER JOIN shelteruser_tbl ON city_tbl.city_id = shelteruser_tbl.city_id WHERE city_tbl.city_id AND shelteruser_tbl.city_id ='$city_id'";
-  $result = mysqli_query($conn, $sql);
-  if ($result == TRUE) {
-    $row = mysqli_fetch_assoc($result);
-  }
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -83,7 +25,7 @@ if ($result->num_rows > 0) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" type="image/x-icon" href="/warp/img/WARP_LOGO copy.png">
-  <title>Animal Shelter | Adoptee Pet Information</title>
+  <title>Animal Application Form</title>
 
   <!-- Bootstrap -->
   <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -112,193 +54,15 @@ if ($result->num_rows > 0) {
 
 </head>
 
-<body class="nav-md">
-  <div class="container body">
-    <div class="main_container">
-      <div class="col-md-3 left_col menu_fixed">
-        <div class="left_col scroll-view">
-          <div class="logo">
-            <a href="../../home.php">
-              <img src="/Capstone/warp/img/logo.png" alt="">
-            </a>
-          </div>
-          <div class="clearfix"></div>
-
-
-          <!-- menu profile quick info -->
-          <div class="profile clearfix">
-            <div class="profile_pic">
-              <img src="/Capstone/warp/WARP Admin/production/images/<?= $row['city_img']; ?>" alt="..." class="img-circle profile_img">
-            </div>
-            <div class="profile_info">
-              <span>Welcome,</span>
-              <h2>
-                <?php
-                echo $row['shelteruser_name'] . ',';
-                ?>
-                <br>
-                <?php
-                echo $row['shelteruser_position'];
-                ?>
-              </h2>
-            </div>
-          </div>
-          <!-- /menu profile quick info -->
-
-          <br />
-
-          <!-- sidebar menu -->
-          <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-            <div class="menu_section">
-              <h3>General</h3>
-              <ul class="nav side-menu">
-                <li><a href="#"><i class="fa fa-home"></i> Account </a>
-                </li>
-                <li><a href="#"><i class="fa fa-edit"></i> Add Adoptee info </a>
-                </li>
-                <li><a href="#"><i class="fa fa-paw"></i> Pet Adoptee List </a>
-                </li>
-                <li><a href="#"><i class="fa fa-paw"></i> Application List </a>
-                </li>
-                <li><a href="#"><i class="fa fa-paw"></i> Adopted Pet List </a>
-                </li>
-              </ul>
-            </div>
-
-          </div>
-          <!-- /sidebar menu -->
-
-          <!-- /menu footer buttons -->
-        </div>
-      </div>
-
-      <!-- top navigation -->
-      <div class="top_nav">
-        <div class="nav_menu">
-          <nav>
-            <div class="nav toggle">
-              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-            </div>
-
-            <ul class="nav navbar-nav navbar-right">
-              <li class="">
-                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="/Capstone/warp/WARP Admin/production/images/<?= $row['city_img']; ?>" alt=""><?php echo $_SESSION['user-email'] ?>
-                  <span class=" fa fa-angle-down"></span>
-                </a>
-                <ul class="dropdown-menu dropdown-usermenu pull-right">
-                  <li><a href="logout.php?logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-                </ul>
-              </li>
-              <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
-                <!-- Notification bell -->
-
-              <li role="presentation" class="dropdown">
-                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                  <i class="fa fa-bell-o"></i>
-                  <span class="badge bg-green">6</span>
-                </a>
-                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                  <li>
-                    <a>
-                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <div class="text-center">
-                      <a>
-                        <strong>See All Alerts</strong>
-                        <i class="fa fa-angle-right"></i>
-                      </a>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-
-          </nav>
-        </div>
-      </div>
-      <!-- /top navigation -->
 
       <!-- page content -->
-      <div class="right_col" role="main">
-        <div class="">
-          <div class="page-title">
-            <div class="title_left">
-              <h3>Edit Adoptee</h3>
-            </div>
-
-            <div class="title_right">
-              <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-
-              </div>
-            </div>
+      <div class="logo">
+           <img id="logo" src="/Capstone/warp/img/logo.png">
           </div>
-          <div class="clearfix"></div>
-          <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="x_panel">
-                <div class="x_title">
-                  <!-- <h2>Form Design <small>different form elements</small></h2> -->
-
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                  <br />
 
                   <form method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="report_generation.php">
-
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" name="id" for="pet-name">Adopter I.D: </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <img src="images/valid_id/<?= $qdata['valid_id']; ?>" alt="Adopter Identification Card" height="150" width="150">
-                      </div>
-                    </div>
-
-                    <div class="form-group">
+                        
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">First Name: </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input type="text" name="adopter_fname" value="<?= $adata['adopter_fname'] ?>" class="form-control col-md-7 col-xs-12" disabled>
@@ -446,83 +210,7 @@ if ($result->num_rows > 0) {
                       </div>
                     </div>
 
-                    <div class="ln_solid"></div>
-                    <div class="form-group">
-                      <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                        <a href="shelter_application_list.php">
-                          <button class="btn btn-round btn-primary" type="button" onclick="return confirm('Are you sure you want to cancel?');">Cancel</button>
-                        </a>
-
-                        <button name="reject" class="btn btn-round btn-danger" onclick="return confirm('Are you sure you want to reject this application?');">Reject</button>
-
-                        <a href="#" data-toggle="modal" data-target="#modalDate"><button name="edit-pet-submit" class="btn btn-round btn-success">Accept</button></a>
-                        <input type="submit" name ="pdf" class="btn btn-round btn-success" value="View as PDF" formaction="report_generation.php">
-                      </div>
-
-                      <?php
-                      //Form Submission for date
-                      if (isset($_POST['submit-date'])) {
-                        $date = $_POST['date'];
-                        //If date is not empty code will execute
-                        if (!empty($date)) {
-                          //Sql query to check if data exist with same applicatin id in sched table
-                          $sql = "SELECT * FROM schedule_tbl WHERE application_id = '$id' LIMIT 1";
-                          $result = mysqli_query($conn, $sql);
-                          if ($result->num_rows > 0) {
-                            echo "<script>alert('Record Exists!')</script>";
-                            echo "<script>window.location.href='shelter_application_list.php';</script>";
-                          } else {
-                            $sql = "INSERT INTO schedule_tbl(schedule_date, application_id) VALUES ('$date', '$id')";
-                            // If the query execute proceed to next query
-                            if (mysqli_query($conn, $sql)) {
-                              $scheduled = 'Scheduled';
-                              $sql4 = "UPDATE applicationresult_tbl SET application_status='$scheduled' WHERE application_id = '$id'";
-                              // If the query execute show Input success message and redirect to shelter_application_list
-                              if (mysqli_query($conn, $sql4)) {
-                                echo "<script>alert('Date Input Success')</script>";
-                                echo "<script>window.location.href='shelter_application_list.php';</script>";
-                              } else {
-                                echo "<script>alert('Data Input Fail')</script>";
-                              }
-                            }
-                          }
-                        } else {
-                          echo "<script>alert('No date input')</script>";
-                        }
-                      }
-
-                      ?>
-                      <div class="modal fade" id="modalDate">
-                        <div class="modal-dialog modal-sm">
-                          <div class="modal-content">
-                            <form action="/Capstone/warp/shelter/production/shelter_application_view.php?id=<?= $id ?>" method="POST">
-                              <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-                                </button>
-                                <h4 class="modal-title">Schedule a date for interview</h4>
-                              </div>
-                              <div class="modal-body">
-                                <input type="date" name="date">
-                              </div>
-                              <div class="modal-footer">
-                                <button class="btn btn-success" name="submit-date" onclick="return confirm('Are you sure you want to accept this application and proceed with the scheduled date?');">Submit
-                                </button>
-                              </div>
-                            </form>
-                          </div>
-                        </div>
-                      </div>
-
-                    </div>
-
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
+                 
       <!-- /page content -->
 
       <!-- footer content -->
@@ -579,6 +267,48 @@ if ($result->num_rows > 0) {
   <script src="../vendors/starrr/dist/starrr.js"></script>
   <!-- Custom Theme Scripts -->
   <script src="../build/js/custom.min.js"></script>
+
+  <style>
+.form-control {
+    border-radius: 0;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    float: left;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+.form-control {
+    display: block;
+    width: 100%;
+    height: 22px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    }
+    label {
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+body {
+    font-family: "Helvetica Neue",Roboto,Arial,"Droid Sans",sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.471;
+}
+</style>
+
 
 </body>
 
