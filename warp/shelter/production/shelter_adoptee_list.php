@@ -248,10 +248,6 @@ if ($result->num_rows > 0) {
                 <div class="x_panel">
                   <div class="x_title">
                     <h4>This table shows all the pet that is up for adoption in this animal shelter. </h4>
-
-                    </li>
-                    </ul>
-
                   </div>
 
                   <p class="text-muted font-13 m-b-30">

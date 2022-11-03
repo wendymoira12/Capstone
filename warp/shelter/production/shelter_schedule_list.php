@@ -256,7 +256,7 @@ if ($result->num_rows > 0) {
                   </thead>
                   <?php
                   $i = 1;
-                  $sql = "SELECT schedule_tbl.schedule_id, schedule_tbl.schedule_date, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_name FROM schedule_tbl INNER JOIN applicationform1 ON schedule_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id ='$city_id'";
+                  $sql = "SELECT schedule_tbl.schedule_id, schedule_tbl.schedule_date, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, schedule_tbl.application_id FROM schedule_tbl INNER JOIN applicationform1 ON schedule_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id ='$city_id'";
                   $result = mysqli_query($conn, $sql);
                   if ($result->num_rows > 0) {
                     foreach ($result as $data) {
@@ -269,10 +269,12 @@ if ($result->num_rows > 0) {
                           <td><?= $data['adopter_fname'] . ' ' . $data['adopter_lname']; ?></td>
                           <td><?= $data['pet_name']; ?></td>
                           <td>
-                            <a href="shelter_schedule_list2.php?id=<?=$data['schedule_id']?>" >
+                            <a href="shelter_schedule_list2.php?id=<?= $data['schedule_id'] ?>">
                               <button type="submit" class="btn btn-round btn-primary">Edit</button>
                             </a>
-                            <button type="button" class="btn btn-round btn-success">Update</button>
+                            <a href="shelter_adopted_insert.php?id=<?= $data['application_id'] ?>">
+                              <button type="button" class="btn btn-round btn-success">Pet Adopted</button>
+                            </a>
                           </td>
 
                         </tr>
@@ -329,6 +331,7 @@ if ($result->num_rows > 0) {
   <script src="../vendors/jszip/dist/jszip.min.js"></script>
   <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
   <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+
 
   <!-- Custom Theme Scripts -->
   <script src="../build/js/custom.min.js"></script>

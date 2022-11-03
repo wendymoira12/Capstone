@@ -24,7 +24,7 @@ $result = mysqli_query($conn, $sql);
 if ($result->num_rows > 0) {
   $row = mysqli_fetch_assoc($result);
   $city_id = $row['city_id'];
-  $sql = "SELECT * FROM city_tbl INNER JOIN shelteruser_tbl ON city_tbl.city_id = shelteruser_tbl.city_id WHERE city_tbl.city_id AND shelteruser_tbl.city_id ='$city_id'";  
+  $sql = "SELECT * FROM city_tbl INNER JOIN shelteruser_tbl ON city_tbl.city_id = shelteruser_tbl.city_id WHERE city_tbl.city_id AND shelteruser_tbl.city_id ='$city_id'";
   $result = mysqli_query($conn, $sql);
   if ($result == TRUE) {
     $row = mysqli_fetch_assoc($result);
@@ -146,137 +146,141 @@ if ($result->num_rows > 0) {
                 </ul>
               </li>
               <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
-              <!-- Notification bell -->
-              
-              <li role="presentation" class="dropdown">
-                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-bell-o"></i>
-                    <span class="badge bg-green">6</span>
-                  </a>
-                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <div class="text-center">
-                        <a>
-                          <strong>See All Alerts</strong>
-                          <i class="fa fa-angle-right"></i>
-                        </a>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
+                <!-- Notification bell -->
 
+              <li role="presentation" class="dropdown">
+                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                  <i class="fa fa-bell-o"></i>
+                  <span class="badge bg-green">6</span>
+                </a>
+                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                  <li>
+                    <a>
+                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                      <span>
+                        <span>John Smith</span>
+                        <span class="time">3 mins ago</span>
+                      </span>
+                      <span class="message">
+                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                      <span>
+                        <span>John Smith</span>
+                        <span class="time">3 mins ago</span>
+                      </span>
+                      <span class="message">
+                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                      <span>
+                        <span>John Smith</span>
+                        <span class="time">3 mins ago</span>
+                      </span>
+                      <span class="message">
+                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                      <span>
+                        <span>John Smith</span>
+                        <span class="time">3 mins ago</span>
+                      </span>
+                      <span class="message">
+                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <div class="text-center">
+                      <a>
+                        <strong>See All Alerts</strong>
+                        <i class="fa fa-angle-right"></i>
+                      </a>
+                    </div>
+                  </li>
+                </ul>
+              </li>
           </nav>
         </div>
       </div>
       <!-- /top navigation -->
 
       <!-- page content -->
+
       <div class="right_col" role="main">
         <div class="">
           <div class="page-title">
             <div class="title_left">
               <h3>List of Adopted Pets </h3>
             </div>
-
             <div class="title_right">
-
             </div>
           </div>
         </div>
 
-
+        <div class="clearfix"></div>
 
         <div class="row">
           <div class="col-md-12 col-sm-12 col-xs-12">
-
-            <div class="x_title">
-              <p class="text-muted font-13 m-b-30">
-
-              </p>
+            <div class="x_panel">
+              <div class="x_title">
+                <h4>This table shows all the pet that has been adopted. </h4>
+              </div>
+              <p class="text-muted font-13 m-b-30"></p>
               <table id="datatable" class="table table-striped table-bordered">
                 <thead>
                   <tr>
                     <th>No.</th>
-                    <th>Pet ID</th>
-                    <th>Transaction ID</th>
-                    <th>Image</th>
-                    <th>Name</th>
+                    <th>Adopter Name</th>
+                    <th>Pet Image</th>
+                    <th>Pet Name</th>
                     <th>Date Adopted</th>
                     <th>Monitoring Date</th>
                     <th>Monitoring Status</th>
                     <th>Action</th>
                   </tr>
                 </thead>
+                <?php
+                $i = 1;
+                $sql = "SELECT adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_img, adoptee_tbl.pet_name, adopted_tbl.date_adopted, adopted_tbl.monitoring_date, adopted_tbl.monitoring_status FROM adopted_tbl INNER JOIN applicationform1 ON adopted_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id = '$city_id'";
 
+                $result = mysqli_query($conn, $sql);
+                if ($result->num_rows > 0) {
+                  foreach ($result as $data) {
+                ?>
+                    <tbody>
+                      <tr>
+                        <td><?= $i++; ?></td>
+                        <td><?= $data['adopter_fname'] . ' ' . $data['adopter_lname']; ?></td>
+                        <td><?= $data['pet_img']; ?></td>
+                        <td><?= $data['pet_name']; ?></td>
+                        <td><?= $data['date_adopted']; ?></td>
+                        <td><?= $data['monitoring_date']; ?></td>
+                        <td><?= $data['monitoring_status']; ?></td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                <?php
+                  }
+                }
 
-                <tbody>
-
-                  <tr>
-                    <td>1</td>
-                    <td>P001</td>
-                    <td>001</td>
-                    <td><img src="../../img/adoption/pet (2).jfif" alt="pet" width="100"></td>
-                    <td>Brownie</td>
-                    <td>01/06/2022</td>
-                    <td>02/10/2022</td>
-                    <td>Pending</td>
-                    <td><button type="button" class="btn btn-round btn-success">Update</button></td>
-                  </tr>
-
-                </tbody>
+                ?>
               </table>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
