@@ -47,6 +47,25 @@ if (isset($_POST['cancel'])) {
   if ($result == TRUE) {
     header('Location: adopter_user_page.php');
   }
+
+  // $sql_city = "SELECT * FROM shelteruser_tbl WHERE user_id ='$user_id'";
+  // $result_city = mysqli_query($conn, $sql);
+
+  // //Kukunin si city_id para maidentify kung saang city lang lalabas yung notif
+  // if($result_city->num_rows > 0){
+  //   $city = mysqli_fetch_assoc($result_city);
+  //   $city_id = $city['city_id'];
+    //function sa cancelled by adopter na notif
+    $msg = 'This adopter has cancelled their application form for pet'; //Eto yung message sa notif tas concat yung name ng pet sa dulo
+    $sql_insert = mysqli_query($conn, "INSERT INTO shelternotif_tbl(application_id, message) VALUES('$id', '$msg')"); //Di ko alam pano ipapasok yung city_id para ma specify kung saang shelter lang dapat lalabas yung notif, may WHERE pa dapat
+    if($sql_insert){
+      echo"<script>alert('Successfully cancelled adoption')</script>";
+    }else{
+      echo mysqli_error($conn);
+      exit;
+    }
+
+  // }
 }
 
 ?>
