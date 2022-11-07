@@ -249,13 +249,14 @@ if ($result->num_rows > 0) {
                       </tr>
                     </thead>
 
-                    <?php
-                    $sql = "SELECT * FROM adoptee_tbl WHERE city_id='$city_id'";
-                    $result = mysqli_query($conn, $sql);
-                    if ($result->num_rows > 0) {
-                      while ($row = $result->fetch_assoc()) {
-                    ?>
-                        <tbody>
+
+                    <tbody>
+                      <?php
+                      $sql = "SELECT * FROM adoptee_tbl WHERE city_id='$city_id'";
+                      $result = mysqli_query($conn, $sql);
+                      if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                      ?>
                           <tr>
                             <td><?php echo $i++; ?></td>
                             <td><?php echo $row['pet_id']; ?></td>
@@ -291,14 +292,14 @@ if ($result->num_rows > 0) {
                           </tr>
 
                   <?php
+                        }
                       }
                     }
+                  } else {
+                    header('Location:shelter_account.php');
                   }
-                } else {
-                  header('Location:shelter_account.php');
-                }
                   ?>
-                        </tbody>
+                    </tbody>
                   </table>
                 </div>
               </div>

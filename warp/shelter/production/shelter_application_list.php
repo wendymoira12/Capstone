@@ -57,7 +57,7 @@ if ($result->num_rows > 0) {
   <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
   <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
   <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
-  
+
 
   <!-- Custom Theme Style -->
   <link href="../build/css/custom.min.css" rel="stylesheet">
@@ -188,11 +188,6 @@ if ($result->num_rows > 0) {
       <!-- /top navigation -->
 
       <!-- page content -->
-      <?php
-      $i = 1;
-      $sql = "SELECT applicationform1.adopter_id, applicationform1.pet_id, applicationform1.date_submitted, applicationresult_tbl.application_result, applicationresult_tbl.application_status, adopter_tbl.adopter_fname, applicationresult_tbl.application_id, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, adoptee_tbl.city_id FROM applicationform1 INNER JOIN applicationresult_tbl ON applicationform1.application_id = applicationresult_tbl.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id = '$city_id'";
-      $result = mysqli_query($conn, $sql);
-      ?>
 
       <div class="right_col" role="main">
         <div class="">
@@ -232,9 +227,11 @@ if ($result->num_rows > 0) {
                     </thead>
                     <tbody>
                       <?php
+                      $i = 1;
+                      $sql = "SELECT applicationform1.adopter_id, applicationform1.pet_id, applicationform1.date_submitted, applicationresult_tbl.application_result, applicationresult_tbl.application_status, adopter_tbl.adopter_fname, applicationresult_tbl.application_id, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, adoptee_tbl.city_id FROM applicationform1 INNER JOIN applicationresult_tbl ON applicationform1.application_id = applicationresult_tbl.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id = '$city_id'";
+                      $result = mysqli_query($conn, $sql);
                       if ($result->num_rows > 0) {
                         foreach ($result as $data) {
-
                       ?>
                           <tr>
                             <td><?= $i++; ?></td>
@@ -247,11 +244,11 @@ if ($result->num_rows > 0) {
                                   View</button></a>
                             </td>
                           </tr>
-                    </tbody>
-                <?php
+                      <?php
                         }
                       }
-                ?>
+                      ?>
+                    </tbody>
                   </table>
                 </div>
               </div>

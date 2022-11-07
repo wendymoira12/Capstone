@@ -147,12 +147,12 @@ if ($result->num_rows > 0) {
               </li>
               <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
                 <!-- Notification bell -->
-              <?php
-              
-              $sql_get = mysqli_query($conn,"SELECT * FROM shelternotif_tbl WHERE status = 0" );
-              $count = mysqli_num_rows($sql_get);
-              
-              ?>
+                <?php
+
+                $sql_get = mysqli_query($conn, "SELECT * FROM shelternotif_tbl WHERE status = 0");
+                $count = mysqli_num_rows($sql_get);
+
+                ?>
 
               <li role="presentation" class="dropdown">
                 <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
@@ -224,15 +224,16 @@ if ($result->num_rows > 0) {
                       <th>Action</th>
                     </tr>
                   </thead>
-                  <?php
-                  $i = 1;
-                  $sql = "SELECT schedule_tbl.schedule_id, schedule_tbl.schedule_date, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, schedule_tbl.application_id FROM schedule_tbl INNER JOIN applicationform1 ON schedule_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id ='$city_id'";
-                  $result = mysqli_query($conn, $sql);
-                  if ($result->num_rows > 0) {
-                    foreach ($result as $data) {
 
-                  ?>
-                      <tbody>
+                  <tbody>
+                    <?php
+                    $i = 1;
+                    $sql = "SELECT schedule_tbl.schedule_id, schedule_tbl.schedule_date, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, schedule_tbl.application_id FROM schedule_tbl INNER JOIN applicationform1 ON schedule_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id ='$city_id'";
+                    $result = mysqli_query($conn, $sql);
+                    if ($result->num_rows > 0) {
+                      foreach ($result as $data) {
+
+                    ?>
                         <tr>
                           <td><?= $i++; ?></td>
                           <td><?= $data['schedule_date'] ?></td>
@@ -246,13 +247,12 @@ if ($result->num_rows > 0) {
                               <button type="button" class="btn btn-round btn-success">Pet Adopted</button>
                             </a>
                           </td>
-
                         </tr>
-                      </tbody>
-                  <?php
+                    <?php
+                      }
                     }
-                  }
-                  ?>
+                    ?>
+                  </tbody>
                 </table>
               </div>
             </div>

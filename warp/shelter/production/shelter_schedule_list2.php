@@ -153,12 +153,12 @@ if ($result->num_rows > 0) {
               </li>
               <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
                 <!-- Notification bell -->
-              <?php
-              
-              $sql_get = mysqli_query($conn,"SELECT * FROM shelternotif_tbl WHERE status = 0" );
-              $count = mysqli_num_rows($sql_get);
-              
-              ?>
+                <?php
+
+                $sql_get = mysqli_query($conn, "SELECT * FROM shelternotif_tbl WHERE status = 0");
+                $count = mysqli_num_rows($sql_get);
+
+                ?>
 
               <li role="presentation" class="dropdown">
                 <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
@@ -230,40 +230,41 @@ if ($result->num_rows > 0) {
                       <th>Action</th>
                     </tr>
                   </thead>
-                  <?php
-                  $i = 1;
-                  $sql = "SELECT schedule_tbl.schedule_id, schedule_tbl.schedule_date, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_name FROM schedule_tbl INNER JOIN applicationform1 ON schedule_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id ='$city_id'";
-                  $result = mysqli_query($conn, $sql);
-                  if ($result->num_rows > 0) {
-                    foreach ($result as $data) {
+                  <tbody>
+                    <?php
+                    $i = 1;
+                    $sql = "SELECT schedule_tbl.schedule_id, schedule_tbl.schedule_date, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_name FROM schedule_tbl INNER JOIN applicationform1 ON schedule_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id ='$city_id'";
+                    $result = mysqli_query($conn, $sql);
+                    if ($result->num_rows > 0) {
+                      foreach ($result as $data) {
 
-                  ?>
-                      <tbody>
+                    ?>
                         <tr>
                           <td><?= $i++; ?></td>
                           <td><?= $data['schedule_date'] ?></td>
                           <td><?= $data['adopter_fname'] . ' ' . $data['adopter_lname']; ?></td>
                           <td><?= $data['pet_name']; ?></td>
                           <td>
-                            <a href="#" >
+                            <a href="#">
                               <button type="submit" class="btn btn-round btn-primary" data-toggle="modal" data-target="#modalEditDate">Edit</button>
                             </a>
                             <button type="button" class="btn btn-round btn-success">Update</button>
                           </td>
 
                         </tr>
-                      </tbody>
-                  <?php
+                    <?php
+                      }
                     }
-                  }
-                  ?>
+                    ?>
+                  </tbody>
+
                 </table>
 
                 <?php
                 //Form Submission for date
                 if (isset($_POST['submit-date'])) {
                   $date = $_POST['date'];
-                  
+
                   //If date is not empty code will execute
                   if (!empty($date)) {
                     $sql = "UPDATE schedule_tbl SET schedule_date='$date' WHERE schedule_id = '$id'";
@@ -277,15 +278,15 @@ if ($result->num_rows > 0) {
                   } else {
                     echo "<script>alert('No date input')</script>";
                   }
-                  
+
                   $change = '2';
                   //notif para sa pagaccept ng application form
-                  $msg = 'This shelter has changed your interview date to';//message if ever na papalitan ni shelter yung interview date ni adopter
+                  $msg = 'This shelter has changed your interview date to'; //message if ever na papalitan ni shelter yung interview date ni adopter
                   $msg1 = 'for pet';
                   $sql_insert = mysqli_query($conn, "INSERT INTO adopternotif_tbl(application_id,  message, message1 isAccepted) VALUES('$id', '$msg', '$msg1', '$change')"); //Di ko alam pano ipapasok yung user_id para ma specify kung para kaninong adopter lang lalabas yung notif
-                  if($sql_insert){
-                    echo"<script>alert('Successfully cancelled adoption')</script>";
-                  }else{
+                  if ($sql_insert) {
+                    echo "<script>alert('Successfully cancelled adoption')</script>";
+                  } else {
                     echo mysqli_error($conn);
                     exit;
                   }
@@ -363,10 +364,10 @@ if ($result->num_rows > 0) {
   <!-- Custom Theme Scripts -->
   <script src="../build/js/custom.min.js"></script>
   <script>
-    $(document).ready(function(){
-        $("#modalEditDate").modal('show');
+    $(document).ready(function() {
+      $("#modalEditDate").modal('show');
     });
-</script>
+  </script>
 
 </body>
 
