@@ -3,10 +3,9 @@ require_once 'dompdf/autoload.inc.php';
 use Dompdf\Dompdf;
 $dompdf = new Dompdf();
 
-
 // instantiate and use the dompdf class
 ob_start();
-require('report.php');
+require('pdf.php');
 $html =ob_get_contents();
 ob_get_clean();
 

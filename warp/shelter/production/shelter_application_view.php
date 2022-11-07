@@ -464,12 +464,13 @@ if ($result->num_rows > 0) {
                         <button name="reject" class="btn btn-round btn-danger" onclick="return confirm('Are you sure you want to reject this application?');">Reject</button>
 
                         <a href="#" data-toggle="modal" data-target="#modalDate"><button name="edit-pet-submit" class="btn btn-round btn-success">Accept</button></a>
-                        
-                        <input type="submit" name ="pdf" class="btn btn-round btn-success" value="View as PDF" formaction="report_generation.php">
+                        <a href="report_generation.php?id=<?= $id ?>">
+                          <button class="btn btn-round btn-primary" type="button">View as PDF</button>
+                        </a>
                       </div>
 
                       <?php
-                      //Form Submission for date
+                      //Form Submission for dateS
                       if (isset($_POST['submit-date'])) {
                         $date = $_POST['date'];
                         //If date is not empty code will execute
