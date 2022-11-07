@@ -51,6 +51,19 @@ if (isset($_POST['reject'])) {
   if ($result == TRUE) {
     header('Location: shelter_application_list.php');
   }
+
+  $reject = '0';
+  //notif para sa pagclick ng reject
+  $msg = 'This shelter has rejected your adoptee application for pet';//message sa notification ng adopter tas concat name ng pet na inadopt niya
+  $sql_insert = mysqli_query($conn, "INSERT INTO adopternotif_tbl(application_id, message, isAccepted) VALUES('$id', '$msg', '$reject')"); //Di ko alam pano ipapasok yung user_id para ma specify kung para kaninong adopter lang lalabas yung notif
+  if($sql_insert){
+    echo"<script>alert('Successfully cancelled adoption')</script>";
+  }else{
+    echo mysqli_error($conn);
+    exit;
+  }
+  
+  
 }
 
 
@@ -289,7 +302,7 @@ if ($result->num_rows > 0) {
                 <div class="x_content">
                   <br />
 
-                  <form method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="report_generation.php">
+                  <form method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" name="id" for="pet-name">Adopter I.D: </label>
@@ -456,6 +469,7 @@ if ($result->num_rows > 0) {
                         <button name="reject" class="btn btn-round btn-danger" onclick="return confirm('Are you sure you want to reject this application?');">Reject</button>
 
                         <a href="#" data-toggle="modal" data-target="#modalDate"><button name="edit-pet-submit" class="btn btn-round btn-success">Accept</button></a>
+                        
                         <input type="submit" name ="pdf" class="btn btn-round btn-success" value="View as PDF" formaction="report_generation.php">
                       </div>
 
@@ -488,6 +502,18 @@ if ($result->num_rows > 0) {
                           }
                         } else {
                           echo "<script>alert('No date input')</script>";
+                        }
+                        
+                        //notif para sa pagaccept ng application form
+                        $accept = '1';
+                        $msg = 'This shelter has accepted your adoptee application for pet';//message sa notification ng adopter tas concat name ng pet na inadopt niya
+                        $msg1 = 'The scheduled date for your interview is';//etong message1 naman naka null sya kase optional lang, if ever na nireject yung application form, wala tong laman kase wala namang massched
+                        $sql_insert = mysqli_query($conn, "INSERT INTO adopternotif_tbl(application_id,  message, message1, isAccepted) VALUES('$id', '$msg', '$msg1', '$accept')"); //Di ko alam pano ipapasok yung user_id para ma specify kung para kaninong adopter lang lalabas yung notif
+                        if($sql_insert){
+                          echo"<script>alert('Successfully cancelled adoption')</script>";
+                        }else{
+                          echo mysqli_error($conn);
+                          exit;
                         }
                       }
 

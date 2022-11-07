@@ -126,72 +126,63 @@ $result = mysqli_query($conn, $sqlapp);
               </li>
               <li><a href="logout.php?logout">Logout </i></a>
               <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
-                <!-- Notification bell -->
-
+              <!-- Notification bell -->
+              <?php
+              
+              $sql_get = mysqli_query($conn,"SELECT * FROM adopternotif_tbl INNER JOIN applicationform1 ON adopternotif_tbl.application_id = applicationform1.application_id INNER JOIN schedule_tbl ON applicationform1.schedule_id = schedule_tbl.schedule_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id WHERE adopternotif_tbl.status = 0" ); //PANO Q GAGAWIN YUNG SCHEDULE_TBL.APPLICATION_ID = APPLICATIONFORM1.APPLICATION_ID para tama yung dates dun sa notif
+              $count = mysqli_num_rows($sql_get);
+              
+              ?>
+              
               <li role="presentation" class="dropdown">
-                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                  <i class="fa fa-bell-o"></i>
-                  <span class="badge bg-green">6</span>
-                </a>
-                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                  <li>
-                    <a>
-                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <div class="text-center">
-                      <a>
-                        <strong>See All Alerts</strong>
-                        <i class="fa fa-angle-right"></i>
-                      </a>
-                    </div>
-                  </li>
-                </ul>
-              </li>
+                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-bell-o"></i>
+                    <span class="badge bg-green"><?php echo $count; ?></span>
+                  </a>
+                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                    <?php
+                    if(mysqli_num_rows($sql_get) > 0){
+                      while($notif = mysqli_fetch_assoc($sql_get)){
+                      ?>
+                        <li>
+                          <a>
+                            <span class="image"><?php echo '<img src="images/logo/' . $notif['city_img'] . '" alt="shelter logo"'; ?></span>
+                            <span>
+                              <span><?php echo $notif['city_name']; ?></span>
+                              <span class="time">3 mins ago</span>
+                            </span>
+                            <span class="message">
+                              <?php
+                              //Pag rejected, yung message lang at pet name
+                              if($notif['isAccepted'] == 0){
+                                echo $notif['message']. ' ' . $notif['pet_name'];
+                              }else if($notif['isAccepted'] == 1){
+                                //Pag accepted, message pati yung isang message with pet name and schedule ng interview
+                                echo $notif['message']. ' ' . $notif['pet_name']. '. '.$notif['message1']. ' ' . $notif['schedule_date'];
+                              }else{
+                                //Pag pinalitan ni shelter yung interview date, dito lalabas
+                                echo $notif['message']. ' ' . $notif['schedule_date']. '. '.$notif['message1']. ' ' . $notif['pet_name'];
+                              }
+                              ?>
+                            </span>
+                          </a>
+                        </li>
+                    <?php
+                    }
+                    }else{
+                      echo '<a > Sorry! No Notifications to show </a>';
+                    }
+                    ?>
+                    <li>
+                      <div class="text-center">
+                        <a>
+                          <strong>See All Notifications</strong>
+                          <i class="fa fa-angle-right"></i>
+                        </a>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
 
 
           </nav>

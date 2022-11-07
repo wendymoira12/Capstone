@@ -38,7 +38,7 @@ if ($result->num_rows > 0) {
     die('id not found');
   }
 }
-// Pag naclick si reject button, mapapalitan yung application status sa application list
+// Pag naclick si cancel button, mapapalitan yung application status sa application list
 if (isset($_POST['cancel'])) {
   $id = $_GET['id'];
   $cancel = 'Cancelled by adopter';

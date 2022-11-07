@@ -277,6 +277,18 @@ if ($result->num_rows > 0) {
                   } else {
                     echo "<script>alert('No date input')</script>";
                   }
+                  
+                  $change = '2';
+                  //notif para sa pagaccept ng application form
+                  $msg = 'This shelter has changed your interview date to';//message if ever na papalitan ni shelter yung interview date ni adopter
+                  $msg1 = 'for pet';
+                  $sql_insert = mysqli_query($conn, "INSERT INTO adopternotif_tbl(application_id,  message, message1 isAccepted) VALUES('$id', '$msg', '$msg1', '$change')"); //Di ko alam pano ipapasok yung user_id para ma specify kung para kaninong adopter lang lalabas yung notif
+                  if($sql_insert){
+                    echo"<script>alert('Successfully cancelled adoption')</script>";
+                  }else{
+                    echo mysqli_error($conn);
+                    exit;
+                  }
                 }
                 ?>
                 <div class="modal fade" id="modalEditDate">
