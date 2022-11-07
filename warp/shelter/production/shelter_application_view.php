@@ -1,6 +1,4 @@
 <?php
-error_reporting(0);
-
 session_start();
 include 'config.php';
 
@@ -14,14 +12,12 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
     header('Location:/Capstone/warp/home.php');
   }
 }
-
-if (!isset($_GET['id'])) {
-  die('Id not provided');
-}
+?>
+<?php
 
 // Kukunin yung answers from application form na equivalent sa questionchoices
 $id = $_GET['id'];
-$sql = "SELECT * FROM applicationform1 WHERE application_id = $id";
+$sql = "SELECT * FROM applicationform1 WHERE application_id = '$id'";
 $result = $conn->query($sql);
 $qdata = mysqli_fetch_assoc($result);
 
@@ -152,21 +148,21 @@ if ($result->num_rows > 0) {
             <div class="menu_section">
               <h3>General</h3>
               <ul class="nav side-menu">
-                <li><a href="#"><i class="fa fa-home"></i> Account </a>
+                <li><a href="shelter_account.php"><i class="fa fa-home"></i> Account </a>
                 </li>
-                <li><a href="#"><i class="fa fa-edit"></i> Add Adoptee info </a>
+                <li><a href="shelter_adoptee_info.php"><i class="fa fa-edit"></i> Add Adoptee info </a>
                 </li>
-                <li><a href="#"><i class="fa fa-paw"></i> Pet Adoptee List </a>
+                <li><a href="shelter_adoptee_list.php"><i class="fa fa-paw"></i> Pet Adoptee List </a>
                 </li>
-                <li><a href="#"><i class="fa fa-paw"></i> Application List </a>
+                <li><a href="shelter_application_list.php"><i class="fa fa-paw"></i> Application List </a>
                 </li>
-                <li><a href="#"><i class="fa fa-paw"></i> Adopted Pet List </a>
+                <li><a href="shelter_schedule_list.php"><i class="fa fa-paw"></i> Schedule List </a>
+                </li>
+                <li><a href="shelter_adopted_list.php"><i class="fa fa-paw"></i> Adopted Pet List </a>
                 </li>
               </ul>
             </div>
-
           </div>
-          <!-- /sidebar menu -->
 
           <!-- /menu footer buttons -->
         </div>
@@ -287,9 +283,8 @@ if ($result->num_rows > 0) {
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                  <br />
 
-                  <form method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="report_generation.php">
+                  <form method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="">
 
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" name="id" for="pet-name">Adopter I.D: </label>
@@ -456,7 +451,7 @@ if ($result->num_rows > 0) {
                         <button name="reject" class="btn btn-round btn-danger" onclick="return confirm('Are you sure you want to reject this application?');">Reject</button>
 
                         <a href="#" data-toggle="modal" data-target="#modalDate"><button name="edit-pet-submit" class="btn btn-round btn-success">Accept</button></a>
-                        <input type="submit" name ="pdf" class="btn btn-round btn-success" value="View as PDF" formaction="report_generation.php">
+                        <input type="submit" name="pdf" class="btn btn-round btn-success" value="View as PDF" formaction="report_generation.php">
                       </div>
 
                       <?php
