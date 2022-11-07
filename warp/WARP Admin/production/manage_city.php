@@ -16,15 +16,15 @@ if (isset($_POST['submit'])) {
   $contact = $_POST['contact'];
   $about = $_POST['about'];
   $img = $_FILES['img']['name'];
-  $img_tmp_name= $_FILES['img']['tmp_name'];
+  $img_tmp_name = $_FILES['img']['tmp_name'];
   $city_img_folder = '../../shelter/production/images/logo/' . $img;
   $sql = "INSERT INTO city_tbl(city_name, city_contact, city_about, city_img) VALUES ('$city','$contact','$about','$img')";
-  if (mysqli_query($conn, $sql)){
+  if (mysqli_query($conn, $sql)) {
     //success
     move_uploaded_file($img_tmp_name, $city_img_folder);
     header('location:manage_city.php');
-  } else{
-    echo 'Error'. mysqli_error($conn);
+  } else {
+    echo 'Error' . mysqli_error($conn);
   }
 }
 ?>
@@ -67,7 +67,11 @@ if (isset($_POST['submit'])) {
   <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
   <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
   <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
-
+  <!-- <script type="text/javascript">
+    $(document).ready(function() {
+      $('#datatable').dataTable();
+    });
+  </script> -->
 </head>
 
 <body class="nav-md">
@@ -210,7 +214,7 @@ if (isset($_POST['submit'])) {
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Image <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="file" name="img" required>
+                          <input class="form-control col-md-7 col-xs-12" type="file" name="img" required>
                         </div>
                       </div>
                       <div class="ln_solid"></div>
@@ -228,11 +232,8 @@ if (isset($_POST['submit'])) {
           </div>
 
 
-          <?php
-          $sql = "SELECT * FROM city_tbl";
-          $result = mysqli_query($conn, $sql);
-          $i = 1;
-          ?>
+
+
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
               <div class="x_title">
@@ -267,28 +268,31 @@ if (isset($_POST['submit'])) {
                       <th>Action</th>
                     </tr>
                   </thead>
-                  <?php
-                  if ($result->num_rows > 0) {
-                    foreach ($result as $row) {
-                  ?>
-                      <tbody>
+                  <tbody>
+                    <?php
+                    $sql = "SELECT * FROM city_tbl";
+                    $result = mysqli_query($conn, $sql);
+                    $i = 1;
+                    if ($result->num_rows > 0) {
+                      foreach ($result as $row) {
+                    ?>
                         <tr>
-                          <td><?= $i++?></td>
+                          <td><?= $i++ ?></td>
                           <td><?php echo $row['city_id']; ?></td>
                           <td><?php echo $row['city_name']; ?></td>
                           <td><?php echo $row['city_contact']; ?></td>
                           <td><?php echo $row['city_about']; ?></td>
                           <td><?php echo $row['city_img']; ?></td>
                           <td>
-                          <a href="edit_city.php?id=<?= $row['city_id']?>" type="submit" class="btn btn-round btn-success">Update</a>
+                            <a href="edit_city.php?id=<?= $row['city_id'] ?>" type="submit" class="btn btn-round btn-success">Update</a>
                             <button type="button" class="btn btn-round btn-danger">Delete</button>
                           </td>
                         </tr>
                     <?php
+                      }
                     }
-                  }
                     ?>
-                      </tbody>
+                  </tbody>
                 </table>
               </div>
             </div>

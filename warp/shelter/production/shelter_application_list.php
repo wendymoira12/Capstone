@@ -57,6 +57,7 @@ if ($result->num_rows > 0) {
   <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
   <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
   <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+  
 
   <!-- Custom Theme Style -->
   <link href="../build/css/custom.min.css" rel="stylesheet">
@@ -144,42 +145,42 @@ if ($result->num_rows > 0) {
                 </ul>
               </li>
               <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
-              <!-- Notification bell -->
-              <?php
-              
-              $sql_get = mysqli_query($conn,"SELECT * FROM shelternotif_tbl WHERE status = 0" );
-              $count = mysqli_num_rows($sql_get);
-              
-              ?>
-              
+                <!-- Notification bell -->
+                <?php
+
+                $sql_get = mysqli_query($conn, "SELECT * FROM shelternotif_tbl WHERE status = 0");
+                $count = mysqli_num_rows($sql_get);
+
+                ?>
+
               <li role="presentation" class="dropdown">
-                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-bell-o"></i>
-                    <span class="badge bg-green"><?php echo $count; ?></span>
-                  </a>
-                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                    <li>
+                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                  <i class="fa fa-bell-o"></i>
+                  <span class="badge bg-green"><?php echo $count; ?></span>
+                </a>
+                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                  <li>
+                    <a>
+                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                      <span>
+                        <span>John Smith</span>
+                        <span class="time">3 mins ago</span>
+                      </span>
+                      <span class="message">
+                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <div class="text-center">
                       <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
+                        <strong>See All Notifications</strong>
+                        <i class="fa fa-angle-right"></i>
                       </a>
-                    </li>
-                    <li>
-                      <div class="text-center">
-                        <a>
-                          <strong>See All Notifications</strong>
-                          <i class="fa fa-angle-right"></i>
-                        </a>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
+                    </div>
+                  </li>
+                </ul>
+              </li>
 
           </nav>
         </div>
@@ -229,12 +230,12 @@ if ($result->num_rows > 0) {
                         <th>Action</th>
                       </tr>
                     </thead>
-                    <?php
-                    if ($result->num_rows > 0) {
-                      foreach ($result as $data) {
+                    <tbody>
+                      <?php
+                      if ($result->num_rows > 0) {
+                        foreach ($result as $data) {
 
-                    ?>
-                        <tbody>
+                      ?>
                           <tr>
                             <td><?= $i++; ?></td>
                             <td><?= $data['adopter_fname'] . ' ' . $data['adopter_lname']; ?></td>
@@ -243,14 +244,14 @@ if ($result->num_rows > 0) {
                             <td><?= $data['application_result']; ?></td>
                             <td><?= $data['application_status']; ?></td>
                             <td><a href="shelter_application_view.php?id=<?= $data['application_id']; ?>"><button type="button" class="btn btn-round btn-success">
-                              View</button></a>
-                          </td>
+                                  View</button></a>
+                            </td>
                           </tr>
-                        </tbody>
-                        <?php
+                    </tbody>
+                <?php
+                        }
                       }
-                    } 
-                    ?>
+                ?>
                   </table>
                 </div>
               </div>
@@ -301,13 +302,9 @@ if ($result->num_rows > 0) {
 
   <!-- Custom Theme Scripts -->
   <script src="../build/js/custom.min.js"></script>
-  <script>
+  <script type="text/javascript">
     $(document).ready(function() {
-      $('#example').DataTable({
-        order: [
-          [4, 'desc']
-        ],
-      });
+      $('#datatable').DataTable();
     });
   </script>
 </body>
