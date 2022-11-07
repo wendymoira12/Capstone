@@ -311,7 +311,7 @@ if ($result->num_rows > 0) {
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">Home Address: </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" name="" value="<?= $adata['adopter_city'] ?>" class="form-control col-md-7 col-xs-12" disabled>
+                        <input type="text" name="" value="<?= $qdata['adopter_address'] ?>" class="form-control col-md-7 col-xs-12" disabled>
                       </div>
                     </div>
 
@@ -438,7 +438,10 @@ if ($result->num_rows > 0) {
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                        <button name="cancel" class="btn btn-round btn-danger" onclick="return confirm('Are you sure you want to cacncel this application?');">Cancel Application</button>
+                      <a href="adopter_user_page.php">
+                            <button type="button" class="btn btn-round btn-success">Back</button>
+                         </a>
+                      <button name="cancel" class="btn btn-round btn-danger" onclick="return confirm('Are you sure you want to cacncel this application?');">Cancel Application</button>
                     </div>
 
                   </form>

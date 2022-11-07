@@ -8,7 +8,7 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'],$_SESSION['user_id
   header('Location:/Capstone/warp/login.php');
 } else {
   $role_id = $_SESSION['user-role-id'];
-  if ($role_id == 1 or $role_id == 2) {
+  if ($role_id == 1) {
     htmlspecialchars($_SERVER['PHP_SELF']);
   } else {
     header('Location:/Capstone/warp/home.php');
@@ -56,11 +56,13 @@ $data = mysqli_fetch_assoc($result);
 $chkvalues = explode(", ", $data["pet_vax"]);
 
 ?>
+
 <?php 
 
 if (isset($_POST['submit']))
   {
 
+  // kuhain yung mga sagot sa application form lagay sa database: applicationform1
   $valid_id = $_FILES["valid_id"]["name"];
   $valid_id_tmp_name = $_FILES['valid_id']['tmp_name'];
   $valid_id_folder = "shelter/production/images/valid_id/" . $valid_id;
@@ -82,18 +84,22 @@ if (isset($_POST['submit']))
   $q14 = mysqli_real_escape_string($conn,$_POST["allow"]);
   $q15 = mysqli_real_escape_string($conn,$_POST["spending"]);
 
+  $address = mysqli_real_escape_string($conn,$_POST["address"]);
+
   
   //$adopter = "SELECT * FROM a.adopter_tbl,u.user_tbl WHERE a.user_id=$_SESSION['user_id']";
 
-  $row = "INSERT INTO applicationform1 (adopter_id,pet_id,valid_id,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15) VALUES ('$adopter_id','$id','$valid_id','$q1','$q2','$q3','$q4','$q5','$q6','$q7','$q8','$q9','$q10','$q11','$q12','$q13','$q14','$q15');";
+  $row = "INSERT INTO applicationform1 (adopter_id,pet_id,adopter_address,valid_id,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15) VALUES ('$adopter_id','$id','$address','$valid_id','$q1','$q2','$q3','$q4','$q5','$q6','$q7','$q8','$q9','$q10','$q11','$q12','$q13','$q14','$q15');";
   $query3 = mysqli_query($conn,$row); 
-  if($query3 == TRUE){
-    move_uploaded_file($valid_id_tmp_name, $valid_id_folder);
-  } 
+  
+  //move_uploaded_file($valid_id, 'shelter/production/images/valid_id/');
   //$insert = $mysqli -> affected_rows;
   //mysqli_close($conn);
-  usleep(250000);
+  
+
   {
+    // base sa sagot, isa isa kukuhain yung katumbas na value niya galing sa questionchoices na table sa "correct" na column, pag 1 correct pag 0 hindi.
+    usleep(250000);
         $app1d = "SELECT application_id from applicationform1 ORDER BY application_id DESC;";
         $query9 = mysqli_query($conn,$app1d);
         $row9 = mysqli_fetch_assoc($query9);
@@ -197,7 +203,7 @@ if (isset($_POST['submit']))
         $final15=implode($row5);
         echo $final15;
         //echo $final15;
-      
+      // kung lahat ng sagot "coorect" = "1", "qualified" ang ilalagay sa table na applicationresult_tbl, pero pag kahit isa lang sa sagot may 0 "Not Qualified" ang malalagay. Default na rin yung "pending" sa result status.
       if ($ffinal1=="1" && $final2=="1"){
         if ($final3=="1" && $final4=="1"){
           if ($final5=="1" && $final6=="1"){
@@ -206,7 +212,7 @@ if (isset($_POST['submit']))
                 if ($final11=="1" && $final2=="1"){
                   if ($final13=="1" && $final14=="1"){
                     if ($final15=="1"){
-                      $row5 = "INSERT INTO applicationresult_details (application_id,application_result,application_status)
+                      $row5 = "INSERT INTO applicationresult_tbl (application_id,application_result,application_status)
                       VALUES ('$final1','Qualified','Pending');";
                       $query5 = mysqli_query($conn,$row5); 
                     }
@@ -223,12 +229,9 @@ if (isset($_POST['submit']))
           $row5 = "INSERT INTO applicationresult_tbl (application_id,application_result,application_status)                
           VALUES ('$final1','Not Qualified','Pending');";
           $query5 = mysqli_query($conn,$row5);                 
-        }                               
-      //if (($ffinal1==1 && $final2==1) && ($final3==1 && $final4==1) && ($final5==1 && $final6==1) && ($final7==1 && $final8==1) && ($final9==1 && $final10==1) && ($final11==1 && $final12==1) && ($final13==1 && $final14==1) && ($final15==1))
-
-      //if ($queryr1='1' && $queryr2='1' && $queryr3='1' && $queryr4='1' && $queryr5='1' && $queryr6='1' && $queryr7='1' && $queryr8='1' && $queryr9='1' && $queryr10='1' && $queryr11='1' && $queryr12='1' && $queryr13='1' && $queryr14='1' && $queryr15='1')
-      
-  }
+        } 
+                                        
+   }
 }
 ?>
 <!doctype html>
@@ -470,7 +473,7 @@ if (isset($_POST['submit']))
                               <div class="modal-body">
                                 <form method="post" action="" enctype="multipart/form-data">
                                 <h3 class="title">Application Form</h3>
-                                <p class="description"> Please make sure that al the details below are correct. Thank you!</p>
+                                <p class="description"> Please make sure all details below are correct. Thank you!</p>
                                 
                                 <div class="form-group">
                                     <span class="input-icon"><i class="fa fa-user"></i></span>
@@ -487,12 +490,8 @@ if (isset($_POST['submit']))
                                     <input type="text" name="age" class="form-control" value="<?php echo $row['adopter_age']; ?>" disabled> 
                                 </div>
 
-                                <div class="form-group">
-                                  <span class="input-icon"><i class="fa fa-compass"></i></span>
-                                  <input type="text" name="city" class="form-control" value="<?php echo $row['adopter_city']; ?>, <?php echo $row['adopter_region']; ?>" disabled> 
-                                </div>
 
-                                <div class="form-group">
+                                <div class="form-group checkbox">
                                   <span class="input-icon"><i class="fa fa-phone"></i></span>
                                   <input type="text" name="number" class="form-control" value="<?php echo $row['adopter_cnum']; ?>" disabled> 
                                 </div>
@@ -500,6 +499,18 @@ if (isset($_POST['submit']))
                                 <div class="form-group checkbox">
                                   <span class="input-icon"><i class="fa fa-at"></i></span>
                                   <input type="email" name="email" class="form-control" value="<?php echo $row1['user_email']; ?>" disabled> 
+                                </div>
+
+                                <div class="form-group">
+                                  <h6> Please choose the address where the pet will reside </hg>
+                                </div>
+                               
+                                <div class="form-group">
+                                  <input type="radio" name="address" id="address" value="<?php echo $row['adopter_currentadd']; ?>"><?php echo $row['adopter_currentadd']; ?></input>
+                                </div>
+
+                                <div class="form-group">
+                                  <input type="radio" name="address" id="address" value="<?php echo $row['adopter_permanentadd']; ?>" required><?php echo $row['adopter_permanentadd']; ?></input>
                                 </div>
                                 
 
@@ -510,7 +521,7 @@ if (isset($_POST['submit']))
                                 
                                 <label>Please upload your Valid ID here for verification purposes:</label>
                                 <div class="form-group">
-                                  <input class="form-control" type="file" name="valid_id" required>
+                                  <input class="form-control" type="file" name="valid_id" id="valid_id" required>
                                 </div>
                                 
                               
@@ -830,14 +841,12 @@ if (isset($_POST['submit']))
                                   </div>
                                 <!-- END q14 -->
                             
-                                <!-- Radio Button Start: q15 - spending -->
+                                <!-- q15:spending -->
                                   <div class="form-group checkbox">
                                     <label>
                                       <!-- display ONLY q15 record (appplicationquestion table) from database-->
                                       <b><?php $sql = "SELECT * FROM applicationquestions where questionID = '15'" ; $result = $conn->query($sql); $question = $result->fetch_assoc(); echo "*".$question['questions'];?></b>
-                                    </label><br>
-                            
-                            
+                                    </label><br>                          
                                             <!-- Input Type Radio Button name: spending-->
                                     <label>  
                                        <?php
@@ -855,7 +864,7 @@ if (isset($_POST['submit']))
                                   
                                 <input class = "btn" type="reset">
                                 <button class="btn" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span> Cancel </button>
-                                <input class = "btn" type="submit" id="submit" name="submit" value="submit"onclick="return confirm('Are you sure you want to proceed?');">
+                                <input class = "btn" type="submit" id="submit" name="submit" value="submit" onclick="return confirm('Are you sure you want to proceed?');">
                                 
                               </div>
                               

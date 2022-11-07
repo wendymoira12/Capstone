@@ -33,8 +33,8 @@ if (isset($_POST['submit'])) {
   $lname = $_POST['lname'];
   $age = $_POST['age'];
   $cnumber = $_POST['cnumber'];
-  $region = $_POST['region'];
-  $city = $_POST['city'];
+  $currentadd = $_POST['currentadd'];
+  $permanentadd = $_POST['permanentadd'];
   $email = $_SESSION['mail'];
 
   //Check if no errors sa pass at confirm pass
@@ -57,9 +57,9 @@ if (isset($_POST['submit'])) {
           $_SESSION['user_id'] = $row['user_id'];
           $userid = $_SESSION['user_id'];
           //Then iinsert na ung data sa adopter_tbl
-          $sql3 = "INSERT INTO adopter_tbl(adopter_fname, adopter_lname, adopter_age, adopter_cnum, adopter_region, adopter_city, user_id) VALUES(?,?,?,?,?,?,?)";
+          $sql3 = "INSERT INTO adopter_tbl(adopter_fname, adopter_lname, adopter_age, adopter_cnum, adopter_currentadd, adopter_permanentadd, user_id) VALUES(?,?,?,?,?,?,?)";
           $stmtinsert = $db->prepare($sql3);
-          $result3 = $stmtinsert->execute([$fname, $lname, $age, $cnumber, $region, $city, $userid]);
+          $result3 = $stmtinsert->execute([$fname, $lname, $age, $cnumber, $currentadd, $permanentadd, $userid]);
           //If successful ang insertion mareredirect na sa homepage si adopter
           if ($result3) {
             echo "<script>alert('Registration complete')</script>";
@@ -119,13 +119,19 @@ if (isset($_POST['submit'])) {
           </div>
           <div class="input-field">
             <i class="fa-solid fa-location-dot"></i>
-            <input type="text" placeholder="Region" name="region" required>
+            <input type="text" placeholder="Current Address" name="currentadd" required>
+          </div>
+          <div class="guide">
+          <h6> Unit Number, House Number, Street, Barangay, City/Municipality.</h6>
           </div>
           <div class="input-field">
             <i class="fa-solid fa-location-dot"></i>
-            <input type="text" placeholder="City" name="city" required>
+            <input type="text" placeholder="Permanent Address" name="permanentadd" required>  
           </div>
-          <div class="input-field">
+          <div class="guide"> 
+            <h6> Unit Number, House Number, Street, Barangay, City/Municipality.</h6>
+          </div>
+            <div class="input-field">
             <i class="fa-solid fas fa-lock"></i>
             <input type="password" class="<?php echo !$passErr ?: 'is-invalid'; ?>" placeholder="Password" name="password" required>
           </div>
