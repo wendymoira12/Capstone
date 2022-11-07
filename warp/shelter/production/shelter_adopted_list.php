@@ -148,14 +148,14 @@ if ($result->num_rows > 0) {
               <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
                 <!-- Notification bell -->
 
-              <!-- Notification bell -->
-              <?php
-              
-              $sql_get = mysqli_query($conn,"SELECT * FROM shelternotif_tbl WHERE status = 0" );
-              $count = mysqli_num_rows($sql_get);
-              
-              ?>
-              
+                <!-- Notification bell -->
+                <?php
+
+                $sql_get = mysqli_query($conn, "SELECT * FROM shelternotif_tbl WHERE status = 0");
+                $count = mysqli_num_rows($sql_get);
+
+                ?>
+
               <li role="presentation" class="dropdown">
                 <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
                   <i class="fa fa-bell-o"></i>
@@ -220,33 +220,33 @@ if ($result->num_rows > 0) {
                   </li>
                 </ul>
               </li>
-                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-bell-o"></i>
-                    <span class="badge bg-green"><?php echo $count; ?></span>
+              <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                <i class="fa fa-bell-o"></i>
+                <span class="badge bg-green"><?php echo $count; ?></span>
+              </a>
+              <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                <li>
+                  <a>
+                    <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                    <span>
+                      <span>John Smith</span>
+                      <span class="time">3 mins ago</span>
+                    </span>
+                    <span class="message">
+                      Film festivals used to be do-or-die moments for movie makers. They were where...
+                    </span>
                   </a>
-                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <div class="text-center">
-                        <a>
-                          <strong>See All Alerts</strong>
-                          <i class="fa fa-angle-right"></i>
-                        </a>
-                      </div>
-                    </li>
-                  </ul>
                 </li>
+                <li>
+                  <div class="text-center">
+                    <a>
+                      <strong>See All Alerts</strong>
+                      <i class="fa fa-angle-right"></i>
+                    </a>
+                  </div>
+                </li>
+              </ul>
+              </li>
 
           </nav>
         </div>
@@ -288,15 +288,15 @@ if ($result->num_rows > 0) {
                     <th>Action</th>
                   </tr>
                 </thead>
-                <?php
-                $i = 1;
-                $sql = "SELECT adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_img, adoptee_tbl.pet_name, adopted_tbl.date_adopted, adopted_tbl.monitoring_date, adopted_tbl.monitoring_status FROM adopted_tbl INNER JOIN applicationform1 ON adopted_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id = '$city_id'";
+                <tbody>
+                  <?php
+                  $i = 1;
+                  $sql = "SELECT adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_img, adoptee_tbl.pet_name, adopted_tbl.date_adopted, adopted_tbl.monitoring_date, adopted_tbl.monitoring_status FROM adopted_tbl INNER JOIN applicationform1 ON adopted_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id = '$city_id'";
 
-                $result = mysqli_query($conn, $sql);
-                if ($result->num_rows > 0) {
-                  foreach ($result as $data) {
-                ?>
-                    <tbody>
+                  $result = mysqli_query($conn, $sql);
+                  if ($result->num_rows > 0) {
+                    foreach ($result as $data) {
+                  ?>
                       <tr>
                         <td><?= $i++; ?></td>
                         <td><?= $data['adopter_fname'] . ' ' . $data['adopter_lname']; ?></td>
@@ -307,12 +307,11 @@ if ($result->num_rows > 0) {
                         <td><?= $data['monitoring_status']; ?></td>
                         <td></td>
                       </tr>
-                    </tbody>
-                <?php
+                  <?php
+                    }
                   }
-                }
-
-                ?>
+                  ?>
+                </tbody>
               </table>
             </div>
           </div>

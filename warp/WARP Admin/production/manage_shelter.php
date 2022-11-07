@@ -265,11 +265,6 @@ if (isset($_POST['submit'])) {
           </div>
 
 
-          <?php
-          $sql = "SELECT shelteruser_tbl.shelteruser_name, shelteruser_tbl.shelteruser_position, shelteruser_tbl.shelteruser_id, city_tbl.city_name, city_tbl.city_contact, user_tbl.user_email FROM shelteruser_tbl INNER JOIN city_tbl ON shelteruser_tbl.city_id = city_tbl.city_id INNER JOIN user_tbl ON shelteruser_tbl.user_id = user_tbl.user_id";
-          $result = mysqli_query($conn, $sql);
-          $i = 1;
-          ?>
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
               <div class="x_title">
@@ -304,11 +299,16 @@ if (isset($_POST['submit'])) {
                       <th>Action</th>
                     </tr>
                   </thead>
-                  <?php
-                  if ($result->num_rows > 0) {
-                    foreach ($result as $row) {
-                  ?>
-                      <tbody>
+
+                  <tbody>
+                    <?php
+                    $sql = "SELECT shelteruser_tbl.shelteruser_name, shelteruser_tbl.shelteruser_position, shelteruser_tbl.shelteruser_id, city_tbl.city_name, city_tbl.city_contact, user_tbl.user_email FROM shelteruser_tbl INNER JOIN city_tbl ON shelteruser_tbl.city_id = city_tbl.city_id INNER JOIN user_tbl ON shelteruser_tbl.user_id = user_tbl.user_id";
+                    $result = mysqli_query($conn, $sql);
+                    $i = 1;
+
+                    if ($result->num_rows > 0) {
+                      foreach ($result as $row) {
+                    ?>
                         <tr>
                           <td><?= $i++ ?></td>
                           <td><?= $row['shelteruser_name']; ?></td>
@@ -317,15 +317,15 @@ if (isset($_POST['submit'])) {
                           <td><?= $row['city_contact']; ?></td>
                           <td><?= $row['user_email']; ?></td>
                           <td>
-                          <a href="edit_shelter.php?id=<?= $row['shelteruser_id']?>" type="submit" class="btn btn-round btn-success">Update</a>
+                            <a href="edit_shelter.php?id=<?= $row['shelteruser_id'] ?>" type="submit" class="btn btn-round btn-success">Update</a>
                             <button type="button" class="btn btn-round btn-danger">Delete</button>
                           </td>
                         </tr>
                     <?php
+                      }
                     }
-                  }
                     ?>
-                      </tbody>
+                  </tbody>
                 </table>
               </div>
             </div>

@@ -12,13 +12,17 @@ if (isset($_GET['id'])) {
     if ($result->num_rows > 0) {
         //Query will be insertion of data in adopted tbl after this query proceed to next query 
         //NO MONITORING DATE YET and monitoring status default will be not yet monitored
-        $sql2 = "INSERT INTO adopted_tbl(application_id) VALUES ('$application_id')";
+        $datetoday = date_add(date_create(date("Y-m-d H:i:s")), date_interval_create_from_date_string("30 days"));
+        $monitoring_date = date_format($datetoday, "Y-m-d H:i:s");
+
+        $sql2 = "INSERT INTO adopted_tbl(application_id, monitoring_date) VALUES ('$application_id', '$monitoring_date')";
         $result = mysqli_query($conn, $sql2);
         if ($result == 1) {
             //Query will be the updating status of application status after this query proceed to next query
             $status = 'Finished';
             $sql3 = "UPDATE applicationresult_tbl SET application_status='$status' WHERE application_id = '$application_id'";
             $result = mysqli_query($conn, $sql3);
+            header('Location:shelter_adopted_list.php');
             // NO DELETION YET
             /* 
             if ($result == 1) {

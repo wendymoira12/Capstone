@@ -164,13 +164,7 @@ if (!isset($_SESSION['email-login'])) {
             </div>
           </div>
 
-          <?php
-          //Query to get data from adopter_tbl and user_tbl
-          $sql = "SELECT adopter_tbl.adopter_id, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adopter_tbl.adopter_age, 
-          adopter_tbl.adopter_cnum, adopter_tbl.adopter_region, adopter_tbl.adopter_city, user_tbl.user_email, user_tbl.user_datecreated FROM user_tbl INNER JOIN adopter_tbl 
-          ON user_tbl.user_id = adopter_tbl.user_id";
-          $result = mysqli_query($conn, $sql);
-          ?>
+
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
               <div class="x_title">
@@ -193,11 +187,16 @@ if (!isset($_SESSION['email-login'])) {
                       <th>Action</th>
                     </tr>
                   </thead>
-                  <?php
-                  if ($result->num_rows > 0) {
-                    foreach ($result as $row) {
-                  ?>
-                      <tbody>
+
+                  <tbody>
+                    <?php
+                    //Query to get data from adopter_tbl and user_tbl
+                    $sql = "SELECT adopter_tbl.adopter_id, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adopter_tbl.adopter_age, adopter_tbl.adopter_cnum, adopter_tbl.adopter_region, adopter_tbl.adopter_city, user_tbl.user_email, user_tbl.user_datecreated FROM user_tbl INNER JOIN adopter_tbl ON user_tbl.user_id = adopter_tbl.user_id";
+                    $result = mysqli_query($conn, $sql);
+
+                    if ($result->num_rows > 0) {
+                      foreach ($result as $row) {
+                    ?>
                         <tr>
                           <td><?php echo $row['adopter_id']; ?></td>
                           <td><?php echo $row['adopter_fname']; ?></td>
@@ -214,10 +213,10 @@ if (!isset($_SESSION['email-login'])) {
                           </td>
                         </tr>
                     <?php
+                      }
                     }
-                  }
                     ?>
-                      </tbody>
+                  </tbody>
                 </table>
               </div>
             </div>
