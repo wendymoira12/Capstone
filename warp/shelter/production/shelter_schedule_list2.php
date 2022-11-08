@@ -233,7 +233,7 @@ if ($result->num_rows > 0) {
                   <tbody>
                     <?php
                     $i = 1;
-                    $sql = "SELECT schedule_tbl.schedule_id, schedule_tbl.schedule_date, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_name FROM schedule_tbl INNER JOIN applicationform1 ON schedule_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id ='$city_id'";
+                    $sql = "SELECT schedule_tbl.schedule_id, schedule_tbl.schedule_date, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, applicationform1.application_id FROM schedule_tbl INNER JOIN applicationform1 ON schedule_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id ='$city_id'";
                     $result = mysqli_query($conn, $sql);
                     if ($result->num_rows > 0) {
                       foreach ($result as $data) {
@@ -270,26 +270,32 @@ if ($result->num_rows > 0) {
                     $sql = "UPDATE schedule_tbl SET schedule_date='$date' WHERE schedule_id = '$id'";
                     if (mysqli_query($conn, $sql)) {
                       // If the query execute show Input success message and redirect to shelter_application_list
-                      echo "<script>alert('Date Input Success')</script>";
-                      echo "<script>window.location.href='shelter_schedule_list.php';</script>";
+                      // echo "<script>alert('Date Input Success')</script>";
+
+                      $app_id = $data['application_id'];
+                      $change = '2';
+                      //notif para sa pagaccept ng application form
+                      $msg = 'This shelter has changed your interview date to'; //message if ever na papalitan ni shelter yung interview date ni adopter
+                      $msg1 = 'for pet';
+                      $sql_insert = "INSERT INTO adopternotif_tbl(application_id, schedule_id,  message, message1, isAccepted) VALUES('$app_id', '$id', '$msg', '$msg1', '$change')"; //Di ko alam pano ipapasok yung user_id para ma specify kung para kaninong adopter lang lalabas yung notif
+
+                      if (mysqli_query($conn, $sql_insert)) {
+                        echo "<script>alert('Successfully changed schedule date')</script>";
+                        echo "<script>window.location.href='shelter_schedule_list.php';</script>";
+                      } else {
+                        echo mysqli_error($conn);
+                        exit;
+                      }
+                      
                     } else {
                       echo "<script>alert('Data Input Fail')</script>";
                     }
+                    
                   } else {
                     echo "<script>alert('No date input')</script>";
                   }
 
-                  $change = '2';
-                  //notif para sa pagaccept ng application form
-                  $msg = 'This shelter has changed your interview date to'; //message if ever na papalitan ni shelter yung interview date ni adopter
-                  $msg1 = 'for pet';
-                  $sql_insert = mysqli_query($conn, "INSERT INTO adopternotif_tbl(application_id,  message, message1 isAccepted) VALUES('$id', '$msg', '$msg1', '$change')"); //Di ko alam pano ipapasok yung user_id para ma specify kung para kaninong adopter lang lalabas yung notif
-                  if ($sql_insert) {
-                    echo "<script>alert('Successfully cancelled adoption')</script>";
-                  } else {
-                    echo mysqli_error($conn);
-                    exit;
-                  }
+                  
                 }
                 ?>
                 <div class="modal fade" id="modalEditDate">
