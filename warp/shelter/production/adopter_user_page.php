@@ -26,15 +26,6 @@ if ($result->num_rows > 0) {
 }
 ?>
 
-<?php
-$i = 1;
-//Columns needed to query = No., Date Submitted, Adopter Name, Adoptee name, Application Status
-$sqlapp = "SELECT applicationform1.date_submitted, applicationform1.adopter_id, applicationform1.pet_id, applicationresult_tbl.application_status, applicationform1.application_id, adoptee_tbl.pet_name FROM applicationform1 INNER JOIN applicationresult_tbl ON applicationform1.application_id = applicationresult_tbl.application_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id WHERE adopter_tbl.adopter_id = '$adopter_id'";
-
-//$sqlapp= "SELECT * FROM applicationform1, applicationresult_tbl WHERE adopter_id ='$adopter_id';";
-
-$result = mysqli_query($conn, $sqlapp);
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -67,17 +58,12 @@ $result = mysqli_query($conn, $sqlapp);
 <body class="nav-md">
   <div class="container body">
     <div class="main_container">
-      <div class="clearfix">
       <div class="col-md-3 left_col menu_fixed">
         <div class="left_col scroll-view">
-        <div class="clearfix">
           <div class="logo">
-          
-            <!--ORIGINAL PLACEMENT OF LOGO<a href="">
-              <img src="images/logo.png" alt="">
-            </a>-->
+            
           </div>
-          </div>
+          <div class="clearfix"></div>
 
           <!-- menu profile quick info -->
           <div class="profile clearfix">
@@ -85,7 +71,6 @@ $result = mysqli_query($conn, $sqlapp);
               <img src="images/logo.png" alt="">
             </a>
             <div class="profile_pic">
-              
               <img src="images/img2.jpg" alt="..." class="img-circle profile_img">
             </div>
             <div class="profile_info">
@@ -108,6 +93,11 @@ $result = mysqli_query($conn, $sqlapp);
             </div>
 
           </div>
+          <!-- /sidebar menu -->
+
+          <!-- /menu footer buttons -->
+
+          <!-- /menu footer buttons -->
         </div>
       </div>
 
@@ -129,65 +119,56 @@ $result = mysqli_query($conn, $sqlapp);
               <li><a href="logout.php?logout">Logout </i></a>
               <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
                 <!-- Notification bell -->
+                <?php
+
+                $sql_get = mysqli_query($conn, "SELECT * FROM adopternotif_tbl INNER JOIN applicationform1 ON adopternotif_tbl.application_id = applicationform1.application_id INNER JOIN schedule_tbl ON applicationform1.schedule_id = schedule_tbl.schedule_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id WHERE adopternotif_tbl.status = 0"); //PANO Q GAGAWIN YUNG SCHEDULE_TBL.APPLICATION_ID = APPLICATIONFORM1.APPLICATION_ID para tama yung dates dun sa notif
+                $count = mysqli_num_rows($sql_get);
+
+                ?>
 
               <li role="presentation" class="dropdown">
                 <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
                   <i class="fa fa-bell-o"></i>
-                  <span class="badge bg-green">6</span>
+                  <span class="badge bg-green"><?php echo $count; ?></span>
                 </a>
                 <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                  <li>
-                    <a>
-                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
+                  <?php
+                  if (mysqli_num_rows($sql_get) > 0) {
+                    while ($notif = mysqli_fetch_assoc($sql_get)) {
+                  ?>
+                      <li>
+                        <a>
+                          <span class="image"><?php echo '<img src="images/logo/' . $notif['city_img'] . '" alt="shelter logo"'; ?></span>
+                          <span>
+                            <span><?php echo $notif['city_name']; ?></span>
+                            <span class="time">3 mins ago</span>
+                          </span>
+                          <span class="message">
+                            <?php
+                            //Pag rejected, yung message lang at pet name
+                            if ($notif['isAccepted'] == 0) {
+                              echo $notif['message'] . ' ' . $notif['pet_name'];
+                            } else if ($notif['isAccepted'] == 1) {
+                              //Pag accepted, message pati yung isang message with pet name and schedule ng interview
+                              echo $notif['message'] . ' ' . $notif['pet_name'] . '. ' . $notif['message1'] . ' ' . $notif['schedule_date'];
+                            } else {
+                              //Pag pinalitan ni shelter yung interview date, dito lalabas
+                              echo $notif['message'] . ' ' . $notif['schedule_date'] . '. ' . $notif['message1'] . ' ' . $notif['pet_name'];
+                            }
+                            ?>
+                          </span>
+                        </a>
+                      </li>
+                  <?php
+                    }
+                  } else {
+                    echo '<a > Sorry! No Notifications to show </a>';
+                  }
+                  ?>
                   <li>
                     <div class="text-center">
                       <a>
-                        <strong>See All Alerts</strong>
+                        <strong>See All Notifications</strong>
                         <i class="fa fa-angle-right"></i>
                       </a>
                     </div>
@@ -212,7 +193,7 @@ $result = mysqli_query($conn, $sqlapp);
             <div class="clearfix"></div>
 
             <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Applications</h2>
@@ -231,12 +212,20 @@ $result = mysqli_query($conn, $sqlapp);
                           <th>Action</th>
                         </tr>
                       </thead>
-                      <?php
-                      if ($result->num_rows > 0) {
-                        foreach ($result as $data) {
+                      <tbody>
+                        <?php
 
-                      ?>
-                          <tbody>
+                        $i = 1;
+                        //Columns needed to query = No., Date Submitted, Adopter Name, Adoptee name, Application Status
+                        $sqlapp = "SELECT applicationform1.date_submitted, applicationform1.adopter_id, applicationform1.pet_id, applicationresult_tbl.application_status, applicationform1.application_id, adoptee_tbl.pet_name FROM applicationform1 INNER JOIN applicationresult_tbl ON applicationform1.application_id = applicationresult_tbl.application_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id WHERE adopter_tbl.adopter_id = '$adopter_id'";
+
+                        //$sqlapp= "SELECT * FROM applicationform1, applicationresult_tbl WHERE adopter_id ='$adopter_id';";
+
+                        $result = mysqli_query($conn, $sqlapp);
+                        if ($result->num_rows > 0) {
+                          foreach ($result as $data) {
+
+                        ?>
                             <tr>
                               <th><?= $i++; ?></th>
                               <th><?php echo $data['application_id']; ?></th>
@@ -249,14 +238,13 @@ $result = mysqli_query($conn, $sqlapp);
                                 </a>
                               </td>
                             </tr>
-                          </tbody>
-                      <?php
+                        <?php
+                          }
                         }
-                      }
 
-                      ?>
+                        ?>
+                      </tbody>
                     </table>
-
                   </div>
                 </div>
               </div>
