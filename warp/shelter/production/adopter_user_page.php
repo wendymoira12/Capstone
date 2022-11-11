@@ -121,8 +121,12 @@ if ($result->num_rows > 0) {
                 <!-- Notification bell -->
                 <?php
 
-                $sql_get = mysqli_query($conn, "SELECT * FROM adopternotif_tbl INNER JOIN applicationform1 ON adopternotif_tbl.application_id = applicationform1.application_id INNER JOIN schedule_tbl ON applicationform1.schedule_id = schedule_tbl.schedule_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id WHERE adopternotif_tbl.status = 0"); //PANO Q GAGAWIN YUNG SCHEDULE_TBL.APPLICATION_ID = APPLICATIONFORM1.APPLICATION_ID para tama yung dates dun sa notif
-                $count = mysqli_num_rows($sql_get);
+                $sqlr = "SELECT * FROM adopternotif_tbl INNER JOIN applicationform1 ON adopternotif_tbl.application_id = applicationform1.application_id INNER JOIN schedule_tbl ON applicationform1.application_id = schedule_tbl.application_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id WHERE adopternotif_tbl.status = '0';";
+                $resultr = mysqli_query($conn, $sqlr);
+                $count = mysqli_num_rows($resultr);
+
+                /*$sql_get = mysqli_query($conn, "SELECT * FROM adopternotif_tbl INNER JOIN applicationform1 ON adopternotif_tbl.application_id = applicationform1.application_id INNER JOIN schedule_tbl ON applicationform1.schedule_id = schedule_tbl.schedule_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id WHERE adopternotif_tbl.status = 0"); //PANO Q GAGAWIN YUNG SCHEDULE_TBL.APPLICATION_ID = APPLICATIONFORM1.APPLICATION_ID para tama yung dates dun sa notif
+                $count = mysqli_num_rows($sql_get);*/
 
                 ?>
 
@@ -133,8 +137,8 @@ if ($result->num_rows > 0) {
                 </a>
                 <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
                   <?php
-                  if (mysqli_num_rows($sql_get) > 0) {
-                    while ($notif = mysqli_fetch_assoc($sql_get)) {
+                  if (mysqli_num_rows($resultr) > 0) {
+                    while ($notif = mysqli_fetch_assoc($resultr)) {
                   ?>
                       <li>
                         <a>

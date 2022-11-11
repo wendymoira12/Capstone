@@ -23,7 +23,7 @@ if (isset($_GET['city_id']) && isset($_POST['edit-shelter-submit'])) {
 
     $img = $_FILES['logo']['name'];
     $img_tmp_name = $_FILES['logo']['tmp_name'];
-    $img_folder = 'images/logo/' . $img;
+    $img_folder = '../../../../images/logo/' . $img;
 
 
     if (!empty($city) && !empty($contact) && !empty($about) && !empty($img)) {
