@@ -121,7 +121,7 @@ if ($result->num_rows > 0) {
                 <!-- Notification bell -->
                 <?php
 
-                $sqlr = "SELECT * FROM adopternotif_tbl INNER JOIN applicationform1 ON adopternotif_tbl.application_id = applicationform1.application_id INNER JOIN schedule_tbl ON applicationform1.application_id = schedule_tbl.application_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id WHERE adopternotif_tbl.status = '0';";
+                $sqlr = "SELECT city_tbl.city_name, city_tbl.city_img, schedule_tbl.schedule_date, adoptee_tbl.pet_name, adopternotif_tbl.message, adopternotif_tbl.message1 FROM adopternotif_tbl INNER JOIN applicationform1 ON adopternotif_tbl.application_id = applicationform1.application_id INNER JOIN schedule_tbl ON applicationform1.application_id = schedule_tbl.application_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id WHERE adopternotif_tbl.status = '0'; AND adoptee_tbl.city_id = city_tbl.city_id";
                 $resultr = mysqli_query($conn, $sqlr);
                 $count = mysqli_num_rows($resultr);
 
