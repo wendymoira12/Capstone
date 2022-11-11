@@ -1,8 +1,8 @@
-<?php 
+<?php
 include 'config/database.php';
 session_start();
 
-if(!isset($_SESSION['email-login'])){
+if (!isset($_SESSION['email-login'])) {
   header('Location: login.php');
 }
 ?>
@@ -58,14 +58,14 @@ if(!isset($_SESSION['email-login'])){
             <div class="profile_info">
               <span>Welcome,</span>
               <h2>
-              <?php 
-              //DISPLAY SESSION
-              if (isset($_SESSION['email-login'])){
-                echo $_SESSION['email-login'];
-              } else {
-                header("Location: login.php");
-              }
-              ?>
+                <?php
+                //DISPLAY SESSION
+                if (isset($_SESSION['email-login'])) {
+                  echo $_SESSION['email-login'];
+                } else {
+                  header("Location: login.php");
+                }
+                ?>
               </h2>
             </div>
           </div>
@@ -78,15 +78,15 @@ if(!isset($_SESSION['email-login'])){
             <div class="menu_section">
               <h3>General</h3>
               <ul class="nav side-menu">
-                <li><a><i class="fa fa-home"></i> Home </a>
-                </li>
+                <li><a><i class="fa fa-home"></i> Home </a></li>
+                <li><a href="manage_city.php"><i class="fa fa-building-o"></i> Manage Cities </a></li>
                 <li><a><i class="fa fa-users"></i> Manage Accounts </a>
                   <ul class="nav child_menu">
                     <li><a href="manage_shelter.php">Shelter</a></li>
                     <li><a href="manage_adopter.php">Adopter</a></li>
-                    <li><a href="manage_city.php">City</a></li>
                   </ul>
                 </li>
+                
               </ul>
             </div>
 
@@ -123,9 +123,8 @@ if(!isset($_SESSION['email-login'])){
 
             <ul class="nav navbar-nav navbar-right">
               <li class="">
-                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
-                  aria-expanded="false">
-                  <img src="images/WARP_LOGO.svg" alt=""><?php echo $_SESSION['email-login']?>
+                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  <img src="images/WARP_LOGO.svg" alt=""><?php echo $_SESSION['email-login'] ?>
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -143,11 +142,12 @@ if(!isset($_SESSION['email-login'])){
       <div class="right_col" role="main">
         <!-- top tiles -->
         <div class="row tile_count">
+
           <?php
           // Make a query to get the total registered shelter accounts by COUNTing all the user with role id == 2
           $sql = "SELECT COUNT(user_id) AS totalshelter FROM user_tbl WHERE role_id = '2'";
           $result = mysqli_query($conn, $sql);
-          if ($result){
+          if ($result) {
             $row = mysqli_fetch_assoc($result);
             $totalshelter = $row['totalshelter'];
           }
@@ -155,106 +155,65 @@ if(!isset($_SESSION['email-login'])){
           <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
             <span class="count_top"><i class="fa fa-user"></i> Total Registered Shelter Accounts</span>
             <div class="count green"><?= $totalshelter ?></div>
-            
           </div>
+
           <?php
           // Make a query to get the total registered adopter accounts by COUNTing all the user with role id == 1
           $sql = "SELECT COUNT(user_id) AS totaladopter FROM user_tbl WHERE role_id = '1'";
           $result = mysqli_query($conn, $sql);
-          if ($result){
+          if ($result) {
             $row = mysqli_fetch_assoc($result);
             $totaladopter = $row['totaladopter'];
           }
           ?>
           <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
             <span class="count_top"><i class="fa fa-user"></i> Total Registered Adopter Accounts</span>
-            <div class="count green"><?= $totaladopter?></div>
-            <span class="count_bottom"><i class="green">4% </i> From Last Week</span>
+            <div class="count green"><?= $totaladopter ?></div>
           </div>
 
+          <?php
+          // Make a query to get the total pet adoptee listed by counting all the pet_id
+          $sql = "SELECT COUNT(pet_id) AS totalpetadoptee FROM adoptee_tbl";
+          $result = mysqli_query($conn, $sql);
+          if ($result) {
+            $row = mysqli_fetch_assoc($result);
+            $totalpetadoptee = $row['totalpetadoptee'];
+          }
+          ?>
           <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
             <span class="count_top"><i class="fa fa-user"></i> Total Pet Adoptee Listed</span>
-            <div class="count green">91</div>
-            <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From Last Week</span>
+            <div class="count green"><?= $totalpetadoptee ?></div>
           </div>
 
+          <?php
+          // Make a query to get the total registered adopter accounts by COUNTing all the user with role id == 1
+          $sql = "SELECT COUNT(adopted_id) AS totaladoptedpet FROM adopted_tbl";
+          $result = mysqli_query($conn, $sql);
+          if ($result) {
+            $row = mysqli_fetch_assoc($result);
+            $totaladoptedpet = $row['totaladoptedpet'];
+          }
+          ?>
           <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
             <span class="count_top"><i class="fa fa-user"></i> Total Pet Adopted</span>
-            <div class="count green">50</div>
-            <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From Last Week</span>
+            <div class="count green"><?= $totaladoptedpet ?></div>
           </div>
-
         </div>
         <!-- /top tiles -->
 
-<!--         
-        <div class="row">
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <div class="x_panel">
-              <div class="x_title">
-                <h2>Registered Users</h2>
-                <ul class="nav navbar-right panel_toolbox">
-                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                  </li>
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                    <ul class="dropdown-menu" role="menu">
-                      <li><a href="#">Settings 1</a>
-                      </li>
-                      <li><a href="#">Settings 2</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li><a class="close-link"><i class="fa fa-close"></i></a>
-                  </li>
-                </ul>
-                <div class="clearfix"></div>
-              </div>
-              <div class="x_content">
-                <canvas id="lineChart"></canvas>
-              </div>
-            </div>
-          </div> -->
-
-          <!-- <div class="col-md-6 col-sm-6 col-xs-12">
-            <div class="x_panel">
-              <div class="x_title">
-                <h2>Pets Adopted</h2>
-                <ul class="nav navbar-right panel_toolbox">
-                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                  </li>
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                    <ul class="dropdown-menu" role="menu">
-                      <li><a href="#">Settings 1</a>
-                      </li>
-                      <li><a href="#">Settings 2</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li><a class="close-link"><i class="fa fa-close"></i></a>
-                  </li>
-                </ul>
-                <div class="clearfix"></div>
-              </div>
-              <div class="x_content">
-                <canvas id="mybarChart"></canvas>
-              </div>
-            </div>
-          </div> -->
-        </div>
       </div>
-      <!-- /page content -->
-
-      <!-- footer content -->
-      <footer>
-        <div class="pull-right">
-          <!-- Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a> -->
-        </div>
-        <div class="clearfix"></div>
-      </footer>
-      <!-- /footer content -->
     </div>
+    <!-- /page content -->
+
+    <!-- footer content -->
+    <footer>
+      <div class="pull-right">
+        <!-- Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a> -->
+      </div>
+      <div class="clearfix"></div>
+    </footer>
+    <!-- /footer content -->
+  </div>
   </div>
 
   <!-- jQuery -->

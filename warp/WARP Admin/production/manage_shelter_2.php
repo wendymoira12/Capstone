@@ -143,19 +143,16 @@ if (isset($_POST['submit'])) {
             <div class="menu_section">
               <h3>General</h3>
               <ul class="nav side-menu">
-                <li><a href="admin_home.php"><i class="fa fa-home"></i> Home <span></span></a>
-                </li>
+                <li><a href="admin_home.php"><i class="fa fa-home"></i> Home <span></span></a></li>
+                <li><a href="manage_city.php"><i class="fa fa-building-o"></i> Manage Cities </a></li>
                 <li><a><i class="fa fa-users"></i> Manage Accounts <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="manage_shelter.php">Shelter</a></li>
                     <li><a href="manage_adopter.php">Adopter</a></li>
-                    <li><a href="manage_city.php">City</a></li>
                   </ul>
                 </li>
               </ul>
             </div>
-
-
           </div>
           <!-- /sidebar menu -->
 
@@ -270,61 +267,9 @@ if (isset($_POST['submit'])) {
           </div>
 
           <!--======================================================== END OF FORM =========================================================================-->
-          <!--=========================================================   TABLE   ==========================================================================-->
-
-          <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="x_panel">
-              <div class="x_title">
-                <h2>List of Shelter Accounts<small>Users</small></h2>
-                <div class="clearfix"></div>
-              </div>
-              <div class="x_content">
-                <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
-                  <thead>
-                    <tr>
-                      <th>No.</th>
-                      <th>Full Name</th>
-                      <th>Position</th>
-                      <th>City</th>
-                      <th>City Contact Number</th>
-                      <th>E-mail Address</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    <?php
-                    $sql = "SELECT shelteruser_tbl.shelteruser_name, shelteruser_tbl.shelteruser_position, shelteruser_tbl.shelteruser_id, city_tbl.city_name, city_tbl.city_contact, user_tbl.user_email FROM shelteruser_tbl INNER JOIN city_tbl ON shelteruser_tbl.city_id = city_tbl.city_id INNER JOIN user_tbl ON shelteruser_tbl.user_id = user_tbl.user_id";
-                    $result = mysqli_query($conn, $sql);
-                    $i = 1;
-                    if ($result->num_rows > 0) {
-                      foreach ($result as $row) {
-                    ?>
-                        <tr>
-                          <td><?= $i++ ?></td>
-                          <td><?= $row['shelteruser_name']; ?></td>
-                          <td><?= $row['shelteruser_position']; ?></td>
-                          <td><?= $row['city_name']; ?></td>
-                          <td><?= $row['city_contact']; ?></td>
-                          <td><?= $row['user_email']; ?></td>
-                          <td>
-                            <a href="edit_shelter.php?id=<?= $row['shelteruser_id'] ?>" type="submit" class="btn btn-round btn-success">Update</a>
-                            <button type="button" class="btn btn-round btn-danger">Delete</button>
-                        </tr>
-                    <?php
-                      }
-                    }
-                    ?>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
 
-      <!--=========================================================   END OF TABLE   ==========================================================================-->
+      
       <!-- /page content -->
 
       <!-- footer content -->

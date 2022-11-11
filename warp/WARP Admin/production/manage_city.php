@@ -112,19 +112,16 @@ if (isset($_POST['submit'])) {
             <div class="menu_section">
               <h3>General</h3>
               <ul class="nav side-menu">
-                <li><a href="admin_home.php"><i class="fa fa-home"></i> Home <span></span></a>
-                </li>
+                <li><a href="admin_home.php"><i class="fa fa-home"></i> Home <span></span></a></li>
+                <li><a href="manage_city.php"><i class="fa fa-building-o"></i> Manage Cities </a></li>
                 <li><a><i class="fa fa-users"></i> Manage Accounts <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="manage_shelter.php">Shelter</a></li>
                     <li><a href="manage_adopter.php">Adopter</a></li>
-                    <li><a href="manage_city.php">City</a></li>
                   </ul>
                 </li>
               </ul>
             </div>
-
-
           </div>
           <!-- /sidebar menu -->
 
@@ -200,7 +197,7 @@ if (isset($_POST['submit'])) {
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Contact <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="contact" name="contact" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" maxlength="11" id="contact" name="contact" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="form-group">
@@ -260,7 +257,6 @@ if (isset($_POST['submit'])) {
                   <thead>
                     <tr>
                       <th>No.</th>
-                      <th>City ID</th>
                       <th>City</th>
                       <th>Contact Number</th>
                       <th>About</th>
@@ -278,11 +274,10 @@ if (isset($_POST['submit'])) {
                     ?>
                         <tr>
                           <td><?= $i++ ?></td>
-                          <td><?php echo $row['city_id']; ?></td>
                           <td><?php echo $row['city_name']; ?></td>
                           <td><?php echo $row['city_contact']; ?></td>
                           <td><?php echo $row['city_about']; ?></td>
-                          <td><?php echo $row['city_img']; ?></td>
+                          <td><?php echo '<img src="../../shelter/production/images/logo/' . $row['city_img'] . '" alt="city_logo" width="100">'; ?></td>
                           <td>
                             <a href="edit_city.php?id=<?= $row['city_id'] ?>" type="submit" class="btn btn-round btn-success">Update</a>
                             <button type="button" class="btn btn-round btn-danger">Delete</button>

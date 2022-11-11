@@ -149,19 +149,16 @@ if (isset($_POST['submit'])) {
             <div class="menu_section">
               <h3>General</h3>
               <ul class="nav side-menu">
-                <li><a href="admin_home.php"><i class="fa fa-home"></i> Home <span></span></a>
-                </li>
+                <li><a href="admin_home.php"><i class="fa fa-home"></i> Home <span></span></a></li>
+                <li><a href="manage_city.php"><i class="fa fa-building-o"></i> Manage Cities </a></li>
                 <li><a><i class="fa fa-users"></i> Manage Accounts <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="manage_shelter.php">Shelter</a></li>
                     <li><a href="manage_adopter.php">Adopter</a></li>
-                    <li><a href="manage_city.php">City</a></li>
                   </ul>
                 </li>
               </ul>
             </div>
-
-
           </div>
           <!-- /sidebar menu -->
 
@@ -224,7 +221,6 @@ if (isset($_POST['submit'])) {
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                    <br />
                     <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Email Address <span class="required">*</span>
@@ -254,7 +250,7 @@ if (isset($_POST['submit'])) {
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                           <button class="btn btn-primary" type="reset">Reset</button>
-                          <button type="submit" class="btn btn-success" name="submit">Submit</button>
+                          <button type="submit" class="btn btn-success" name="submit">Next</button>
                         </div>
                       </div>
                     </form>

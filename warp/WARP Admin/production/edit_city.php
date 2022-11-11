@@ -116,13 +116,12 @@ if (isset($_POST['submit-update'])) {
             <div class="menu_section">
               <h3>General</h3>
               <ul class="nav side-menu">
-                <li><a href="admin_home.php"><i class="fa fa-home"></i> Home <span></span></a>
-                </li>
+                <li><a href="admin_home.php"><i class="fa fa-home"></i> Home <span></span></a></li>
+                <li><a href="manage_city.php"><i class="fa fa-building-o"></i> Manage Cities </a></li>
                 <li><a><i class="fa fa-users"></i> Manage Accounts <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="manage_shelter.php">Shelter</a></li>
                     <li><a href="manage_adopter.php">Adopter</a></li>
-                    <li><a href="manage_city.php">City</a></li>
                   </ul>
                 </li>
               </ul>
@@ -220,7 +219,7 @@ if (isset($_POST['submit-update'])) {
                               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Contact<span class="required">*</span>
                               </label>
                               <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" id="city_contact" name="city_contact" required="required" class="form-control col-md-7 col-xs-12" value="<?= $row['city_contact']; ?>">
+                                <input type="text" maxlength="11" id="city_contact" name="city_contact" required="required" class="form-control col-md-7 col-xs-12" value="<?= $row['city_contact']; ?>">
                               </div>
                             </div>
                             <div class="form-group">
@@ -231,9 +230,9 @@ if (isset($_POST['submit-update'])) {
                               </div>
                             </div>
                             <div class="form-group">
-                              <label for="pet-img" class="control-label col-md-3 col-sm-3 col-xs-12">Upload Adoptee Image<span class="required">*</label>
+                              <label for="pet-img" class="control-label col-md-3 col-sm-3 col-xs-12">Upload Image<span class="required">*</label>
                               <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input class="form-control col-md-7 col-xs-12" type="file"  name="city_img" value="<?= $row['city_img'] ?>" required>
+                                <input class="form-control col-md-7 col-xs-12" type="file" id="files" name="city_img" value="<?= $row['city_img'] ?>">
                               </div>
                             </div>
                       <?php
