@@ -330,7 +330,7 @@ if ($result->num_rows > 0) {
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">Home Address: </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" name="adopter_city" value="<?= $adata['adopter_city'] ?>" class="form-control col-md-7 col-xs-12" disabled>
+                        <input type="text" name="adopter_city" value="<?= $adata['adopter_currentadd'] ?>" class="form-control col-md-7 col-xs-12" disabled>
                       </div>
                     </div>
 

@@ -1,3 +1,5 @@
+
+
 <?php
 /*<!--<?php         
 $app1d = "SELECT * from applicationresult_tbl ORDER BY application_id DESC;";
@@ -64,7 +66,14 @@ $data = mysqli_fetch_assoc($result);
 $chkvalues = explode(", ", $data["pet_vax"]);
 
 ?>
+<?php
+$sql = "SELECT * FROM applicationform1";
+$result = $conn->query($sql);
 
+if (!$result) {
+    trigger_error('Invalid query: ' . $conn->error);
+}
+?>
 <?php 
 
 if (isset($_POST['submit']))
@@ -91,11 +100,7 @@ if (isset($_POST['submit']))
   $q13 = mysqli_real_escape_string($conn,$_POST["rent"]);
   $q14 = mysqli_real_escape_string($conn,$_POST["allow"]);
   $q15 = mysqli_real_escape_string($conn,$_POST["spending"]);
-
   $address = mysqli_real_escape_string($conn,$_POST["address"]);
-
-  
-  //$adopter = "SELECT * FROM a.adopter_tbl,u.user_tbl WHERE a.user_id=$_SESSION['user_id']";
 
   $row = "INSERT INTO applicationform1 (adopter_id,pet_id,adopter_address,valid_id,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15) VALUES ('$adopter_id','$id','$address','$valid_id','$q1','$q2','$q3','$q4','$q5','$q6','$q7','$q8','$q9','$q10','$q11','$q12','$q13','$q14','$q15');";
   $query3 = mysqli_query($conn,$row); 
@@ -105,150 +110,155 @@ if (isset($_POST['submit']))
   //mysqli_close($conn);
 
   //tulog muna ng mga 4 seconds para smooth sa next process
-  usleep(5000000);
-  if (count($_POST)>0){
+  usleep(250000);
+  {
+   // $appsql = "SELECT application_id FROM applicationform1 WHERE adopter_id ='$adopter_id';";
   
     // base sa sagot, isa isa kukuhain yung katumbas na value niya galing sa questionchoices na table sa "correct" na column, pag 1 correct pag 0 hindi.
     
-        /*$app1d = "SELECT application_id from applicationform1 WHERE adopter_id=='$adopter_id' ORDER BY application_id DESC;";
-        $query9 = mysqli_query($conn,$app1d);
-        $row9 = mysqli_fetch_assoc($query9);
-        $final1=implode($row9);*/
-        move_uploaded_file($valid_id_tmp_name, $valid_id_folder);
+        $app1d = "SELECT application_id from applicationform1 WHERE adopter_id='$adopter_id';";
+        $appresult = mysqli_query($conn,$app1d);
 
-        $app1d = "SELECT application_id from applicationform1 WHERE adopter_id='$adopter_id' ORDER BY application_id DESC;";
-        $query9 = mysqli_query($conn,$app1d);
-        $row9 = mysqli_fetch_assoc($query9);
-        $final1=implode($row9);
-        
-        //q1 fetch
-        $sqlresult1 = "SELECT correct FROM questionchoices WHERE choices='$q1'AND questionID=1;";
-        $queryr1 = mysqli_query($conn,$sqlresult1);
-        $row1 = mysqli_fetch_assoc($queryr1);
-        $ffinal1=implode($row1);
-       // echo $ffinal1.",";
-      
-        //q2 fetch
-        $sqlresult2 = "SELECT correct FROM questionchoices WHERE choices='$q2' AND questionID=2;";
-        $queryr2 = mysqli_query($conn,$sqlresult2);
-        $row2 = mysqli_fetch_assoc($queryr2);
-        $final2=implode($row2);
-        //echo $final2.",";
-      
-        //q3 fetch
-       $sqlresult3 = "SELECT correct FROM questionchoices WHERE choices='$q3' AND questionID=3;";
-        $queryr3 = mysqli_query($conn,$sqlresult3);
-        $row3 = mysqli_fetch_assoc($queryr3);
-        $final3=implode($row3);
-        //echo $final3.",";
-      
-        //q4 fetch
-        $sqlresult4 = "SELECT correct FROM questionchoices WHERE choices='$q4' AND questionID=4;";
-        $queryr4 = mysqli_query($conn,$sqlresult4);
-        $row4 = mysqli_fetch_assoc($queryr4);
-        $final4=implode($row4);
-        //echo $final4.","; 
-      
-        //q5 fetch
-       $sqlresult5 = "SELECT correct FROM questionchoices WHERE choices='$q5' AND questionID=5;";
-        $queryr5 = mysqli_query($conn,$sqlresult5);
-        $row5 = mysqli_fetch_assoc($queryr5);
-        $final5=implode($row5);
-        //echo $final5.",";
-      
-        //65 fetch
-       $sqlresult6 = "SELECT correct FROM questionchoices WHERE choices='$q6'AND questionID=6;";
-        $queryr6 = mysqli_query($conn,$sqlresult6);
-        $row6 = mysqli_fetch_assoc($queryr6);
-        $final6=implode($row6);
-        //echo $final6.",";
-      
-        //q7 fetch
-       $sqlresult7 = "SELECT correct FROM questionchoices WHERE choices='$q7'AND questionID=7;";
-        $queryr7 = mysqli_query($conn,$sqlresult7);
-        $row7 = mysqli_fetch_assoc($queryr7);
-        $final7=implode($row7);
-        //echo $final7.",";
-      
-        //q8 fetch
-       $sqlresult8 = "SELECT correct FROM questionchoices WHERE choices='$q8'AND questionID=8;";
-        $queryr8 = mysqli_query($conn,$sqlresult8);
-        $row5 = mysqli_fetch_assoc($queryr8);
-        $final8=implode($row5);
-        //echo $final8.",";
-        //q9 fetch
-        $sqlresult9 = "SELECT correct FROM questionchoices WHERE choices='$q9'AND questionID=9;";
-        $queryr9 = mysqli_query($conn,$sqlresult9);
-        $row5 = mysqli_fetch_assoc($queryr9);
-        $final9=implode($row5);
-        //echo $final9.",";
-        //q10 fetch
-        $sqlresult10 = "SELECT correct FROM questionchoices WHERE choices='$q10'AND questionID=10;";
-        $queryr10 = mysqli_query($conn,$sqlresult10);
-        $row5 = mysqli_fetch_assoc($queryr10);
-        $final10=implode($row5);
-        //echo $final10.",";
-        //q11 fetch
-        $sqlresult11 = "SELECT correct FROM questionchoices WHERE choices='$q11'AND questionID=11;";
-        $queryr11 = mysqli_query($conn,$sqlresult11);
-        $row5 = mysqli_fetch_assoc($queryr11);
-        $final11=implode($row5);
-        //echo $final11.",";
-        //q12 fetch
-        $sqlresult12 = "SELECT correct FROM questionchoices WHERE choices='$q12'AND questionID=12;";
-        $queryr12 = mysqli_query($conn,$sqlresult12);
-        $row5 = mysqli_fetch_assoc($queryr12);
-        $final12=implode($row5);
-        //echo $final12.",";
-        //q13 fetch
-        $sqlresult13 = "SELECT correct FROM questionchoices WHERE choices='$q13'AND questionID=13;";
-        $queryr13 = mysqli_query($conn,$sqlresult13);
-        $row5 = mysqli_fetch_assoc($queryr13);
-        $final13=implode($row5);
-        //echo $final13.",";
-        //q14 fetch
-        $sqlresult14 = "SELECT correct FROM questionchoices WHERE choices='$q14' AND questionID=14;";
-        $queryr14 = mysqli_query($conn,$sqlresult14);
-        $row5 = mysqli_fetch_assoc($queryr14);
-        $final14=implode($row5);
-        //echo $final14.",";
-        //q15 fetch
-        $sqlresult15 = "SELECT correct FROM questionchoices WHERE choices='$q15'AND questionID=15;";
-        $queryr15 = mysqli_query($conn,$sqlresult15);
-        $row5 = mysqli_fetch_assoc($queryr15);
-        $final15=implode($row5);
-        //echo $final15;
-        //echo $final15;
-      
-        // kung lahat ng sagot "coorect" = "1", "qualified" ang ilalagay sa table na applicationresult_tbl, pero pag kahit isa lang sa sagot may 0 "Not Qualified" ang malalagay. Default na rin yung "pending" sa result status.
-      if ($ffinal1=="1" && $final2=="1"){
-        if ($final3=="1" && $final4=="1"){
-          if ($final5=="1" && $final6=="1"){
-            if ($final7=="1" && $final8=="1"){
-              if ($final9=="1" && $final10=="1"){
-                if ($final11=="1" && $final2=="1"){
-                  if ($final13=="1" && $final14=="1"){
-                    if ($final15=="1"){
-                      $row5 = "INSERT INTO applicationresult_tbl (application_id,application_result,application_status)
-                      VALUES ('$final1','Qualified','Pending');";
-                      $query5 = mysqli_query($conn,$row5); 
+        if ($appresult->num_rows > 0){
+
+            $row9 = mysqli_fetch_assoc($appresult);
+            $final1=implode($row9);
+              //move_uploaded_file($valid_id_tmp_name, $valid_id_folder);
+
+            /* $app1d = "SELECT application_id from applicationform1 WHERE adopter_id='$adopter_id' ORDER BY application_id DESC;";
+              $query9 = mysqli_query($conn,$app1d);
+              $row9 = mysqli_fetch_assoc($query9);
+              $final1=implode($row9);*/
+              
+              //q1 fetch
+              $sqlresult1 = "SELECT correct FROM questionchoices WHERE choices='$q1'AND questionID=1;";
+              $queryr1 = mysqli_query($conn,$sqlresult1);
+              $row1 = mysqli_fetch_assoc($queryr1);
+              $ffinal1=implode($row1);
+            // echo $ffinal1.",";
+            
+              //q2 fetch
+              $sqlresult2 = "SELECT correct FROM questionchoices WHERE choices='$q2' AND questionID=2;";
+              $queryr2 = mysqli_query($conn,$sqlresult2);
+              $row2 = mysqli_fetch_assoc($queryr2);
+              $final2=implode($row2);
+              //echo $final2.",";
+            
+              //q3 fetch
+            $sqlresult3 = "SELECT correct FROM questionchoices WHERE choices='$q3' AND questionID=3;";
+              $queryr3 = mysqli_query($conn,$sqlresult3);
+              $row3 = mysqli_fetch_assoc($queryr3);
+              $final3=implode($row3);
+              //echo $final3.",";
+            
+              //q4 fetch
+              $sqlresult4 = "SELECT correct FROM questionchoices WHERE choices='$q4' AND questionID=4;";
+              $queryr4 = mysqli_query($conn,$sqlresult4);
+              $row4 = mysqli_fetch_assoc($queryr4);
+              $final4=implode($row4);
+              //echo $final4.","; 
+            
+              //q5 fetch
+            $sqlresult5 = "SELECT correct FROM questionchoices WHERE choices='$q5' AND questionID=5;";
+              $queryr5 = mysqli_query($conn,$sqlresult5);
+              $row5 = mysqli_fetch_assoc($queryr5);
+              $final5=implode($row5);
+              //echo $final5.",";
+            
+              //65 fetch
+            $sqlresult6 = "SELECT correct FROM questionchoices WHERE choices='$q6'AND questionID=6;";
+              $queryr6 = mysqli_query($conn,$sqlresult6);
+              $row6 = mysqli_fetch_assoc($queryr6);
+              $final6=implode($row6);
+              //echo $final6.",";
+            
+              //q7 fetch
+            $sqlresult7 = "SELECT correct FROM questionchoices WHERE choices='$q7'AND questionID=7;";
+              $queryr7 = mysqli_query($conn,$sqlresult7);
+              $row7 = mysqli_fetch_assoc($queryr7);
+              $final7=implode($row7);
+              //echo $final7.",";
+            
+              //q8 fetch
+            $sqlresult8 = "SELECT correct FROM questionchoices WHERE choices='$q8'AND questionID=8;";
+              $queryr8 = mysqli_query($conn,$sqlresult8);
+              $row5 = mysqli_fetch_assoc($queryr8);
+              $final8=implode($row5);
+              //echo $final8.",";
+              //q9 fetch
+              $sqlresult9 = "SELECT correct FROM questionchoices WHERE choices='$q9'AND questionID=9;";
+              $queryr9 = mysqli_query($conn,$sqlresult9);
+              $row5 = mysqli_fetch_assoc($queryr9);
+              $final9=implode($row5);
+              //echo $final9.",";
+              //q10 fetch
+              $sqlresult10 = "SELECT correct FROM questionchoices WHERE choices='$q10'AND questionID=10;";
+              $queryr10 = mysqli_query($conn,$sqlresult10);
+              $row5 = mysqli_fetch_assoc($queryr10);
+              $final10=implode($row5);
+              //echo $final10.",";
+              //q11 fetch
+              $sqlresult11 = "SELECT correct FROM questionchoices WHERE choices='$q11'AND questionID=11;";
+              $queryr11 = mysqli_query($conn,$sqlresult11);
+              $row5 = mysqli_fetch_assoc($queryr11);
+              $final11=implode($row5);
+              //echo $final11.",";
+              //q12 fetch
+              $sqlresult12 = "SELECT correct FROM questionchoices WHERE choices='$q12'AND questionID=12;";
+              $queryr12 = mysqli_query($conn,$sqlresult12);
+              $row5 = mysqli_fetch_assoc($queryr12);
+              $final12=implode($row5);
+              //echo $final12.",";
+              //q13 fetch
+              $sqlresult13 = "SELECT correct FROM questionchoices WHERE choices='$q13'AND questionID=13;";
+              $queryr13 = mysqli_query($conn,$sqlresult13);
+              $row5 = mysqli_fetch_assoc($queryr13);
+              $final13=implode($row5);
+              //echo $final13.",";
+              //q14 fetch
+              $sqlresult14 = "SELECT correct FROM questionchoices WHERE choices='$q14' AND questionID=14;";
+              $queryr14 = mysqli_query($conn,$sqlresult14);
+              $row5 = mysqli_fetch_assoc($queryr14);
+              $final14=implode($row5);
+              //echo $final14.",";
+              //q15 fetch
+              $sqlresult15 = "SELECT correct FROM questionchoices WHERE choices='$q15'AND questionID=15;";
+              $queryr15 = mysqli_query($conn,$sqlresult15);
+              $row5 = mysqli_fetch_assoc($queryr15);
+              $final15=implode($row5);
+              //echo $final15;
+              //echo $final15;
+            
+              // kung lahat ng sagot "coorect" = "1", "qualified" ang ilalagay sa table na applicationresult_tbl, pero pag kahit isa lang sa sagot may 0 "Not Qualified" ang malalagay. Default na rin yung "pending" sa result status.
+            if ($ffinal1=="1" && $final2=="1"){
+              if ($final3=="1" && $final4=="1"){
+                if ($final5=="1" && $final6=="1"){
+                  if ($final7=="1" && $final8=="1"){
+                    if ($final9=="1" && $final10=="1"){
+                      if ($final11=="1" && $final2=="1"){
+                        if ($final13=="1" && $final14=="1"){
+                          if ($final15=="1"){
+                            $row5 = "INSERT INTO applicationresult_tbl (application_id,application_result,application_status)
+                            VALUES ('$final1','Qualified','Pending');";
+                            $query5 = mysqli_query($conn,$row5); 
+                          }
+                        }
+                      }
                     }
                   }
                 }
               }
             }
-          }
-        }
-      }
 
-      else 
-         {
-          $row5 = "INSERT INTO applicationresult_tbl (application_id,application_result,application_status)                
-          VALUES ('$final1','Not Qualified','Pending');";
-          $query5 = mysqli_query($conn,$row5);                 
-        } 
-                                        
-   }
+            else 
+              {
+                $row5 = "INSERT INTO applicationresult_tbl (application_id,application_result,application_status)                
+                VALUES ('$final1','Not Qualified','Pending');";
+                $query5 = mysqli_query($conn,$row5);                 
+              } 
+                                              
+        }
+  }
 }
 ?>
 <!doctype html>
@@ -476,21 +486,25 @@ if (isset($_POST['submit']))
     <div class="row">
       <div class="col-md-12">
           <div class="modal-box">
-            <?php if($_SESSION['user-role-id']==1)?>
+
                 <!-- ADOPT ME! - trigger ng application form pop up-->
                 <?php
-                $disable = "SELECT * from applicationresult_tbl, applicationform1, adopter_tbl  WHERE applicationresult_tbl.application_id = applicationform1.application_id AND adopter_tbl.adopter_id=applicationform1.adopter_id";
+                $disable = "SELECT adopter_id, application_status from applicationform1, applicationresult_tbl WHERE applicationform1.adopter_id='$adopter_id';";
                 $qdisable = mysqli_query($conn,$disable);
-                $fdisable = mysqli_fetch_assoc($qdisable);
                 ?>
                   <button type="button"  class="btn btn-primary btn-lg show-modal" data-toggle="modal" data-target="#myModal"
-                  <?php         
-                         if ($fdisable==TRUE){
-                            if ($fdisable["application_status"] == 'Pending'){ 
-                              ?> disabled 
-                                <?php 
-                               } 
-                                  }?> >Adopt Me!
+                      <?php 
+                      if ($qdisable->num_rows!=0){
+                              $fdisable = mysqli_fetch_assoc($qdisable);
+                                if ($fdisable['application_status'] == "Pending"){ 
+                                
+                                  ?> disabled 
+                                    <?php 
+                                }
+                              }
+                                    ?> 
+                  >
+                  Adopt Me!
                   </button>
  
                 <!-- Modal -->
