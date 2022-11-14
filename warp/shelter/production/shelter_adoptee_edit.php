@@ -491,9 +491,9 @@ if ($result->num_rows > 0) {
                     <div class="form-group">
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                         <a href="shelter_adoptee_list.php">
-                          <button name="pet-cancel" class="btn-round btn-danger" type="button" onclick="return confirm('Are you sure you want to cancel editing adoptee info?');">Cancel</button>
+                          <button name="pet-cancel" class="btn btn-round btn-danger" type="button" onclick="return confirm('Are you sure you want to cancel editing adoptee info?');">Cancel</button>
                         </a>
-                        <button name="pet-reset" class="btn-round btn-primary" type="reset" onclick="return confirm('Are you sure you want to reset all info?');">Reset</button>
+                        <button name="pet-reset" class="btn btn-round btn-primary" type="reset" onclick="return confirm('Are you sure you want to reset all info?');">Reset</button>
                         <button name="edit-pet-submit" class="btn btn-round btn-success" onclick="return confirm('Are you sure you want to submit all changes?');">Submit</button>
                       </div>
                     </div>

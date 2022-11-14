@@ -28,14 +28,6 @@ if ($result->num_rows > 0) {
   $result = mysqli_query($conn, $sql);
   if ($result == TRUE) {
     $row = mysqli_fetch_assoc($result);
-
-    // Make a query to get the total registered adoptees by COUNTing all the adoptees with city id == which shelter city id
-    $sql = "SELECT COUNT(pet_id) AS totaladoptee FROM adoptee_tbl WHERE city_id = '$city_id'";
-    $result = mysqli_query($conn, $sql);
-    if ($result) {
-      $data = mysqli_fetch_assoc($result);
-      $totaladoptee = $data['totaladoptee'];
-    }
   }
 }
 ?>
@@ -206,20 +198,48 @@ if ($result->num_rows > 0) {
       <div class="right_col" role="main">
 
         <!-- top tiles -->
+
         <div class="row tile_count">
+          <?php
+          // Make a query to get the total registered adoptees by COUNTing all the adoptees with city id == which shelter city id
+          $sql = "SELECT COUNT(pet_id) AS totaladoptee FROM adoptee_tbl WHERE city_id = '$city_id'";
+          $result = mysqli_query($conn, $sql);
+          if ($result) {
+            $data = mysqli_fetch_assoc($result);
+            $totaladoptee = $data['totaladoptee'];
+          }
+          ?>
           <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
             <span class="count_top"><i class="fa fa-paw"></i> Total Adoptee Pets</span>
             <div class="count"><?= $totaladoptee ?></div>
           </div>
+
+          <?php
+          // Make a query to get the total adopted pets by COUNTing all the adopted_id with city id == which shelter city id
+          $sql = "SELECT COUNT(adopted_id) AS totaladoptedpet FROM adopted_tbl INNER JOIN applicationform1 ON adopted_tbl.application_id = applicationform1.application_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id WHERE adoptee_tbl.city_id = '$city_id'";
+          $result = mysqli_query($conn, $sql);
+          if ($result) {
+            $data = mysqli_fetch_assoc($result);
+            $totaladoptedpet = $data['totaladoptedpet'];
+          }
+          ?>
           <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
             <span class="count_top"><i class="fa fa-paw"></i> Total Adopted Pets</span>
-            <div class="count">123.50</div>
-            <!-- <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span> -->
+            <div class="count"><?= $totaladoptedpet ?></div>
           </div>
+
+          <?php
+          // Make a query to get the total applications by COUNTing all the application_id with city id == which shelter city id
+          $sql = "SELECT COUNT(application_id) AS totalapplications FROM applicationform1 INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id = '$city_id'";
+          $result = mysqli_query($conn, $sql);
+          if ($result) {
+            $data = mysqli_fetch_assoc($result);
+            $totalapplications = $data['totalapplications'];
+          }
+          ?>
           <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
             <span class="count_top"><i class="fa fa-user"></i> Total Applications</span>
-            <div class="count">2,500</div>
-            <!-- <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span> -->
+            <div class="count"><?= $totalapplications ?></div>
           </div>
 
           <div class="clearfix"></div>
