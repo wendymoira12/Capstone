@@ -21,6 +21,7 @@ if (!isset($_GET['id'])) {
 
 // Kukunin yung answers from application form na equivalent sa questionchoices
 $id = $_GET['id'];
+$_SESSION['sched_id'] = $id;
 // Get the user ID from the login sesh
 $user_id = $_SESSION['user_id'];
 // Query to check if user_id from the login shesh = shelteruser_id to get the city 
@@ -255,75 +256,44 @@ if ($result->num_rows > 0) {
                           <td><?= $data['adopter_fname'] . ' ' . $data['adopter_lname']; ?></td>
                           <td><?= $data['pet_name']; ?></td>
                           <td>
-                            <a href="#">
-                              <button type="submit" class="btn btn-round btn-primary" data-toggle="modal" data-target="#modalEditDate">Edit</button>
+                            <a href="shelter_schedule_list2.php?id=<?= $data['schedule_id'] ?>">
+                              <button type="submit" class="btn btn-round btn-primary">Edit</button>
                             </a>
-                            <button type="button" class="btn btn-round btn-success">Update</button>
+                            <a href="shelter_adopted_insert.php?id=<?= $data['application_id'] ?>">
+                              <button type="button" class="btn btn-round btn-success">Pet Adopted</button>
+                            </a>
                           </td>
 
                         </tr>
                     <?php
+                     
                       }
                     }
+                   
                     ?>
                   </tbody>
 
                 </table>
 
-                <?php
-                //Form Submission for date
-                if (isset($_POST['submit-date'])) {
-                  $date = $_POST['date'];
 
-                  //If date is not empty code will execute
-                  if (!empty($date)) {
-                    $sql = "UPDATE schedule_tbl SET schedule_date='$date' WHERE schedule_id = '$id'";
-                    if (mysqli_query($conn, $sql)) {
-                      // If the query execute show Input success message and redirect to shelter_application_list
-                      // echo "<script>alert('Date Input Success')</script>";
-
-                      $app_id = $data['application_id'];
-                      $change = '2';
-                      //notif para sa pagaccept ng application form
-                      $msg = 'This shelter has changed your interview date to'; //message if ever na papalitan ni shelter yung interview date ni adopter
-                      $msg1 = 'for pet';
-                      $sql_insert = "INSERT INTO adopternotif_tbl(application_id, schedule_id,  message, message1, isAccepted) VALUES('$app_id', '$id', '$msg', '$msg1', '$change')"; //Di ko alam pano ipapasok yung user_id para ma specify kung para kaninong adopter lang lalabas yung notif
-
-                      if (mysqli_query($conn, $sql_insert)) {
-                        echo "<script>alert('Successfully changed schedule date')</script>";
-                        echo "<script>window.location.href='shelter_schedule_list.php';</script>";
-                      } else {
-                        echo mysqli_error($conn);
-                        exit;
-                      }
-                      
-                    } else {
-                      echo "<script>alert('Data Input Fail')</script>";
-                    }
-                    
-                  } else {
-                    echo "<script>alert('No date input')</script>";
-                  }
-
-                  
-                }
-                ?>
-                <div class="modal fade" id="modalEditDate">
+                <div class="modal fade" id="modalEditDate" data-bs-backdrop="static">
                   <div class="modal-dialog modal-sm">
                     <div class="modal-content">
                       <!-- <iframe name="edit_schedule" style="display:none;"></iframe> -->
-                      <form action="#" method="POST">
+                      <form action="edit_schedule_date.php?sched_id=<?= $id ?>" method="POST">
                         <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-                          </button>
                           <h4 class="modal-title">Schedule a date for interview</h4>
                         </div>
                         <div class="modal-body">
                           <input type="date" name="date">
                         </div>
                         <div class="modal-footer">
+                          <a href="shelter_schedule_list.php">
+                            <button class="btn btn-danger" name="cancel">Cancel</button>
+                          </a>
                           <button class="btn btn-success" name="submit-date" onclick="return confirm('Are you sure you want to edit the scheduled date?');">Submit
                           </button>
+
                         </div>
                       </form>
                     </div>

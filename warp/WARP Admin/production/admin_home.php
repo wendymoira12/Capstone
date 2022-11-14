@@ -186,7 +186,7 @@ if (!isset($_SESSION['email-login'])) {
           </div>
 
           <?php
-          // Make a query to get the total registered adopter accounts by COUNTing all the user with role id == 1
+          // Make a query to get the total pet adopted by COUNTing all the user with role id == 1
           $sql = "SELECT COUNT(adopted_id) AS totaladoptedpet FROM adopted_tbl";
           $result = mysqli_query($conn, $sql);
           if ($result) {

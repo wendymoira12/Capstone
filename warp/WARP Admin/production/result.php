@@ -20,7 +20,11 @@ print_r($_SESSION['user-role-id']);
 echo '<br>';
 print_r($_SESSION['user_id']);
 echo '<br>';
-
+echo '<br>';
+print_r($_SESSION['sched_id']);
+echo '<br>';
+print_r($_SESSION['app_id']);
+echo '<br>';
 //Date algorithm
 date_default_timezone_set("Asia/Manila");
 
