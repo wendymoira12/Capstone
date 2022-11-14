@@ -127,15 +127,15 @@ if ($result->num_rows > 0) {
       <div class="col-md-3 left_col menu_fixed">
         <div class="left_col scroll-view">
           <div class="logo">
-            <a href="../../home.php">
-              <img src="/Capstone/warp/img/logo.png" alt="">
-            </a>
           </div>
           <div class="clearfix"></div>
 
 
-          <!-- menu profile quick info -->
-          <div class="profile clearfix">
+         <!-- menu profile quick info -->
+         <div class="profile clearfix">
+          <a href="">
+              <img src="images/logo.png" alt="">
+            </a>
             <div class="profile_pic">
               <img src="/Capstone/warp/WARP Admin/production/images/<?= $row['city_img']; ?>" alt="..." class="img-circle profile_img">
             </div>
