@@ -116,14 +116,14 @@ if (isset($_POST['submit']))
   
     // base sa sagot, isa isa kukuhain yung katumbas na value niya galing sa questionchoices na table sa "correct" na column, pag 1 correct pag 0 hindi.
     
-        $app1d = "SELECT application_id from applicationform1 WHERE adopter_id='$adopter_id';";
+        $app1d = "SELECT application_id from applicationform1 WHERE adopter_id='$adopter_id' ORDER BY date_submitted DESC;";
         $appresult = mysqli_query($conn,$app1d);
 
-        if ($appresult->num_rows > 0){
+        if ($appresult->num_rows != 0){
 
             $row9 = mysqli_fetch_assoc($appresult);
             $final1=implode($row9);
-              //move_uploaded_file($valid_id_tmp_name, $valid_id_folder);
+            move_uploaded_file($valid_id_tmp_name, $valid_id_folder);
 
             /* $app1d = "SELECT application_id from applicationform1 WHERE adopter_id='$adopter_id' ORDER BY application_id DESC;";
               $query9 = mysqli_query($conn,$app1d);
@@ -489,7 +489,7 @@ if (isset($_POST['submit']))
 
                 <!-- ADOPT ME! - trigger ng application form pop up-->
                 <?php
-                $disable = "SELECT adopter_id, application_status from applicationform1, applicationresult_tbl WHERE applicationform1.adopter_id='$adopter_id';";
+                $disable = "SELECT adopter_id, application_status from applicationform1, applicationresult_tbl WHERE applicationform1.adopter_id='$adopter_id' ORDER BY applicationresult_tbl.application_id DESC;";
                 $qdisable = mysqli_query($conn,$disable);
                 ?>
                   <button type="button"  class="btn btn-primary btn-lg show-modal" data-toggle="modal" data-target="#myModal"
