@@ -21,7 +21,6 @@ if (!isset($_GET['id'])) {
 
 // Kukunin yung answers from application form na equivalent sa questionchoices
 $id = $_GET['id'];
-$_SESSION['sched_id'] = $id;
 // Get the user ID from the login sesh
 $user_id = $_SESSION['user_id'];
 // Query to check if user_id from the login shesh = shelteruser_id to get the city 

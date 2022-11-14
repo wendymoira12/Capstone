@@ -15,7 +15,6 @@ if (isset($_GET['sched_id']) && isset($_POST['submit-date'])) {
             $result = mysqli_query($conn, $sql2);
             if ($result->num_rows > 0) {
                 $data = mysqli_fetch_assoc($result);
-                $_SESSION['app_id'] = $data['application_id'];
                 $app_id = $data['application_id'];
                 $change = '2';
                 //notif para sa pagaccept ng application form
