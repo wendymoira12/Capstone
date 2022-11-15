@@ -84,14 +84,14 @@ if ($result1->num_rows > 0) {
     <div class="main_container">
       <div class="col-md-3 left_col menu_fixed">
         <div class="left_col scroll-view">
-        <div class="logo">
+          <div class="logo">
           </div>
           <div class="clearfix"></div>
 
 
           <!-- menu profile quick info -->
           <div class="profile clearfix">
-          <a href="">
+            <a href="">
               <img src="images/logo.png" alt="">
             </a>
             <div class="profile_pic">
@@ -229,13 +229,7 @@ if ($result1->num_rows > 0) {
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
-                <div class="x_title">
-                  <!-- <h2>Form Design <small>different form elements</small></h2> -->
-
-                  <div class="clearfix"></div>
-                </div>
                 <div class="x_content">
-                  <br />
 
                   <!---------------------- TINANGGAL KO MUNA YUNG DROPZONE ---------------------->
 
@@ -264,7 +258,7 @@ if ($result1->num_rows > 0) {
                   <form enctype="multipart/form-data" action="modify_shelter.php?city_id=<?= $id ?>" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="city">Shelter City name <span class="required">*</span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="city">Shelter City Name <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input type="text" name="city" value="<?= $data['city_name'] ?>" required class="form-control col-md-7 col-xs-12">
@@ -275,7 +269,7 @@ if ($result1->num_rows > 0) {
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="contact">Contact Number <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" name="contact" value="<?= $data['city_contact'] ?>" required class="form-control col-md-7 col-xs-12">
+                        <input type="text" name="contact" maxlength="11" value="<?= $data['city_contact'] ?>" required class="form-control col-md-7 col-xs-12" onkeypress="return /[0-9]/i.test(event.key)">
                       </div>
                     </div>
 
@@ -298,10 +292,10 @@ if ($result1->num_rows > 0) {
                     <div class="form-group">
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                         <a href="shelter_account.php">
-                          <button name="pet-cancel" class="btn-round btn-primary" type="button" onclick="return confirm('Are you sure you want to cancel editing?');">Cancel</button>
+                          <button name="pet-cancel" class="btn btn-round btn-primary" type="button" onclick="return confirm('Are you sure you want to cancel editing?');">Cancel</button>
                         </a>
-                        <button name="pet-reset" class="btn-round btn-primary" type="reset" onclick="return confirm('Are you sure you want to reset all information?');">Reset</button>
-                        <button name="edit-shelter-submit" class="btn-round btn-success" onclick="return confirm('Are you sure you want to submit the edited info?');">Submit</button>
+                        <button name="pet-reset" class="btn btn-round btn-primary" type="reset" onclick="return confirm('Are you sure you want to reset all information?');">Reset</button>
+                        <button name="edit-shelter-submit" class="btn btn-round btn-success" onclick="return confirm('Are you sure you want to submit the edited info?');">Submit</button>
                       </div>
                     </div>
 

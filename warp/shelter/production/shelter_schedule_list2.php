@@ -275,7 +275,7 @@ if ($result->num_rows > 0) {
                 </table>
 
 
-                <div class="modal fade" id="modalEditDate" data-bs-backdrop="static">
+                <div class="modal fade" id="modalEditDate" data-backdrop="static">
                   <div class="modal-dialog modal-sm">
                     <div class="modal-content">
                       <!-- <iframe name="edit_schedule" style="display:none;"></iframe> -->
