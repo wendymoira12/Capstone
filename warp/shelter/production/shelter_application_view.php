@@ -50,16 +50,14 @@ if (isset($_POST['reject'])) {
 
   $reject = '0';
   //notif para sa pagclick ng reject
-  $msg = 'This shelter has rejected your adoptee application for pet';//message sa notification ng adopter tas concat name ng pet na inadopt niya
+  $msg = 'This shelter has rejected your adoptee application for pet'; //message sa notification ng adopter tas concat name ng pet na inadopt niya
   $sql_insert = mysqli_query($conn, "INSERT INTO adopternotif_tbl(application_id, message, isAccepted) VALUES('$id', '$msg', '$reject')"); //Di ko alam pano ipapasok yung user_id para ma specify kung para kaninong adopter lang lalabas yung notif
-  if($sql_insert){
-    echo"<script>alert('Successfully cancelled adoption')</script>";
-  }else{
+  if ($sql_insert) {
+    echo "<script>alert('Successfully cancelled adoption')</script>";
+  } else {
     echo mysqli_error($conn);
     exit;
   }
-  
-  
 }
 
 
@@ -131,9 +129,9 @@ if ($result->num_rows > 0) {
           <div class="clearfix"></div>
 
 
-         <!-- menu profile quick info -->
-         <div class="profile clearfix">
-          <a href="">
+          <!-- menu profile quick info -->
+          <div class="profile clearfix">
+            <a href="">
               <img src="images/logo.png" alt="">
             </a>
             <div class="profile_pic">
@@ -450,44 +448,50 @@ if ($result->num_rows > 0) {
                       </div>
 
                       <?php
-                      //Form Submission for dateS
+                      //Form Submission for dates
                       if (isset($_POST['submit-date'])) {
                         $date = $_POST['date'];
                         //If date is not empty code will execute
                         if (!empty($date)) {
                           //Sql query to check if data exist with same applicatin id in sched table
-                          $sql = "SELECT * FROM schedule_tbl WHERE application_id = '$id' LIMIT 1";
+                          $sql = "SELECT * FROM schedule_tbl WHERE (application_id = '$id' AND deleted_at IS NULL) LIMIT 1";
                           $result = mysqli_query($conn, $sql);
                           if ($result->num_rows > 0) {
                             echo "<script>alert('Record Exists!')</script>";
                             echo "<script>window.location.href='shelter_application_list.php';</script>";
                           } else {
-                            $sql = "INSERT INTO schedule_tbl(schedule_date, application_id) VALUES ('$date', '$id')";
-                            // If the query execute proceed to next query
-                            if (mysqli_query($conn, $sql)) {
+                            $sql2 = "INSERT INTO schedule_tbl(schedule_date, application_id) VALUES (?, ?)";
+                            $stmt = mysqli_stmt_init($conn);
+                            if (!mysqli_stmt_prepare($stmt, $sql2)) {
+                              echo "SQL Prepared Statement Failed";
+                            } else {
+                              mysqli_stmt_bind_param($stmt, "si", $date, $id);
+                              mysqli_stmt_execute($stmt);
                               $scheduled = 'Scheduled';
-                              $sql4 = "UPDATE applicationresult_tbl SET application_status='$scheduled' WHERE application_id = '$id'";
-                              // If the query execute show Input success message and redirect to shelter_application_list
-                              if (mysqli_query($conn, $sql4)) {
+                              $sql4 = "UPDATE applicationresult_tbl SET application_status= ? WHERE application_id = ?";
+                              $stmt2 = mysqli_stmt_init($conn);
+                              if (!mysqli_stmt_prepare($stmt2, $sql4)) {
+                                echo "SQL Prepared Statement Failed";
+                              } else {
+                                mysqli_stmt_bind_param($stmt2, "si", $scheduled, $id);
+                                mysqli_stmt_execute($stmt2);
                                 echo "<script>alert('Date Input Success')</script>";
                                 echo "<script>window.location.href='shelter_application_list.php';</script>";
-                              } else {
-                                echo "<script>alert('Data Input Fail')</script>";
                               }
                             }
                           }
                         } else {
                           echo "<script>alert('No date input')</script>";
                         }
-                        
+
                         //notif para sa pagaccept ng application form
                         $accept = '1';
-                        $msg = 'This shelter has accepted your adoptee application for pet';//message sa notification ng adopter tas concat name ng pet na inadopt niya
-                        $msg1 = 'The scheduled date for your interview is';//etong message1 naman naka null sya kase optional lang, if ever na nireject yung application form, wala tong laman kase wala namang massched
+                        $msg = 'This shelter has accepted your adoptee application for pet'; //message sa notification ng adopter tas concat name ng pet na inadopt niya
+                        $msg1 = 'The scheduled date for your interview is'; //etong message1 naman naka null sya kase optional lang, if ever na nireject yung application form, wala tong laman kase wala namang massched
                         $sql_insert = mysqli_query($conn, "INSERT INTO adopternotif_tbl(application_id,  message, message1, isAccepted) VALUES('$id', '$msg', '$msg1', '$accept')"); //Di ko alam pano ipapasok yung user_id para ma specify kung para kaninong adopter lang lalabas yung notif
-                        if($sql_insert){
-                          echo"<script>alert('Successfully cancelled adoption')</script>";
-                        }else{
+                        if ($sql_insert) {
+                          echo "<script>alert('Successfully cancelled adoption')</script>";
+                        } else {
                           echo mysqli_error($conn);
                           exit;
                         }

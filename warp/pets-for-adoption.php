@@ -5,7 +5,7 @@ use LDAP\Result;
 
 include('connect/connection.php');
 
-$sql = "SELECT * FROM adoptee_tbl";
+$sql = "SELECT * FROM adoptee_tbl WHERE deleted_at IS NULL";
 $result = mysqli_query($conn, $sql);
 
 $data = mysqli_fetch_assoc($result);
