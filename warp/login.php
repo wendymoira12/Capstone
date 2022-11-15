@@ -164,6 +164,7 @@ if (isset($_POST["register"])) {
             <input type="submit" value="Login" action="home.html" class="btn solid" /> -->
           <button type="submit" name="submit-login" class="btn solid">Login</button>
 
+
           </form>
           <form action="#" class="sign-up-form" method="POST">
           <h2 class="title">Register to WARP</h2>
