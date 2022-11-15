@@ -206,7 +206,7 @@ if (!isset($_SESSION['email-login'])) {
                           <td><?php echo $row['user_datecreated']; ?></td>
                           <td><?php echo $row['user_email']; ?></td>
                           <td>
-                            <a href="delete_adopter.php?adopter_id=<?=$row['adopter_id']?>"><button type="button" class="btn btn-round btn-danger">Delete</button></a>
+                            <a href="delete_adopter.php?adopter_id=<?=$row['adopter_id']?>"><button type="button" class="btn btn-round btn-danger" onclick="return confirm('Are you sure you want to delete this data?');">Delete</button></a>
                           </td>
                         </tr>
                     <?php

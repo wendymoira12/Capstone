@@ -12,21 +12,52 @@ if (!isset($_SESSION['email-login'])) {
 if (isset($_POST['submit'])) {
 
   //Get the values
-  $city = $_POST['city'];
-  $contact = $_POST['contact'];
-  $about = $_POST['about'];
+
+  // Validate city
+  if (empty($_POST['city'])) {
+    $cityErr = 'City is required';
+  } else {
+    $city = filter_input(
+      INPUT_POST,
+      'city',
+      FILTER_SANITIZE_FULL_SPECIAL_CHARS
+    );
+  }
+  // Validate contact
+  if (empty($_POST['contact'])) {
+    $contactErr = 'Contact Number is required';
+  } else {
+    $contact = filter_input(
+      INPUT_POST,
+      'contact',
+      FILTER_SANITIZE_FULL_SPECIAL_CHARS
+    );
+  }
+
+  if (empty($_POST['about'])) {
+    $aboutErr = 'About is required';
+  } else {
+    $about = filter_input(
+      INPUT_POST,
+      'about',
+      FILTER_SANITIZE_FULL_SPECIAL_CHARS
+    );
+  }
+
   $img = $_FILES['img']['name'];
   $img_tmp_name = $_FILES['img']['tmp_name'];
   $city_img_folder = '../../shelter/production/images/logo/' . $img;
-  $sql = "INSERT INTO city_tbl(city_name, city_contact, city_about, city_img) VALUES (?, ?, ?, ?)";
-  $stmt = mysqli_stmt_init($conn);
-  if (!mysqli_stmt_prepare($stmt,$sql)){
-    echo '<script>alert("SQL Prepared Statement Failed")</script>';
-  } else{
-    mysqli_stmt_bind_param($stmt, "ssss", $city, $contact, $about, $img);
-    mysqli_stmt_execute($stmt);
-    move_uploaded_file($img_tmp_name, $city_img_folder);
-    header('location:manage_city.php');
+  if (empty($cityErr) && empty($contactErr) && empty($aboutErr) && !empty($img)) {
+    $sql = "INSERT INTO city_tbl(city_name, city_contact, city_about, city_img) VALUES (?, ?, ?, ?)";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+      echo '<script>alert("SQL Prepared Statement Failed")</script>';
+    } else {
+      mysqli_stmt_bind_param($stmt, "ssss", $city, $contact, $about, $img);
+      mysqli_stmt_execute($stmt);
+      move_uploaded_file($img_tmp_name, $city_img_folder);
+      header('location:manage_city.php');
+    }
   }
 }
 ?>
@@ -282,7 +313,7 @@ if (isset($_POST['submit'])) {
                           <td><?php echo '<img src="../../shelter/production/images/logo/' . $row['city_img'] . '" alt="city_logo" width="100">'; ?></td>
                           <td>
                             <a href="edit_city.php?id=<?= htmlspecialchars($row['city_id']) ?>" type="submit" class="btn btn-round btn-success">Update</a>
-                            <a href="delete_city.php?city_id=<?= htmlspecialchars($row['city_id']) ?>"><button type="submit" class="btn btn-round btn-danger">Delete</button> </a>
+                            <a href="delete_city.php?city_id=<?= htmlspecialchars($row['city_id']) ?>"><button type="submit" class="btn btn-round btn-danger" onclick="return confirm('Are you sure you want to delete this data?');">Delete</button> </a>
                           </td>
                         </tr>
                     <?php

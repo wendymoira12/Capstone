@@ -320,7 +320,7 @@ if (isset($_POST['submit'])) {
                           <td><?= $row['user_email']; ?></td>
                           <td>
                             <a href="edit_shelter.php?id=<?= $row['shelteruser_id'] ?>" type="submit" class="btn btn-round btn-success">Update</a>
-                            <a href="delete_shelteruser.php?shelteruser_id=<?= $row['shelteruser_id'] ?>"><button type="button" class="btn btn-round btn-danger">Delete</button></a>
+                            <a href="delete_shelteruser.php?shelteruser_id=<?= $row['shelteruser_id'] ?>"><button type="button" class="btn btn-round btn-danger" onclick="return confirm('Are you sure you want to delete this data?');"> Delete</button></a>
                           </td>
                         </tr>
                     <?php
