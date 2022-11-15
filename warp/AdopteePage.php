@@ -405,10 +405,10 @@ if (isset($_POST['submit'])) {
           <div class="single-post">
             <div class="single-item">
               <div class="slick">
-                <img class="img-fluid" src="shelter/production/images/pet_img/<?= $data['pet_img']; ?>" width="200" height="300">
+                <img class="img-fluid" src="shelter/production/images/pet_img/<?= $data['pet_img']; ?>">
               </div>
               <div class="slick">
-                <video width="400px" height="400px" controls>
+                <video width="300px" height="300px" controls>
                   <source src="shelter/production/images/pet_vid/<?= $data['pet_vid']; ?>" type="video/mp4">
                 </video>
               </div>
