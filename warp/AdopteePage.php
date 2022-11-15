@@ -416,8 +416,7 @@ if (isset($_POST['submit'])) {
 
 
             <div class="blog_details">
-              <h2><?php echo $data['pet_name']; ?>
-              </h2>
+            <h2 style="text-align: center;"><?php echo $data['pet_name']; ?></h2>
 
               <p class="excert">
                 <b>Age:</b> <?php echo $data['pet_age']; ?><br>
