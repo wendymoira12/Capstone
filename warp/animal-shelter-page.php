@@ -130,7 +130,7 @@ if ($result->num_rows > 0) {
                             <div class="row">
                                 <div class="portfolio-gallery">
                                     <?php
-                                    $sql = "SELECT * FROM adoptee_tbl WHERE city_id='$city_id'";
+                                    $sql = "SELECT * FROM adoptee_tbl WHERE city_id='$city_id' AND deleted_at IS NULL";
                                     $result = mysqli_query($conn, $sql);
                                     if (mysqli_num_rows($result) > 0) {
                                         foreach ($result as $data) {

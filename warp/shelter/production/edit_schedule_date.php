@@ -7,10 +7,13 @@ if (isset($_GET['sched_id']) && isset($_POST['submit-date'])) {
     $id = $_GET['sched_id'];
     //If date is not empty code will execute
     if (!empty($date)) {
-        $sql = "UPDATE schedule_tbl SET schedule_date='$date' WHERE schedule_id = '$id'";
-        if (mysqli_query($conn, $sql)) {
-            // If the query execute show Input success message and redirect to shelter_application_list
-            // echo "<script>alert('Date Input Success')</script>";
+        $sql = "UPDATE schedule_tbl SET schedule_date = ? WHERE schedule_id = ?";
+        $stmt = mysqli_stmt_init($conn);
+        if (!mysqli_stmt_prepare($stmt, $sql)){
+            echo "SQL Prepared Statement Failed";
+        } else {
+            mysqli_stmt_bind_param($stmt, "si", $date, $id);
+            mysqli_stmt_execute($stmt);
             $sql2 = "SELECT application_id FROM schedule_tbl WHERE schedule_id = '$id'";
             $result = mysqli_query($conn, $sql2);
             if ($result->num_rows > 0) {
@@ -31,8 +34,6 @@ if (isset($_GET['sched_id']) && isset($_POST['submit-date'])) {
                     exit;
                 }
             }
-        } else {
-            echo "<script>alert('Data Input Fail')</script>";
         }
     } else {
         echo "<script>alert('No date input')</script>";
