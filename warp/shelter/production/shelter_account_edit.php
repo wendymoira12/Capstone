@@ -84,7 +84,8 @@ if ($result1->num_rows > 0) {
     <div class="main_container">
       <div class="col-md-3 left_col menu_fixed">
         <div class="left_col scroll-view">
-          <div class="logo">
+        <div class="logo">
+          </div>
           <div class="clearfix"></div>
 
 
