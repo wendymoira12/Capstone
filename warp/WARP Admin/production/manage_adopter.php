@@ -172,7 +172,7 @@ if (!isset($_SESSION['email-login'])) {
                 <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                   <thead>
                     <tr>
-                      <th>Adopter ID.</th>
+                      <th>No.</th>
                       <th>First Name</th>
                       <th>Last Name</th>
                       <th>Age</th>
@@ -187,15 +187,16 @@ if (!isset($_SESSION['email-login'])) {
 
                   <tbody>
                     <?php
+                    $i = 1;
                     //Query to get data from adopter_tbl and user_tbl
-                    $sql = "SELECT adopter_tbl.adopter_id, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adopter_tbl.adopter_age, adopter_tbl.adopter_cnum, adopter_tbl.adopter_currentadd, adopter_tbl.adopter_permanentadd, user_tbl.user_email, user_tbl.user_datecreated FROM user_tbl INNER JOIN adopter_tbl ON user_tbl.user_id = adopter_tbl.user_id";
+                    $sql = "SELECT adopter_tbl.adopter_id, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adopter_tbl.adopter_age, adopter_tbl.adopter_cnum, adopter_tbl.adopter_currentadd, adopter_tbl.adopter_permanentadd, user_tbl.user_email, user_tbl.user_datecreated FROM user_tbl INNER JOIN adopter_tbl ON user_tbl.user_id = adopter_tbl.user_id WHERE adopter_tbl.deleted_at IS NULL";
                     $result = mysqli_query($conn, $sql);
 
                     if ($result->num_rows > 0) {
                       foreach ($result as $row) {
                     ?>
                         <tr>
-                          <td><?php echo $row['adopter_id']; ?></td>
+                          <td><?= $i++ ?></td>
                           <td><?php echo $row['adopter_fname']; ?></td>
                           <td><?php echo $row['adopter_lname']; ?></td>
                           <td><?php echo $row['adopter_age']; ?></td>
@@ -205,8 +206,7 @@ if (!isset($_SESSION['email-login'])) {
                           <td><?php echo $row['user_datecreated']; ?></td>
                           <td><?php echo $row['user_email']; ?></td>
                           <td>
-                            <!-- <a href="edit_shelter.php?id=<?= $row['adopter_id'] ?>" type="submit" class="btn btn-round btn-success">Update</a> -->
-                            <button type="button" class="btn btn-round btn-danger">Delete</button>
+                            <a href="delete_adopter.php?adopter_id=<?=$row['adopter_id']?>"><button type="button" class="btn btn-round btn-danger">Delete</button></a>
                           </td>
                         </tr>
                     <?php

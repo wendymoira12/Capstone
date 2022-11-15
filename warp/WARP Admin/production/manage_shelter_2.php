@@ -11,7 +11,7 @@ if (!isset($_SESSION['email-login'])) {
 // Form submit
 if (isset($_POST['submit'])) {
 
-  // Validate City
+  // Validate Name
   if (empty($_POST['name'])) {
     $nameErr = 'Full Name is required';
   } else {
@@ -22,7 +22,7 @@ if (isset($_POST['submit'])) {
     );
   }
 
-  // Validate Contact
+  // Validate Position
   if (empty($_POST['position'])) {
     $positionErr = 'Position is required';
   } else {
@@ -33,11 +33,11 @@ if (isset($_POST['submit'])) {
     );
   }
   // Get About info
-  $city = $_POST['select_city'];
+  $city_id = $_POST['select_city'];
   $roleno = $_SESSION['role_id'];
   $email = $_SESSION['user_email'];
 
-  if (empty($cityErr) && empty($contactErr)) {
+  if (empty($nameErr) && empty($positionErr)) {
     //Check if stored Session variable(user_email, role_id) is == to the query and it exists
     //To do that need ifetch ung user id
     $sql = "SELECT * FROM user_tbl WHERE user_email='$email' AND role_id='$roleno'";
@@ -47,20 +47,19 @@ if (isset($_POST['submit'])) {
       $row = mysqli_fetch_assoc($result);
       $_SESSION['user_id'] = $row['user_id'];
       $userid = $_SESSION['user_id'];
-      $sql3 = "INSERT INTO shelteruser_tbl (shelteruser_name, shelteruser_position, user_id, city_id) VALUES ('$name','$position','$userid','$city')";
-      //then insert na ung values ng additional info ng shelter pati narin ung id ng user_email na may role#2 as foreign key na sa shelter table
-      if (mysqli_query($conn, $sql3)) {
-        header('Location: manage_shelter.php');
+      $sql3 = "INSERT INTO shelteruser_tbl (shelteruser_name, shelteruser_position, user_id, city_id) VALUES (?, ?, ?, ?)";
+      $stmt = mysqli_stmt_init($conn);
+      if (!mysqli_stmt_prepare($stmt, $sql3)) {
+        echo "SQL Prepare Statement Failed";
       } else {
-        echo 'Error' . mysqli_error($conn);
+        mysqli_stmt_bind_param($stmt, "ssii", $name, $position, $userid, $city_id);
+        mysqli_stmt_execute($stmt);
+        unset($_SESSION['user_id'], $_SESSION['role_id'], $_SESSION['user_email']);
+        header('Location: manage_shelter.php');
       }
     } else {
       echo 'Error' . mysqli_error($conn);
     }
-
-    //To verify ifefetch ung data from 2 tables with JOIN sa query then ishoshow sa table
-    //Then ung nafetch na data ipapasok sa foreach loop
-
   }
 }
 ?>
@@ -222,7 +221,7 @@ if (isset($_POST['submit'])) {
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <?php
                           //To query the city names and id from city table
-                          $sql = "SELECT * FROM city_tbl";
+                          $sql = "SELECT city_id, city_name FROM city_tbl WHERE deleted_at IS NULL";
                           $result = mysqli_query($conn, $sql);
                           ?>
                           <select class="select2_single form-control" tabindex="-1" name="select_city">
@@ -269,71 +268,71 @@ if (isset($_POST['submit'])) {
           <!--======================================================== END OF FORM =========================================================================-->
 
 
-      
-      <!-- /page content -->
 
-      <!-- footer content -->
-      <footer>
-        <!-- <div class="pull-right">
+          <!-- /page content -->
+
+          <!-- footer content -->
+          <footer>
+            <!-- <div class="pull-right">
         Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
       </div> -->
-        <div class="clearfix"></div>
-      </footer>
-      <!-- /footer content -->
-    </div>
-  </div>
+            <div class="clearfix"></div>
+          </footer>
+          <!-- /footer content -->
+        </div>
+      </div>
 
-  <!-- jQuery -->
-  <script src="../vendors/jquery/dist/jquery.min.js"></script>
-  <!-- Bootstrap -->
-  <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-  <!-- FastClick -->
-  <script src="../vendors/fastclick/lib/fastclick.js"></script>
-  <!-- NProgress -->
-  <script src="../vendors/nprogress/nprogress.js"></script>
-  <!-- bootstrap-progressbar -->
-  <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-  <!-- iCheck -->
-  <script src="../vendors/iCheck/icheck.min.js"></script>
-  <!-- bootstrap-daterangepicker -->
-  <script src="../vendors/moment/min/moment.min.js"></script>
-  <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
-  <!-- bootstrap-wysiwyg -->
-  <script src="../vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
-  <script src="../vendors/jquery.hotkeys/jquery.hotkeys.js"></script>
-  <script src="../vendors/google-code-prettify/src/prettify.js"></script>
-  <!-- jQuery Tags Input -->
-  <script src="../vendors/jquery.tagsinput/src/jquery.tagsinput.js"></script>
-  <!-- Switchery -->
-  <script src="../vendors/switchery/dist/switchery.min.js"></script>
-  <!-- Select2 -->
-  <script src="../vendors/select2/dist/js/select2.full.min.js"></script>
-  <!-- Parsley -->
-  <script src="../vendors/parsleyjs/dist/parsley.min.js"></script>
-  <!-- Autosize -->
-  <script src="../vendors/autosize/dist/autosize.min.js"></script>
-  <!-- jQuery autocomplete -->
-  <script src="../vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
-  <!-- starrr -->
-  <script src="../vendors/starrr/dist/starrr.js"></script>
-  <!-- Custom Theme Scripts -->
-  <script src="../build/js/custom.min.js"></script>
-  <!-- Datatables -->
-  <script src="../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-  <script src="../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-  <script src="../vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-  <script src="../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-  <script src="../vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
-  <script src="../vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
-  <script src="../vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
-  <script src="../vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-  <script src="../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-  <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-  <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-  <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-  <script src="../vendors/jszip/dist/jszip.min.js"></script>
-  <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
-  <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+      <!-- jQuery -->
+      <script src="../vendors/jquery/dist/jquery.min.js"></script>
+      <!-- Bootstrap -->
+      <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+      <!-- FastClick -->
+      <script src="../vendors/fastclick/lib/fastclick.js"></script>
+      <!-- NProgress -->
+      <script src="../vendors/nprogress/nprogress.js"></script>
+      <!-- bootstrap-progressbar -->
+      <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+      <!-- iCheck -->
+      <script src="../vendors/iCheck/icheck.min.js"></script>
+      <!-- bootstrap-daterangepicker -->
+      <script src="../vendors/moment/min/moment.min.js"></script>
+      <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+      <!-- bootstrap-wysiwyg -->
+      <script src="../vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
+      <script src="../vendors/jquery.hotkeys/jquery.hotkeys.js"></script>
+      <script src="../vendors/google-code-prettify/src/prettify.js"></script>
+      <!-- jQuery Tags Input -->
+      <script src="../vendors/jquery.tagsinput/src/jquery.tagsinput.js"></script>
+      <!-- Switchery -->
+      <script src="../vendors/switchery/dist/switchery.min.js"></script>
+      <!-- Select2 -->
+      <script src="../vendors/select2/dist/js/select2.full.min.js"></script>
+      <!-- Parsley -->
+      <script src="../vendors/parsleyjs/dist/parsley.min.js"></script>
+      <!-- Autosize -->
+      <script src="../vendors/autosize/dist/autosize.min.js"></script>
+      <!-- jQuery autocomplete -->
+      <script src="../vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
+      <!-- starrr -->
+      <script src="../vendors/starrr/dist/starrr.js"></script>
+      <!-- Custom Theme Scripts -->
+      <script src="../build/js/custom.min.js"></script>
+      <!-- Datatables -->
+      <script src="../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+      <script src="../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+      <script src="../vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+      <script src="../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+      <script src="../vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+      <script src="../vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+      <script src="../vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+      <script src="../vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+      <script src="../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+      <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+      <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+      <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+      <script src="../vendors/jszip/dist/jszip.min.js"></script>
+      <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
+      <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
 
 </body>
 

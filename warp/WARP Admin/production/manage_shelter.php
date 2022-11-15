@@ -44,24 +44,33 @@ if (isset($_POST['submit'])) {
     //Check if password == to confirm password
     if ($pass == $cpass) {
       //To check if username exists in the database
-      $sql = "SELECT * FROM user_tbl WHERE user_email='$email'";
-      $result = mysqli_query($conn, $sql);
-      // If the query is false, add data to database
-      if (!$result->num_rows > 0) {
-        $pass = password_hash($pass, PASSWORD_DEFAULT);
-        $role = 2;
-        $sql = "INSERT INTO user_tbl (user_email, user_password, role_id) VALUES ('$email', '$pass', '$role')";
-        if (mysqli_query($conn, $sql)) {
-          // success
-          $_SESSION['user_email'] = $email;
-          $_SESSION['role_id'] = $role;
-          header('Location: manage_shelter_2.php');
-        } else {
-          // error
-          echo 'Error: ' . mysqli_error($conn);
-        }
+      $sql = "SELECT * FROM user_tbl WHERE user_email= ?";
+      $stmt = mysqli_stmt_init($conn);
+      if (!mysqli_stmt_prepare($stmt, $sql)) {
+        echo "SQL Prepare Statement Failed";
       } else {
-        echo "<script>alert('Oops! Email already used')</script>";
+        mysqli_stmt_bind_param($stmt, "s", $email);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        // If the query is false, add data to database
+        if (!$result->num_rows > 0) {
+          $pass = password_hash($pass, PASSWORD_DEFAULT);
+          $role = 2;
+          $sql2 = "INSERT INTO user_tbl (user_email, user_password, role_id) VALUES (?, ?, ?)";
+          $stmt2 = mysqli_stmt_init($conn);
+          if (!mysqli_stmt_prepare($stmt2, $sql2)) {
+            echo "SQL Prepare Statement Failed";
+          } else {
+            mysqli_stmt_bind_param($stmt2, "ssi", $email, $pass, $role);
+            mysqli_stmt_execute($stmt2);
+            // success
+            $_SESSION['role_id'] = $role;
+            $_SESSION['user_email'] = $email;
+            header('Location: manage_shelter_2.php');
+          }
+        } else {
+          echo "<script>alert('Oops! Email already used')</script>";
+        }
       }
     } else {
       echo "<script>alert('Password doesnt Match')</script>";
@@ -226,24 +235,21 @@ if (isset($_POST['submit'])) {
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Email Address <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="email" class="form-control col-md-7 col-xs-12 <?php echo !$emailErr ?:
-                                                                                      'is-invalid'; ?>" required="required" type="email" name="email">
+                          <input id="email" class="form-control col-md-7 col-xs-12 <?php echo !$emailErr ?: 'is-invalid'; ?>" required="required" type="email" name="email">
                         </div>
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Password">Password<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="password" id="password" name="password" required="required" class="form-control col-md-7 col-xs-12 <?php echo !$passErr ?:
-                                                                                                                                            'is-invalid'; ?>">
+                          <input type="password" id="password" name="password" required="required" class="form-control col-md-7 col-xs-12 <?php echo !$passErr ?: 'is-invalid'; ?>">
                         </div>
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Password">Confirm Password<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="password" id="cpassword" name="cpassword" required="required" class="form-control col-md-7 col-xs-12 <?php echo !$cpassErr ?:
-                                                                                                                                              'is-invalid'; ?>">
+                          <input type="password" id="cpassword" name="cpassword" required="required" class="form-control col-md-7 col-xs-12 <?php echo !$cpassErr ?: 'is-invalid'; ?>">
                         </div>
                       </div>
                       <div class="ln_solid"></div>
@@ -298,7 +304,7 @@ if (isset($_POST['submit'])) {
 
                   <tbody>
                     <?php
-                    $sql = "SELECT shelteruser_tbl.shelteruser_name, shelteruser_tbl.shelteruser_position, shelteruser_tbl.shelteruser_id, city_tbl.city_name, city_tbl.city_contact, user_tbl.user_email FROM shelteruser_tbl INNER JOIN city_tbl ON shelteruser_tbl.city_id = city_tbl.city_id INNER JOIN user_tbl ON shelteruser_tbl.user_id = user_tbl.user_id";
+                    $sql = "SELECT shelteruser_tbl.shelteruser_name, shelteruser_tbl.shelteruser_position, shelteruser_tbl.shelteruser_id, city_tbl.city_name, city_tbl.city_contact, user_tbl.user_email FROM shelteruser_tbl INNER JOIN city_tbl ON shelteruser_tbl.city_id = city_tbl.city_id INNER JOIN user_tbl ON shelteruser_tbl.user_id = user_tbl.user_id WHERE shelteruser_tbl.deleted_at IS NULL";
                     $result = mysqli_query($conn, $sql);
                     $i = 1;
 
@@ -314,7 +320,7 @@ if (isset($_POST['submit'])) {
                           <td><?= $row['user_email']; ?></td>
                           <td>
                             <a href="edit_shelter.php?id=<?= $row['shelteruser_id'] ?>" type="submit" class="btn btn-round btn-success">Update</a>
-                            <button type="button" class="btn btn-round btn-danger">Delete</button>
+                            <a href="delete_shelteruser.php?shelteruser_id=<?= $row['shelteruser_id'] ?>"><button type="button" class="btn btn-round btn-danger">Delete</button></a>
                           </td>
                         </tr>
                     <?php

@@ -18,28 +18,52 @@ if (isset($_POST['submit-update'])) {
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
   }
 
+  // Validate Name
+  if (empty($_POST['name'])) {
+    $nameErr = 'Full Name is required';
+  } else {
+    $name = filter_input(
+      INPUT_POST,
+      'name',
+      FILTER_SANITIZE_FULL_SPECIAL_CHARS
+    );
+  }
+
+  // Validate Position
+  if (empty($_POST['position'])) {
+    $positionErr = 'Position is required';
+  } else {
+    $position = filter_input(
+      INPUT_POST,
+      'position',
+      FILTER_SANITIZE_FULL_SPECIAL_CHARS
+    );
+  }
   // Store in variables other data to be updated
-  $name = $_POST['name'];
+
   $user_id = $_SESSION['user_id'];
   $shelteruser_id = $_SESSION['shelteruser_id'];
   $about = $_POST['about'];
-  $position = $_POST['position'];
 
   //If there are no errors the function will execute
-  if (empty($emailErr)) {
+  if (empty($emailErr) && empty($nameErr) && empty($positionErr)) {
     // Query to update the shelter_tbl first
-    $sql = "UPDATE shelteruser_tbl SET shelteruser_name='$name', shelteruser_position='$position' WHERE shelteruser_id='$shelteruser_id'";
-    // If true then the query will be executed and another query will be executed
-    if (mysqli_query($conn, $sql) === TRUE) {
-      $sql = "UPDATE user_tbl SET user_email='$email' WHERE user_id='$user_id'";
-      // If true the query will be executed and will be redirected back to manage_shelter.php
-      if (mysqli_query($conn, $sql)) {
-        header('location:manage_shelter.php');
-      } else {
-        echo "Error" . mysqli_error($conn);
-      }
+    $sql = "UPDATE shelteruser_tbl SET shelteruser_name = ?, shelteruser_position = ? WHERE shelteruser_id = ? ";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+      echo "SQL Prepare Statement Failed";
     } else {
-      echo "Error" . mysqli_error($conn);
+      mysqli_stmt_bind_param($stmt, "ssi", $name, $position, $shelteruser_id);
+      mysqli_stmt_execute($stmt);
+      $sql2 = "UPDATE user_tbl SET user_email = ? WHERE user_id = ?";
+      $stmt2 = mysqli_stmt_init($conn);
+      if (!mysqli_stmt_prepare($stmt2, $sql2)) {
+        echo "SQL Prepare Statement Failed";
+      } else {
+        mysqli_stmt_bind_param($stmt2, "si", $email, $user_id);
+        mysqli_stmt_execute($stmt2);
+        header('location:manage_shelter.php');
+      }
     }
   }
 }

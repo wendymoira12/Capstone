@@ -21,9 +21,9 @@ echo '<br>';
 print_r($_SESSION['user_id']);
 echo '<br>';
 echo '<br>';
-print_r($_SESSION['sched_id']);
+print_r($_SESSION['role_id']);
 echo '<br>';
-print_r($_SESSION['app_id']);
+print_r($_SESSION['user_email']);
 echo '<br>';
 //Date algorithm
 date_default_timezone_set("Asia/Manila");
