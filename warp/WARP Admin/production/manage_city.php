@@ -18,13 +18,15 @@ if (isset($_POST['submit'])) {
   $img = $_FILES['img']['name'];
   $img_tmp_name = $_FILES['img']['tmp_name'];
   $city_img_folder = '../../shelter/production/images/logo/' . $img;
-  $sql = "INSERT INTO city_tbl(city_name, city_contact, city_about, city_img) VALUES ('$city','$contact','$about','$img')";
-  if (mysqli_query($conn, $sql)) {
-    //success
+  $sql = "INSERT INTO city_tbl(city_name, city_contact, city_about, city_img) VALUES (?, ?, ?, ?)";
+  $stmt = mysqli_stmt_init($conn);
+  if (!mysqli_stmt_prepare($stmt,$sql)){
+    echo '<script>alert("SQL Prepared Statement Failed")</script>';
+  } else{
+    mysqli_stmt_bind_param($stmt, "ssss", $city, $contact, $about, $img);
+    mysqli_stmt_execute($stmt);
     move_uploaded_file($img_tmp_name, $city_img_folder);
     header('location:manage_city.php');
-  } else {
-    echo 'Error' . mysqli_error($conn);
   }
 }
 ?>
@@ -197,7 +199,7 @@ if (isset($_POST['submit'])) {
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Contact <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" maxlength="11" id="contact" name="contact" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" maxlength="11" id="contact" name="contact" required="required" class="form-control col-md-7 col-xs-12" onkeypress="return /[0-9]/i.test(event.key)">
                         </div>
                       </div>
                       <div class="form-group">
@@ -266,7 +268,7 @@ if (isset($_POST['submit'])) {
                   </thead>
                   <tbody>
                     <?php
-                    $sql = "SELECT * FROM city_tbl";
+                    $sql = "SELECT city_id, city_name, city_contact, city_about, city_img FROM city_tbl WHERE deleted_at IS NULL";
                     $result = mysqli_query($conn, $sql);
                     $i = 1;
                     if ($result->num_rows > 0) {
@@ -279,8 +281,8 @@ if (isset($_POST['submit'])) {
                           <td><?php echo $row['city_about']; ?></td>
                           <td><?php echo '<img src="../../shelter/production/images/logo/' . $row['city_img'] . '" alt="city_logo" width="100">'; ?></td>
                           <td>
-                            <a href="edit_city.php?id=<?= $row['city_id'] ?>" type="submit" class="btn btn-round btn-success">Update</a>
-                            <button type="button" class="btn btn-round btn-danger">Delete</button>
+                            <a href="edit_city.php?id=<?= htmlspecialchars($row['city_id']) ?>" type="submit" class="btn btn-round btn-success">Update</a>
+                            <a href="delete_city.php?city_id=<?= htmlspecialchars($row['city_id']) ?>"><button type="submit" class="btn btn-round btn-danger">Delete</button> </a>
                           </td>
                         </tr>
                     <?php
@@ -360,5 +362,3 @@ if (isset($_POST['submit'])) {
   <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
 
 </body>
-
-</html>
