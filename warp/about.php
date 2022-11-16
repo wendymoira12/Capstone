@@ -1,3 +1,18 @@
+<?php
+include 'config.php';
+include('connect/connection.php');
+session_start();
+
+//if hindi nakaset si user-email and user-role-id babalik sya sa login.php
+if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
+    header('Location: login.php');
+}
+
+$sql = "SELECT * FROM city_tbl";
+$result = mysqli_query($conn, $sql);
+
+$row = mysqli_fetch_assoc($result);
+?>
 <!doctype html>
 <html class="no-js" lang="zxx">
 
@@ -32,42 +47,42 @@
     </head>
 
     <body>
-        <header>
-            <div class="header-area ">
-                <div id="sticky-header" class="main-header-area">
-                    <div class="container">
-                        <div class="row align-items-center">
-                            <div class="col-xl-3 col-lg-3">
-                                <div class="logo">
-                                    <a href="home.php">
-                                        <img src="img/logo.png" alt="">
-                                    </a>
-                                </div>
+    <header>
+        <div class="header-area ">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-xl-3 col-lg-3">
+                            <div class="logo">
+                                <a href="home.php">
+                                    <img src="img/logo.png" alt="">
+                                </a>
                             </div>
-                            <div class="col-xl-9 col-lg-9">
-                                <div class="main-menu  d-none d-lg-block">
-                                    <nav>
-                                        <ul id="navigation">
-                                            <li><a href="home.php">Home</a></li>
-                                            <li> <a href="about.php">About Us </i></a>
-                                            <li> <a href="pets-for-adoption.php">Pets for Adoption </i></a>
-                                            <li><a href="contact.php">Contact</a></li>
-                                            <li><a href="getroleid.php?id=<?= $_SESSION['user-role-id'] ?>">
-                                                    <i class="fa-solid fa-user" style="font-size:20px;color:rgb(4, 4, 41);"></i></a>
-                                            </li>
-                                            <li><a href="logout.php?logout">Logout </a></li>
-                                        </ul>
-                                    </nav>
-                                </div>
+                        </div>
+                        <div class="col-xl-9 col-lg-9">
+                            <div class="main-menu  d-none d-lg-block">
+                                <nav>
+                                    <ul id="navigation">
+                                        <li><a href="home.php">Home</a></li>
+                                        <li> <a href="about.php">About Us </i></a>
+                                        <li> <a href="pets-for-adoption.php">Pets for Adoption </i></a>
+                                        <li><a href="contact.php">Contact</a></li>
+                                        <li><a href="getroleid.php?id=<?= $_SESSION['user-role-id'] ?>">
+                                                <i class="fa-solid fa-user" style="font-size:20px;color:rgb(4, 4, 41);"></i></a>
+                                        </li>
+                                        <li><a href="logout.php?logout">Logout </a></li>
+                                    </ul>
+                                </nav>
                             </div>
-                            <div class="col-12">
-                                <div class="mobile_menu d-block d-lg-none"></div>
-                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
                         </div>
                     </div>
                 </div>
             </div>
-        </header>
+        </div>
+    </header>
 
         <!-- header_start  -->
 
@@ -97,10 +112,9 @@
                     <div class="col-lg-6 offset-lg-1 col-md-6">
                         <div class="pet_info">
                             <div class="section_title">
-                                <h3><span>We care your pet </span> <br>
-                                    As you care</h3>
-                                <p>Lorem ipsum dolor sit , consectetur adipiscing elit, sed do <br> iusmod tempor incididunt ut labore et dolore magna aliqua. <br> Quis ipsum suspendisse ultrices gravida. Risus commodo <br>
-                                    viverra maecenas accumsan.</p>
+                                <h3>What is WARP?</h3>
+                                <p>WARP strives to rehome animals by working in partnership with animal shelters located throughout metro manila. 
+                                    Organizations maintain their own homepages and databases of available pets.</p>
                                 <a href="about.html" class="boxed-btn3">About Us</a>
                             </div>
                         </div>
@@ -119,8 +133,9 @@
                             <div class="section_title">
                                 <h3><span>We need your</span>
                                     help Adopt Us</h3>
-                                <p>Lorem ipsum dolor sit , consectetur adipiscing elit, sed do iusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices.</p>
-                                <a href="contact.html" class="boxed-btn3">Contact Us</a>
+                                    <p>Adopt, don't shop. Save a life by adopting
+                                    a pet from your local shelter.
+                                </p>                                <a href="contact.html" class="boxed-btn3">Contact Us</a>
                             </div>
                         </div>
                     </div>

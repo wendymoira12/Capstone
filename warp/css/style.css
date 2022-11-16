@@ -116,7 +116,7 @@ p {
   font-size: 16px;
   font-weight: 400;
   line-height: 30px;
-  color: #e26a1f;
+  color: #dd5500;
   margin-bottom: 13px;
   font-family: "Open Sans", sans-serif;
   font-weight: bold;
@@ -258,8 +258,8 @@ h3 {
 
 /* line 170, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_reset.scss */
 .section-padding {
-  padding-top: 120px;
-  padding-bottom: 120px;
+  padding-top: 60px;
+  padding-bottom: 60px;
 }
 
 /* line 174, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_reset.scss */

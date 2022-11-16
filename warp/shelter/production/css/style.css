@@ -3553,7 +3553,7 @@ h3 {
 
 /* line 133, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_contact.scss */
 .contact-section {
-  padding: 130px 0 100px;
+  padding: 60px 0 50px;
 }
 
 @media (max-width: 991px) {
@@ -5830,7 +5830,7 @@ h6 {
   padding: 15px;
   line-height: 1.733;
   color: #888888;
-  font-style: italic;
+  font-style: normal;
   margin-top: 25px;
   margin-bottom: 25px;
 }
@@ -6636,7 +6636,7 @@ h6 {
   text-transform: uppercase;
   padding: 0;
   margin: 0;
-  font-style: italic;
+  font-style: normal;
 }
 .portfolio .portfolio-wrap .portfolio-links {
   text-align: center;
