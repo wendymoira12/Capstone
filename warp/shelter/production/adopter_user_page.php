@@ -151,7 +151,7 @@ if ($result->num_rows > 0) {
                             <?php
                             //Pag rejected, yung message lang at pet name
                             if ($notif['isAccepted'] == '0') {
-                              echo $notif['message'] . ' ' . $notif['pet_name'];
+                              echo $notif['message'] . ' ' . $notif['pet_name'] . ' ' . $notif['message1'];
                             } else if ($notif['isAccepted'] == '1') {
                               //Pag accepted, message pati yung isang message with pet name and schedule ng interview
                               echo $notif['message'] . ' ' . $notif['pet_name'] . '. ' . $notif['message1'] . ' ' . $notif['schedule_date'];

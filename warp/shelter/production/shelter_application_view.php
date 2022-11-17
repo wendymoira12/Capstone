@@ -39,7 +39,7 @@ if ($result->num_rows > 0) {
   }
 }
 // Pag naclick si reject button, mapapalitan yung application status sa application list
-if (isset($_POST['reject'])) {
+if (isset($_POST['submit-reject'])) {
   $id = $_GET['id'];
   $reject = 'Rejected';
   $sql = "UPDATE applicationresult_tbl SET application_status='$reject' WHERE application_id = '$id'";
@@ -51,7 +51,10 @@ if (isset($_POST['reject'])) {
   $reject = '0';
   //notif para sa pagclick ng reject
   $msg = 'This shelter has rejected your adoptee application for pet'; //message sa notification ng adopter tas concat name ng pet na inadopt niya
-  $sql_insert = mysqli_query($conn, "INSERT INTO adopternotif_tbl(application_id, message, isAccepted) VALUES('$id', '$msg', '$reject')"); //Di ko alam pano ipapasok yung user_id para ma specify kung para kaninong adopter lang lalabas yung notif
+
+  //Reason for rejecting 
+  $msg1 = 'for the following reasons: ' . $_POST['rejectmsg'];
+  $sql_insert = mysqli_query($conn, "INSERT INTO adopternotif_tbl(application_id, message, message1, isAccepted) VALUES('$id', '$msg', '$msg1', '$reject')"); //Di ko alam pano ipapasok yung user_id para ma specify kung para kaninong adopter lang lalabas yung notif
   if ($sql_insert) {
     echo "<script>alert('Successfully cancelled adoption')</script>";
   } else {
@@ -439,9 +442,14 @@ if ($result->num_rows > 0) {
                           <button class="btn btn-round btn-primary" type="button" onclick="return confirm('Are you sure you want to cancel?');">Cancel</button>
                         </a>
 
-                        <button name="reject" class="btn btn-round btn-danger" onclick="return confirm('Are you sure you want to reject this application?');">Reject</button>
+                        <a href="#" data-toggle="modal" data-target="#modalReject">
+                          <button name="reject" class="btn btn-round btn-danger">Reject</button>
+                        </a>
 
-                        <a href="#" data-toggle="modal" data-target="#modalDate"><button name="edit-pet-submit" class="btn btn-round btn-success">Accept</button></a>
+                        <a href="#" data-toggle="modal" data-target="#modalDate">
+                          <button name="edit-pet-submit" class="btn btn-round btn-success">Accept</button>
+                        </a>
+
                         <a href="report_generation.php?id=<?= $id ?>">
                           <button class="btn btn-round btn-primary" type="button">View as PDF</button>
                         </a>
@@ -518,7 +526,27 @@ if ($result->num_rows > 0) {
                           </div>
                         </div>
                       </div>
-
+                      
+                      <div class="modal fade" id="modalReject">
+                        <div class="modal-dialog modal-sm">
+                          <div class="modal-content">
+                            <form action="/Capstone/warp/shelter/production/shelter_application_view.php?id=<?= $id ?>" method="POST">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                                </button>
+                                <h4 class="modal-title">Please include the reason for rejection</h4>
+                              </div>
+                              <div class="modal-body">
+                                <textarea name="rejectmsg"></textarea>
+                              </div>
+                              <div class="modal-footer">
+                                <button class="btn btn-success" name="submit-reject" onclick="return confirm('Are you sure you want to reject this application?');">Submit
+                                </button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
                     </div>
 
                   </form>
