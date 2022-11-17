@@ -17,6 +17,10 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
 <?php
 // Get the user ID from the login sesh
 $user_id = $_SESSION['user_id'];
+
+// Get user-email for change pass
+$user_email = $_SESSION['user-email'];
+
 // Query to check if user_id from the login shesh = shelteruser_id to get the city 
 $sql = "SELECT * FROM shelteruser_tbl WHERE user_id ='$user_id'";
 $result = mysqli_query($conn, $sql);
@@ -31,6 +35,8 @@ if ($result->num_rows > 0) {
   }
 }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,7 +63,7 @@ if ($result->num_rows > 0) {
   <link rel="stylesheet" href="/warp/shelter/production/css/style.css">
 
   <!-- Custom Theme Style -->
-  <link href="../build/css/custom1.min.css" rel="stylesheet">
+  <link href="../build/css/custom.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/warp/shelter/production/css/style.css">
 
 </head>
@@ -199,50 +205,6 @@ if ($result->num_rows > 0) {
       <div class="right_col" role="main">
 
         <!-- top tiles -->
-
-        <div class="row tile_count">
-          <?php
-          // Make a query to get the total registered adoptees by COUNTing all the adoptees with city id == which shelter city id
-          $sql = "SELECT COUNT(pet_id) AS totaladoptee FROM adoptee_tbl WHERE city_id = '$city_id'";
-          $result = mysqli_query($conn, $sql);
-          if ($result) {
-            $data = mysqli_fetch_assoc($result);
-            $totaladoptee = $data['totaladoptee'];
-          }
-          ?>
-          <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-            <span class="count_top"><i class="fa fa-paw"></i> Total Adoptee Pets</span>
-            <div class="count"><?= $totaladoptee ?></div>
-          </div>
-
-          <?php
-          // Make a query to get the total adopted pets by COUNTing all the adopted_id with city id == which shelter city id
-          $sql = "SELECT COUNT(adopted_id) AS totaladoptedpet FROM adopted_tbl INNER JOIN applicationform1 ON adopted_tbl.application_id = applicationform1.application_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id WHERE adoptee_tbl.city_id = '$city_id'";
-          $result = mysqli_query($conn, $sql);
-          if ($result) {
-            $data = mysqli_fetch_assoc($result);
-            $totaladoptedpet = $data['totaladoptedpet'];
-          }
-          ?>
-          <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-            <span class="count_top"><i class="fa fa-paw"></i> Total Adopted Pets</span>
-            <div class="count"><?= $totaladoptedpet ?></div>
-          </div>
-
-          <?php
-          // Make a query to get the total applications by COUNTing all the application_id with city id == which shelter city id
-          $sql = "SELECT COUNT(application_id) AS totalapplications FROM applicationform1 INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id = '$city_id'";
-          $result = mysqli_query($conn, $sql);
-          if ($result) {
-            $data = mysqli_fetch_assoc($result);
-            $totalapplications = $data['totalapplications'];
-          }
-          ?>
-          <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-            <span class="count_top"><i class="fa fa-user"></i> Total Applications</span>
-            <div class="count"><?= $totalapplications ?></div>
-          </div>
-        </div>
         <div class="clearfix"></div>
 
         <div class="row">
@@ -250,41 +212,49 @@ if ($result->num_rows > 0) {
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
               <div class="x_title">
-
                 <div class="title_left">
-                  <h3>Shelter Account Page</h3>
-                </div>
-
-                <div class="title_right">
-
+                  <h3>Change Password</h3>
                 </div>
               </div>
-
-              <div class="col-md-5 col-sm-5 col-xs-12">
-                <div class="product-image">
-                  <?php echo '<img src="images/logo/' . $row['city_img'] . '" alt="shelter logo"'; ?>
-                </div>
+              <div class="x_content">
+                <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="POST" action="<?= htmlspecialchars('changepassform.php'); ?>">
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="currentpass">Current Password<span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="password" id="currentpass" name="curpassword" required="required" class="form-control col-md-7 col-xs-12 <?= !$curpassErr ?: 'is-invalid'; ?>">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="newpass">New Password<span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="password" id="newpass" name="newpassword" required="required" class="form-control col-md-7 col-xs-12 <?= !$newpassErr ?: 'is-invalid'; ?>">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="confirmpass">Confirm New Password<span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="password" id="confirmpass" name="conpassword" required="required" class="form-control col-md-7 col-xs-12 <?= !$conpassErr ?: 'is-invalid'; ?>">
+                    </div>
+                  </div>
+                  <div class="ln_solid"></div>
+                  <div class="form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                      <button class="btn btn-primary" type="reset">Reset</button>
+                      <button type="submit" class="btn btn-success" name="submit-pass" onclick="return confirm('Are you sure you want to change your password?');"
+>Submit</button>
+                    </div>
+                  </div>
+                </form>
               </div>
-            </div>
-
-            <div class="col-md-6 col-sm-6 col-xs-12" style="border:0px solid #e5e5e5;">
-              <h3 class="x_title"><?php echo $row['city_name']; ?> </h3>
-              <div class="clearfix"></div>
-              <h2>About us</h2>
-              <p><?php echo $row['city_about']; ?></p>
-              <br>
-              <h2>Contact us</h2>
-              <p><?php echo $row['city_contact']; ?></p>
-              <br>
-              <a href="shelter_account_edit.php?city_id=<?php echo $row['city_id']; ?>">
-                <button type="button" class="btn btn-success btn-primary" onclick="return confirm('Are you sure you want to edit shelter information?');">Edit Information</button>
-              </a>
             </div>
           </div>
         </div>
+
+
       </div>
-
-
       <!-- /page content -->
 
       <!-- footer content -->

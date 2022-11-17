@@ -6,12 +6,15 @@ session_start();
 print_r($_SESSION['password-login']);
 print_r($_SESSION['otp']);
 print_r($_SESSION['mail'] );
-//print_r($_SESSION['sched_id']);
-if (password_verify($_SESSION['password2'], $_SESSION['password-login'])) {
+//print_r($_SESSION['sched_id']);*/
+
+$pass2 = '1234';
+$pass1 = '$2y$10$zr/lI/p/pIJJUsaKZEURHO8FrviTK.PChLIB/a0wspxn/jcMETbea';
+if (password_verify($pass2, $pass1)) {
     echo 'Password is valid!';
 } else {
     echo 'Invalid password.';
-} */
+} 
 //print_r($_SESSION['password-login']);
 print_r($_SESSION['email-login']);
 print_r($_SESSION['user-email']); 
