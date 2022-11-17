@@ -130,24 +130,23 @@ if (isset($_POST["register"])) {
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <script src="https://kit.fontawesome.com/b6742a828f.js" crossorigin="anonymous"></script>
-    <meta charset="UTF-8" />
-    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script
-      src="https://kit.fontawesome.com/64d58efce2.js"
-      crossorigin="anonymous"
-    ></script>
-    <link rel="stylesheet" href="css/login.css" />
-    <title>Sign in & Sign up Form</title>
-  </head>
-  <body>
-    
-    <div class="logo">
 
-    </div>
-    <div class="container">
+<head>
+  <script src="https://kit.fontawesome.com/b6742a828f.js" crossorigin="anonymous"></script>
+  <meta charset="UTF-8" />
+  <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="css/login.css" />
+  <title>Sign in & Sign up Form</title>
+</head>
+
+<body>
+
+  <div class="logo">
+
+  </div>
+  <div class="container">
     <div class="forms-container">
       <div class="signin-signup">
         <form action="" method="POST" class="sign-in-form">
@@ -163,51 +162,52 @@ if (isset($_POST["register"])) {
           <!--
             <input type="submit" value="Login" action="home.html" class="btn solid" /> -->
           <button type="submit" name="submit-login" class="btn solid">Login</button>
-          </form>
-          <form action="#" class="sign-up-form" method="POST">
+        </form>
+        <form action="#" class="sign-up-form" method="POST">
           <h2 class="title">Register to WARP</h2>
-            <div class="input-field">
-              <i class="fas fa-envelope"></i>
-              <input type="text" id="email_address" class="form-control <?php echo !$emailErr ?: 'is-invalid'; ?>" placeholder="Email Address" name="email" required autofocus>
-              <label for="email_address"></label>
-            </div>
-            <button class="btn solid" input type="submit" value="Register" name="register">Register</button>
-            <p class="social-text"></p>
-            <div class="social-media">
-              
-            
-            </div>
-          </form>
-        </div>
-      </div>
+          <div class="input-field">
+            <i class="fas fa-envelope"></i>
+            <input type="text" id="email_address" class="form-control <?php echo !$emailErr ?: 'is-invalid'; ?>" placeholder="Email Address" name="email" required autofocus>
+            <label for="email_address"></label>
+          </div>
+          <button class="btn solid" input type="submit" value="Register" name="register">Register</button>
+          <p class="social-text"></p>
+          <div class="social-media">
 
-      <div class="panels-container">
-        <div class="panel left-panel">
-          <div class="content">
-            <h3>New here?</h3>
-            <p>
-            </p>
-            <button class="btn transparent" id="sign-up-btn">
-              Sign up
-            </button>
+
           </div>
-          <img src="img/WARP_Logo_Orange.png" class="image" alt="" />
-        </div>
-        <div class="panel right-panel">
-          <div class="content">
-            <h3>Already one of us?</h3>
-<br>
-            <button class="btn transparent" id="sign-in-btn">
-              Sign in
-            </button>
-          </div>
-          <img src="img/WARP_LOGO copy.png" class="image" alt="" />
-        </div>
+        </form>
       </div>
     </div>
 
-    <script src="js/app.js"></script>
-  </body>
+    <div class="panels-container">
+      <div class="panel left-panel">
+        <div class="content">
+          <h3>New here?</h3>
+          <p>
+          </p>
+          <button class="btn transparent" id="sign-up-btn">
+            Sign up
+          </button>
+        </div>
+        <img src="img/WARP_Logo_Orange.png" class="image" alt="" />
+      </div>
+      <div class="panel right-panel">
+        <div class="content">
+          <h3>Already one of us?</h3>
+          <br>
+          <button class="btn transparent" id="sign-in-btn">
+            Sign in
+          </button>
+        </div>
+        <img src="img/WARP_LOGO copy.png" class="image" alt="" />
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+
 </html>
 
 <script>
