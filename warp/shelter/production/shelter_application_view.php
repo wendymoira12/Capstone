@@ -53,7 +53,7 @@ if (isset($_POST['submit-reject'])) {
   $msg = 'This shelter has rejected your adoptee application for pet'; //message sa notification ng adopter tas concat name ng pet na inadopt niya
 
   //Reason for rejecting 
-  $msg1 = 'for the following reasons: ' . $_POST['rejectmsg'];
+  $msg1 = 'For the following reason/s: ' . $_POST['rejectmsg'];
   $sql_insert = mysqli_query($conn, "INSERT INTO adopternotif_tbl(application_id, message, message1, isAccepted) VALUES('$id', '$msg', '$msg1', '$reject')"); //Di ko alam pano ipapasok yung user_id para ma specify kung para kaninong adopter lang lalabas yung notif
   if ($sql_insert) {
     echo "<script>alert('Successfully cancelled adoption')</script>";
@@ -115,7 +115,7 @@ if ($result->num_rows > 0) {
   <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
   <!-- Dropzone.js -->
   <link href="../vendors/dropzone/dist/min/dropzone.min.css" rel="stylesheet"> <!-- Custom Theme Style -->
-  <link href="../build/css/custom.min.css" rel="stylesheet">
+  <link href="../build/css/custom1.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/warp/shelter/production/css/style.css">
 
   <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous"> -->

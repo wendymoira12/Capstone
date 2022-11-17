@@ -60,7 +60,7 @@ if ($result->num_rows > 0) {
 
 
   <!-- Custom Theme Style -->
-  <link href="../build/css/custom.min.css" rel="stylesheet">
+  <link href="../build/css/custom1.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/warp/shelter/production/css/style.css">
 </head>
 

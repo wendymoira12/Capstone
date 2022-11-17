@@ -65,7 +65,7 @@ if ($result->num_rows > 0) {
   <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom Theme Style -->
-  <link href="../build/css/custom.min.css" rel="stylesheet">
+  <link href="../build/css/custom1.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/warp/shelter/production/css/style.css">
 </head>
 

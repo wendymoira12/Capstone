@@ -75,7 +75,7 @@ if ($result1->num_rows > 0) {
   <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
   <!-- Dropzone.js -->
   <link href="../vendors/dropzone/dist/min/dropzone.min.css" rel="stylesheet"> <!-- Custom Theme Style -->
-  <link href="../build/css/custom.min.css" rel="stylesheet">
+  <link href="../build/css/custom1.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/warp/shelter/production/css/style.css">
 </head>
 
