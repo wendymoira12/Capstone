@@ -133,7 +133,7 @@ if ($result->num_rows > 0) {
           <!-- menu profile quick info -->
           <div class="profile clearfix">
             <div class="profile_pic">
-              <img src="images/img2.jpg" alt="..." class="img-circle profile_img">
+              <img src="images/user.png" alt="..." class="img-circle profile_img">
             </div>
             <div class="profile_info">
               <span>Welcome,</span>
@@ -181,71 +181,67 @@ if ($result->num_rows > 0) {
                   <li><a href="logout.php?logout">Logout </i></a>
                   <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
               <!-- Notification bell -->
-              
+              <?php
+
+                $sqlr = "SELECT city_tbl.city_name, city_tbl.city_img, schedule_tbl.schedule_date, adoptee_tbl.pet_name, adopternotif_tbl.message, adopternotif_tbl.message1, adopternotif_tbl.isAccepted, adopter_tbl.user_id FROM adopternotif_tbl INNER JOIN applicationform1 ON adopternotif_tbl.application_id = applicationform1.application_id INNER JOIN schedule_tbl ON applicationform1.application_id = schedule_tbl.application_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id WHERE adopternotif_tbl.status = '0' AND adoptee_tbl.city_id = city_tbl.city_id AND adopter_tbl.user_id = '$user_id'";
+                $resultr = mysqli_query($conn, $sqlr);
+                $count = mysqli_num_rows($resultr);
+
+                /*$sql_get = mysqli_query($conn, "SELECT * FROM adopternotif_tbl INNER JOIN applicationform1 ON adopternotif_tbl.application_id = applicationform1.application_id INNER JOIN schedule_tbl ON applicationform1.schedule_id = schedule_tbl.schedule_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id WHERE adopternotif_tbl.status = 0"); //PANO Q GAGAWIN YUNG SCHEDULE_TBL.APPLICATION_ID = APPLICATIONFORM1.APPLICATION_ID para tama yung dates dun sa notif
+                $count = mysqli_num_rows($sql_get);*/
+
+                ?>
+
               <li role="presentation" class="dropdown">
-                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-bell-o"></i>
-                    <span class="badge bg-green">6</span>
-                  </a>
-                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <div class="text-center">
+                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                  <i class="fa fa-bell-o"></i>
+                  <span class="badge bg-green"><?php echo $count; ?></span>
+                </a>
+                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                  <?php
+                  if (mysqli_num_rows($resultr) > 0) {
+                    while ($notif = mysqli_fetch_assoc($resultr)) {
+                  ?>
+                      <li>
                         <a>
-                          <strong>See All Alerts</strong>
-                          <i class="fa fa-angle-right"></i>
+                          <span class="image"><?php echo '<img src="images/logo/' . $notif['city_img'] . '" alt="shelter logo"'; ?></span>
+                          <span>
+                            <span><?php echo $notif['city_name']; ?></span>
+                            <span class="time">3 mins ago</span>
+                          </span>
+                          <span class="message">
+                            <?php
+                            //Pag rejected, yung message lang at pet name
+                            if ($notif['isAccepted'] == '0') {
+                              echo $notif['message'] . ' ' . $notif['pet_name'] . '. ';
+                              echo $notif['message1'];
+                            } else if ($notif['isAccepted'] == '1') {
+                              //Pag accepted, message pati yung isang message with pet name and schedule ng interview
+                              echo $notif['message'] . ' ' . $notif['pet_name'] . '. ' . $notif['message1'] . ' ' . $notif['schedule_date'];
+                            } else {
+                              //Pag pinalitan ni shelter yung interview date, dito lalabas
+                              echo $notif['message'] . ' ' . $notif['schedule_date'] . '. ' . $notif['message1'] . ' ' . $notif['pet_name'];
+                            }
+                            ?>
+                          </span>
                         </a>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
+                      </li>
+                  <?php
+                    }
+                  } else {
+                    echo '<a > Sorry! No Notifications to show </a>';
+                  }
+                  ?>
+                  <li>
+                    <div class="text-center">
+                      <a>
+                        <strong>See All Notifications</strong>
+                        <i class="fa fa-angle-right"></i>
+                      </a>
+                    </div>
+                  </li>
+                </ul>
+              </li>
 
                   
               </nav>
@@ -283,7 +279,7 @@ if ($result->num_rows > 0) {
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">Adopter I.D: </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <img src="images/valid_id/<?= $qdata['valid_id']; ?>" alt="Adopter Identification Card" height="150" width="150">
+                       <img src="images/valid_id/<?= $qdata['valid_id']; ?>" alt="Adopter Identification Card" height="150" width="325">
                       </div>
                     </div>
 

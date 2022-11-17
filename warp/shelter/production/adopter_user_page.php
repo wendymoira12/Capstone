@@ -71,7 +71,9 @@ if ($result->num_rows > 0) {
               <img src="images/logo.png" alt="">
             </a>
             <div class="profile_pic">
-              <img src="images/img2.jpg" alt="..." class="img-circle profile_img">
+              <a href="/Capstone/warp/home.php" >
+              <img src="images/user.png"  alt="..." class="img-circle profile_img">
+              </a>
             </div>
             <div class="profile_info">
               <span>Welcome,</span>
@@ -80,7 +82,7 @@ if ($result->num_rows > 0) {
           </div>
           <!-- /menu profile quick info -->
 
-          <br />
+          <br/>
 
           <!-- sidebar menu -->
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">

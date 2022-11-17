@@ -42,6 +42,7 @@
     box-shadow: 0 0 20px rgba(62, 0, 0, 0.1);
     display: inline-block;
     transition: all 0.3s ease 0s;
+    text-decoration: none;
 }
 .show-modal:hover{
     color: #fff;
@@ -82,6 +83,7 @@
     top: 8px;
     z-index: 1;
     transition: all 0.3s;
+    
 }
 .modal-content .close:hover{
     color: #fff;
