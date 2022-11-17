@@ -1507,11 +1507,11 @@ ul.quick-list li {
     right: 0;
     left: auto;
     width: 220px;
-    height: 500px;
-    overflow-y: auto;
+    overflow: auto;
 }
 .navbar-nav .open .dropdown-menu.msg_list {
     width: 300px;
+    height: 300px;
 }
 .info-number .badge {
     font-size: 10px;
