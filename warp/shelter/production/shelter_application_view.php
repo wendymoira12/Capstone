@@ -446,11 +446,11 @@ if ($result->num_rows > 0) {
                           <button name="reject" class="btn btn-round btn-danger">Reject</button>
                         </a>
 
-                        <a href="#" data-toggle="modal" data-target="#modalDate">
-                          <button name="edit-pet-submit" class="btn btn-round btn-success">Accept</button>
+                        <a href="accept_application.php?id=<?= htmlspecialchars($id)?>">
+                          <button name="accept_application" type="button" class="btn btn-round btn-success">Accept</button>
                         </a>
 
-                        <a href="report_generation.php?id=<?= $id ?>">
+                        <a href="report_generation.php?id=<?= htmlspecialchars($id) ?>">
                           <button class="btn btn-round btn-primary" type="button">View as PDF</button>
                         </a>
                       </div>
