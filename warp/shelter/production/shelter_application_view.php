@@ -439,7 +439,7 @@ if ($result->num_rows > 0) {
                     <div class="form-group">
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                         <a href="shelter_application_list.php">
-                          <button class="btn btn-round btn-primary" type="button" onclick="return confirm('Are you sure you want to cancel?');">Cancel</button>
+                          <button class="btn btn-round btn-primary" type="button" onclick="return confirm('Are you sure you want to go back?');">Back</button>
                         </a>
 
                         <a href="#" data-toggle="modal" data-target="#modalReject">

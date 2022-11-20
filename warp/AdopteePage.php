@@ -103,9 +103,11 @@ if (isset($_POST['submit'])) {
     //tulog muna ng mga 4 seconds para smooth sa next process
     usleep(250000); 
 
-
+    // pag merong pumasok na data sa applicationform1 after magsubmit nung adopter;
     if ($query3){
+      //ilalagay yung valid_id sa valid_id na folder;
       move_uploaded_file($valid_id_tmp_name, $valid_id_folder);
+      //tas ipoprocess yung kung qualified or hindi.
       require "applicationresult.php";
     }
 }
@@ -395,14 +397,26 @@ if (isset($_POST['submit'])) {
                             <?php
                             $disable = "SELECT adopter_id, application_status from applicationform1, applicationresult_tbl WHERE applicationform1.adopter_id='$adopter_id' ORDER BY applicationresult_tbl.application_id DESC;";
                             $qdisable = mysqli_query($conn, $disable);
+
+                            //$mdisable = "SELECT application_id, monitoring_status from adopted_tbl,applicationform1 WHERE applicationform1.adopter_id='$adopter_id' AND applicationform1.application_id=adopted_tbl.application_id ORDER BY applicationform1.application_id DESC;";
+                            //$mgdisable = mysqli_query($conn, $mdisable);
+                            //$mfgdisable = mysqli_fetch_assoc($conn, $mGdisable);
+
+                          
+                            
                             ?>
                             <button type="button" class="btn btn-primary btn-lg show-modal" data-toggle="modal" data-target="#myModal" <?php
                               if ($qdisable->num_rows != 0) {
                               $fdisable = mysqli_fetch_assoc($qdisable);
-                              if ($fdisable['application_status'] == "Pending") {
-                                ?> disabled <?php
-                                  }
-                                  }
+                             //$mfdisable = mysqli_fetch_assoc($conn, $mgdisable);
+                              $var=$fdisable['application_status'];
+                              //$var2=$mfdisable['monitoring_status'];
+
+                              if ($var == "Pending" OR $var == "Scheduled") {
+    
+                                ?> disabled <?php 
+                                }
+                              }
                           ?>>
                               Adopt Me!
                             </button>

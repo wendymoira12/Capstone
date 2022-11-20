@@ -437,7 +437,23 @@ if ($result->num_rows > 0) {
                       <a href="adopter_user_page.php">
                             <button type="button" class="btn btn-round btn-success">Back</button>
                          </a>
-                      <button name="cancel" class="btn btn-round btn-danger" onclick="return confirm('Are you sure you want to cacncel this application?');">Cancel Application</button>
+                         <?php
+                            $disable = "SELECT adopter_id, application_status from applicationform1, applicationresult_tbl WHERE applicationform1.adopter_id='$adopter_id' ORDER BY applicationresult_tbl.application_id DESC;";
+                            $qdisable = mysqli_query($conn, $disable); 
+                            ?>
+                      <button name="cancel" class="btn btn-round btn-danger" onclick="return confirm('Are you sure you want to cacncel this application?')"
+                      <?php
+                      
+                      if ($qdisable->num_rows != 0) {
+                              $fdisable = mysqli_fetch_assoc($qdisable);
+                              $var=$fdisable['application_status'];
+
+                              if ($var != "Pending") {
+    
+                                ?> disabled <?php 
+                                }
+                              }
+                          ?>>Cancel Application</button>
                     </div>
 
                   </form>
