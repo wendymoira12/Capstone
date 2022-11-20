@@ -94,7 +94,7 @@ if (isset($_POST["register"])) {
       $mail->Username = 'warp.pup@gmail.com';
       $mail->Password = 'zulriaypcszobrgp';
 
-      $mail->setFrom('warp.pup@gmail.com', 'OTP Verification');
+      $mail->setFrom('warp.pup@gmail.com', 'WARP');
       $mail->addAddress($_POST["email"]);
 
       $mail->isHTML(true);
@@ -162,6 +162,8 @@ if (isset($_POST["register"])) {
           <!--
             <input type="submit" value="Login" action="home.html" class="btn solid" /> -->
           <button type="submit" name="submit-login" class="btn solid">Login</button>
+          <p style="display: flex;justify-content: center;align-items: center;margin-top: 20px;"><a href="forgot-pw.php" style="color: #4590ef;">Forgot Password?</a></p>
+
         </form>
         <form action="#" class="sign-up-form" method="POST">
           <h2 class="title">Register to WARP</h2>

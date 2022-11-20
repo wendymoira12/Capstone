@@ -59,41 +59,38 @@ if (isset($_POST["forgot-pw"])) {
       $mail->Username = 'warp.pup@gmail.com';
       $mail->Password = 'zulriaypcszobrgp';
 
-      $mail->setFrom('warp.pup@gmail.com', 'OTP Verification');
+      $mail->setFrom('warp.pup@gmail.com', 'WARP');
       $mail->addAddress($_POST["email"]);
 
       $mail->isHTML(true);
-      $mail->Subject = "Your OTP code";
+      $mail->Subject = "WARP: Forgot Password";
       $mail->Body = "<p>Dear user, </p> 
-      It seems like you forgot your password for WARP. If this is true, enter the code below to .
-      Reset your password<h3> $otp <br></h3>
+      It seems like you forgot your password for WARP. If this is true, enter the code below to reset your password<h3> $otp <br></h3>
                     <p> If you didn't request this, you can disregard this email or you can let us know.</p>
                     <br><br>
                     <p>Welcome to WARP!</p>
                     <b>WARP Team</b>";
-
-      if (!$mail->send()) {
-      ?>
-        <script>
-          alert("<?php echo "Failed, Invalid Email " ?>");
-        </script>
-      <?php
-      } else {
-      ?>
-        <script>
-          alert("<?php echo "Verification Code sent to " . $email ?>");
-          window.location.replace('reset-pw.php');
-        </script>
-<?php
-      }
-      //}
-    }
-  }
-}
-
-?>
-
-
+ 
+                    if (!$mail->send()) {
+                      ?>
+                        <script>
+                          alert("<?php echo "Email doesn't Exist " ?>");
+                        </script>
+                      <?php
+                      } else {
+                      ?>
+                        <script>
+                          alert("<?php echo "Security code sent to " . $email ?>");
+                          window.location.replace('security-code.php');
+                        </script>
+                <?php
+                      }
+                      //}
+                    }
+                  }
+                }
+                
+                ?>
 
 <!DOCTYPE html>
 <html lang="en">
