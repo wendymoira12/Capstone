@@ -93,6 +93,7 @@ if ($result->num_rows > 0) {
 <html lang="en">
 
 <head>
+
   <script src="https://kit.fontawesome.com/b6742a828f.js" crossorigin="anonymous"></script>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <!-- Meta, title, CSS, favicons, etc. -->
@@ -111,13 +112,18 @@ if ($result->num_rows > 0) {
   <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
   <!-- iCheck -->
   <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+  
 
   <!-- Custom Theme Style -->
   <link href="../build/css/custom.min.css" rel="stylesheet">
   <link rel="stylesheet" href="Capstone/warp/shelter/production/css/style.css">
+  <link rel="stylesheet" href="css/imagepopup.css">
+ 
 
 </head>
+<style>
 
+</style>
 <body class="nav-md">
   <div class="container body">
     <div class="main_container">
@@ -253,7 +259,7 @@ if ($result->num_rows > 0) {
         <div class="">
           <div class="page-title">
             <div class="title_left">
-              <h3>Edit Adoptee</h3>
+              <h3>View Your Application</h3>
             </div>
 
             <div class="title_right">
@@ -278,9 +284,14 @@ if ($result->num_rows > 0) {
 
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">Adopter I.D: </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                       <img src="images/valid_id/<?= $qdata['valid_id']; ?>" alt="Adopter Identification Card" height="150" width="325">
-                      </div>
+
+                            <!-- Trigger the Modal by clicking the valid id -->
+                            <img id="myImg" src="images/valid_id/<?= $qdata['valid_id']; ?>" alt="valid_id" style="width:100%;max-width:300px">
+                            <div id="myModal" class="modal">
+                              <span class="close">&times;</span>
+                              <img class="modal-content" id="img01">
+                            </div>
+
                     </div>
 
                     <div class="form-group">
@@ -491,6 +502,21 @@ if ($result->num_rows > 0) {
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
+    <script>
+          var modal = document.getElementById("myModal");
+          var img = document.getElementById("myImg");
+          var modalImg = document.getElementById("img01");
+          img.onclick = function(){
+            modal.style.display = "block";
+            modalImg.src = this.src;
+            captionText.innerHTML = this.alt;
+          }
+          var span = document.getElementsByClassName("close")[0];
+          span.onclick = function() {
+            modal.style.display = "none";
+          }
+    </script>
+
 </body>
 
 </html>

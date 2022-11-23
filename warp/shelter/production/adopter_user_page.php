@@ -51,7 +51,8 @@ if ($result->num_rows > 0) {
 
   <!-- Custom Theme Style -->
   <link href="../build/css/custom1.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="Capstone/warp/shelter/production/css/style.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/adopter_editprofile.css">
 
 </head>
 
@@ -71,9 +72,28 @@ if ($result->num_rows > 0) {
               <img src="images/logo.png" alt="">
             </a>
             <div class="profile_pic">
-              <a href="/Capstone/warp/home.php" >
-              <img src="images/user.png"  alt="..." class="img-circle profile_img">
-              </a>
+
+
+              <img id="myBtn" src="images/user.png"  alt="..." class="img-circle profile_img">
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <h2>Modal Header</h2>
+    </div>
+    <div class="modal-body">
+      <p>Some text in the Modal Body</p>
+      <p>Some other text...</p>
+    </div>
+    <div class="modal-footer">
+      <h3>Modal Footer</h3>
+    </div>
+  </div>
+
+</div>
+                
             </div>
             <div class="profile_info">
               <span>Welcome,</span>
@@ -302,6 +322,33 @@ if ($result->num_rows > 0) {
 
   <!-- Custom Theme Scripts -->
   <script src="../build/js/custom.min.js"></script>
+  <script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var img = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+img.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
 </body>
 
 </html>

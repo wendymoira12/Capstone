@@ -72,14 +72,24 @@ if (!$result) {
 ?>
 <?php
 
+//kuhain yung mga sagot sa application form lagay sa database: applicationform1
 if (isset($_POST['submit'])) {
-
-  // kuhain yung mga sagot sa application form lagay sa database: applicationform1
-  $valid_id = $_FILES["valid_id"]["name"];
+   /* valid id */
+  $valid_id = mysqli_real_escape_string($conn,$_FILES["valid_id"]["name"]);
   $valid_id_tmp_name = $_FILES['valid_id']['tmp_name'];
-  $valid_id_folder = "shelter/production/images/valid_id/" . $valid_id;
 
+    //dapat image lang bawal mga pdf word etc...
+    $valid_id_imagetype = exif_imagetype($valid_id_tmp_name);
+    if (!$valid_id_imagetype) {
+        echo('Uploaded file is not an image.');
+    }
 
+    //extension nung file dapat JPEG PNG GIF XBM XPM WBMP WebP BMP
+    $image_extension = image_type_to_extension($valid_id_imagetype, true);
+
+    //converts image name into hexadecimal (need masked din yung image, BALIKAN 'TO - ask groupmates)
+    $image_name = bin2hex(random_bytes(16)) . $image_extension;
+  /* valid id */
   $q1 = mysqli_real_escape_string($conn, $_POST["occupation"]);
   $q2 = mysqli_real_escape_string($conn, $_POST["civilstatus"]);
   $q3 = mysqli_real_escape_string($conn, $_POST["children"]);
@@ -97,7 +107,7 @@ if (isset($_POST['submit'])) {
   $q15 = mysqli_real_escape_string($conn, $_POST["spending"]);
   $address = mysqli_real_escape_string($conn, $_POST["address"]);
 
-  $row = "INSERT INTO applicationform1 (adopter_id,pet_id,adopter_address,valid_id,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15) VALUES ('$adopter_id','$id','$address','$valid_id','$q1','$q2','$q3','$q4','$q5','$q6','$q7','$q8','$q9','$q10','$q11','$q12','$q13','$q14','$q15');";
+  $row = "INSERT INTO applicationform1 (adopter_id,pet_id,adopter_address,valid_id,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15) VALUES ('$adopter_id','$id','$address','$image_name','$q1','$q2','$q3','$q4','$q5','$q6','$q7','$q8','$q9','$q10','$q11','$q12','$q13','$q14','$q15');";
   $query3 = mysqli_query($conn, $row);
     
     //tulog muna ng mga 4 seconds para smooth sa next process
@@ -106,7 +116,7 @@ if (isset($_POST['submit'])) {
     // pag merong pumasok na data sa applicationform1 after magsubmit nung adopter;
     if ($query3){
       //ilalagay yung valid_id sa valid_id na folder;
-      move_uploaded_file($valid_id_tmp_name, $valid_id_folder);
+      move_uploaded_file($valid_id_tmp_name, __DIR__ . "/shelter/production/images/valid_id/" . $image_name) ;
       //tas ipoprocess yung kung qualified or hindi.
       require "applicationresult.php";
     }
@@ -477,7 +487,9 @@ if (isset($_POST['submit'])) {
 
                                       <label>Please upload your Valid ID here for verification purposes:</label>
                                       <div class="form-group">
-                                        <input class="form-control" type="file" name="valid_id" id="valid_id" required>
+                                        
+                                        <input class="form-control" type="file" name="valid_id" id="valid_id" accept="image/*" required>
+                                      
                                       </div>
 
 

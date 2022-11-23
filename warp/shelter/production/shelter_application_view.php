@@ -116,7 +116,9 @@ if ($result->num_rows > 0) {
   <!-- Dropzone.js -->
   <link href="../vendors/dropzone/dist/min/dropzone.min.css" rel="stylesheet"> <!-- Custom Theme Style -->
   <link href="../build/css/custom1.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/warp/shelter/production/css/style.css">
+  <link rel="stylesheet" href="css/imagepopup.css">
+  
+
 
   <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous"> -->
 
@@ -283,7 +285,12 @@ if ($result->num_rows > 0) {
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" name="id" for="pet-name">Adopter I.D: </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <img src="images/valid_id/<?= $qdata['valid_id']; ?>" alt="Adopter Identification Card" height="150" width="150">
+                        <!-- Trigger the Modal by clicking the valid id -->
+                        <img id="myImg" src="images/valid_id/<?= $qdata['valid_id']; ?>" alt="valid_id" style="width:100%;max-width:300px">
+                            <div id="myModal" class="modal">
+                              <span class="close">&times;</span>
+                              <img class="modal-content" id="img01">
+                            </div>
                       </div>
                     </div>
 
@@ -613,6 +620,20 @@ if ($result->num_rows > 0) {
   <script src="../vendors/starrr/dist/starrr.js"></script>
   <!-- Custom Theme Scripts -->
   <script src="../build/js/custom.min.js"></script>
+  <script>
+          var modal = document.getElementById("myModal");
+          var img = document.getElementById("myImg");
+          var modalImg = document.getElementById("img01");
+          img.onclick = function(){
+            modal.style.display = "block";
+            modalImg.src = this.src;
+            captionText.innerHTML = this.alt;
+          }
+          var span = document.getElementsByClassName("close")[0];
+          span.onclick = function() {
+            modal.style.display = "none";
+          }
+</script>
 
 </body>
 

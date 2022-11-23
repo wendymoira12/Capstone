@@ -78,7 +78,7 @@ if ($result->num_rows > 0) {
               <img src="images/logo.png" alt="">
             </a>
             <div class="profile_pic">
-              <img src="/Capstone/warp/WARP Admin/production/images/<?= $row['city_img']; ?>" alt="..." class="img-circle profile_img">
+              <img src="/Capstone/warp/shelter/production/images/logo/<?= $row['city_img']; ?>" alt="..." class="img-circle profile_img">
             </div>
             <div class="profile_info">
               <span>Welcome,</span>
@@ -134,7 +134,7 @@ if ($result->num_rows > 0) {
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="/Capstone/warp/WARP Admin/production/images/<?= $row['city_img']; ?>" alt=""><?php echo $_SESSION['user-email'] ?>
+                  <img src="/Capstone/warp/shelter/production/images/logo/<?= $row['city_img']; ?>" alt=""><?php echo $_SESSION['user-email'] ?>
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -163,7 +163,7 @@ if ($result->num_rows > 0) {
                   ?>
                       <li>
                         <a>
-                          <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                          <span class="image"><img src="images/user.png" alt="Profile Image" /></span>
                           <span>
                             <span><?php echo $notif['adopter_fname'] . ' ' . $notif['adopter_lname']; ?></span>
                             <span class="time">3 mins ago</span>
