@@ -19,7 +19,6 @@ $row = mysqli_fetch_assoc($result);
 
 <head>
     <script src="https://kit.fontawesome.com/b6742a828f.js" crossorigin="anonymous"></script>
-
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>WARP Home Page</title>
@@ -63,12 +62,10 @@ $row = mysqli_fetch_assoc($result);
                                 <nav>
                                     <ul id="navigation">
                                         <li><a href="home.php">Home</a></li>
-                                        <li> <a href="about.php">About Us </i></a>
-                                        <li> <a href="pets-for-adoption.php">Pets for Adoption </i></a>
+                                        <li> <a href="about.php">About Us </a>
+                                        <li> <a href="pets-for-adoption.php">Pets for Adoption </a>
                                         <li><a href="contact.php">Contact</a></li>
-                                        <li><a href="getroleid.php?id=<?= $_SESSION['user-role-id'] ?>">
-                                                <i class="fa-solid fa-user" style="font-size:20px;color:rgb(4, 4, 41);"></i></a>
-                                        </li>
+                                        <li><a href="getroleid.php?id=<?= $_SESSION['user-role-id'] ?>"><img src="img/user.png" width="20px" height="20px"></a></li>
                                         <li><a href="logout.php?logout">Logout </a></li>
                                     </ul>
                                 </nav>
@@ -76,6 +73,7 @@ $row = mysqli_fetch_assoc($result);
                         </div>
                         <div class="col-12">
                             <div class="mobile_menu d-block d-lg-none"></div>
+
                         </div>
                     </div>
                 </div>
@@ -231,7 +229,7 @@ $row = mysqli_fetch_assoc($result);
                                     <div class="single_adapt text-center">
                                         <img src="img/adapt_icon/2.png" alt="">
                                         <div class="adapt_content">
-                                            <h3><span class="counter"><?= $totaldogs?></span>+</h3>
+                                            <h3><span class="counter"><?= $totaldogs ?></span>+</h3>
                                             <p>Dogs Available</p>
                                         </div>
                                     </div>
