@@ -62,9 +62,7 @@ $row = mysqli_fetch_assoc($result);
                                 <nav>
                                     <ul id="navigation">
                                         <li><a href="home.php">Home</a></li>
-                                        <li> <a href="about.php">About Us </a>
                                         <li> <a href="pets-for-adoption.php">Pets for Adoption </a>
-                                        <li><a href="contact.php">Contact</a></li>
                                         <li><a href="getroleid.php?id=<?= $_SESSION['user-role-id'] ?>"><img src="img/user.png" width="20px" height="20px"></a></li>
                                         <li><a href="logout.php?logout">Logout </a></li>
                                     </ul>
