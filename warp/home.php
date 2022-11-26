@@ -19,7 +19,6 @@ $row = mysqli_fetch_assoc($result);
 
 <head>
     <script src="https://kit.fontawesome.com/b6742a828f.js" crossorigin="anonymous"></script>
-
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>WARP Home Page</title>
@@ -47,40 +46,9 @@ $row = mysqli_fetch_assoc($result);
 
 <body>
     <header>
-        <div class="header-area ">
-            <div id="sticky-header" class="main-header-area">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-xl-3 col-lg-3">
-                            <div class="logo">
-                                <a href="home.php">
-                                    <img src="img/logo.png" alt="">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-xl-9 col-lg-9">
-                            <div class="main-menu  d-none d-lg-block">
-                                <nav>
-                                    <ul id="navigation">
-                                        <li><a href="home.php">Home</a></li>
-                                        <li> <a href="about.php">About Us </i></a>
-                                        <li> <a href="pets-for-adoption.php">Pets for Adoption </i></a>
-                                        <li><a href="contact.php">Contact</a></li>
-                                        <li><a href="getroleid.php?id=<?= $_SESSION['user-role-id'] ?>">
-                                                <i class="fa-solid fa-user" style="font-size:20px;color:rgb(4, 4, 41);"></i></a>
-                                        </li>
-                                        <li><a href="logout.php?logout">Logout </a></li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="mobile_menu d-block d-lg-none"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?php
+        include "header.php"
+        ?>
     </header>
 
     <!-- slider_area_start -->
@@ -231,7 +199,7 @@ $row = mysqli_fetch_assoc($result);
                                     <div class="single_adapt text-center">
                                         <img src="img/adapt_icon/2.png" alt="">
                                         <div class="adapt_content">
-                                            <h3><span class="counter"><?= $totaldogs?></span>+</h3>
+                                            <h3><span class="counter"><?= $totaldogs ?></span>+</h3>
                                             <p>Dogs Available</p>
                                         </div>
                                     </div>
@@ -265,66 +233,14 @@ $row = mysqli_fetch_assoc($result);
         </div>
 
 
-        <!-- footer_start  -->
-        <footer class="footer">
-            <div class="footer_top">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-3 col-md-6 col-lg-3">
-                            <div class="footer_widget">
-                                <h3 class="footer_title">
-                                    Contact Us
-                                </h3>
-                                <ul class="address_line">
-                                    <li>warp.pup@gmail.com</li>
-                                    <li>Metro Manila, Philippines</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-xl-3  col-md-6 col-lg-3">
-                            <div class="footer_widget">
+  <!-- footer_start  -->
+  <footer class="footer">
+    <?php
+      include "footer.php";
+    ?>
+  </footer>
+  <!-- footer_end  -->
 
-                            </div>
-                        </div>
-                        <div class="col-xl-3  col-md-6 col-lg-3">
-                            <div class="footer_widget">
-                                <h3 class="footer_title">
-
-                                </h3>
-                                <ul class="links">
-                                    <br>
-
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-md-6 col-lg-3 ">
-                            <div class="footer_widget">
-                                <div class="footer_logo">
-                                    <a href="#">
-                                        <img src="img/logo.png" alt="">
-                                    </a>
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="copy-right_text">
-                <div class="container">
-                    <div class="bordered_1px"></div>
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <p class="copy_right text-center">
-
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- footer_end  -->
 
 
         <!-- JS here -->
