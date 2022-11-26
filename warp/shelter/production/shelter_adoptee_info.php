@@ -37,7 +37,7 @@ if (isset($_POST['pet-submit'])) {
   $pet_img = $_FILES['pet-img']['name'];
   $pet_img_tmp_name = $_FILES['pet-img']['tmp_name'];
   // upload image to folder named images/
-  $pet_img_folder = 'images/pet_img/' . $pet_img;
+  $pet_img_folder = '/images/pet_img/' . $pet_img;
   // only images can be uploaded
   $pet_img_imagetype = exif_imagetype($pet_img_tmp_name);
   if(!$pet_img_imagetype) {
@@ -47,7 +47,7 @@ if (isset($_POST['pet-submit'])) {
   $pet_img1 = $_FILES['pet-img1']['name'];
   $pet_img_tmp_name1 = $_FILES['pet-img1']['tmp_name'];
   // upload image to folder named images/
-  $pet_img_folder1 = 'images/pet_img/' . $pet_img1;
+  $pet_img_folder1 = '/images/pet_img/' . $pet_img1;
   // only images can be uploaded
   $pet_img_imagetype1 = exif_imagetype($pet_img_tmp_name1);
   if(!$pet_img_imagetype1) {
@@ -65,8 +65,8 @@ if (isset($_POST['pet-submit'])) {
   }
 
   //extension nung file dapat JPEG PNG GIF XBM XPM WBMP WebP BMP
-  $image_extension = image_type_to_extension($valid_id_imagetype, true);
-  $image_extension1 = image_type_to_extension($valid_id_imagetype1, true);
+  $image_extension = image_type_to_extension($pet_img_imagetype, true);
+  $image_extension1 = image_type_to_extension($pet_img_imagetype1, true);
 
   //converts image name into hexadecimal
   $image_name = bin2hex(random_bytes(16)) . $image_extension;
@@ -75,7 +75,7 @@ if (isset($_POST['pet-submit'])) {
   $pet_vid = $_FILES['pet-vid']['name'];
   $pet_vid_tmp_name = $_FILES['pet-vid']['tmp_name'];
   // upload video to folder named images/
-  $pet_vid_folder = 'images/pet_vid/' . $pet_vid;
+  $pet_vid_folder = '/images/pet_vid/' . $pet_vid;
 
   //Check pet_vid size
   if($_FILES["pet_vid"]["size"] > 30000000000){
