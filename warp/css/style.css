@@ -6910,3 +6910,28 @@ h6 {
       flex:0 0 100% ;
       max-width: 100%; }
 }
+.pagination {
+  display: inline-block;
+  text-align: center;
+
+}
+.page {
+      text-align: center;
+   }
+.page-item {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  display: inline-block;
+  text-decoration: none;
+}
+.page-item a.active {
+  background-color: #ff843a;
+  color: white;
+  border-radius: 5px;
+}
+
+.page-item a:hover:not(.active) {
+  background-color: #ddd;
+  border-radius: 5px;
+}

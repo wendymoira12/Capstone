@@ -4,15 +4,20 @@ session_start();
 use LDAP\Result;
 
 include('connect/connection.php');
+if(isset($_GET['page']))
+    {
+        $page = $_GET['page'];
+    }
+    else
+    {
+        $page = 1;
+    }
 
-$sql = "SELECT * FROM adoptee_tbl WHERE deleted_at IS NULL";
-$result = mysqli_query($conn, $sql);
-
-$data = mysqli_fetch_assoc($result);
-
-
-
-
+    $num_per_page = 03;
+    $start_from = ($page-1)*03;
+    
+    $query = "SELECT * FROM warp_capstone.adoptee_tbl LIMIT $start_from,$num_per_page";
+    $result = mysqli_query($conn,$query);
 ?>
 
 <!doctype html>
@@ -59,16 +64,14 @@ $data = mysqli_fetch_assoc($result);
         <![endif]-->
 
         <header>
-        <?php 
-        if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
-            include "header_homeguest.php";
-        }
-
-        else {
-            include "header.php";
-        }
-        ?>
-    </header>
+            <?php
+            if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
+                include "header_homeguest.php";
+            } else {
+                include "header.php";
+            }
+            ?>
+        </header>
 
         <!-- header_start  -->
         <!-- bradcam_area_start -->
@@ -87,6 +90,7 @@ $data = mysqli_fetch_assoc($result);
         <br>
 
         <!-- ======= Portfolio Section ======= -->
+
 
         <section class="portfolio" id="Portfolio">
             <div class="container">
@@ -135,13 +139,44 @@ $data = mysqli_fetch_assoc($result);
                     </div>
                 </div>
             </div>
-  <!-- footer_start  -->
-  <footer class="footer">
-    <?php
-      include "footer.php";
-    ?>
-  </footer>
-  <!-- footer_end  -->
+            <?php 
+        
+                $pr_query = "SELECT * FROM adoptee_tbl";
+                $pr_result = mysqli_query($conn,$pr_query);
+                $total_record = mysqli_num_rows($pr_result );
+                
+                $total_page = ceil($total_record/$num_per_page);
+                ?>
+<nav aria-label="Page navigation example">
+<div class="page">
+  <ul class="pagination">
+  <?php
+                if($page>1)
+                {
+                    echo "<a href='pets-for-adoption.php?page=".($page-1)."' class='page-item'>Previous</a>";
+                }
+                
+                for($i=1;$i<$total_page;$i++)
+                {
+                    echo "<a href='pets-for-adoption.php?page=".$i."' class='page-item'>$i</a>";
+                }
+
+                if($i>$page)
+                {
+                    echo "<a href='pets-for-adoption.php?page=".($page+1)."' class='page-item'>Next</a>";
+                }
+        
+        ?>
+        </ul>
+        </div>     
+</nav>
+            <!-- footer_start  -->
+            <footer class="footer">
+                <?php
+                include "footer.php";
+                ?>
+            </footer>
+            <!-- footer_end  -->
 
 
 
