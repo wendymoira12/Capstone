@@ -37,14 +37,52 @@ if (isset($_POST['pet-submit'])) {
   $pet_img = $_FILES['pet-img']['name'];
   $pet_img_tmp_name = $_FILES['pet-img']['tmp_name'];
   // upload image to folder named images/
-  $pet_img_folder = 'images/pet_img/' . $pet_img;
+  $pet_img_folder = '/images/pet_img/' . $pet_img;
+  // only images can be uploaded
+  $pet_img_imagetype = exif_imagetype($pet_img_tmp_name);
+  if(!$pet_img_imagetype) {
+    echo('Uploaded file is not an image.');
+  }
+
+  $pet_img1 = $_FILES['pet-img1']['name'];
+  $pet_img_tmp_name1 = $_FILES['pet-img1']['tmp_name'];
+  // upload image to folder named images/
+  $pet_img_folder1 = '/images/pet_img/' . $pet_img1;
+  // only images can be uploaded
+  $pet_img_imagetype1 = exif_imagetype($pet_img_tmp_name1);
+  if(!$pet_img_imagetype1) {
+    echo('Uploaded file is not an image.');
+  }
+
+  //Check pet_img size
+  if($_FILES["pet_img"]["size"] > 5000000000){
+    echo "Your file is too large, must be less than 5mb";
+  }
+
+  //Check pet_img1 size
+  if($_FILES["pet_img1"]["size"] > 5000000000){
+    echo "Your file is too large, must be less than 5mb";
+  }
+
+  //extension nung file dapat JPEG PNG GIF XBM XPM WBMP WebP BMP
+  $image_extension = image_type_to_extension($pet_img_imagetype, true);
+  $image_extension1 = image_type_to_extension($pet_img_imagetype1, true);
+
+  //converts image name into hexadecimal
+  $image_name = bin2hex(random_bytes(16)) . $image_extension;
+  $image_name1 = bin2hex(random_bytes(16)) . $image_extension1;
 
   $pet_vid = $_FILES['pet-vid']['name'];
   $pet_vid_tmp_name = $_FILES['pet-vid']['tmp_name'];
   // upload video to folder named images/
-  $pet_vid_folder = 'images/pet_vid/' . $pet_vid;
+  $pet_vid_folder = '/images/pet_vid/' . $pet_vid;
 
-  if (empty($pet_img) && ($pet_vid) && empty($pet_name) && empty($pet_age) && empty($color) && empty($breed) && empty($specie) && empty($gender) && empty($neuter) &&  empty($chkstr) && empty($weight) && empty($size) && empty($medrec) && empty($sociability) && empty($energy) && empty($affection) && empty($description)) {
+  //Check pet_vid size
+  if($_FILES["pet_vid"]["size"] > 30000000000){
+    echo "Your file is too large, must be less than 30mb";
+  }
+
+  if (empty($pet_img) && empty($pet_img1) && ($pet_vid) && empty($pet_name) && empty($pet_age) && empty($color) && empty($breed) && empty($specie) && empty($gender) && empty($neuter) &&  empty($chkstr) && empty($weight) && empty($size) && empty($medrec) && empty($sociability) && empty($energy) && empty($affection) && empty($description)) {
     $message[] = 'Please fill ouT all fieldS';
   } else {
     $user_id = $_SESSION['user_id'];
@@ -57,14 +95,15 @@ if (isset($_POST['pet-submit'])) {
     if ($result->num_rows > 0) {
       $row = mysqli_fetch_assoc($result);
       $city_id = $row['city_id'];
-      $sql = "INSERT INTO adoptee_tbl(pet_img, pet_vid, pet_name, pet_age, pet_color, pet_breed, pet_specie, pet_gender, pet_neuter, pet_vax, pet_weight, pet_size, pet_medrec, pet_lsoc, pet_lene, pet_laff, pet_desc, city_id) VALUES('$pet_img', '$pet_vid', '$pet_name', '$pet_age', '$color', '$breed', '$specie', '$gender', '$neuter', '$chkstr', '$weight', '$size', '$medrec', '$sociability', '$energy', '$affection', '$description', '$city_id')";
+      $sql = "INSERT INTO adoptee_tbl(pet_img, pet_img1, pet_vid, pet_name, pet_age, pet_color, pet_breed, pet_specie, pet_gender, pet_neuter, pet_vax, pet_weight, pet_size, pet_medrec, pet_lsoc, pet_lene, pet_laff, pet_desc, city_id) VALUES('$image_name', '$image_name1', '$pet_vid', '$pet_name', '$pet_age', '$color', '$breed', '$specie', '$gender', '$neuter', '$chkstr', '$weight', '$size', '$medrec', '$sociability', '$energy', '$affection', '$description', '$city_id')";
 
       $result = mysqli_query($conn, $sql);
 
       // UPLOAD THE IMAGES AND VIDEOS IN THE IMAGES FOLDER
       if ($result) {
-        move_uploaded_file($pet_img_tmp_name, $pet_img_folder);
-        move_uploaded_file($pet_vid_tmp_name, $pet_vid_folder);
+        move_uploaded_file($pet_img_tmp_name, __DIR__ . $pet_img_folder);
+        move_uploaded_file($pet_img_tmp_name1, __DIR__ . $pet_img_folder1);
+        move_uploaded_file($pet_vid_tmp_name, __DIR__ . $pet_vid_folder);
 
         echo "<script>alert('Adoptee added successfully')</script>";
         header("Location: shelter_adoptee_info.php");
@@ -73,16 +112,6 @@ if (isset($_POST['pet-submit'])) {
         header("Location: shelter_adoptee_info.php");
       }
 
-      // $upload = mysqli_query($conn, $sql);
-      // if ($upload)
-      // {
-      //   move_uploaded_file($pet_img_tmp_name, $pet_img_folder);
-      //   // move_uploaded_file($pet_vid_tmp_name, $pet_vid_folder);
-      //   $message[] = 'New adoptee addedd successfully';
-      // }else
-      // {
-      //   $message[] = 'Could not add the adoptee';
-      // }
     }
   }
 };
@@ -525,9 +554,16 @@ if ($result->num_rows > 0) {
                       </div>
 
                       <div class="form-group">
+                        <label for="pet-img" class="control-label col-md-3 col-sm-3 col-xs-12">Upload Adoptee Image<span class="required">*</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input class="form-control col-md-7 col-xs-12" type="file" name="pet-img1" required>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
                         <label for="pet-vid" class="control-label col-md-3 col-sm-3 col-xs-12">Upload Adoptee Video<span class="required">*</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input class="form-control col-md-7 col-xs-12" type="file" name="pet-vid">
+                          <input class="form-control col-md-7 col-xs-12" type="file" accept="video/mp3, video/mp4" name="pet-vid">
                         </div>
                       </div>
 
