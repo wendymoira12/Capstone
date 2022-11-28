@@ -41,6 +41,7 @@ $row = mysqli_fetch_assoc($result);
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/slicknav.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/footer_excess.css">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
 </head>
 
@@ -291,6 +292,7 @@ $row = mysqli_fetch_assoc($result);
                 format: 'HH.MM'
             });
         </script>
+
 </body>
 
 </html>

@@ -59,10 +59,16 @@ $data = mysqli_fetch_assoc($result);
         <![endif]-->
 
         <header>
-            <?php
+        <?php 
+        if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
+            include "header_homeguest.php";
+        }
+
+        else {
             include "header.php";
-            ?>
-        </header>
+        }
+        ?>
+    </header>
 
         <!-- header_start  -->
         <!-- bradcam_area_start -->
