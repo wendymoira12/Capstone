@@ -13,7 +13,7 @@ if (isset($_GET['page'])) {
 $num_per_page = 03;
 $start_from = ($page - 1) * 03;
 
-$query = "SELECT * FROM warp_capstone.adoptee_tbl LIMIT $start_from,$num_per_page";
+$query = "SELECT * FROM warp_capstone.adoptee_tbl WHERE deleted_at IS NULL LIMIT $start_from,$num_per_page ";
 $result = mysqli_query($conn, $query);
 ?>
 
