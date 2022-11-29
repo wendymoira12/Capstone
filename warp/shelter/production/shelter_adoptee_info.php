@@ -65,12 +65,12 @@ if (isset($_POST['pet-submit'])) {
   }
 
   //extension nung file dapat JPEG PNG GIF XBM XPM WBMP WebP BMP
-  $image_extension = image_type_to_extension($pet_img_imagetype, true);
-  $image_extension1 = image_type_to_extension($pet_img_imagetype1, true);
+  // $image_extension = image_type_to_extension($pet_img_imagetype, true);
+  // $image_extension1 = image_type_to_extension($pet_img_imagetype1, true);
 
   //converts image name into hexadecimal
-  $image_name = bin2hex(random_bytes(16)) . $image_extension;
-  $image_name1 = bin2hex(random_bytes(16)) . $image_extension1;
+  // $image_name = bin2hex(random_bytes(16)) . $image_extension;
+  // $image_name1 = bin2hex(random_bytes(16)) . $image_extension1;
 
   $pet_vid = $_FILES['pet-vid']['name'];
   $pet_vid_tmp_name = $_FILES['pet-vid']['tmp_name'];
@@ -95,15 +95,15 @@ if (isset($_POST['pet-submit'])) {
     if ($result->num_rows > 0) {
       $row = mysqli_fetch_assoc($result);
       $city_id = $row['city_id'];
-      $sql = "INSERT INTO adoptee_tbl(pet_img1, pet_img2, pet_vid, pet_name, pet_age, pet_color, pet_breed, pet_specie, pet_gender, pet_neuter, pet_vax, pet_weight, pet_size, pet_medrec, pet_lsoc, pet_lene, pet_laff, pet_desc, city_id) VALUES('$image_name', '$image_name1', '$pet_vid', '$pet_name', '$pet_age', '$color', '$breed', '$specie', '$gender', '$neuter', '$chkstr', '$weight', '$size', '$medrec', '$sociability', '$energy', '$affection', '$description', '$city_id')";
+      $sql = "INSERT INTO adoptee_tbl(pet_img1, pet_img2, pet_vid, pet_name, pet_age, pet_color, pet_breed, pet_specie, pet_gender, pet_neuter, pet_vax, pet_weight, pet_size, pet_medrec, pet_lsoc, pet_lene, pet_laff, pet_desc, city_id) VALUES('$pet_img', '$pet_img1', '$pet_vid', '$pet_name', '$pet_age', '$color', '$breed', '$specie', '$gender', '$neuter', '$chkstr', '$weight', '$size', '$medrec', '$sociability', '$energy', '$affection', '$description', '$city_id')";
 
       $result = mysqli_query($conn, $sql);
 
       // UPLOAD THE IMAGES AND VIDEOS IN THE IMAGES FOLDER
-      if ($result) {
-        move_uploaded_file($pet_img_tmp_name, __DIR__ . $pet_img_folder);
-        move_uploaded_file($pet_img_tmp_name1, __DIR__ . $pet_img_folder1);
-        move_uploaded_file($pet_vid_tmp_name, __DIR__ . $pet_vid_folder);
+      if ($result == TRUE) {
+        move_uploaded_file($pet_img_tmp_name, $pet_img_folder);
+        move_uploaded_file($pet_img_tmp_name1, $pet_img_folder1);
+        move_uploaded_file($pet_vid_tmp_name, $pet_vid_folder);
 
         echo "<script>alert('Adoptee added successfully')</script>";
         header("Location: shelter_adoptee_info.php");
@@ -114,7 +114,7 @@ if (isset($_POST['pet-submit'])) {
 
     }
   }
-};
+};  
 ?>
 
 <?php
@@ -475,7 +475,7 @@ if ($result->num_rows > 0) {
                           <select name="size" class="select2_single form-control" tabindex="-1" required>
                             <option></option>
                             <option value="Small">Small</option>
-                            <option value="Average">Average</option>
+                            <option value="Medium">Medium</option>
                             <option value="Large">Large</option>
                           </select>
                         </div>

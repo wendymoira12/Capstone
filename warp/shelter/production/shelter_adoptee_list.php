@@ -231,7 +231,8 @@ if ($result->num_rows > 0) {
                   <thead>
                     <tr>
                       <th>No. </th>
-                      <th>Image</th>
+                      <th>Image1</th>
+                      <th>Image2</th>
                       <th>Name</th>
                       <th>Age</th>
                       <th>Color</th>

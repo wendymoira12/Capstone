@@ -37,15 +37,55 @@ if (isset($_GET['id']) && isset($_POST['edit-pet-submit'])) {
 
     $pet_img = $_FILES['pet-img']['name'];
     $pet_img_tmp_name = $_FILES['pet-img']['tmp_name'];
-    $pet_img_folder = 'images/pet_img' . $pet_img;
-
+    // upload image to folder named images/
+    $pet_img_folder = '/images/pet_img/' . $pet_img;
+    // only images can be uploaded
+    $pet_img_imagetype = exif_imagetype($pet_img_tmp_name);
+    if(!$pet_img_imagetype) {
+      echo('Uploaded file is not an image.');
+    }
+  
+    $pet_img1 = $_FILES['pet-img1']['name'];
+    $pet_img_tmp_name1 = $_FILES['pet-img1']['tmp_name'];
+    // upload image to folder named images/
+    $pet_img_folder1 = '/images/pet_img/' . $pet_img1;
+    // only images can be uploaded
+    $pet_img_imagetype1 = exif_imagetype($pet_img_tmp_name1);
+    if(!$pet_img_imagetype1) {
+      echo('Uploaded file is not an image.');
+    }
+  
+    //Check pet_img size
+    if($_FILES["pet_img"]["size"] > 5000000000){
+      echo "Your file is too large, must be less than 5mb";
+    }
+  
+    //Check pet_img1 size
+    if($_FILES["pet_img1"]["size"] > 5000000000){
+      echo "Your file is too large, must be less than 5mb";
+    }
+  
+    //extension nung file dapat JPEG PNG GIF XBM XPM WBMP WebP BMP
+    $image_extension = image_type_to_extension($pet_img_imagetype, true);
+    $image_extension1 = image_type_to_extension($pet_img_imagetype1, true);
+  
+    //converts image name into hexadecimal
+    $image_name = bin2hex(random_bytes(16)) . $image_extension;
+    $image_name1 = bin2hex(random_bytes(16)) . $image_extension1;
+  
     $pet_vid = $_FILES['pet-vid']['name'];
     $pet_vid_tmp_name = $_FILES['pet-vid']['tmp_name'];
-    $pet_vid_folder = 'images/pet_vid' . $pet_vid;
+    // upload video to folder named images/
+    $pet_vid_folder = '/images/pet_vid/' . $pet_vid;
+  
+    //Check pet_vid size
+    if($_FILES["pet_vid"]["size"] > 30000000000){
+      echo "Your file is too large, must be less than 30mb";
+    }
+  
+    if (!empty($pet_name) && !empty($pet_age) && !empty($color) && !empty($breed) && !empty($specie) && !empty($gender) && !empty($neuter) && !empty($chkstr) && !empty($weight) && !empty($size) && !empty($medrec) && !empty($sociability) && !empty($energy) && !empty($affection) && !empty($pet_img) && ($pet_img1) && !empty($pet_vid) && !empty($description)) {
 
-    if (!empty($pet_name) && !empty($pet_age) && !empty($color) && !empty($breed) && !empty($specie) && !empty($gender) && !empty($neuter) && !empty($chkstr) && !empty($weight) && !empty($size) && !empty($medrec) && !empty($sociability) && !empty($energy) && !empty($affection) && !empty($pet_img) && !empty($pet_vid) && !empty($description)) {
-
-        $sql = "UPDATE adoptee_tbl SET pet_name = '$pet_name', pet_age = '$pet_age', pet_color = '$color', pet_breed = '$breed', pet_specie = '$specie', pet_gender = '$gender', pet_neuter = '$neuter', pet_vax = '$chkstr', pet_weight = '$weight', pet_size = '$size', pet_medrec = '$medrec', pet_lsoc = '$sociability', pet_lene = '$energy', pet_laff = '$affection', pet_desc = '$description', pet_img = '$pet_img', pet_vid = '$pet_vid' WHERE pet_id = '$id'";
+        $sql = "UPDATE adoptee_tbl SET pet_name = '$pet_name', pet_age = '$pet_age', pet_color = '$color', pet_breed = '$breed', pet_specie = '$specie', pet_gender = '$gender', pet_neuter = '$neuter', pet_vax = '$chkstr', pet_weight = '$weight', pet_size = '$size', pet_medrec = '$medrec', pet_lsoc = '$sociability', pet_lene = '$energy', pet_laff = '$affection', pet_desc = '$description', pet_img1 = '$pet_img', pet_img2 = '$pet_img1', pet_vid = '$pet_vid' WHERE pet_id = '$id'";
 
         $result = $conn->query($sql);
 
@@ -65,6 +105,7 @@ if (isset($_GET['id']) && isset($_POST['edit-pet-submit'])) {
 // UPLOAD THE IMAGES AND VIDEOS IN THE IMAGES FOLDER
 if ($result) {
     move_uploaded_file($pet_img_tmp_name, $pet_img_folder);
+    move_uploaded_file($pet_img_tmp_name1, $pet_img_folder1);
     move_uploaded_file($pet_vid_tmp_name, $pet_vid_folder);
 
     echo "<script>alert('Adoptee added successfully')</script>";

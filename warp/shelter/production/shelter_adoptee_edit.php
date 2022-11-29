@@ -472,6 +472,13 @@ if ($result->num_rows > 0) {
                       </div>
                     </div>
 
+                      <div class="form-group">
+                        <label for="pet-img" class="control-label col-md-3 col-sm-3 col-xs-12">Upload Adoptee Image<span class="required">*</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input class="form-control col-md-7 col-xs-12" type="file" name="pet-img1" value="<?= $data['pet_img2'] ?>" required>
+                        </div>
+                      </div>
+
                     <div class="form-group">
                       <label for="pet-vid" class="control-label col-md-3 col-sm-3 col-xs-12">Upload Adoptee Video<span class="required">*</label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
