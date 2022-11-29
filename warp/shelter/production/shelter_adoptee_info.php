@@ -37,7 +37,7 @@ if (isset($_POST['pet-submit'])) {
   $pet_img1 = $_FILES['pet-img1']['name'];
   $pet_img_tmp_name = $_FILES['pet-img1']['tmp_name'];
   // upload image to folder named images/
-  $pet_img_folder = '/images/pet_img/' . $pet_img1;
+  $pet_img_folder = '/images/pet_img1/' . $pet_img1;
   // only images can be uploaded
   $pet_img_imagetype = exif_imagetype($pet_img_tmp_name);
   if(!$pet_img_imagetype) {
@@ -47,7 +47,7 @@ if (isset($_POST['pet-submit'])) {
   $pet_img2 = $_FILES['pet-img2']['name'];
   $pet_img_tmp_name1 = $_FILES['pet-img2']['tmp_name'];
   // upload image to folder named images/
-  $pet_img_folder1 = '/images/pet_img/' . $pet_img2;
+  $pet_img_folder1 = '/images/pet_img2/' . $pet_img2;
   // only images can be uploaded
   $pet_img_imagetype1 = exif_imagetype($pet_img_tmp_name1);
   if(!$pet_img_imagetype1) {
@@ -65,12 +65,12 @@ if (isset($_POST['pet-submit'])) {
   }
 
   //extension nung file dapat JPEG PNG GIF XBM XPM WBMP WebP BMP
-  // $image_extension = image_type_to_extension($pet_img_imagetype, true);
-  // $image_extension1 = image_type_to_extension($pet_img_imagetype1, true);
+  $image_extension1 = image_type_to_extension($pet_img_imagetype, true);
+  $image_extension2 = image_type_to_extension($pet_img_imagetype1, true);
 
   //converts image name into hexadecimal
-  // $image_name = bin2hex(random_bytes(16)) . $image_extension;
-  // $image_name1 = bin2hex(random_bytes(16)) . $image_extension1;
+  $image_name1 = bin2hex(random_bytes(16)) . $image_extension1;
+  $image_name2 = bin2hex(random_bytes(16)) . $image_extension2;
 
   $pet_vid = $_FILES['pet-vid']['name'];
   $pet_vid_tmp_name = $_FILES['pet-vid']['tmp_name'];
@@ -78,11 +78,11 @@ if (isset($_POST['pet-submit'])) {
   $pet_vid_folder = '/images/pet_vid/' . $pet_vid;
 
   //Check pet_vid size
-  if($_FILES["pet_vid"]["size"] > 30000000000){
-    echo "Your file is too large, must be less than 30mb";
-  }
+  // if($_FILES["pet_vid"]["size"] > 30000000000){
+  //   echo "Your file is too large, must be less than 30mb";
+  // }
 
-  if (empty($pet_img) && empty($pet_img1) && ($pet_vid) && empty($pet_name) && empty($pet_age) && empty($color) && empty($breed) && empty($specie) && empty($gender) && empty($neuter) &&  empty($chkstr) && empty($weight) && empty($size) && empty($medrec) && empty($sociability) && empty($energy) && empty($affection) && empty($description)) {
+  if (empty($pet_img1) && empty($pet_img2) && ($pet_vid) && empty($pet_name) && empty($pet_age) && empty($color) && empty($breed) && empty($specie) && empty($gender) && empty($neuter) &&  empty($chkstr) && empty($weight) && empty($size) && empty($medrec) && empty($sociability) && empty($energy) && empty($affection) && empty($description)) {
     $message[] = 'Please fill ouT all fieldS';
   } else {
     $user_id = $_SESSION['user_id'];
@@ -101,9 +101,9 @@ if (isset($_POST['pet-submit'])) {
 
       // UPLOAD THE IMAGES AND VIDEOS IN THE IMAGES FOLDER
       if ($result == TRUE) {
-        move_uploaded_file($pet_img_tmp_name, $pet_img_folder);
-        move_uploaded_file($pet_img_tmp_name1, $pet_img_folder1);
-        move_uploaded_file($pet_vid_tmp_name, $pet_vid_folder);
+        move_uploaded_file($pet_img_tmp_name, __DIR__ . $pet_img_folder);
+        move_uploaded_file($pet_img_tmp_name1, __DIR__ . $pet_img_folder1);
+        move_uploaded_file($pet_vid_tmp_name, __DIR__ . $pet_vid_folder);
 
         echo "<script>alert('Adoptee added successfully')</script>";
         header("Location: shelter_adoptee_info.php");
@@ -112,6 +112,8 @@ if (isset($_POST['pet-submit'])) {
         header("Location: shelter_adoptee_info.php");
       }
 
+    }else{
+      echo "<script>alert('Oops! Something went wrong')</script>";
     }
   }
 };  
