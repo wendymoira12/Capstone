@@ -445,7 +445,7 @@ if ($result->num_rows > 0) {
                         </a>
 
                         <a href="accept_application.php?id=<?= htmlspecialchars($id)?>">
-                          <button name="accept_application" type="button" class="btn btn-round btn-success">Accept</button>
+                          <button name="accept_application" type="button" class="btn btn-round btn-success" onclick="return confirm('Are you sure you want to accept this application?');">Accept</button>
                         </a>
 
                         <a href="report_generation.php?id=<?= htmlspecialchars($id) ?>">

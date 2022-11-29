@@ -7,7 +7,7 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
   header('Location:/Capstone/warp/login.php');
 } else {
   $role_id = $_SESSION['user-role-id'];
-  if ($role_id == 2){
+  if ($role_id == 2) {
     htmlspecialchars($_SERVER['PHP_SELF']);
   } else {
     header('Location:/Capstone/warp/home.php');
@@ -117,12 +117,20 @@ $chkvalues = explode(", ", $data["pet_vax"]);
       <div class="row">
         <div class="col-lg-8 posts-list">
           <div class="single-post">
-            <div class="feature-img">
-              <img class="img-fluid" src="images/pet_img/<?= $data['pet_img1']; ?>" width="400" height="600">
+            <div class="single-item">
+              <div class="slick">
+                <img class="img-fluid" src="shelter/production/images/pet_img/<?= $data['pet_img1']; ?>">
+              </div>
+              <div class="slick">
+                <video width="300px" height="300px" controls>
+                  <source src="shelter/production/images/pet_vid/<?= $data['pet_vid']; ?>" type="video/mp4">
+                </video>
+              </div>
             </div>
+
+
             <div class="blog_details">
-              <h2><?php echo $data['pet_name']; ?>
-              </h2>
+              <h2 style="text-align: center;"><?php echo $data['pet_name']; ?></h2>
 
               <p class="excert">
                 <b>Age:</b> <?php echo $data['pet_age']; ?><br>
