@@ -188,14 +188,6 @@ if ($result->num_rows > 0) {
                     echo '<a > Sorry! No Notifications to show </a>';
                   }
                   ?>
-                  <li>
-                    <div class="text-center">
-                      <a>
-                        <strong>See All Alerts</strong>
-                        <i class="fa fa-angle-right"></i>
-                      </a>
-                    </div>
-                  </li>
                 </ul>
               </li>
 

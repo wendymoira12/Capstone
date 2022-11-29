@@ -90,30 +90,30 @@ if ($result->num_rows > 0) {
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="portfolio-gallery">
-                        <?php
-                        $sql = "SELECT * FROM adoptee_tbl WHERE city_id='$city_id' AND deleted_at IS NULL";
-                        $result = mysqli_query($conn, $sql);
-                        if (mysqli_num_rows($result) > 0) {
-                            foreach ($result as $data) {
-                        ?>
-                                <div class="item" data-id="<?php echo $data['pet_specie']; ?>">
-                                    <div class="inner">
-                                        <a href="AdopteePage.php?id=<?php echo $data['pet_id']; ?>">
-                                            <img src="shelter/production/images/pet_img/<?= $data['pet_img']; ?>"> </a>
-                                        <div class="service_content text-center">
-                                            <a href="AdopteePage.php?id=<?php echo $data['pet_id']; ?>">
-                                                <h3><?= $data['pet_name']; ?></h3>
-                                            </a>
-                                            <h5> <b> Gender:</b> <?= $data['pet_gender']; ?> <br>
-                                                <b> Age:</b> <?= $data['pet_age']; ?> <br>
-                                                <b> Size:</b> <?= $data['pet_size']; ?> <br>
-                                                <b> Neutered:</b> <?= $data['pet_neuter']; ?>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="row">
+                                <div class="portfolio-gallery">
+                                    <?php
+                                    $sql = "SELECT * FROM adoptee_tbl WHERE city_id='$city_id' AND deleted_at IS NULL";
+                                    $result = mysqli_query($conn, $sql);
+                                    if (mysqli_num_rows($result) > 0) {
+                                        foreach ($result as $data) {
+                                    ?>
+                                            <div class="item" data-id="<?php echo $data['pet_specie']; ?>">
+                                                <div class="inner">
+                                                    <a href="AdopteePage.php?id=<?php echo $data['pet_id']; ?>">
+                                                        <img src="shelter/production/images/pet_img/<?= $data['pet_img1']; ?>"> </a>
+                                                    <div class="service_content text-center">
+                                                        <a href="AdopteePage.php?id=<?php echo $data['pet_id']; ?>">
+                                                            <h3><?= $data['pet_name']; ?></h3>
+                                                        </a>
+                                                        <h5> <b> Gender:</b> <?= $data['pet_gender']; ?> <br>
+                                                            <b> Age:</b> <?= $data['pet_age']; ?> <br>
+                                                            <b> Size:</b> <?= $data['pet_size']; ?> <br>
+                                                            <b> Neutered:</b> <?= $data['pet_neuter']; ?>
+                                                        </h5>
+                                                    </div>
+                                                </div>
+                                            </div>
 
                     <?php
                             }

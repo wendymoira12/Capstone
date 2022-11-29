@@ -179,14 +179,6 @@ if ($result->num_rows > 0) {
                     echo '<a > Sorry! No Notifications to show </a>';
                   }
                   ?>
-                  <li>
-                    <div class="text-center">
-                      <a>
-                        <strong>See All Alerts</strong>
-                        <i class="fa fa-angle-right"></i>
-                      </a>
-                    </div>
-                  </li>
                 </ul>
               </li>
 
@@ -275,6 +267,9 @@ if ($result->num_rows > 0) {
               <br>
               <h2>Contact us</h2>
               <p><?php echo $row['city_contact']; ?></p>
+              <br>
+              <h2>Email Address</h2>
+              <p> <!-- email add here --> </p>
               <br>
               <a href="shelter_account_edit.php?city_id=<?php echo $row['city_id']; ?>">
                 <button type="button" class="btn btn-success btn-primary" onclick="return confirm('Are you sure you want to edit shelter information?');">Edit Information</button>

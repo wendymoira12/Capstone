@@ -199,14 +199,6 @@ if ($result->num_rows > 0) {
                     echo '<a > Sorry! No Notifications to show </a>';
                   }
                   ?>
-                  <li>
-                    <div class="text-center">
-                      <a>
-                        <strong>See All Alerts</strong>
-                        <i class="fa fa-angle-right"></i>
-                      </a>
-                    </div>
-                  </li>
                 </ul>
               </li>
 
@@ -476,7 +468,7 @@ if ($result->num_rows > 0) {
                     <div class="form-group">
                       <label for="pet-img" class="control-label col-md-3 col-sm-3 col-xs-12">Upload Adoptee Image<span class="required">*</label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="file" accept="" name="pet-img" value="<?= $data['pet_img'] ?>" required>
+                        <input class="form-control col-md-7 col-xs-12" type="file" accept="" name="pet-img" value="<?= $data['pet_img1'] ?>" required>
                       </div>
                     </div>
 
@@ -491,9 +483,10 @@ if ($result->num_rows > 0) {
                     <div class="form-group">
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                         <a href="shelter_adoptee_list.php">
-                          <button name="pet-cancel" class="btn btn-round btn-danger" type="button" onclick="return confirm('Are you sure you want to cancel editing adoptee info?');">Cancel</button>
+                          <button name="pet-cancel" class="btn btn-round btn-primary" type="button" onclick="return confirm('Are you sure you want to cancel editing adoptee info?');">Back</button>
                         </a>
-                        <button name="pet-reset" class="btn btn-round btn-primary" type="reset" onclick="return confirm('Are you sure you want to reset all info?');">Reset</button>
+                        <button name="pet-reset" class="btn btn-round btn-danger" type="reset" onclick="return confirm('Are you sure you want to reset all info?');">Reset</button>
+
                         <button name="edit-pet-submit" class="btn btn-round btn-success" onclick="return confirm('Are you sure you want to submit all changes?');">Submit</button>
                       </div>
                     </div>
