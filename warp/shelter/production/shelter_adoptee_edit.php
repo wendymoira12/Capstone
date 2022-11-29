@@ -199,14 +199,6 @@ if ($result->num_rows > 0) {
                     echo '<a > Sorry! No Notifications to show </a>';
                   }
                   ?>
-                  <li>
-                    <div class="text-center">
-                      <a>
-                        <strong>See All Alerts</strong>
-                        <i class="fa fa-angle-right"></i>
-                      </a>
-                    </div>
-                  </li>
                 </ul>
               </li>
 
@@ -476,7 +468,7 @@ if ($result->num_rows > 0) {
                     <div class="form-group">
                       <label for="pet-img" class="control-label col-md-3 col-sm-3 col-xs-12">Upload Adoptee Image<span class="required">*</label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="file" accept="" name="pet-img" value="<?= $data['pet_img'] ?>" required>
+                        <input class="form-control col-md-7 col-xs-12" type="file" accept="" name="pet-img" value="<?= $data['pet_img1'] ?>" required>
                       </div>
                     </div>
 

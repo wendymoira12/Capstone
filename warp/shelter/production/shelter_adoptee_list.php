@@ -192,14 +192,6 @@ if ($result->num_rows > 0) {
                       echo '<a > Sorry! No Notifications to show </a>';
                     }
                     ?>
-                    <li>
-                      <div class="text-center">
-                        <a>
-                          <strong>See All Alerts</strong>
-                          <i class="fa fa-angle-right"></i>
-                        </a>
-                      </div>
-                    </li>
                   </ul>
                 </li>
 
@@ -269,7 +261,8 @@ if ($result->num_rows > 0) {
                     ?>
                         <tr>
                           <td><?= $i++; ?></td>
-                          <td><?= '<img src="images/pet_img/' . $row['pet_img'] . '" alt="pet" width="100">'; ?></td>
+                          <td><?= '<img src="images/pet_img/' . $row['pet_img1'] . '" alt="pet" width="100">'; ?></td>
+                          <td><?= '<img src="images/pet_img/' . $row['pet_img2'] . '" alt="pet" width="100">'; ?></td>
                           <td><?= $row['pet_name']; ?></td>
                           <td><?= $row['pet_age']; ?></td>
                           <td><?= $row['pet_color']; ?></td>

@@ -45,21 +45,20 @@ if (isset($_POST['submit-reject'])) {
   $sql = "UPDATE applicationresult_tbl SET application_status='$reject' WHERE application_id = '$id'";
   $result = $conn->query($sql);
   if ($result == TRUE) {
-    header('Location: shelter_application_list.php');
-  }
+    $reject = '0';
+    //notif para sa pagclick ng reject
+    $msg = 'This shelter has rejected your adoptee application for pet'; //message sa notification ng adopter tas concat name ng pet na inadopt niya
 
-  $reject = '0';
-  //notif para sa pagclick ng reject
-  $msg = 'This shelter has rejected your adoptee application for pet'; //message sa notification ng adopter tas concat name ng pet na inadopt niya
-
-  //Reason for rejecting 
-  $msg1 = 'For the following reason/s: ' . $_POST['rejectmsg'];
-  $sql_insert = mysqli_query($conn, "INSERT INTO adopternotif_tbl(application_id, message, message1, isAccepted) VALUES('$id', '$msg', '$msg1', '$reject')"); //Di ko alam pano ipapasok yung user_id para ma specify kung para kaninong adopter lang lalabas yung notif
-  if ($sql_insert) {
-    echo "<script>alert('Successfully cancelled adoption')</script>";
-  } else {
-    echo mysqli_error($conn);
-    exit;
+    //Reason for rejecting 
+    $msg1 = 'For the following reason/s: ' . $_POST['rejectmsg'];
+    $sql_insert = mysqli_query($conn, "INSERT INTO adopternotif_tbl(application_id, message, message1, isAccepted) VALUES('$id', '$msg', '$msg1', '$reject')"); 
+    if ($sql_insert) {
+      echo "<script>alert('Successfully cancelled adoption')</script>";
+      header('Location: shelter_application_list.php');
+    } else {
+      echo mysqli_error($conn);
+      exit;
+    }
   }
 }
 
@@ -239,14 +238,6 @@ if ($result->num_rows > 0) {
                     echo '<a > Sorry! No Notifications to show </a>';
                   }
                   ?>
-                  <li>
-                    <div class="text-center">
-                      <a>
-                        <strong>See All Alerts</strong>
-                        <i class="fa fa-angle-right"></i>
-                      </a>
-                    </div>
-                  </li>
                 </ul>
               </li>
 
@@ -503,7 +494,7 @@ if ($result->num_rows > 0) {
                         $accept = '1';
                         $msg = 'This shelter has accepted your adoptee application for pet'; //message sa notification ng adopter tas concat name ng pet na inadopt niya
                         $msg1 = 'The scheduled date for your interview is'; //etong message1 naman naka null sya kase optional lang, if ever na nireject yung application form, wala tong laman kase wala namang massched
-                        $sql_insert = mysqli_query($conn, "INSERT INTO adopternotif_tbl(application_id,  message, message1, isAccepted) VALUES('$id', '$msg', '$msg1', '$accept')"); //Di ko alam pano ipapasok yung user_id para ma specify kung para kaninong adopter lang lalabas yung notif
+                        $sql_insert = mysqli_query($conn, "INSERT INTO adopternotif_tbl(application_id,  message, message1, isAccepted) VALUES('$id', '$msg', '$msg1', '$accept')");
                         if ($sql_insert) {
                           echo "<script>alert('Successfully cancelled adoption')</script>";
                         } else {

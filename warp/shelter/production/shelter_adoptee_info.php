@@ -95,7 +95,7 @@ if (isset($_POST['pet-submit'])) {
     if ($result->num_rows > 0) {
       $row = mysqli_fetch_assoc($result);
       $city_id = $row['city_id'];
-      $sql = "INSERT INTO adoptee_tbl(pet_img, pet_img1, pet_vid, pet_name, pet_age, pet_color, pet_breed, pet_specie, pet_gender, pet_neuter, pet_vax, pet_weight, pet_size, pet_medrec, pet_lsoc, pet_lene, pet_laff, pet_desc, city_id) VALUES('$image_name', '$image_name1', '$pet_vid', '$pet_name', '$pet_age', '$color', '$breed', '$specie', '$gender', '$neuter', '$chkstr', '$weight', '$size', '$medrec', '$sociability', '$energy', '$affection', '$description', '$city_id')";
+      $sql = "INSERT INTO adoptee_tbl(pet_img1, pet_img2, pet_vid, pet_name, pet_age, pet_color, pet_breed, pet_specie, pet_gender, pet_neuter, pet_vax, pet_weight, pet_size, pet_medrec, pet_lsoc, pet_lene, pet_laff, pet_desc, city_id) VALUES('$image_name', '$image_name1', '$pet_vid', '$pet_name', '$pet_age', '$color', '$breed', '$specie', '$gender', '$neuter', '$chkstr', '$weight', '$size', '$medrec', '$sociability', '$energy', '$affection', '$description', '$city_id')";
 
       $result = mysqli_query($conn, $sql);
 
@@ -292,14 +292,6 @@ if ($result->num_rows > 0) {
                     echo '<a > Sorry! No Notifications to show </a>';
                   }
                   ?>
-                  <li>
-                    <div class="text-center">
-                      <a>
-                        <strong>See All Alerts</strong>
-                        <i class="fa fa-angle-right"></i>
-                      </a>
-                    </div>
-                  </li>
                 </ul>
               </li>
 
@@ -563,7 +555,7 @@ if ($result->num_rows > 0) {
                       <div class="form-group">
                         <label for="pet-vid" class="control-label col-md-3 col-sm-3 col-xs-12">Upload Adoptee Video<span class="required">*</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input class="form-control col-md-7 col-xs-12" type="file" accept="video/mp3, video/mp4" name="pet-vid">
+                          <input class="form-control col-md-7 col-xs-12" type="file" accept="video/MOV, video/mp4" name="pet-vid">
                         </div>
                       </div>
 

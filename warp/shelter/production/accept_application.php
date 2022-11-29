@@ -30,6 +30,19 @@ if (isset($_GET['id'])) {
             } else {
                 mysqli_stmt_bind_param($stmt2, "si", $scheduled, $app_id);
                 mysqli_stmt_execute($stmt2);
+                
+                        //notif para sa pagaccept ng application form
+                        $accept = '1';
+                        $msg = 'This shelter has accepted your adoptee application for pet'; //message sa notification ng adopter tas concat name ng pet na inadopt niya
+                        $msg1 = 'The scheduled date for your interview is'; //etong message1 naman naka null sya kase optional lang, if ever na nireject yung application form, wala tong laman kase wala namang massched
+                        $sql_insert = mysqli_query($conn, "INSERT INTO adopternotif_tbl(application_id,  message, message1, isAccepted) VALUES('$app_id', '$msg', '$msg1', '$accept')");
+                        if ($sql_insert) {
+                          echo "<script>alert('Successfully cancelled adoption')</script>";
+                        } else {
+                          echo mysqli_error($conn);
+                          exit;
+                        }
+
                 echo "<script>alert('Date Input Success')</script>";
                 echo "<script>window.location.href='shelter_schedule_list.php';</script>";
             }
