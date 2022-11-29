@@ -177,8 +177,8 @@ if (!isset($_SESSION['email-login'])) {
                       <th>Last Name</th>
                       <th>Age</th>
                       <th>Contact Number</th>
-                      <th>Region</th>
-                      <th>City </th>
+                      <th>Current Address</th>
+                      <th>Permanent Address</th>
                       <th>Date Created</th>
                       <th>E-mail Address</th>
                       <th>Action</th>
