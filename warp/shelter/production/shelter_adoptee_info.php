@@ -34,20 +34,20 @@ if (isset($_POST['pet-submit'])) {
   $affection = $_POST['affection'];
   $description = $_POST['description'];
 
-  $pet_img = $_FILES['pet-img']['name'];
-  $pet_img_tmp_name = $_FILES['pet-img']['tmp_name'];
+  $pet_img1 = $_FILES['pet-img1']['name'];
+  $pet_img_tmp_name = $_FILES['pet-img1']['tmp_name'];
   // upload image to folder named images/
-  $pet_img_folder = '/images/pet_img/' . $pet_img;
+  $pet_img_folder = '/images/pet_img/' . $pet_img1;
   // only images can be uploaded
   $pet_img_imagetype = exif_imagetype($pet_img_tmp_name);
   if(!$pet_img_imagetype) {
     echo('Uploaded file is not an image.');
   }
 
-  $pet_img1 = $_FILES['pet-img1']['name'];
-  $pet_img_tmp_name1 = $_FILES['pet-img1']['tmp_name'];
+  $pet_img2 = $_FILES['pet-img2']['name'];
+  $pet_img_tmp_name1 = $_FILES['pet-img2']['tmp_name'];
   // upload image to folder named images/
-  $pet_img_folder1 = '/images/pet_img/' . $pet_img1;
+  $pet_img_folder1 = '/images/pet_img/' . $pet_img2;
   // only images can be uploaded
   $pet_img_imagetype1 = exif_imagetype($pet_img_tmp_name1);
   if(!$pet_img_imagetype1) {
@@ -95,7 +95,7 @@ if (isset($_POST['pet-submit'])) {
     if ($result->num_rows > 0) {
       $row = mysqli_fetch_assoc($result);
       $city_id = $row['city_id'];
-      $sql = "INSERT INTO adoptee_tbl(pet_img1, pet_img2, pet_vid, pet_name, pet_age, pet_color, pet_breed, pet_specie, pet_gender, pet_neuter, pet_vax, pet_weight, pet_size, pet_medrec, pet_lsoc, pet_lene, pet_laff, pet_desc, city_id) VALUES('$pet_img', '$pet_img1', '$pet_vid', '$pet_name', '$pet_age', '$color', '$breed', '$specie', '$gender', '$neuter', '$chkstr', '$weight', '$size', '$medrec', '$sociability', '$energy', '$affection', '$description', '$city_id')";
+      $sql = "INSERT INTO adoptee_tbl(pet_img1, pet_img2, pet_vid, pet_name, pet_age, pet_color, pet_breed, pet_specie, pet_gender, pet_neuter, pet_vax, pet_weight, pet_size, pet_medrec, pet_lsoc, pet_lene, pet_laff, pet_desc, city_id) VALUES('$pet_img1', '$pet_img2', '$pet_vid', '$pet_name', '$pet_age', '$color', '$breed', '$specie', '$gender', '$neuter', '$chkstr', '$weight', '$size', '$medrec', '$sociability', '$energy', '$affection', '$description', '$city_id')";
 
       $result = mysqli_query($conn, $sql);
 
@@ -539,16 +539,16 @@ if ($result->num_rows > 0) {
                       </div>
 
                       <div class="form-group">
-                        <label for="pet-img" class="control-label col-md-3 col-sm-3 col-xs-12">Upload Adoptee Image<span class="required">*</label>
+                        <label for="pet-img1" class="control-label col-md-3 col-sm-3 col-xs-12">Upload Adoptee Image<span class="required">*</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input class="form-control col-md-7 col-xs-12" type="file" name="pet-img" required>
+                          <input class="form-control col-md-7 col-xs-12" type="file" name="pet-img1" required>
                         </div>
                       </div>
 
                       <div class="form-group">
-                        <label for="pet-img" class="control-label col-md-3 col-sm-3 col-xs-12">Upload Adoptee Image<span class="required">*</label>
+                        <label for="pet-img2" class="control-label col-md-3 col-sm-3 col-xs-12">Upload Adoptee Image<span class="required">*</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input class="form-control col-md-7 col-xs-12" type="file" name="pet-img1" required>
+                          <input class="form-control col-md-7 col-xs-12" type="file" name="pet-img2" required>
                         </div>
                       </div>
 
