@@ -44,16 +44,26 @@ if (isset($_POST['submit'])) {
     );
   }
 
+  if (empty($_POST['email'])) {
+    $emailErr = 'Email is required';
+  } else {
+    $email = filter_input(
+      INPUT_POST,
+      'email',
+      FILTER_SANITIZE_EMAIL
+    );
+  }
+
   $img = $_FILES['img']['name'];
   $img_tmp_name = $_FILES['img']['tmp_name'];
   $city_img_folder = '../../shelter/production/images/logo/' . $img;
-  if (empty($cityErr) && empty($contactErr) && empty($aboutErr) && !empty($img)) {
-    $sql = "INSERT INTO city_tbl(city_name, city_contact, city_about, city_img) VALUES (?, ?, ?, ?)";
+  if (empty($cityErr) && empty($contactErr) && empty($aboutErr) && !empty($img) && empty($emailErr)) {
+    $sql = "INSERT INTO city_tbl(city_name, city_contact, city_about, city_img, city_email) VALUES (?, ?, ?, ?, ?)";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
       echo '<script>alert("SQL Prepared Statement Failed")</script>';
     } else {
-      mysqli_stmt_bind_param($stmt, "ssss", $city, $contact, $about, $img);
+      mysqli_stmt_bind_param($stmt, "sssss", $city, $contact, $about, $img, $email);
       mysqli_stmt_execute($stmt);
       move_uploaded_file($img_tmp_name, $city_img_folder);
       header('location:manage_city.php');
@@ -241,12 +251,20 @@ if (isset($_POST['submit'])) {
                         </div>
                       </div>
                       <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Email Address <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="email" class="form-control col-md-7 col-xs-12 <?php echo !$emailErr ?: 'is-invalid'; ?>" required="required" type="email" name="email">
+                        </div>
+                      </div>
+                      <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Image <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input class="form-control col-md-7 col-xs-12" type="file" name="img" required>
                         </div>
                       </div>
+
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
@@ -293,13 +311,14 @@ if (isset($_POST['submit'])) {
                       <th>City</th>
                       <th>Contact Number</th>
                       <th>About</th>
+                      <th>Email</th>
                       <th>Image</th>
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php
-                    $sql = "SELECT city_id, city_name, city_contact, city_about, city_img FROM city_tbl WHERE deleted_at IS NULL";
+                    $sql = "SELECT city_id, city_name, city_contact, city_about, city_email, city_img FROM city_tbl WHERE deleted_at IS NULL";
                     $result = mysqli_query($conn, $sql);
                     $i = 1;
                     if ($result->num_rows > 0) {
@@ -310,6 +329,7 @@ if (isset($_POST['submit'])) {
                           <td><?php echo $row['city_name']; ?></td>
                           <td><?php echo $row['city_contact']; ?></td>
                           <td><?php echo $row['city_about']; ?></td>
+                          <td><?= $row['city_email'];?></td>
                           <td><?php echo '<img src="../../shelter/production/images/logo/' . $row['city_img'] . '" alt="city_logo" width="100">'; ?></td>
                           <td>
                             <a href="edit_city.php?id=<?= htmlspecialchars($row['city_id']) ?>" type="submit" class="btn btn-round btn-success">Update</a>

@@ -17,13 +17,14 @@ if (isset($_POST['submit-update'])) {
   $about = $_POST['city_about'];
   $contact = $_POST['city_contact'];
   $city_id = $_SESSION['city_id'];
+  $email = $_POST['city_email'];
   $img = $_FILES['city_img']['name'];
-  $img_tmp_name= $_FILES['city_img']['tmp_name'];
+  $img_tmp_name = $_FILES['city_img']['tmp_name'];
   $city_img_folder = '../../shelter/production/images/logo/' . $img;
   //If there are no errors the function will execute
 
   // Query to update the shelter_tbl first
-  $sql = "UPDATE city_tbl SET city_name='$name', city_contact='$contact', city_about='$about', city_img='$img' WHERE city_id='$city_id'";
+  $sql = "UPDATE city_tbl SET city_name='$name', city_contact='$contact', city_about='$about', city_email='$email', city_img='$img' WHERE city_id='$city_id'";
   // If true then the query will be executed and another query will be executed
   if (mysqli_query($conn, $sql) === TRUE) {
     //Success
@@ -227,6 +228,13 @@ if (isset($_POST['submit-update'])) {
                               </label>
                               <div class="col-md-6 col-sm-6 col-xs-12">
                                 <input type="text" id="city_about" name="city_about" required="required" class="form-control col-md-7 col-xs-12" value="<?= $row['city_about']; ?>">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12">Email Address <span class="required">*</span>
+                              </label>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="email" class="form-control col-md-7 col-xs-12" required="required" type="email" name="city_email" value="<?= $row['city_email'];?>">
                               </div>
                             </div>
                             <div class="form-group">
