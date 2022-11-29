@@ -15,14 +15,6 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
 }
 ?>
 <?php
-// Delete pet from adoptee table
-if (isset($_GET['pet-delete'])) {
-  $id = $_GET['pet-delete'];
-  mysqli_query($conn, "DELETE FROM adoptee_tbl WHERE pet_id = $id");
-  header('Location: shelter_adoptee_list.php');
-}
-?>
-<?php
 $i = 1;
 
 // Get the user ID from the login sesh
