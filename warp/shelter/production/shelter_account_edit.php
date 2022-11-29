@@ -258,6 +258,14 @@ if ($result1->num_rows > 0) {
                     </div>
 
                     <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="city">Shelter Email Address <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" name="emailAdd" value="" required class="form-control col-md-7 col-xs-12">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="contact">Contact Number <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
@@ -284,7 +292,7 @@ if ($result1->num_rows > 0) {
                     <div class="form-group">
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                         <a href="shelter_account.php">
-                          <button name="pet-cancel" class="btn btn-round btn-primary" type="button" onclick="return confirm('Are you sure you want to cancel editing?');">Cancel</button>
+                          <button name="pet-cancel" class="btn btn-round btn-primary" type="button" onclick="return confirm('Are you sure you want to cancel editing?');">Back</button>
                         </a>
                         <button name="pet-reset" class="btn btn-round btn-primary" type="reset" onclick="return confirm('Are you sure you want to reset all information?');">Reset</button>
                         <button name="edit-shelter-submit" class="btn btn-round btn-success" onclick="return confirm('Are you sure you want to submit the edited info?');">Submit</button>
