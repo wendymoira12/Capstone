@@ -106,11 +106,9 @@ $result = mysqli_query($conn, $query);
                             <div class="item" data-id="<?php echo $data['pet_specie']; ?>">
                                 <div class="inner">
                                     <a href="AdopteePage.php?id=<?php echo $data['pet_id']; ?>">
-                                        <img src="shelter/production/images/pet_img/<?= $data['pet_img']; ?>"> </a>
+                                        <img src="shelter/production/images/pet_img/<?= $data['pet_img1']; ?>"> </a>
                                     <div class="service_content text-center">
-                                        <a href="AdopteePage.php?id=<?php echo $data['pet_id']; ?>">
-                                            <img src="shelter/production/images/pet_img/<?= $data['pet_img1']; ?>"> </a>
-                                        <div class="service_content text-center">
+                                       
                                             <a href="AdopteePage.php?id=<?php echo $data['pet_id']; ?>">
                                                 <h3><?= $data['pet_name']; ?></h3>
                                             </a>
@@ -119,7 +117,7 @@ $result = mysqli_query($conn, $query);
                                                 <b> Size:</b> <?= $data['pet_size']; ?> <br>
                                                 <b> Neutered:</b> <?= $data['pet_neuter']; ?>
                                             </h5>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
