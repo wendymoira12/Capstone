@@ -76,7 +76,7 @@ if ($result->num_rows > 0) {
 
           <!-- menu profile quick info -->
           <div class="profile clearfix">
-          <a href="">
+            <a href="">
               <img src="images/logo.png" alt="">
             </a>
             <div class="profile_pic">
@@ -128,32 +128,32 @@ if ($result->num_rows > 0) {
         </div>
       </div>
 
-<!-- top navigation -->
-<div class="top_nav">
-  <div class="nav_menu">
-    <nav>
-      <div class="nav toggle">
-        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-      </div>
+      <!-- top navigation -->
+      <div class="top_nav">
+        <div class="nav_menu">
+          <nav>
+            <div class="nav toggle">
+              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
 
-      <ul class="nav navbar-nav navbar-right">
-        <li class="">
-          <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-            <img src="/Capstone/warp/shelter/production/images/logo/<?= $row['city_img']; ?>" alt=""><?php echo $_SESSION['user-email'] ?>
-            <span class=" fa fa-angle-down"></span>
-          </a>
-          <ul class="dropdown-menu dropdown-usermenu pull-right">
-            <li><a href="logout.php?logout"><i class="fa fa-sign-out pull-right"></i>Log Out</a></li>
-          </ul>
-        </li>
-        <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
-          <!-- Notification bell -->
-          <?php
+            <ul class="nav navbar-nav navbar-right">
+              <li class="">
+                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  <img src="/Capstone/warp/shelter/production/images/logo/<?= $row['city_img']; ?>" alt=""><?php echo $_SESSION['user-email'] ?>
+                  <span class=" fa fa-angle-down"></span>
+                </a>
+                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                  <li><a href="logout.php?logout"><i class="fa fa-sign-out pull-right"></i>Log Out</a></li>
+                </ul>
+              </li>
+              <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
+                <!-- Notification bell -->
+                <?php
 
-          $sql_get = mysqli_query($conn, "SELECT adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, shelternotif_tbl.message, adoptee_tbl.pet_name FROM shelternotif_tbl INNER JOIN applicationform1 ON shelternotif_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id WHERE shelternotif_tbl.status = '0' AND applicationform1.application_id = shelternotif_tbl.application_id AND adoptee_tbl.city_id = '$city_id'");
-          $count = mysqli_num_rows($sql_get);
+                $sql_get = mysqli_query($conn, "SELECT adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, shelternotif_tbl.message, adoptee_tbl.pet_name FROM shelternotif_tbl INNER JOIN applicationform1 ON shelternotif_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id WHERE shelternotif_tbl.status = '0' AND applicationform1.application_id = shelternotif_tbl.application_id AND adoptee_tbl.city_id = '$city_id'");
+                $count = mysqli_num_rows($sql_get);
 
-          ?>
+                ?>
 
         <li role="presentation" class="dropdown">
           <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
@@ -186,10 +186,10 @@ if ($result->num_rows > 0) {
           </ul>
         </li>
 
-    </nav>
-  </div>
-</div>
-<!-- /top navigation -->
+          </nav>
+        </div>
+      </div>
+      <!-- /top navigation -->
 
       <!-- page content -->
 
@@ -229,7 +229,7 @@ if ($result->num_rows > 0) {
                 <tbody>
                   <?php
                   $i = 1;
-                  $sql = "SELECT adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_img1, adoptee_tbl.pet_img2, adoptee_tbl.pet_name, adopted_tbl.date_adopted, adopted_tbl.monitoring_date, adopted_tbl.monitoring_status FROM adopted_tbl INNER JOIN applicationform1 ON adopted_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id = '$city_id'";
+                  $sql = "SELECT adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_img1, adoptee_tbl.pet_img2, adoptee_tbl.pet_name, adopted_tbl.date_adopted, adopted_tbl.monitoring_date, adopted_tbl.monitoring_status, adopted_tbl.adopted_id FROM adopted_tbl INNER JOIN applicationform1 ON adopted_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id = '$city_id'";
 
                   $result = mysqli_query($conn, $sql);
                   if ($result->num_rows > 0) {
@@ -244,7 +244,14 @@ if ($result->num_rows > 0) {
                         <td><?= $data['date_adopted']; ?></td>
                         <td><?= $data['monitoring_date']; ?></td>
                         <td><?= $data['monitoring_status']; ?></td>
-                        <td></td>
+                        <td>
+                          <a href="edit_monitoring_date.php?id=<?= $data['adopted_id'] ?>">
+                            <button type="submit" class="btn btn-round btn-primary">Edit Date</button>
+                          </a>
+                          <a href="edit_monitoring_status.php?adopted_id=<?= $data['adopted_id'] ?>">
+                            <button type="submit" class="btn btn-round btn-success">Pet Monitored</button>
+                          </a>
+                        </td>
                       </tr>
                   <?php
                     }

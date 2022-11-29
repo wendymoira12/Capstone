@@ -39,6 +39,7 @@ $datetoday= date_add(date_create(date("Y-m-d H:i:s")), date_interval_create_from
 $date = date_format($datetoday,"Y-m-d H:i:s");
 echo $date;
 
+
 //Check PHP SESSION COOKIE
 //filter_list();
 //phpinfo();
