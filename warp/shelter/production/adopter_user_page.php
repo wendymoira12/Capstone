@@ -62,38 +62,38 @@ if ($result->num_rows > 0) {
       <div class="col-md-3 left_col menu_fixed">
         <div class="left_col scroll-view">
           <div class="logo">
-            
+
           </div>
           <div class="clearfix"></div>
 
           <!-- menu profile quick info -->
           <div class="profile clearfix">
-          <a href="">
+            <a href="">
               <img src="images/logo.png" alt="">
             </a>
             <div class="profile_pic">
 
 
-              <img id="myBtn" src="images/user.png"  alt="..." class="img-circle profile_img">
-<div id="myModal" class="modal">
+              <img id="myBtn" src="images/user.png" alt="..." class="img-circle profile_img">
+              <div id="myModal" class="modal">
 
-  <!-- Modal content -->
-  <div class="modal-content">
-    <div class="modal-header">
-      <span class="close">&times;</span>
-      <h2>Modal Header</h2>
-    </div>
-    <div class="modal-body">
-      <p>Some text in the Modal Body</p>
-      <p>Some other text...</p>
-    </div>
-    <div class="modal-footer">
-      <h3>Modal Footer</h3>
-    </div>
-  </div>
+                <!-- Modal content -->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <span class="close">&times;</span>
+                    <h2>Modal Header</h2>
+                  </div>
+                  <div class="modal-body">
+                    <p>Some text in the Modal Body</p>
+                    <p>Some other text...</p>
+                  </div>
+                  <div class="modal-footer">
+                    <h3>Modal Footer</h3>
+                  </div>
+                </div>
 
-</div>
-                
+              </div>
+
             </div>
             <div class="profile_info">
               <span>Welcome,</span>
@@ -102,7 +102,7 @@ if ($result->num_rows > 0) {
           </div>
           <!-- /menu profile quick info -->
 
-          <br/>
+          <br />
 
           <!-- sidebar menu -->
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
@@ -279,6 +279,9 @@ if ($result->num_rows > 0) {
           </div>
         </div>
       </div>
+      </div>
+  </div>
+
       <!-- /page content -->
 
       <!-- footer content -->
@@ -289,8 +292,6 @@ if ($result->num_rows > 0) {
         <div class="clearfix"></div>
       </footer>
       <!-- /footer content -->
-    </div>
-  </div>
 
   <!-- jQuery -->
   <script src="../vendors/jquery/dist/jquery.min.js"></script>
@@ -323,32 +324,32 @@ if ($result->num_rows > 0) {
   <!-- Custom Theme Scripts -->
   <script src="../build/js/custom.min.js"></script>
   <script>
-// Get the modal
-var modal = document.getElementById("myModal");
+    // Get the modal
+    var modal = document.getElementById("myModal");
 
-// Get the button that opens the modal
-var img = document.getElementById("myBtn");
+    // Get the button that opens the modal
+    var img = document.getElementById("myBtn");
 
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
 
-// When the user clicks the button, open the modal 
-img.onclick = function() {
-  modal.style.display = "block";
-}
+    // When the user clicks the button, open the modal 
+    img.onclick = function() {
+      modal.style.display = "block";
+    }
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-</script>
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
 </body>
 
 </html>
