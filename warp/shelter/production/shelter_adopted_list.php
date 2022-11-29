@@ -155,36 +155,36 @@ if ($result->num_rows > 0) {
 
                 ?>
 
-        <li role="presentation" class="dropdown">
-          <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-            <i class="fa fa-bell-o"></i>
-            <span class="badge bg-green"><?php echo $count; ?></span>
-          </a>
-          <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-            <?php
-            if (mysqli_num_rows($sql_get) > 0) {
-              while ($notif = mysqli_fetch_assoc($sql_get)) {
-            ?>
-                <li>
-                  <a>
-                    <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                    <span>
-                      <span><?php echo $notif['adopter_fname'] . ' ' . $notif['adopter_lname']; ?></span>
-                      <span class="time">3 mins ago</span>
-                    </span>
-                    <span class="message">
-                      <?php echo $notif['message'] . ' ' . $notif['pet_name']; ?>
-                    </span>
-                  </a>
-                </li>
-            <?php
-              }
-            } else {
-              echo '<a > Sorry! No Notifications to show </a>';
-            }
-            ?>
-          </ul>
-        </li>
+              <li role="presentation" class="dropdown">
+                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                  <i class="fa fa-bell-o"></i>
+                  <span class="badge bg-green"><?php echo $count; ?></span>
+                </a>
+                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                  <?php
+                  if (mysqli_num_rows($sql_get) > 0) {
+                    while ($notif = mysqli_fetch_assoc($sql_get)) {
+                  ?>
+                      <li>
+                        <a>
+                          <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                          <span>
+                            <span><?php echo $notif['adopter_fname'] . ' ' . $notif['adopter_lname']; ?></span>
+                            <span class="time">3 mins ago</span>
+                          </span>
+                          <span class="message">
+                            <?php echo $notif['message'] . ' ' . $notif['pet_name']; ?>
+                          </span>
+                        </a>
+                      </li>
+                  <?php
+                    }
+                  } else {
+                    echo '<a > Sorry! No Notifications to show </a>';
+                  }
+                  ?>
+                </ul>
+              </li>
 
           </nav>
         </div>
@@ -238,8 +238,8 @@ if ($result->num_rows > 0) {
                       <tr>
                         <td><?= $i++; ?></td>
                         <td><?= $data['adopter_fname'] . ' ' . $data['adopter_lname']; ?></td>
-                        <td><?= $data['pet_img1']; ?></td>
-                        <td><?= $data['pet_img2']; ?></td>
+                        <td><?= '<img src="images/pet_img/' . $data['pet_img1'] . '" alt="pet" width="100">'; ?></td>
+                        <td><?= '<img src="images/pet_img/' . $data['pet_img2'] . '" alt="pet" width="100">'; ?></td>
                         <td><?= $data['pet_name']; ?></td>
                         <td><?= $data['date_adopted']; ?></td>
                         <td><?= $data['monitoring_date']; ?></td>
