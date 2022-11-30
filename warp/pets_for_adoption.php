@@ -4,10 +4,10 @@ include 'config.php';
 include('connect/connection.php');
 session_start();
 
-//if hindi nakaset si user-email and user-role-id babalik sya sa login.php
-if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
-    header('Location: login.php');
-}
+// //if hindi nakaset si user-email and user-role-id babalik sya sa login.php
+// if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
+//     header('Location: login.php');
+// }
 ?>
 <?php
 if (isset($_GET['page'])) {
