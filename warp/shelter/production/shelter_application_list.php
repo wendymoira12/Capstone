@@ -76,7 +76,7 @@ if ($result->num_rows > 0) {
 
           <!-- menu profile quick info -->
           <div class="profile clearfix">
-          <a href="">
+            <a href="">
               <img src="images/logo.png" alt="">
             </a>
             <div class="profile_pic">
@@ -303,7 +303,12 @@ if ($result->num_rows > 0) {
   <script src="../build/js/custom.min.js"></script>
   <script type="text/javascript">
     $(document).ready(function() {
-      $('#datatable').DataTable();
+      var table = $('#datatable').DataTable();
+
+      $('#datatable tbody').on('click', 'tr', function() {
+        var data = table.row(this).data();
+        alert('You clicked on ' + data[0] + "'s row");
+      });
     });
   </script>
 </body>
