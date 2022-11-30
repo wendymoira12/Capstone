@@ -139,7 +139,7 @@ if ($result->num_rows > 0) {
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
                   <li><a href="changepass.php"><i class="fa fa-wrench pull-right"></i>Change Password</a></li>
-                  <li><a href="logout.php?logout"><i class="fa fa-sign-out pull-right"></i>Log Out</a></li>
+                  <li><a href="/Capstone/warp/logout.php?logout"><i class="fa fa-sign-out pull-right"></i>Log Out</a></li>
                 </ul>
               </li>
               <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
