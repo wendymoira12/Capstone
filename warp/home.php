@@ -61,7 +61,6 @@ $row = mysqli_fetch_assoc($result);
                         <div class="slider_text">
                             <h3>Adopt from<br> <span>Animal Shelters</span></h3>
                             <p>Browse pets from our network in Metro Manila shelters and rescues.</p>
-                            <a href="contact.php" class="boxed-btn4">Contact Us</a>
                         </div>
                     </div>
                 </div>
@@ -134,7 +133,6 @@ $row = mysqli_fetch_assoc($result);
                                 <h3><span>We care your pet </span> <br>
                                     As you care</h3>
                                 <p></p>
-                                <a href="about.php" class="boxed-btn3">About Us</a>
                             </div>
                         </div>
                     </div>
@@ -223,9 +221,6 @@ $row = mysqli_fetch_assoc($result);
                             <div class="section_title text-center">
                                 <h3>Why go with WARP</h3>
                                 <p>We provide a safe and secured Animal Adoption Process. <br> For any concerns or suggestions contact us anytime!</p>
-                            </div>
-                            <div class="contact_btn d-flex align-items-center justify-content-center">
-                                <a href="contact.php" class="boxed-btn4">Contact Us</a>
                             </div>
                         </div>
                     </div>

@@ -65,7 +65,6 @@ session_regenerate_id();
                         <div class="slider_text">
                             <h3>Adopt from<br> <span>Animal Shelters</span></h3>
                             <p>Browse pets from our network in Metro Manila shelters and rescues.</p>
-                            <a href="contact.php" class="boxed-btn4">Contact Us</a>
                         </div>
                     </div>
                 </div>
@@ -140,7 +139,6 @@ session_regenerate_id();
                                     incididunt ut labore et dolore magna aliqua. <br> Quis ipsum suspendisse ultrices
                                     gravida. Risus commodo <br>
                                     viverra maecenas accumsan.</p>
-                                <a href="about.php" class="boxed-btn3">About Us</a>
                             </div>
                         </div>
                     </div>
@@ -156,11 +154,11 @@ session_regenerate_id();
                     <div class="col-lg-5">
                         <div class="adapt_help">
                             <div class="section_title">
-                                <h3><span>We need your</span>
-                                    help Adopt Us</h3>
-                                <p>Lorem ipsum dolor sit , consectetur adipiscing elit, sed do iusmod tempor incididunt
-                                    ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices.</p>
-                                <a href="contact.php" class="boxed-btn3">Contact Us</a>
+                            <h3>We need your help</h3>
+                                <p>Adopt, don't shop. Save a life by adopting
+                                    a pet from your local shelter.
+                                </p>
+                                <a href="pets-for-adoption.php" class="boxed-btn3">Adopt Us</a>
                             </div>
                         </div>
                     </div>
@@ -207,14 +205,9 @@ session_regenerate_id();
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
                         <div class="contact_text text-center">
-                            <div class="section_title text-center">
+                        <div class="section_title text-center">
                                 <h3>Why go with WARP</h3>
-                                <p>Because we know that even the best technology is only as good as the people behind
-                                    it. 24/7 tech support.</p>
-                            </div>
-                            <div class="contact_btn d-flex align-items-center justify-content-center">
-                                <a href="contact.php" class="boxed-btn4">Contact Us</a>
-                                <p>Or <a href="#"> +880 4664 216</a></p>
+                                <p>We provide a safe and secured Animal Adoption Process. <br> For any concerns or suggestions contact us anytime!</p>
                             </div>
                         </div>
                     </div>
