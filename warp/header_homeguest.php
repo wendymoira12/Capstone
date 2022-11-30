@@ -31,7 +31,7 @@
                                 <nav>
                                     <ul id="navigation">
                                         <li><a href="home-guest.php">Home</a></li>
-                                        <li> <a href="pets-for-adoption.php">Pets for Adoption </i></a>                                    
+                                        <li> <a href="pets_for_adoption.php">Pets for Adoption</a> </li>                              
 
                                     </ul>
                                 </nav>

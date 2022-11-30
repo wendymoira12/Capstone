@@ -49,11 +49,15 @@ if ($result->num_rows > 0) {
     </head>
 
     <body>
-        <header>
-            <?php
-            include "header.php"
-            ?>
-        </header>
+    <header>
+        <?php
+        if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
+            include "header_homeguest.php";
+        } else {
+            include "header.php";
+        }
+        ?>
+    </header>
 
         <div class="bradcam_area breadcam_bg">
             <div class="container">
