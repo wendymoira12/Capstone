@@ -146,15 +146,15 @@ $result = mysqli_query($conn, $query);
                 <li class="page item">
                     <?php
                     if ($page > 1) {
-                        echo "<a href='pets-for-adoption.php?page=" . ($page - 1) . "' class='page-item'>Previous</a>";
+                        echo "<a href='pets_for_adoption.php?page=" . ($page - 1) . "' class='page-item'>Previous</a>";
                     }
 
                     for ($i = 1; $i < $total_page; $i++) {
-                        echo "<a href='pets-for-adoption.php?page=" . $i . "' class='page-item'>$i</a>";
+                        echo "<a href='pets_for_adoption.php?page=" . $i . "' class='page-item'>$i</a>";
                     }
 
                     if ($i > $page) {
-                        echo "<a href='pets-for-adoption.php?page=" . ($page + 1) . "' class='page-item'>Next</a>";
+                        echo "<a href='pets_for_adoption.php?page=" . ($page + 1) . "' class='page-item'>Next</a>";
                     }
 
                     ?>
