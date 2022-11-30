@@ -182,7 +182,7 @@ if ($result1->num_rows > 0) {
                           <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
                           <span>
                             <span><?php echo $notif['adopter_fname'] . ' ' . $notif['adopter_lname']; ?></span>
-                            <span class="time">3 mins ago</span>
+                            <!-- <span class="time">3 mins ago</span> -->
                           </span>
                           <span class="message">
                             <?php echo $notif['message'] . ' ' . $notif['pet_name']; ?>
