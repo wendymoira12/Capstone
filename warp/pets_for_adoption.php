@@ -1,15 +1,22 @@
 <?php
+use LDAP\Result;
+include 'config.php';
+include('connect/connection.php');
 session_start();
 
-use LDAP\Result;
-
-include('connect/connection.php');
+//if hindi nakaset si user-email and user-role-id babalik sya sa login.php
+if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
+    header('Location: login.php');
+}
+?>
+<?php
 if (isset($_GET['page'])) {
     $page = $_GET['page'];
 } else {
     $page = 1;
 }
-
+?>
+<?php
 $num_per_page = 03;
 $start_from = ($page - 1) * 03;
 
@@ -21,7 +28,7 @@ $result = mysqli_query($conn, $query);
 <html class="no-js" lang="zxx">
 
 <head>
-    
+
     <script src="https://kit.fontawesome.com/b6742a828f.js" crossorigin="anonymous"></script>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -109,16 +116,16 @@ $result = mysqli_query($conn, $query);
                                     <a href="AdopteePage.php?id=<?php echo $data['pet_id']; ?>">
                                         <img src="shelter/production/images/pet_img1/<?= $data['pet_img1']; ?>"> </a>
                                     <div class="service_content text-center">
-                                       
-                                            <a href="AdopteePage.php?id=<?php echo $data['pet_id']; ?>">
-                                                <h3><?= $data['pet_name']; ?></h3>
-                                            </a>
-                                            <h5> <b> Gender:</b> <?= $data['pet_gender']; ?> <br>
-                                                <b> Age:</b> <?= $data['pet_age']; ?> <br>
-                                                <b> Size:</b> <?= $data['pet_size']; ?> <br>
-                                                <b> Neutered:</b> <?= $data['pet_neuter']; ?>
-                                            </h5>
-                                        
+
+                                        <a href="AdopteePage.php?id=<?php echo $data['pet_id']; ?>">
+                                            <h3><?= $data['pet_name']; ?></h3>
+                                        </a>
+                                        <h5> <b> Gender:</b> <?= $data['pet_gender']; ?> <br>
+                                            <b> Age:</b> <?= $data['pet_age']; ?> <br>
+                                            <b> Size:</b> <?= $data['pet_size']; ?> <br>
+                                            <b> Neutered:</b> <?= $data['pet_neuter']; ?>
+                                        </h5>
+
                                     </div>
                                 </div>
                             </div>
@@ -143,22 +150,22 @@ $result = mysqli_query($conn, $query);
         <nav aria-label="Page navigation example">
             <div class="page">
                 <ul class="pagination">
-                <li class="page item">
-                    <?php
-                    if ($page > 1) {
-                        echo "<a href='pets_for_adoption.php?page=" . ($page - 1) . "' class='page-item'>Previous</a>";
-                    }
+                    <li class="page item">
+                        <?php
+                        if ($page > 1) {
+                            echo "<a href='pets_for_adoption.php?page=" . ($page - 1) . "' class='page-item'>Previous</a>";
+                        }
 
-                    for ($i = 1; $i < $total_page; $i++) {
-                        echo "<a href='pets_for_adoption.php?page=" . $i . "' class='page-item'>$i</a>";
-                    }
+                        for ($i = 1; $i < $total_page; $i++) {
+                            echo "<a href='pets_for_adoption.php?page=" . $i . "' class='page-item'>$i</a>";
+                        }
 
-                    if ($i > $page) {
-                        echo "<a href='pets_for_adoption.php?page=" . ($page + 1) . "' class='page-item'>Next</a>";
-                    }
+                        if ($i > $page) {
+                            echo "<a href='pets_for_adoption.php?page=" . ($page + 1) . "' class='page-item'>Next</a>";
+                        }
 
-                    ?>
-                      </li>
+                        ?>
+                    </li>
                 </ul>
             </div>
         </nav>
