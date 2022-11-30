@@ -14,7 +14,7 @@
                                 <nav>
                                     <ul id="navigation">
                                         <li><a href="home.php" style="text-decoration: none">Home</a></li>
-                                        <li> <a href="pets-for-adoption.php" style="text-decoration: none">Pets for Adoption </a>
+                                        <li> <a href="pets_for_adoption.php" style="text-decoration: none">Pets for Adoption </a>
                                         <li><a href="getroleid.php?id=<?= $_SESSION['user-role-id'] ?>" style="text-decoration: none"><img src="img/user.png" width="20px" height="20px"></a></li>
                                         <li><a href="logout.php?logout" style="text-decoration: none">Logout </a></li>
                                     </ul>

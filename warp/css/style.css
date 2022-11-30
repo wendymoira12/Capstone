@@ -3953,9 +3953,9 @@ h6 {
 
 /* line 347, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_elements.scss */
 .generic-blockquote {
-  padding: 30px 50px 30px 30px;
+  padding: 50px 100px 50px 100px;
   background: #f9f9ff;
-  border-left: 2px solid #222222;
+  border-left: 30px solid #222222;
 }
 
 /* line 353, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_elements.scss */
@@ -6924,6 +6924,7 @@ h6 {
   padding: 8px 16px;
   display: inline-block;
   text-decoration: none;
+  
 }
 .page-item a.active {
   background-color: #ff843a;
