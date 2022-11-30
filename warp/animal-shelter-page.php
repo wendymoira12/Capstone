@@ -16,12 +16,29 @@ $result = mysqli_query($conn, $sql);
 if ($result->num_rows > 0) {
     $row = mysqli_fetch_assoc($result);
 ?>
+ 
+    <?php
+     /*
+    // Pagination
+    if (isset($_GET['page'])) {
+        $page = $_GET['page'];
+    } else {
+        $page = 1;
+    }
+    ?>
+    <?php
+    $num_per_page = 3;
+    $start_from = ($page - 1) * 3;
 
+  $query = "SELECT * FROM warp_capstone.adoptee_tbl WHERE deleted_at IS NULL LIMIT $start_from,$num_per_page ";
+$result = mysqli_query($conn, $query);
+*/
+    ?>
     <!doctype html>
     <html class="no-js" lang="zxx">
 
     <head>
-        
+
         <script src="https://kit.fontawesome.com/b6742a828f.js" crossorigin="anonymous"></script>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -49,15 +66,15 @@ if ($result->num_rows > 0) {
     </head>
 
     <body>
-    <header>
-        <?php
-        if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
-            include "header_homeguest.php";
-        } else {
-            include "header.php";
-        }
-        ?>
-    </header>
+        <header>
+            <?php
+            if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
+                include "header_homeguest.php";
+            } else {
+                include "header.php";
+            }
+            ?>
+        </header>
 
         <div class="bradcam_area breadcam_bg">
             <div class="container">
@@ -134,7 +151,42 @@ if ($result->num_rows > 0) {
                     </div>
                 </div>
             </div>
+            <?php
+             /*
+            $pr_query = "SELECT * FROM adoptee_tbl WHERE city_id = '$city_id'";
+            $pr_result = mysqli_query($conn, $pr_query);
+            $total_record = mysqli_num_rows($pr_result);
+
+            $total_page = ceil($total_record / $num_per_page);
+            ?>
+           
+            <nav aria-label="Page navigation example">
+                <div class="page">
+                    <ul class="pagination">
+                        <li class="page item">
+                          
+                            <?php
+                             
+                            if ($page > 1) {
+                               echo "<a href='animal-shelter-page.php?id='$city_id'page=" . ($page - 1) . "' class='page-item'>Previous</a>";
+                            }
+
+                            for ($i = 1; $i < $total_page; $i++) {
+                                echo "<a href='animal-shelter-page.php?id='$city_id.'page=" . $i . "' class='page-item'>$i</a>";
+                            }
+
+                            if ($i > $page) {
+                                echo "<a href='animal-shelter-page.php?id='$city_id'page=" . ($page + 1) . "' class='page-item'>Next</a>";
+                            }
+ */ 
+                          ?>
+                            
+                        </li>
+                    </ul>
+                </div>
+            </nav>
         </section>
+     
         <!-- footer_start  -->
         <footer class="footer">
             <?php
