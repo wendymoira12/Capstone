@@ -60,7 +60,8 @@ $row = mysqli_fetch_assoc($result);
                     <div class="col-lg-5 col-md-6">
                         <div class="slider_text">
                             <h3>Adopt from<br> <span>Animal Shelters</span></h3>
-                            <p>Browse pets from our network in Metro Manila shelters and rescues.</p>
+                            <p><b> Our listings include all ages and sizes, giving you plenty of options to choose from. 
+                                We partner with local shelters and rescues to provide you with the cutest selection of pets in Metro Manila.</b> </hp>
                         </div>
                     </div>
                 </div>
@@ -130,8 +131,8 @@ $row = mysqli_fetch_assoc($result);
                     <div class="col-lg-6 offset-lg-1 col-md-6">
                         <div class="pet_info">
                             <div class="section_title">
-                                <h3><span>We care your pet </span> <br>
-                                    As you care</h3>
+                                <h3><span>Adoption – because family isn’t made from blood, </span> <br>
+                                it’s made from love.</h3>
                                 <p></p>
                             </div>
                         </div>

@@ -21,6 +21,7 @@ $result = mysqli_query($conn, $query);
 <html class="no-js" lang="zxx">
 
 <head>
+    
     <script src="https://kit.fontawesome.com/b6742a828f.js" crossorigin="anonymous"></script>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -142,6 +143,7 @@ $result = mysqli_query($conn, $query);
         <nav aria-label="Page navigation example">
             <div class="page">
                 <ul class="pagination">
+                <li class="page item">
                     <?php
                     if ($page > 1) {
                         echo "<a href='pets-for-adoption.php?page=" . ($page - 1) . "' class='page-item'>Previous</a>";
@@ -156,6 +158,7 @@ $result = mysqli_query($conn, $query);
                     }
 
                     ?>
+                      </li>
                 </ul>
             </div>
         </nav>
