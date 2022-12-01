@@ -30,6 +30,15 @@ $chkvalues = explode(", ", $data["pet_vax"]);
 
 ?>
 
+<?php
+$sql = "SELECT * FROM applicationform1";
+$result = $conn->query($sql);
+
+if (!$result) {
+  trigger_error('Invalid query: ' . $conn->error);
+}
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -44,7 +53,7 @@ $chkvalues = explode(", ", $data["pet_vax"]);
 
 
   <!-- <link rel="manifest" href="site.webmanifest"> -->
-  <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.png">
+  <link rel="shortcut icon" type="image/x-icon" href="/Capstone/warp/img/WARP_LOGO copy.png">
   <!-- Place favicon.ico in the root directory -->
 
   <!-- CSS here -->
@@ -60,10 +69,64 @@ $chkvalues = explode(", ", $data["pet_vax"]);
   <link rel="stylesheet" href="../../css/slicknav.css">
   <link rel="stylesheet" href="../../css/style.css">
   <link rel="stylesheet" href="../../css/AF.css">
+ <!-- SLIDER CSS AND JS -->
+ <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
 
   <!-- <link rel="stylesheet" href="css/responsive.css"> -->
 </head>
+<!-- SLIDER STYLE -->
+<style type="text/css">
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+  }
 
+  * {
+    box-sizing: border-box;
+  }
+
+  .slider {
+    width: 30%;
+    margin: 30px auto;
+    width: 200px;
+  }
+
+  .slick-slide {
+    margin: 0px 10px;
+    width: 50vw;
+    box-sizing: border-box;
+  }
+
+  .slick-slide img {
+    width: 300px;
+    margin: auto;
+  }
+
+  .slick-prev:before,
+  .slick-next:before {
+    color: black;
+  }
+
+
+  .slick-slide {
+    transition: all ease-in-out .3s;
+    opacity: .2;
+  }
+
+  .slick-active {
+    opacity: .5;
+  }
+
+  .slick-current {
+    opacity: 1;
+  }
+
+  div.slick {
+    text-align: center;
+  }
+</style>
 <body>
   <header>
     <div class="header-area ">
@@ -82,7 +145,7 @@ $chkvalues = explode(", ", $data["pet_vax"]);
               <div class="main-menu  d-none d-lg-block">
                 <nav>
                   <ul id="navigation">
-                    <li><a href="shelter_adoptee_list.php">Back to Adoptee List</a></li>
+                    <li><a href="shelter_adoptee_list.php" style="text-decoration: none">Back to Adoptee List</a></li>
                   </ul>
                 </nav>
               </div>
@@ -119,15 +182,17 @@ $chkvalues = explode(", ", $data["pet_vax"]);
           <div class="single-post">
             <div class="single-item">
               <div class="slick">
-                <img class="img-fluid" src="shelter/production/images/pet_img1/<?= $data['pet_img1']; ?>">
+                <img class="img-fluid" src="images/pet_img1/<?= $data['pet_img1']; ?>">
+              </div>
+              <div class="slick">
+                <img class="img-fluid" src="images/pet_img2/<?= $data['pet_img2']; ?>">
               </div>
               <div class="slick">
                 <video width="300px" height="300px" controls>
-                  <source src="shelter/production/images/pet_vid/<?= $data['pet_vid']; ?>" type="video/mp4">
+                  <source src="images/pet_vid/<?= $data['pet_vid']; ?>" type="video/mp4">
                 </video>
               </div>
             </div>
-
 
             <div class="blog_details">
               <h2 style="text-align: center;"><?php echo $data['pet_name']; ?></h2>
@@ -262,339 +327,9 @@ $chkvalues = explode(", ", $data["pet_vax"]);
                               <h3 class="title">Application Form</h3>
                               <p class="description">All fields are required</p>
 
-                              <div class="form-group">
-                                <span class="input-icon"><i class="fa fa-user"></i></span>
-                                <input type="email" class="form-control" placeholder="First Name" disabled>
-                              </div>
-
-                              <div class="form-group">
-                                <span class="input-icon"><i class="fa fa-user"></i></span>
-                                <input type="email" class="form-control" placeholder="Last Name" disabled>
-                              </div>
-
-                              <div class="form-group">
-                                <span class="input-icon"><i class="fa fa-user"></i></span>
-                                <input type="email" class="form-control" placeholder="Age" disabled>
-                              </div>
-
-                              <div class="form-group">
-                                <span class="input-icon"><i class="fa fa-compass"></i></span>
-                                <input type="email" class="form-control" placeholder="Home Address" disabled>
-                              </div>
-
-                              <div class="form-group">
-                                <span class="input-icon"><i class="fa fa-phone"></i></span>
-                                <input type="password" class="form-control" placeholder="Contact Number" disabled>
-                              </div>
-
-                              <div class="form-group checkbox">
-                                <span class="input-icon"><i class="fa fa-at"></i></span>
-                                <input type="password" class="form-control" placeholder="E-mail Address" disabled>
-                              </div>
-
-
-                              <!--Valid ID Picture-->
-                              <div class="form-group">
-                                <p>Please upload your Valid ID here for verification purposes:</p>
-                                <input type="file" id="myfile" name="">
-                              </div>
-
-                              <!-- QUESTIONAIRRE -->
-
-                              <div class="form-group checkbox">
-                                <label>
-                                  <b> Occupation</b>
-                                </label><br>
-
-                                <!-- Input Type Radio Button -->
-                                <label for="recommed-1">
-                                  <input type="radio" id="recommed-1" name="occupation"> Student </input>
-                                </label><br>
-                                <label for="recommed-2">
-                                  <input type="radio" id="recommed-2" name="occupation"> Employed</input>
-                                </label><br>
-                                <label for="recommed-3">
-                                  <input type="radio" id="recommed-3" name="occupation"> Self-emlpoyed</input>
-                                </label><br>
-                              </div>
-
-                              <div class="form-group checkbox">
-                                <label>
-                                  <b> Civil Status </b>
-                                </label><br>
-
-                                <!-- Input Type Radio Button -->
-                                <label for="recommed-1">
-                                  <input type="radio" id="recommed-1" name="Civil Status"> Single</input>
-                                </label><br>
-                                <label for="recommed-2">
-                                  <input type="radio" id="recommed-2" name="Civil Status"> Married</input>
-                                </label><br>
-                                <label for="recommed-3">
-                                  <input type="radio" id="recommed-3" name="Civil Status"> Widowed</input>
-                                </label><br>
-                                <label for="recommed-4">
-                                  <input type="radio" id="recommed-4" name="Civil Status"> Separated</input>
-                                </label><br>
-                                <label for="recommed-5">
-                                  <input type="radio" id="recommed-5" name="Civil Status"> Annuled</input>
-                                </label><br>
-                                <label for="recommed-6">
-                                  <input type="radio" id="recommed-6" name="Civil Status"> CommonLaw</input>
-                                </label><br>
-                              </div>
-
-
-                              <div class="form-group checkbox">
-                                <label>
-                                  <b> Are there children (below 18) in the house? If yes how old are they? </b>
-                                </label><br>
-
-                                <!-- Input Type Radio Button -->
-                                <label for="old-1">
-                                  <input type="radio" id="old-1" name="old"> There is a/are children below 8 years old</input>
-                                </label><br>
-                                <label for="old-2">
-                                  <input type="radio" id="old-2" name="old"> All children in our house are older than 8 years old</input>
-                                </label><br>
-                                <label for="old-3">
-                                  <input type="radio" id="old-3" name="old"> There is no children living in our house</input>
-                                </label><br>
-                              </div>
-
-                              <div class="form-group checkbox">
-                                <label>
-                                  <b> Do you have other children? </b>
-                                </label><br>
-
-                                <!-- Input Type Radio Button -->
-                                <label for="recommed-1">
-                                  <input type="radio" id="recommed-1" name="children"> Yes</input>
-                                </label><br>
-                                <label for="recommed-2">
-                                  <input type="radio" id="recommed-2" name="children"> No</input>
-                                </label><br>
-                              </div>
-
-                              <div class="form-group checkbox">
-                                <label>
-                                  <b> Have you had pets in the past? </b>
-                                </label><br>
-
-                                <!-- Input Type Radio Button -->
-                                <label for="recommed-1">
-                                  <input type="radio" id="recommed-1" name="past"> Yes</input>
-                                </label><br>
-                                <label for="recommed-2">
-                                  <input type="radio" id="recommed-2" name="past"> No</input>
-                                </label><br>
-                              </div>
-
-                              <div class="form-group checkbox">
-                                <label>
-                                  <b> Who else do you live with? </b>
-                                </label><br>
-
-                                <!-- Input Type Radio Button -->
-                                <label for="recommed-1">
-                                  <input type="radio" id="recommed-1" name="live"> I live by myself</input>
-                                </label><br>
-                                <label for="recommed-2">
-                                  <input type="radio" id="recommed-2" name="live"> Spouse/Partner</input>
-                                </label><br>
-                                <label for="recommed-3">
-                                  <input type="radio" id="recommed-3" name="live"> Parents</input>
-                                </label><br>
-                                <label for="recommed-4">
-                                  <input type="radio" id="recommed-4" name="live"> Roommate (s)</input>
-                                </label><br>
-                                <label for="recommed-5">
-                                  <input type="radio" id="recommed-5" name="live"> Other Relatives</input>
-                                </label><br>
-                              </div>
-
-                              <div class="form-group checkbox">
-                                <label>
-                                  <b> Are any members of your household allergic to animals? </b>
-                                </label><br>
-
-                                <!-- Input Type Radio Button -->
-                                <label for="recommed-1">
-                                  <input type="radio" id="members-1" name="members"> Yes</input>
-                                </label><br>
-                                <label for="recommed-2">
-                                  <input type="radio" id="members-2" name="members"> No</input>
-                                </label><br>
-                                <label for="recommed-3">
-                                  <input type="radio" id="members-3" name="members"> I don’t Know</input>
-                                </label><br>
-                              </div>
-
-                              <div class="form-group checkbox">
-                                <label>
-                                  <b> Who will be responsible for feeding, grooming, and generally caring for your pet? </b>
-                                </label><br>
-
-                                <!-- Input Type Radio Button -->
-                                <label for="responsible-1">
-                                  <input type="radio" id="responsible-1" name="responsible"> Myself</input>
-                                </label><br>
-                                <label for="responsible-2">
-                                  <input type="radio" id="responsible-2" name="responsible"> My partner</input>
-                                </label><br>
-                                <label for="recommed-3">
-                                  <input type="radio" id="recommed-3" name="responsible"> My Family</input>
-                                </label><br>
-                              </div>
-
-                              <div class="form-group checkbox">
-                                <label>
-                                  <b>
-                                    Who will be financially responsible for your pet's needs </b>
-                                </label><br>
-
-                                <!-- Input Type Radio Button -->
-                                <label for="recommed-1">
-                                  <input type="radio" id="financially-1" name="financially"> Myself</input>
-                                </label><br>
-                                <label for="recommed-2">
-                                  <input type="radio" id="financially-2" name="financially"> My partner</input>
-                                </label><br>
-                                <label for="recommed-3">
-                                  <input type="radio" id="financially-3" name="financially"> My Family</input>
-                                </label><br>
-                              </div>
-
-                              <div class="form-group checkbox">
-                                <label>
-                                  <b> Who will look after your pet if you go on vacation or in case of emergency? </b>
-                                </label><br>
-
-                                <!-- Input Type Radio Button -->
-                                <label for="vacation-1">
-                                  <input type="radio" id="vacation-1" name="vacation"> Partner</input>
-                                </label><br>
-                                <label for="vacation-2">
-                                  <input type="radio" id="vacation-2" name="vacation"> Family</input>
-                                </label><br>
-                                <label for="vacation-3">
-                                  <input type="radio" id="vacation-3" name="vacation"> Friends</input>
-                                </label><br>
-                              </div>
-
-                              <div class="form-group checkbox">
-                                <label>
-                                  <b> How many hours in an average workday will your pet be left alone? </b>
-                                </label><br>
-
-                                <!-- Input Type Radio Button -->
-                                <label for="hours-1">
-                                  <input type="radio" id="hours-1" name="hours"> 1-4</input>
-                                </label><br>
-                                <label for="hours-2">
-                                  <input type="radio" id="hours-2" name="hours"> 4-8</input>
-                                </label><br>
-                                <label for="hours-3">
-                                  <input type="radio" id="hours-3" name="hours"> More than 8hrs</input>
-                                </label><br>
-                                <label for="hours-4">
-                                  <input type="radio" id="hours-4" name="hours"> I work remotely </input>
-                                </label><br>
-                              </div>
-
-                              <div class="form-group checkbox">
-                                <label>
-                                  <b> Does everyone in the family support your decision to adopt a pet? </b>
-                                </label><br>
-
-                                <!-- Input Type Radio Button -->
-                                <label for="support-1">
-                                  <input type="radio" id="support-1" name="support"> Yes</input>
-                                </label><br>
-                                <label for="support-2">
-                                  <input type="radio" id="support-2" name="support"> No</input>
-                                </label><br>
-                              </div>
-
-                              <div class="form-group checkbox">
-                                <label>
-                                  <b> What type of building do you live in? </b>
-                                </label><br>
-
-                                <!-- Input Type Radio Button -->
-                                <label for="building-1">
-                                  <input type="radio" id="building-1" name="building"> House </input>
-                                </label><br>
-                                <label for="building-2">
-                                  <input type="radio" id="building-2" name="building"> Condo</input>
-                                </label><br>
-                                <label for="building-3">
-                                  <input type="radio" id="building-3" name="building"> Apartment</input>
-                                </label><br>
-                              </div>
-
-                              <div class="form-group checkbox">
-                                <label>
-                                  <b> If you rent, do you have permission from your landlord to have an animal? </b>
-                                </label><br>
-
-                                <!-- Input Type Radio Button -->
-                                <label for="permission-1">
-                                  <input type="radio" id="permission-1" name="permission"> Yes </input>
-                                </label><br>
-                                <label for="permission-2">
-                                  <input type="radio" id="permission-2" name="permission"> No</input>
-                                </label><br>
-                                <label for="permission-3">
-                                  <input type="radio" id="permission-3" name="permission"> I own</input>
-                                </label><br>
-                              </div>
-
-                              <div class="form-group checkbox">
-                                <label>
-                                  <b> Are you prepared to spend for the wellness of your pet? If so, how much
-                                    are you willing to spend in a year? </b>
-                                </label><br>
-
-                                <!-- Input Type Radio Button -->
-                                <label for="prepared-1">
-                                  <input type="radio" id="prepared-1" name="prepared"> Under 10,000 </input>
-                                </label><br>
-                                <label for="prepared-2">
-                                  <input type="radio" id="prepared-2" name="prepared"> 10,000 - 20,000</input>
-                                </label><br>
-                                <label for="prepared-3">
-                                  <input type="radio" id="prepared-3" name="prepared"> 20,001 – 40,000</input>
-                                </label><br>
-                                <label for="prepared-4">
-                                  <input type="radio" id="prepared-4" name="prepared"> 40,001 – 60,000</input>
-                                </label><br>
-                                <label for="prepared-5">
-                                  <input type="radio" id="prepared-5" name="prepared"> 60,001 – 80,000</input>
-                                </label><br>
-                              </div>
-
-                              <button class="btn" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span> Cancel </button>
-                              <a class="trigger_popup_fricc">
-                                <button class="btn"> Submit </button>
-                              </a>
-
                             </div>
                             <!--start popup confirmation message-->
-                            <div class="hover_bkgr_fricc">
-                              <span class="helper"></span>
-                              <div>
-                                <div class="popupCloseButton">&times;</div>
-                                <p>
-                                  <img src=img/logo.png>
-                                <h4><b>Are you sure you want to proceed with your application?</h4><br />
-                                </p>
-                                <form action="#">
-                                  <button class="button1" value="submit" formaction="submit.html"> Yes, I want to proceed </button>
-                                  <button class="button1" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span> Go Back </button>
-                                  <!--end ConfirmationMessage-->
-                              </div>
-                            </div>
+                           
                           </div>
                         </div>
                       </div>
@@ -653,7 +388,24 @@ $chkvalues = explode(", ", $data["pet_vax"]);
   <script src="../../js/plugins.js"></script>
   <script src="../../js/gijgo.min.js"></script>
 
-
+<!-- SLIDER-->
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+  <script type="text/javascript">
+    $(document).on('ready', function() {
+      $('.single-item').slick();
+    });
+    $('.one-time').slick({
+      dots: true,
+      infinite: true,
+      speed: 300,
+      slidesToShow: 1,
+      adaptiveHeight: true
+    });
+    $('.single-item-rtl').slick({
+      rtl: true
+    });
+  </script>
+  
   <!--contact js-->
   <script src="../../js/contact.js"></script>
   <script src="../../js/jquery.ajaxchimp.min.js"></script>
