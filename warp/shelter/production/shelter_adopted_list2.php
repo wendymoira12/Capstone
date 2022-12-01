@@ -15,6 +15,12 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
 ?>
 
 <?php
+if (!isset($_GET['id'])) {
+  die('Id not provided');
+}
+
+// Kukunin yung answers from application form na equivalent sa questionchoices
+$id = $_GET['id'];
 // Get the user ID from the login sesh
 $user_id = $_SESSION['user_id'];
 // Query to check if user_id from the login shesh = shelteruser_id to get the city 
@@ -143,7 +149,7 @@ if ($result->num_rows > 0) {
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
-                <li><a href="/Capstone/warp/logout.php?logout"><i class="fa fa-sign-out pull-right"></i>Log Out</a></li>
+                  <li><a href="/Capstone/warp/logout.php?logout"><i class="fa fa-sign-out pull-right"></i>Log Out</a></li>
                 </ul>
               </li>
               <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
@@ -248,7 +254,7 @@ if ($result->num_rows > 0) {
                             <td><?= $data['monitoring_date']; ?></td>
                             <td><?= $data['monitoring_status']; ?></td>
                             <td>
-                              <a href="shelter_adopted_list2.php?id=<?= $data['adopted_id'] ?>">
+                              <a href="edit_monitoring_date.php?id=<?= $data['adopted_id'] ?>">
                                 <button type="submit" class="btn btn-round btn-primary">Edit Date</button>
                               </a>
                               <a href="edit_monitoring_status.php?adopted_id=<?= $data['adopted_id'] ?>">
@@ -262,6 +268,29 @@ if ($result->num_rows > 0) {
                       ?>
                     </tbody>
                   </table>
+                </div>
+              </div>
+            </div>
+            <div class="modal fade" id="modalEditDate" data-backdrop="static">
+              <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                  <!-- <iframe name="edit_monitoring" style="display:none;"></iframe> -->
+                  <form action="edit_monitoring_date.php?adopted_id=<?=$id?>" method="POST">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Edit Monitoring Schedule</h4>
+                    </div>
+                    <div class="modal-body">
+                      <input type="date" name="date">
+                    </div>
+                    <div class="modal-footer">
+                      <a href="shelter_adopted_list.php">
+                        <button class="btn btn-danger" name="cancel">Cancel</button>
+                      </a>
+                      <button class="btn btn-success" name="submit-date" onclick="return confirm('Are you sure you want to edit the monitoring date?');">Submit
+                      </button>
+
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
@@ -310,7 +339,7 @@ if ($result->num_rows > 0) {
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
-    <!-- <script type="text/javascript">
+    <script type="text/javascript">
       $(document).ready(function() {
         var table = $('#datatable').DataTable();
 
@@ -319,7 +348,12 @@ if ($result->num_rows > 0) {
           alert('You clicked on ' + data[0] + "'s row");
         });
       });
-    </script> -->
+    </script>
+    <script>
+      $(document).ready(function() {
+        $("#modalEditDate").modal('show');
+      });
+    </script>
 </body>
 
 </html>
