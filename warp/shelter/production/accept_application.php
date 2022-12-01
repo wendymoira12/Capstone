@@ -37,7 +37,7 @@ if (isset($_GET['id'])) {
                         $msg1 = 'The scheduled date for your interview is'; //etong message1 naman naka null sya kase optional lang, if ever na nireject yung application form, wala tong laman kase wala namang massched
                         $sql_insert = mysqli_query($conn, "INSERT INTO adopternotif_tbl(application_id,  message, message1, isAccepted) VALUES('$app_id', '$msg', '$msg1', '$accept')");
                         if ($sql_insert) {
-                          echo "<script>alert('Successfully cancelled adoption')</script>";
+                          echo "<script>alert('Successfully accepted adoption')</script>";
                         } else {
                           echo mysqli_error($conn);
                           exit;

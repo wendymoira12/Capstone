@@ -53,7 +53,7 @@ if (isset($_POST['submit-reject'])) {
     $msg1 = 'For the following reason/s: ' . $_POST['rejectmsg'];
     $sql_insert = mysqli_query($conn, "INSERT INTO adopternotif_tbl(application_id, message, message1, isAccepted) VALUES('$id', '$msg', '$msg1', '$reject')"); 
     if ($sql_insert) {
-      echo "<script>alert('Successfully cancelled adoption')</script>";
+      // echo "<script>alert('Successfully cancelled adoption')</script>";
       header('Location: shelter_application_list.php');
     } else {
       echo mysqli_error($conn);
@@ -115,7 +115,7 @@ if ($result->num_rows > 0) {
   <!-- Dropzone.js -->
   <link href="../vendors/dropzone/dist/min/dropzone.min.css" rel="stylesheet"> <!-- Custom Theme Style -->
   <link href="../build/css/custom1.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/imagepopup.css">
+  <!-- <link rel="stylesheet" href="css/imagepopup.css"> -->
   
 
 
@@ -490,17 +490,6 @@ if ($result->num_rows > 0) {
                           echo "<script>alert('No date input')</script>";
                         }
 
-                        //notif para sa pagaccept ng application form
-                        $accept = '1';
-                        $msg = 'This shelter has accepted your adoptee application for pet'; //message sa notification ng adopter tas concat name ng pet na inadopt niya
-                        $msg1 = 'The scheduled date for your interview is'; //etong message1 naman naka null sya kase optional lang, if ever na nireject yung application form, wala tong laman kase wala namang massched
-                        $sql_insert = mysqli_query($conn, "INSERT INTO adopternotif_tbl(application_id,  message, message1, isAccepted) VALUES('$id', '$msg', '$msg1', '$accept')");
-                        if ($sql_insert) {
-                          echo "<script>alert('Successfully cancelled adoption')</script>";
-                        } else {
-                          echo mysqli_error($conn);
-                          exit;
-                        }
                       }
 
                       ?>

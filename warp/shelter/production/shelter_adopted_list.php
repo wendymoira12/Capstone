@@ -310,7 +310,7 @@ if ($result->num_rows > 0) {
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
       $(document).ready(function() {
         var table = $('#datatable').DataTable();
 
@@ -319,7 +319,7 @@ if ($result->num_rows > 0) {
           alert('You clicked on ' + data[0] + "'s row");
         });
       });
-    </script>
+    </script> -->
 </body>
 
 </html>
