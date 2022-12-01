@@ -141,7 +141,7 @@ if ($result->num_rows > 0) {
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
-                <li><a href="/Capstone/warp/logout.php?logout"><i class="fa fa-sign-out pull-right"></i>Log Out</a></li>
+                  <li><a href="/Capstone/warp/logout.php?logout"><i class="fa fa-sign-out pull-right"></i>Log Out</a></li>
                 </ul>
               </li>
               <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
@@ -242,8 +242,14 @@ if ($result->num_rows > 0) {
                             <td><?= $data['date_submitted']; ?></td>
                             <td><?= $data['application_result']; ?></td>
                             <td><?= $data['application_status']; ?></td>
-                            <td><a href="shelter_application_view.php?id=<?= $data['application_id']; ?>"><button type="button" class="btn btn-round btn-success">
-                                  View</button></a>
+                            <td>
+                              <a href="shelter_application_view.php?id=<?= $data['application_id']; ?>">
+                                <button type="button" class="btn btn-round btn-success">View Application</button>
+                              </a>
+
+                              <a href="view_adopter.php?id=<?= $data['adopter_id']; ?>">
+                                <button type="button" class="btn btn-round btn-info">Show Adopter Info</button>
+                              </a>
                             </td>
                           </tr>
                       <?php

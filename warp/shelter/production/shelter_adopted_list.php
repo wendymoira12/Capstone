@@ -232,7 +232,7 @@ if ($result->num_rows > 0) {
                     <tbody>
                       <?php
                       $i = 1;
-                      $sql = "SELECT adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_img1, adoptee_tbl.pet_img2, adoptee_tbl.pet_name, adopted_tbl.date_adopted, adopted_tbl.monitoring_date, adopted_tbl.monitoring_status, adopted_tbl.adopted_id FROM adopted_tbl INNER JOIN applicationform1 ON adopted_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id = '$city_id'";
+                      $sql = "SELECT adopter_tbl.adopter_id, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_img1, adoptee_tbl.pet_img2, adoptee_tbl.pet_name, adopted_tbl.date_adopted, adopted_tbl.monitoring_date, adopted_tbl.monitoring_status, adopted_tbl.adopted_id FROM adopted_tbl INNER JOIN applicationform1 ON adopted_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id = '$city_id'";
 
                       $result = mysqli_query($conn, $sql);
                       if ($result->num_rows > 0) {
@@ -253,6 +253,9 @@ if ($result->num_rows > 0) {
                               </a>
                               <a href="edit_monitoring_status.php?adopted_id=<?= $data['adopted_id'] ?>">
                                 <button type="submit" class="btn btn-round btn-success">Pet Monitored</button>
+                              </a>
+                              <a href="view_adopter.php?id=<?= $data['adopter_id']; ?>">
+                                <button type="button" class="btn btn-round btn-info">Show Adopter Info</button>
                               </a>
                             </td>
                           </tr>
