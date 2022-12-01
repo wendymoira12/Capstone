@@ -146,7 +146,7 @@ if ($result->num_rows > 0) {
                 <!-- Notification bell -->
                 <?php
 
-                $sql_get = mysqli_query($conn, "SELECT adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, shelternotif_tbl.message, adoptee_tbl.pet_name FROM shelternotif_tbl INNER JOIN applicationform1 ON shelternotif_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id WHERE shelternotif_tbl.status = '0' AND applicationform1.application_id = shelternotif_tbl.application_id AND adoptee_tbl.city_id = '$city_id'");
+                $sql_get = mysqli_query($conn, "SELECT adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, shelternotif_tbl.message, adoptee_tbl.pet_name, shelternotif_tbl.shelternotif_date FROM shelternotif_tbl INNER JOIN applicationform1 ON shelternotif_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id WHERE shelternotif_tbl.status = '0' AND applicationform1.application_id = shelternotif_tbl.application_id AND adoptee_tbl.city_id = '$city_id' ORDER BY shelternotif_tbl.shelternotif_date DESC ");
                 $count = mysqli_num_rows($sql_get);
 
                 ?>
@@ -269,7 +269,7 @@ if ($result->num_rows > 0) {
               <p><?php echo $row['city_contact']; ?></p>
               <br>
               <h2>Email Address</h2>
-              <p> <!-- email add here --> </p>
+              <p> <?php echo $row['city_email']; ?> </p>
               <br>
               <a href="shelter_account_edit.php?city_id=<?php echo $row['city_id']; ?>">
                 <button type="button" class="btn btn-success btn-primary" onclick="return confirm('Are you sure you want to edit shelter information?');">Edit Information</button>

@@ -119,7 +119,20 @@ if (isset($_POST['submit'])) {
     move_uploaded_file($valid_id_tmp_name, __DIR__ . "/shelter/production/images/valid_id/" . $image_name);
     //tas ipoprocess yung kung qualified or hindi.
     require "applicationresult.php";
+    $app_id = $row1d['application_id'];
   }
+
+  //Notification after submitting an application for an adoptee
+  $msg = 'This adopter has submitted an adoption applicaion for pet';
+  $sql_insert1 = mysqli_query($conn, "INSERT INTO shelternotif_tbl(application_id, message) VALUES('$app_id', '$msg')");
+  if($sql_insert1){
+    echo"<script>alert('Successfully sent adoption application')</script>";
+    header('Location:/Capstone/warp/pets_for_adoption.php');
+  }else{
+    echo mysqli_error($conn);
+    exit;
+  }
+
 }
 ?>
 

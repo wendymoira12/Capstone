@@ -143,7 +143,7 @@ if ($result->num_rows > 0) {
                 <!-- Notification bell -->
                 <?php
 
-                $sqlr = "SELECT city_tbl.city_name, city_tbl.city_img, schedule_tbl.schedule_date, adoptee_tbl.pet_name, adopternotif_tbl.message, adopternotif_tbl.message1, adopternotif_tbl.isAccepted, adopter_tbl.user_id FROM adopternotif_tbl INNER JOIN applicationform1 ON adopternotif_tbl.application_id = applicationform1.application_id INNER JOIN schedule_tbl ON applicationform1.application_id = schedule_tbl.application_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id WHERE adopternotif_tbl.status = '0' AND adoptee_tbl.city_id = city_tbl.city_id AND adopter_tbl.user_id = '$user_id' ORDER BY schedule_tbl.schedule_date DESC";
+                $sqlr = "SELECT city_tbl.city_name, city_tbl.city_img, schedule_tbl.schedule_date, adoptee_tbl.pet_name, adopternotif_tbl.message, adopternotif_tbl.message1, adopternotif_tbl.isAccepted, adopter_tbl.user_id, adopternotif_tbl.adopternotif_date FROM adopternotif_tbl INNER JOIN applicationform1 ON adopternotif_tbl.application_id = applicationform1.application_id INNER JOIN schedule_tbl ON applicationform1.application_id = schedule_tbl.application_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id WHERE adopternotif_tbl.status = '0' AND adoptee_tbl.city_id = city_tbl.city_id AND adopter_tbl.user_id = '$user_id' ORDER BY adopternotif_tbl.adopternotif_date DESC";
                 $resultr = mysqli_query($conn, $sqlr);
                 $count = mysqli_num_rows($resultr);
 
@@ -236,7 +236,7 @@ if ($result->num_rows > 0) {
 
                         $i = 1;
                         //Columns needed to query = No., Date Submitted, Adopter Name, Adoptee name, Application Status
-                        $sqlapp = "SELECT applicationform1.date_submitted, applicationform1.adopter_id, applicationform1.pet_id, applicationresult_tbl.application_status, applicationform1.application_id, adoptee_tbl.pet_name FROM applicationform1 INNER JOIN applicationresult_tbl ON applicationform1.application_id = applicationresult_tbl.application_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id WHERE adopter_tbl.adopter_id = '$adopter_id'";
+                        $sqlapp = "SELECT applicationform1.date_submitted, applicationform1.adopter_id, applicationform1.pet_id, applicationresult_tbl.application_status, applicationform1.application_id, adoptee_tbl.pet_name, adopternotif_tbl.message1, adopternotif_tbl.isAccepted FROM applicationform1 INNER JOIN applicationresult_tbl ON applicationform1.application_id = applicationresult_tbl.application_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adopternotif_tbl ON adopternotif_tbl.application_id = applicationform1.application_id WHERE adopter_tbl.adopter_id = '$adopter_id'";
 
                         //$sqlapp= "SELECT * FROM applicationform1, applicationresult_tbl WHERE adopter_id ='$adopter_id';";
 
@@ -250,7 +250,19 @@ if ($result->num_rows > 0) {
                               <th><?php echo $data['application_id']; ?></th>
                               <th><?php echo $data['pet_name']; ?></th>
                               <td><?php echo $data['date_submitted']; ?></td>
-                              <td><?php echo $data['application_status']; ?></td>
+                              <td>
+                                <!-- Pag 0 yung isAccepted/Rejected, lalabas yung application status with reasons for rejection, else yung application status lang -->
+                                <?php
+                                  if($data['isAccepted'] == '0'){
+                                    echo $data['application_status'];?>
+                                    <br>
+                                    <?php
+                                    echo $data['message1'];
+                                  }else{
+                                    echo $data['application_status'];
+                                  }
+                                ?>
+                              </td>
                               <td>
                                 <a href="adopter_application_view.php?id=<?= $data['application_id']; ?>">
                                   <button type="button" class="btn btn-round btn-success">View</button>

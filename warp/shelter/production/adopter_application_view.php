@@ -56,7 +56,7 @@ if (isset($_POST['cancel'])) {
   //   $city = mysqli_fetch_assoc($result_city);
   //   $city_id = $city['city_id'];
     //function sa cancelled by adopter na notif
-    $msg = 'This adopter has cancelled their application form for pet'; //Eto yung message sa notif tas concat yung name ng pet sa dulo
+    $msg = 'This adopter has cancelled their adoption application for pet'; //Eto yung message sa notif tas concat yung name ng pet sa dulo
     $sql_insert = mysqli_query($conn, "INSERT INTO shelternotif_tbl(application_id, message) VALUES('$id', '$msg')"); //Di ko alam pano ipapasok yung city_id para ma specify kung saang shelter lang dapat lalabas yung notif, may WHERE pa dapat
     if($sql_insert){
       echo"<script>alert('Successfully cancelled adoption')</script>";

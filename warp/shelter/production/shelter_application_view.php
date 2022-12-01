@@ -50,10 +50,9 @@ if (isset($_POST['submit-reject'])) {
     $msg = 'This shelter has rejected your adoptee application for pet'; //message sa notification ng adopter tas concat name ng pet na inadopt niya
 
     //Reason for rejecting 
-    $msg1 = 'For the following reason/s: ' . $_POST['rejectmsg'];
+    $msg1 = 'Reason/s: ' . $_POST['rejectmsg'];
     $sql_insert = mysqli_query($conn, "INSERT INTO adopternotif_tbl(application_id, message, message1, isAccepted) VALUES('$id', '$msg', '$msg1', '$reject')"); 
     if ($sql_insert) {
-      // echo "<script>alert('Successfully cancelled adoption')</script>";
       header('Location: shelter_application_list.php');
     } else {
       echo mysqli_error($conn);
