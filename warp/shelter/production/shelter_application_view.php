@@ -45,7 +45,7 @@ if (isset($_POST['submit-reject'])) {
   $sql = "UPDATE applicationresult_tbl SET application_status='$reject' WHERE application_id = '$id'";
   $result = $conn->query($sql);
   if ($result == TRUE) {
-    $reject = '0';
+    $reject = '3';
     //notif para sa pagclick ng reject
     $msg = 'This shelter has rejected your adoptee application for pet'; //message sa notification ng adopter tas concat name ng pet na inadopt niya
 
