@@ -83,7 +83,7 @@ $result = mysqli_query($conn, $query);
                         <div class="bradcam_text text-center">
                             <h3><?php echo $row['city_name']; ?></h3>
                             <br>
-                            <h4 style="color:white;"> <img src="img/phone.svg" width="30px" height="30px"> &nbsp <?php echo $row['city_contact']; ?>&nbsp &nbsp &nbsp &nbsp <img src="img/envelope-open.svg" width="30px" height="30px"> &nbsp shelter@gmail.com</i></h4>
+                            <h4 style="color:white;"> <img src="img/phone.svg" width="30px" height="30px"> &nbsp <?php echo $row['city_contact']; ?>&nbsp &nbsp &nbsp &nbsp <img src="img/envelope-open.svg" width="30px" height="30px"><?php echo $row['city_email']; ?></i></h4>
                             <br>
                         </div>
                     </div>
