@@ -224,9 +224,13 @@ if ($result->num_rows > 0) {
                                           $var=$fdisable['application_status'];
 
                                           if ($var != "Pending") {
+                                            if($var != "Scheduled"){
                 
                                             ?> disabled <?php 
+                                              }
                                             }
+                                          }else if($var != "Pending"){
+
                                           }
                                       ?>>View Application</button>
                               </a>
