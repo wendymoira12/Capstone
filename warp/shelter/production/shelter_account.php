@@ -146,7 +146,7 @@ if ($result->num_rows > 0) {
                 <!-- NOTIF START -->
                 <?php
                 include "shelter_notif.php";
-                ?>                
+                ?>
                 <!-- NOTIF END -->
 
           </nav>
@@ -162,6 +162,34 @@ if ($result->num_rows > 0) {
         <div class="row tile_count">
           <?php
           // Make a query to get the total registered adoptees by COUNTing all the adoptees with city id == which shelter city id
+          $sql = "SELECT COUNT(pet_id) AS currentadoptee FROM adoptee_tbl WHERE city_id = '$city_id' AND deleted_at IS NULL";
+          $result = mysqli_query($conn, $sql);
+          if ($result) {
+            $data = mysqli_fetch_assoc($result);
+            $currentadoptee = $data['currentadoptee'];
+          }
+          ?>
+          <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+            <span class="count_top"><i class="fa fa-paw"></i> No. of Current Pet Adoptee Listed</span>
+            <div class="count"><?= $currentadoptee ?></div>
+          </div>
+          
+          <?php
+          // Make a query to get the total registered adoptees by COUNTing all the adoptees with city id == which shelter city id
+          $sql = "SELECT COUNT(applicationresult_id) AS currentapplications FROM applicationresult_tbl INNER JOIN applicationform1 ON applicationresult_tbl.application_id  = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id = '$city_id' AND applicationresult_tbl.application_status != 'Finished'";
+          $result = mysqli_query($conn, $sql);
+          if ($result) {
+            $data = mysqli_fetch_assoc($result);
+            $currentapplications = $data['currentapplications'];
+          }
+          ?>
+          <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+            <span class="count_top"><i class="fa fa-paw"></i> No. of Current Applications</span>
+            <div class="count"><?= $currentapplications ?></div>
+          </div>
+
+          <?php
+          // Make a query to get the total registered adoptees by COUNTing all the adoptees with city id == which shelter city id
           $sql = "SELECT COUNT(pet_id) AS totaladoptee FROM adoptee_tbl WHERE city_id = '$city_id'";
           $result = mysqli_query($conn, $sql);
           if ($result) {
@@ -170,7 +198,7 @@ if ($result->num_rows > 0) {
           }
           ?>
           <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-            <span class="count_top"><i class="fa fa-paw"></i> Total Adoptee Pets</span>
+            <span class="count_top"><i class="fa fa-paw"></i> Total Pet Adoptee Listed</span>
             <div class="count"><?= $totaladoptee ?></div>
           </div>
 

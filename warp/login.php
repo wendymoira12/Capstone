@@ -11,7 +11,6 @@ if (isset($_POST['submit-login'])) {
   $pass_login = $_POST['pass-login'];
   $role_adopter = 1;
   $role_shelter = 2;
-  $_SESSION['password2'] = $pass_login;
   $sql = "SELECT * FROM user_tbl WHERE (user_email='$email_login' AND role_id='$role_adopter') OR (user_email='$email_login' AND role_id='$role_shelter')";
   $result = mysqli_query($conn, $sql);
   //If the query is true, sql will fetch all the data in the row
