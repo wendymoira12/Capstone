@@ -38,7 +38,12 @@ echo '<br>';
 $datetoday= date_add(date_create(date("Y-m-d H:i:s")), date_interval_create_from_date_string("30 days"));
 $date = date_format($datetoday,"Y-m-d H:i:s");
 echo $date;
-
+echo '<br>';
+print_r($_SESSION['otp']);
+echo '<br>';
+print_r($_SESSION['mail']);
+echo '<br>';
+var_dump($_SESSION);
 
 //Check PHP SESSION COOKIE
 //filter_list();
