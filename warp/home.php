@@ -73,154 +73,162 @@ $row = mysqli_fetch_assoc($result);
     </div>
     <!-- slider_area_end -->
 
-    <!-- service_area_start  -->
+    <!-- CONTAINS ALL FROM LIST OF SHELTERS TO WHY GO WITH WARP MESSAGE -->
     <div class="service_area">
-        <div class="container">
-            <div class="row justify-content-center ">
-                <div class="col-lg-7 col-md-10">
-                    <div class="section_title text-center mb-95">
-                        <h3>List of Metro Manila Animal Shelters</h3>
-                        <p>Find your future furfriend! Browse from different Animal Shelters below.</p>
+
+        <!-- LISTING OF SHELTERS -->
+            <div class="container">
+                <div class="row justify-content-center ">
+                    <div class="col-lg-7 col-md-10">
+                        <div class="section_title text-center mb-95">
+                            <h3>List of Metro Manila Animal Shelters</h3>
+                            <p>Find your future furfriend! Browse from different Animal Shelters below.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="row justify-content-center">
-                <!-- Check if may existing na shelter na ishoshow -->
-                <?php
-                if (mysqli_num_rows($result) > 0) {
-                    foreach ($result as $row) {
-                ?>
 
-                        <div class="col-lg-4 col-md-6">
-                            <div class="single_service">
-                                <a href="animal-shelter-page.php?id=<?php echo $row['city_id']; ?>">
-                                    <!-- removed service_icon_bg_1 -->
-                                    <div class="service_thumb d-flex align-items-center justify-content-center">
-                                        <div class="service_icon">
-                                            <img src="/Capstone/warp/shelter/production/images/logo/<?= $row['city_img']; ?>" alt="Shelter logo" height="200" width="200">
+                <div class="row justify-content-center">
+                    <!-- Check if may existing na shelter na ishoshow -->
+                    <?php
+                    if (mysqli_num_rows($result) > 0) {
+                        foreach ($result as $row) {
+                    ?>
+
+                            <div class="col-lg-4 col-md-6">
+                                <div class="single_service">
+                                    <a href="animal-shelter-page.php?id=<?php echo $row['city_id']; ?>">
+                                        <!-- removed service_icon_bg_1 -->
+                                        <div class="service_thumb d-flex align-items-center justify-content-center">
+                                            <div class="service_icon">
+                                                <img src="/Capstone/warp/shelter/production/images/logo/<?= $row['city_img']; ?>" alt="Shelter logo" height="200" width="200">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="service_content text-center">
-                                        <h3><?php echo $row['city_name']; ?></h3>
-                                    </div>
-                                </a>
+                                        <div class="service_content text-center">
+                                            <h3><?php echo $row['city_name']; ?></h3>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
 
-                <?php
+                    <?php
+                        }
+                    } else {
+                        echo "No records found";
                     }
-                } else {
-                    echo "No records found";
-                }
-                ?>
-            </div>
-        </div>
-
-        <!-- service_area_end -->
-
-        <!-- pet_care_area_start  -->
-        <div class="pet_care_area">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-5 col-md-6">
-                        <div class="pet_thumb">
-                            <img src="img/about/pet_care.png" alt="">
-                        </div>
-                    </div>
-                    <div class="col-lg-6 offset-lg-1 col-md-6">
-                        <div class="pet_info">
-                            <div class="section_title">
-                                <h3><span>Adoption – because family isn’t made from blood, </span> <br>
-                                    it’s made from love.</h3>
-                                <p></p>
-                            </div>
-                        </div>
-                    </div>
+                    ?>
                 </div>
             </div>
-        </div>
-        <!-- pet_care_area_end  -->
+        <!-- LISTING OF SHELTERS -->
 
-        <!-- adapt_area_start  -->
-
-        <div class="adapt_area">
-            <div class="container">
-                <div class="row justify-content-between align-items-center">
-                    <div class="col-lg-5">
-                        <div class="adapt_help">
-                            <div class="section_title">
-                                <h3>We need your help</h3>
-                                <p>Adopt, don't shop. Save a life by adopting
-                                    a pet from your local shelter.
-                                </p>
-                                <a href="pets-for-adoption.php" class="boxed-btn3">Adopt Us</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="adapt_about">
-                            <div class="row align-items-center">
-
-                                <div class="col-lg-6 col-md-6">
-                                    <?php
-                                    // Make a query to get the total adopted pets by COUNTing all the adopted_id with city id == which shelter city id
-                                    $sql = "SELECT COUNT(adopted_id) AS totaladoptedpet FROM adopted_tbl INNER JOIN applicationform1 ON adopted_tbl.application_id = applicationform1.application_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id";
-                                    $result = mysqli_query($conn, $sql);
-                                    if ($result) {
-                                        $data = mysqli_fetch_assoc($result);
-                                        $totaladoptedpet = $data['totaladoptedpet'];
-                                    }
-                                    ?>
-                                    <div class="single_adapt text-center">
-                                        <img src="img/adapt_icon/1.png" alt="">
-                                        <div class="adapt_content">
-                                            <h3 class="counter"><?= $totaladoptedpet ?></h3>
-                                            <p>Pets Adopted</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6">
-                                    <?php
-                                    // Make a query to get the total registered shelter accounts by COUNTing all the user with role id == 2
-                                    $sql = "SELECT COUNT(pet_id) AS totalcats FROM adoptee_tbl WHERE pet_specie ='Cat' AND deleted_at IS NULL";
-                                    $result = mysqli_query($conn, $sql);
-                                    if ($result) {
-                                        $row = mysqli_fetch_assoc($result);
-                                        $totalcats = $row['totalcats'];
-                                    }
-                                    ?>
-                                    <div class="single_adapt text-center">
-                                        <img src="img/adapt_icon/3.png" alt="">
-                                        <div class="adapt_content">
-                                            <h3><span class="counter"><?= $totalcats ?></span>+</h3>
-                                            <p>Cats Available</p>
-                                        </div>
-                                    </div>
-                                    <?php
-                                    // Make a query to get the total registered shelter accounts by COUNTing all the user with role id == 2
-                                    $sql = "SELECT COUNT(pet_id) AS totaldogs FROM adoptee_tbl WHERE pet_specie ='Dog' AND deleted_at IS NULL";
-                                    $result = mysqli_query($conn, $sql);
-                                    if ($result) {
-                                        $row = mysqli_fetch_assoc($result);
-                                        $totaldogs = $row['totaldogs'];
-                                    }
-                                    ?>
-                                    <div class="single_adapt text-center">
-                                        <img src="img/adapt_icon/2.png" alt="">
-                                        <div class="adapt_content">
-                                            <h3><span class="counter"><?= $totaldogs ?></span>+</h3>
-                                            <p>Dogs Available</p>
-                                        </div>
+        <!-- TOTAL COUNTS HOME AREA  -->
+            <div class="row justify-content-center">
+                <div class="adapt_area">
+                    <div class="container">
+                        <!-- <div class="row justify-content-between align-items-center"> -->
+                            <div class="col-lg-5">
+                                <div class="adapt_help">
+                                    <div class="section_title">
+                                        <h3></h3>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                            <!-- <div class="col-lg-6"> -->
+                                
+                                <div class="adapt_about"> <!-- STYLE INSIDE BOX CONTAINER -->
+                                    <div class="row align-items-center"> <!-- WIDTH OF BOX CONTAINER -->
+                                    
+                                        <!-- TOTAL ADOPTED PETS -->
+                                            <div class="col-lg-6 col-md-6">
+                                                    <?php
+                                                    // Make a query to get the total adopted pets by COUNTing all the adopted_id with city id == which shelter city id
+                                                    $sql = "SELECT COUNT(adopted_id) AS totaladoptedpet FROM adopted_tbl INNER JOIN applicationform1 ON adopted_tbl.application_id = applicationform1.application_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id";
+                                                    $result = mysqli_query($conn, $sql);
+                                                    if ($result) {
+                                                        $data = mysqli_fetch_assoc($result);
+                                                        $totaladoptedpet = $data['totaladoptedpet'];
+                                                    }
+                                                    ?>
+                                                    <div class="single_adapt text-center">
+                                                        <img src="img/adapt_icon/1.png" alt="">
+                                                        <div class="adapt_content">
+                                                            <h3 class="counter"><?= $totaladoptedpet ?></h3>
+                                                            <p>Pets Adopted</p>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                        <!-- TOTAL ADOPTED PETS -->
+
+                                        <!-- ADOPT NOW BUTTON -->
+                                            <div class="col-lg-6 col-md-9">
+                                                    <div class="pet_care_area">
+                                                        <div class="container">
+                                                            <div class="adapt_content">
+                                                                <div class="section_title">
+                                                                    <h3>
+                                                                        We need your help
+                                                                    </h3>
+                                                                    <p>
+                                                                        Adopt, don't shop. Save a life by adopting a pet from your local shelter.
+                                                                    </p>
+                                                                    <a href="pets_for_adoption.php" class="boxed-btn3">Adopt Now</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                        <!-- ADOPT NOW BUTTON -->
+
+                                        <!-- TOTAL AVAILABLE CATS -->
+                                            <div class="col-lg-6 col-md-6">
+                                                <?php
+                                                // Make a query to get the total registered shelter accounts by COUNTing all the user with role id == 2
+                                                $sql = "SELECT COUNT(pet_id) AS totalcats FROM adoptee_tbl WHERE pet_specie ='Cat' AND deleted_at IS NULL";
+                                                $result = mysqli_query($conn, $sql);
+                                                if ($result) {
+                                                    $row = mysqli_fetch_assoc($result);
+                                                    $totalcats = $row['totalcats'];
+                                                }
+                                                ?>
+                                                <div class="single_adapt text-center">
+                                                    <img src="img/adapt_icon/3.png" alt="">
+                                                    <div class="adapt_content">
+                                                        <h3><span class="counter"><?= $totalcats ?></span>+</h3>
+                                                        <p>Cats Available</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <!-- TOTAL AVAILABLE CATS -->
+
+                                        <!-- TOTAL AVAILABLE DOGS -->
+                                            <div class="col-lg-6 col-md-6">
+                                                <?php
+                                                // Make a query to get the total registered shelter accounts by COUNTing all the user with role id == 2
+                                                $sql = "SELECT COUNT(pet_id) AS totaldogs FROM adoptee_tbl WHERE pet_specie ='Dog' AND deleted_at IS NULL";
+                                                $result = mysqli_query($conn, $sql);
+                                                if ($result) {
+                                                    $row = mysqli_fetch_assoc($result);
+                                                    $totaldogs = $row['totaldogs'];
+                                                }
+                                                ?>
+                                                <div class="single_adapt text-center">
+                                                    <img src="img/adapt_icon/2.png" alt="">
+                                                    <div class="adapt_content">
+                                                        <h3><span class="counter"><?= $totaldogs ?></span>+</h3>
+                                                        <p>Dogs Available</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <!-- TOTAL AVAILABLE DOGS -->
+
+                                    </div>
+                                </div>
+                            <!-- </div> -->
+                        <!-- </div> -->
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- adapt_area_end  -->
+        <!-- TOTAL COUNTS HOME AREA  -->
 
 
 
@@ -240,6 +248,9 @@ $row = mysqli_fetch_assoc($result);
         </div>
 
     </div>
+    <!-- CONTAINS ALL FROM LIST OF SHELTERS TO WHY GO WITH WARP MESSAGE -->
+
+
     <!-- footer_start  -->
     <footer class="footer">
         <?php

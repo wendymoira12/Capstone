@@ -1709,7 +1709,7 @@ h3 {
   left: 0;
   top: 0;
   content: '';
-  background-image: url(../img/banner/prise_bg.png);
+  /* background-image: url(../img/banner/prise_bg.png); */
   height: 100%;
   width: 100%;
   opacity: .04;
@@ -3320,7 +3320,7 @@ h3 {
 /* line 30, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_adapt.scss */
 .adapt_area .adapt_about .single_adapt {
   margin-bottom: 40px;
-  box-shadow: 0px 16px 35px 0px rgba(0, 0, 2, 0.08);
+  box-shadow: 0px 16px 35px 0px rgba(227, 74, 4, 0.08);
   border-radius: 14px;
   background: #fff;
   padding: 40px 40px 33px 40px;
