@@ -176,7 +176,7 @@ if ($result->num_rows > 0) {
           
           <?php
           // Make a query to get the total registered adoptees by COUNTing all the adoptees with city id == which shelter city id
-          $sql = "SELECT COUNT(applicationresult_id) AS currentapplications FROM applicationresult_tbl INNER JOIN applicationform1 ON applicationresult_tbl.application_id  = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id = '$city_id' AND applicationresult_tbl.application_status != 'Finished'";
+          $sql = "SELECT COUNT(applicationresult_id) AS currentapplications FROM applicationresult_tbl INNER JOIN applicationform1 ON applicationresult_tbl.application_id  = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id = '$city_id' AND applicationresult_tbl.application_status != 'Finished' AND applicationresult_tbl.application_status != 'Cancelled by adopter'";
           $result = mysqli_query($conn, $sql);
           if ($result) {
             $data = mysqli_fetch_assoc($result);

@@ -32,7 +32,6 @@ if (isset($_POST['submit-login'])) {
     }
   } else {
     echo "<script>alert('Oops! Email or Password is incorrect')</script>";
-    echo 'Error: ' . mysqli_error($conn);
   }
 }
 

@@ -60,8 +60,8 @@ $row = mysqli_fetch_assoc($result);
                     <div class="col-lg-5 col-md-6">
                         <div class="slider_text">
                             <h3>Adopt from<br> <span>Animal Shelters</span></h3>
-                            <p><b> Our listings include all ages and sizes, giving you plenty of options to choose from. 
-                                We partner with local shelters and rescues to provide you with the cutest selection of pets in Metro Manila.</b> </hp>
+                            <p><b> Our listings include all ages and sizes, giving you plenty of options to choose from.
+                                    We partner with local shelters and rescues to provide you with the cutest selection of pets in Metro Manila.</b> </hp>
                         </div>
                     </div>
                 </div>
@@ -132,7 +132,7 @@ $row = mysqli_fetch_assoc($result);
                         <div class="pet_info">
                             <div class="section_title">
                                 <h3><span>Adoption – because family isn’t made from blood, </span> <br>
-                                it’s made from love.</h3>
+                                    it’s made from love.</h3>
                                 <p></p>
                             </div>
                         </div>
@@ -161,11 +161,21 @@ $row = mysqli_fetch_assoc($result);
                     <div class="col-lg-6">
                         <div class="adapt_about">
                             <div class="row align-items-center">
+
                                 <div class="col-lg-6 col-md-6">
+                                    <?php
+                                    // Make a query to get the total adopted pets by COUNTing all the adopted_id with city id == which shelter city id
+                                    $sql = "SELECT COUNT(adopted_id) AS totaladoptedpet FROM adopted_tbl INNER JOIN applicationform1 ON adopted_tbl.application_id = applicationform1.application_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id";
+                                    $result = mysqli_query($conn, $sql);
+                                    if ($result) {
+                                        $data = mysqli_fetch_assoc($result);
+                                        $totaladoptedpet = $data['totaladoptedpet'];
+                                    }
+                                    ?>
                                     <div class="single_adapt text-center">
                                         <img src="img/adapt_icon/1.png" alt="">
                                         <div class="adapt_content">
-                                            <h3 class="counter">452</h3>
+                                            <h3 class="counter"><?= $totaladoptedpet ?></h3>
                                             <p>Pets Adopted</p>
                                         </div>
                                     </div>
@@ -173,7 +183,7 @@ $row = mysqli_fetch_assoc($result);
                                 <div class="col-lg-6 col-md-6">
                                     <?php
                                     // Make a query to get the total registered shelter accounts by COUNTing all the user with role id == 2
-                                    $sql = "SELECT COUNT(pet_id) AS totalcats FROM adoptee_tbl WHERE pet_specie ='Cat'";
+                                    $sql = "SELECT COUNT(pet_id) AS totalcats FROM adoptee_tbl WHERE pet_specie ='Cat' AND deleted_at IS NULL";
                                     $result = mysqli_query($conn, $sql);
                                     if ($result) {
                                         $row = mysqli_fetch_assoc($result);
@@ -189,7 +199,7 @@ $row = mysqli_fetch_assoc($result);
                                     </div>
                                     <?php
                                     // Make a query to get the total registered shelter accounts by COUNTing all the user with role id == 2
-                                    $sql = "SELECT COUNT(pet_id) AS totaldogs FROM adoptee_tbl WHERE pet_specie ='Dog'";
+                                    $sql = "SELECT COUNT(pet_id) AS totaldogs FROM adoptee_tbl WHERE pet_specie ='Dog' AND deleted_at IS NULL";
                                     $result = mysqli_query($conn, $sql);
                                     if ($result) {
                                         $row = mysqli_fetch_assoc($result);
