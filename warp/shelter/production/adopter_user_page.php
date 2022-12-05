@@ -166,8 +166,8 @@ if ($result->num_rows > 0) {
                         <a>
                           <span class="image"><?php echo '<img src="images/logo/' . $notif['city_img'] . '" alt="shelter logo"'; ?></span>
                           <span>
-                            <span style="font-weight: 900;"><?php echo $notif['city_name']; ?></span><br>
-                            <span><?php echo $notif['adopternotif_date']; ?></span>
+                            <span><?php echo $notif['adopternotif_date']; ?></span><br>
+                            <span style="font-weight: 900;"><?php echo $notif['city_name']; ?></span>
                           </span>
                           <span class="message">
                             <?php

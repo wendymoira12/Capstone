@@ -20,8 +20,8 @@ $count = mysqli_num_rows($sql_get);
         <a>
             <span class="image"><img src="images/user.png" alt="Profile Image" /></span>
             <span>
-            <span style="font-weight: 900;"><?php echo $notif['adopter_fname'] . ' ' . $notif['adopter_lname']; ?></span><br>
-            <span><?php echo $notif['shelternotif_date']; ?></span>
+            <span><?php echo $notif['shelternotif_date']; ?></span><br>
+            <span style="font-weight: 900;"><?php echo $notif['adopter_fname'] . ' ' . $notif['adopter_lname']; ?></span>
             </span>
             <span class="message">
             <?php echo $notif['message'] . ' ' . $notif['pet_name']; ?>
