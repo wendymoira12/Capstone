@@ -211,7 +211,24 @@ if ($result->num_rows > 0) {
                             <td><?= $data['application_status']; ?></td>
                             <td>
                               <a href="shelter_application_view.php?id=<?= $data['application_id']; ?>">
-                                <button type="button" class="btn btn-round btn-success">View Application</button>
+                                  <?php
+                                    $app_id = $data['application_id'];
+                                    $disable = "SELECT application_id, application_status from applicationresult_tbl WHERE application_id='$app_id'";
+                                    $qdisable = mysqli_query($conn, $disable); 
+                                  ?>
+                                <button type="button" class="btn btn-round btn-success"
+                                  <?php
+                                  
+                                  if ($qdisable->num_rows != 0) {
+                                          $fdisable = mysqli_fetch_assoc($qdisable);
+                                          $var=$fdisable['application_status'];
+
+                                          if ($var != "Pending") {
+                
+                                            ?> disabled <?php 
+                                            }
+                                          }
+                                      ?>>View Application</button>
                               </a>
 
                               <a href="view_adopter.php?id=<?= $data['adopter_id']; ?>">

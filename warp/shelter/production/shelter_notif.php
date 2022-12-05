@@ -21,7 +21,7 @@ $count = mysqli_num_rows($sql_get);
             <span class="image"><img src="images/user.png" alt="Profile Image" /></span>
             <span>
             <span><?php echo $notif['adopter_fname'] . ' ' . $notif['adopter_lname']; ?></span>
-            <!-- <span class="time">3 mins ago</span> -->
+            <span class="time"><?php echo $notif['shelternotif_date']; ?></span>
             </span>
             <span class="message">
             <?php echo $notif['message'] . ' ' . $notif['pet_name']; ?>
