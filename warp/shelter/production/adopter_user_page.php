@@ -274,6 +274,7 @@ if ($result->num_rows > 0) {
                               <td>
                                 <a href="adopter_application_view.php?id=<?= $data['application_id']; ?>">
                                   <?php
+                                    $app_id = $data['application_id'];
                                     $disable = "SELECT application_id, application_status from applicationresult_tbl WHERE application_id='$app_id'";
                                     $qdisable = mysqli_query($conn, $disable); 
                                   ?>
