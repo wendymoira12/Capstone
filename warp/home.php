@@ -97,7 +97,7 @@ $row = mysqli_fetch_assoc($result);
 
                             <div class="col-lg-4 col-md-6">
                                 <div class="single_service">
-                                    <a href="animal-shelter-page.php?id=<?php echo $row['city_id']; ?>">
+                                    <a href="animal-shelter-page.php?id=<?= $row['city_id']; ?>&page=1">
                                         <!-- removed service_icon_bg_1 -->
                                         <div class="service_thumb d-flex align-items-center justify-content-center">
                                             <div class="service_icon">

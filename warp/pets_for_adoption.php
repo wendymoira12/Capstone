@@ -1,5 +1,7 @@
 <?php
+
 use LDAP\Result;
+
 include 'config.php';
 include('connect/connection.php');
 session_start();
@@ -11,18 +13,12 @@ session_start();
 ?>
 <?php
 if (isset($_GET['page'])) {
-    $page = $_GET['page'];
+    $page_no = $_GET['page'];
 } else {
-    $page = 1;
+    $page_no = 1;
 }
 ?>
-<?php
-$num_per_page = 9;
-$start_from = ($page - 1) * 9;
 
-$query = "SELECT * FROM warp_capstone.adoptee_tbl WHERE deleted_at IS NULL LIMIT $start_from,$num_per_page ";
-$result = mysqli_query($conn, $query);
-?>
 
 <!doctype html>
 <html class="no-js" lang="zxx">
@@ -108,6 +104,23 @@ $result = mysqli_query($conn, $query);
 
                 <div class="portfolio-gallery">
                     <?php
+
+                    $num_per_page = 3;
+                    $offset = ($page_no - 1) * $num_per_page;
+
+                    $previous_page = $page_no - 1;
+                    $next_page = $page_no + 1;
+
+                    // Query to get the total count of records
+                    $pr_query = "SELECT COUNT(*) as total_records FROM warp_capstone.adoptee_tbl WHERE deleted_at IS NULL";
+                    $pr_result = mysqli_query($conn, $pr_query);
+                    $records = mysqli_fetch_array($pr_result);
+                    $total_record = $records['total_records'];
+                    $total_page = ceil($total_record / $num_per_page);
+
+                    $query = "SELECT * FROM adoptee_tbl WHERE deleted_at IS NULL LIMIT $offset,$num_per_page ";
+                    $result = mysqli_query($conn, $query);
+
                     if (mysqli_num_rows($result) > 0) {
                         foreach ($result as $data) {
                     ?>
@@ -139,33 +152,19 @@ $result = mysqli_query($conn, $query);
                 </div>
             </div>
         </div>
-        <?php
-
-        $pr_query = "SELECT * FROM adoptee_tbl";
-        $pr_result = mysqli_query($conn, $pr_query);
-        $total_record = mysqli_num_rows($pr_result);
-
-        $total_page = ceil($total_record / $num_per_page);
-        ?>
         <nav aria-label="Page navigation example">
             <div class="page">
                 <ul class="pagination">
-                    <li class="page item">
-                        <?php
-                        if ($page > 1) {
-                            echo "<a href='pets_for_adoption.php?page=" . ($page - 1) . "' class='page-item'>Previous</a>";
-                        }
+                    <li class="page-item"><a class="page-link <?= ($page_no <= 1) ? 'disabled' : '' ?>" <?= ($page_no > 1) ? 'href=?page=' . $previous_page : ''; ?>>Previous</a></li>
 
-                        for ($i = 1; $i < $total_page; $i++) {
-                            echo "<a href='pets_for_adoption.php?page=" . $i . "' class='page-item'>$i</a>";
-                        }
-
-                        if ($i > $page) {
-                            echo "<a href='pets_for_adoption.php?page=" . ($page + 1) . "' class='page-item'>Next</a>";
-                        }
-
-                        ?>
-                    </li>
+                    <?php for ($counter = 1; $counter <= $total_page; $counter++) { ?>
+                        <?php if ($page_no != $counter) { ?>
+                            <li class="page-item"><a class="page-link" href="?page=<?= $counter; ?>"><?= $counter ?></a></li>
+                        <?php } else { ?>
+                            <li class="page-item"><a class="page-link active"><?= $counter ?></a></li>
+                        <?php } ?>
+                    <?php } ?>
+                    <li class="page-item"><a class="page-link <?= ($page_no >= $total_page) ? 'disabled' : ''; ?>" <?= ($page_no < $total_page) ? 'href=?page=' . $next_page : ''; ?>>Next</a></li>
                 </ul>
             </div>
         </nav>
