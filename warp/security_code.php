@@ -1,7 +1,4 @@
 <?php session_start() ?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="css/login.css" />
-  <title>Sign in & Sign up Form</title>
+  <title>Verify Account</title>
   <!------ <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> ---------->
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -48,10 +45,6 @@
   <div class="panels-container">
     <div class="panel left-panel">
       <div class="content">
-        <h3></h3>
-        <p>
-        </p>
-
       </div>
       <img src="img/WARP_Logo_Orange.png" class="image" alt="" />
     </div>
@@ -77,7 +70,7 @@ if (isset($_POST["verify"])) {
   ?>
     <script>
       alert("Verify account done, you may reset your password now");
-      window.location.replace("reset-pw.php");
+      window.location.replace("reset_pw.php");
     </script>
 <?php
   }
