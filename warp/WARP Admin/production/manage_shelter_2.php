@@ -182,91 +182,99 @@ if (isset($_POST['submit'])) {
         </div>
       </div>
       <!-- /top navigation -->
+
       <!--======================================================== FORM =========================================================================-->
       <!-- page content -->
       <div class="right_col" role="main">
         <div class="">
           <div class="page-title">
             <div class="title_left">
-              <h3>Manage Shelter</h3><br>
+              <h3>Manage Shelter: Step 2</h3><br>
             </div>
             <div class="clearfix"></div>
-            <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Create Shelter Account</h2>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-                    <br />
-                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">City*</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <?php
-                          //To query the city names and id from city table
-                          $sql = "SELECT city_id, city_name FROM city_tbl WHERE deleted_at IS NULL";
-                          $result = mysqli_query($conn, $sql);
-                          ?>
-                          <select class="select2_single form-control" tabindex="-1" name="select_city">
+              <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="x_panel">
+
+                    <div class="x_title">
+                      <h2>Create Shelter Staff Account</h2>
+                      <div class="clearfix"></div>
+                    </div>
+
+                    <div class="x_content">
+                      <br>
+                      <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+                        <div class="form-group">
+
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12">City*</label>
+
+                          <div class="col-md-6 col-sm-6 col-xs-12">
                             <?php
-                            if ($result->num_rows > 0) {
-                              foreach ($result as $row) {
+                            //To query the city names and id from city table
+                            $sql = "SELECT city_id, city_name FROM city_tbl WHERE deleted_at IS NULL";
+                            $result = mysqli_query($conn, $sql);
                             ?>
-                                <option value="<?= $row['city_id'] ?>"><?= $row['city_name'] ?></option>
-                            <?php
+                            <select class="select2_single form-control" tabindex="-1" name="select_city">
+                              <?php
+                              if ($result->num_rows > 0) {
+                                foreach ($result as $row) {
+                              ?>
+                                  <option value="<?= $row['city_id'] ?>"><?= $row['city_name'] ?></option>
+                              <?php
+                                }
                               }
-                            }
-                            ?>
-                          </select>
+                              ?>
+                            </select>
+                          </div>
+
                         </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Full Name<span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="name" name="name" required="required" class="form-control col-md-7 col-xs-12">
+
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Full Name<span class="required">*</span>
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" id="name" name="name" required="required" class="form-control col-md-7 col-xs-12">
+                          </div>
                         </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="position">Position<span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="position" name="position" required="required" class="form-control col-md-7 col-xs-12">
+
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="position">Position<span class="required">*</span>
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" id="position" name="position" required="required" class="form-control col-md-7 col-xs-12">
+                          </div>
                         </div>
-                      </div>
-                      <div class="ln_solid"></div>
-                      <div class="form-group">
-                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <button class="btn btn-primary" type="reset">Reset</button>
-                          <button type="submit" class="btn btn-success" name="submit">Submit</button>
+
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                          <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                            <button class="btn btn-primary" type="reset">Reset</button>
+                            <button type="submit" class="btn btn-success" name="submit">Submit</button>
+                          </div>
                         </div>
-                      </div>
-                    </form>
+
+                      </form>
+                    </div>
+                    
                   </div>
                 </div>
               </div>
             </div>
+
+            <!--======================================================== END OF FORM =========================================================================-->
+
+            <!-- /page content -->
           </div>
-
-          <!--======================================================== END OF FORM =========================================================================-->
-
-
-
-          <!-- /page content -->
-
-          <!-- footer content -->
-          <footer>
-            <!-- <div class="pull-right">
-        Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
-      </div> -->
-            <div class="clearfix"></div>
-          </footer>
-          <!-- /footer content -->
         </div>
       </div>
+            
+      <!-- footer content -->
+            <footer>
 
+            </footer>
+      <!-- /footer content -->
+
+      
       <!-- jQuery -->
       <script src="../vendors/jquery/dist/jquery.min.js"></script>
       <!-- Bootstrap -->
