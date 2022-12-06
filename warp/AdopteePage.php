@@ -396,27 +396,47 @@ if (isset($_POST['submit'])) {
                     $disable = "SELECT adopter_id, application_status from applicationform1, applicationresult_tbl WHERE applicationform1.adopter_id='$adopter_id' ORDER BY applicationresult_tbl.application_id DESC;";
                     $qdisable = mysqli_query($conn, $disable);
 
-                    //$mdisable = "SELECT application_id, monitoring_status from adopted_tbl,applicationform1 WHERE applicationform1.adopter_id='$adopter_id' AND applicationform1.application_id=adopted_tbl.application_id ORDER BY applicationform1.application_id DESC;";
-                    //$mgdisable = mysqli_query($conn, $mdisable);
-                    //$mfgdisable = mysqli_fetch_assoc($conn, $mGdisable);
+                    /* GET YUNG CURRENT DATE TAS ICOCOMPARE SA DATABASE NG APPLICATIONFORM1 DATE_SUBMITTED COLUMN */
+                    $timezone = date_default_timezone_set('Asia/Manila');
+                    // echo "$timezone";
+                    $date = date('Y-m-d');
+                    // echo "$date";
+                    $disable2 = "SELECT application_id from applicationform1 WHERE adopter_id='$adopter_id' AND date_submitted = '$date';";
+                    $qdisable2 = mysqli_query($conn, $disable2);
+                    $cfdisable = mysqli_num_rows($qdisable2);
 
+                    
+                    /* PAG AFTER NA MAMONITOR TSAKA PWEDE ULI MAGADOPT */
+                    $monitor = "SELECT monitoring_status from applicationform1, adopted_tbl WHERE applicationform1.adopter_id='$adopter_id' AND applicationform1.application_id = adopted_tbl.application_id ORDER BY applicationform1.application_id DESC;";
+                    $monitoring = mysqli_query($conn, $disable);
+
+                    if ($monitoring->num_rows != 0) {
+                      $mmonitoring = mysqli_fetch_assoc($monitoring);
+                      // $var2 = $mmonitoring['monitoring_status'];
+                    }
 
 
                     ?>
-                    <button type="button" class="btn btn-primary btn-lg show-modal" data-toggle="modal" data-target="#myModal" <?php
-                                                                                                                                if ($qdisable->num_rows != 0) {
-                                                                                                                                  $fdisable = mysqli_fetch_assoc($qdisable);
-                                                                                                                                  //$mfdisable = mysqli_fetch_assoc($conn, $mgdisable);
-                                                                                                                                  $var = $fdisable['application_status'];
-                                                                                                                                  //$var2=$mfdisable['monitoring_status'];
+                    <button type="button" class="btn btn-primary btn-lg show-modal" data-toggle="modal" data-target="#myModal" 
+                      
+                      <?php
+                      if ($qdisable->num_rows != 0) {
+                        $fdisable = mysqli_fetch_assoc($qdisable);
+                        $var = $fdisable['application_status'];
+                      
+                           /* IF HINDI CANCELLED BY ADOPTER YUNG STATUS - DISABLED YUNG BUTTON, 
+                            IF NAKA 3 PASA NA NG APPLICATION YUNG  ADOPTER DISABLED ULI */
 
-                                                                                                                                  if ($var == "Pending" or $var == "Scheduled") {
+                            // MONITORING STATUS NA LANG PAG DONE DAPAT TSAKA PWEDE MAGADOPT
 
-                                                                                                                                ?> disabled <?php
-                                                                                                                                  }
-                                                                                                                                }
-                                            ?>>
-                      Adopt Me!
+                          if (($var == "Pending") OR ($var == "Scheduled") OR $cfdisable >= 3) {
+
+                            ?> disabled <?php
+                            }
+                          }
+                      ?>
+                      >
+                        Adopt Me!
                     </button>
 
                     <!-- Modal -->
