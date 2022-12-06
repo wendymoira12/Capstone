@@ -398,12 +398,13 @@ if (isset($_POST['submit'])) {
 
                     /* GET YUNG CURRENT DATE TAS ICOCOMPARE SA DATABASE NG APPLICATIONFORM1 DATE_SUBMITTED COLUMN */
                     $timezone = date_default_timezone_set('Asia/Manila');
-                    // echo "$timezone";
+                    //echo "$timezone";
                     $date = date('Y-m-d');
-                    // echo "$date";
-                    $disable2 = "SELECT application_id from applicationform1 WHERE adopter_id='$adopter_id' AND date_submitted = '$date';";
+                    //echo "$date";
+                    $disable2 = "SELECT application_id FROM applicationform1 WHERE adopter_id='$adopter_id' AND date_submitted = '$date';";
                     $qdisable2 = mysqli_query($conn, $disable2);
-                    $cfdisable = mysqli_num_rows($qdisable2);
+                    $datedisable = mysqli_num_rows($qdisable2);
+                    //echo $datedisable;
 
                     
                     /* PAG AFTER NA MAMONITOR TSAKA PWEDE ULI MAGADOPT */
@@ -429,7 +430,7 @@ if (isset($_POST['submit'])) {
 
                             // MONITORING STATUS NA LANG PAG DONE DAPAT TSAKA PWEDE MAGADOPT
 
-                          if (($var == "Pending") OR ($var == "Scheduled") OR $cfdisable >= 3) {
+                          if ((($var == "Pending") OR ($var == "Scheduled")) OR $datedisable >= 3) {
 
                             ?> disabled <?php
                             }
