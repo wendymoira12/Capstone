@@ -184,7 +184,7 @@ if ($result->num_rows > 0) {
           }
           ?>
           <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-            <span class="count_top"><i class="fa fa-paw"></i> No. of Current Applications</span>
+            <span class="count_top"><i class="fa fa-file-text"></i> Ongoing Applications </span>
             <div class="count"><?= $currentapplications ?></div>
           </div>
 
@@ -226,7 +226,7 @@ if ($result->num_rows > 0) {
           }
           ?>
           <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-            <span class="count_top"><i class="fa fa-user"></i> Total Applications</span>
+            <span class="count_top"><i class="fa fa-file-text"></i> Total Received Applications</span>
             <div class="count"><?= $totalapplications ?></div>
           </div>
         </div>
