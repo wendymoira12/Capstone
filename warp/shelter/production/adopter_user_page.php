@@ -147,6 +147,9 @@ if ($result->num_rows > 0) {
                 $resultr = mysqli_query($conn, $sqlr);
                 $count = mysqli_num_rows($resultr);
 
+                $date = mysqli_fetch_assoc($resultr);
+                include "time_ago_adopter.php";
+
                 /*$sql_get = mysqli_query($conn, "SELECT * FROM adopternotif_tbl INNER JOIN applicationform1 ON adopternotif_tbl.application_id = applicationform1.application_id INNER JOIN schedule_tbl ON applicationform1.schedule_id = schedule_tbl.schedule_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id WHERE adopternotif_tbl.status = 0"); //PANO Q GAGAWIN YUNG SCHEDULE_TBL.APPLICATION_ID = APPLICATIONFORM1.APPLICATION_ID para tama yung dates dun sa notif
                 $count = mysqli_num_rows($sql_get);*/
 
@@ -166,8 +169,12 @@ if ($result->num_rows > 0) {
                         <a>
                           <span class="image"><?php echo '<img src="images/logo/' . $notif['city_img'] . '" alt="shelter logo"'; ?></span>
                           <span>
-                            <span><?php echo $notif['adopternotif_date']; ?></span><br>
-                            <span style="font-weight: 900;"><?php echo $notif['city_name']; ?></span>
+                            <span class="time">
+                              <?php 
+                              $unixTimestamp = convertToUnixTimestamp($notifAt);
+                              echo convertToAgoFormat($unixTimestamp);
+                              ?></span>
+                            <span"><?php echo $notif['city_name']; ?></span>
                           </span>
                           <span class="message">
                             <?php

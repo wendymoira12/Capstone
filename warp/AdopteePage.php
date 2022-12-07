@@ -123,7 +123,7 @@ if (isset($_POST['submit'])) {
   }
 
   //Notification after submitting an application for an adoptee
-  $msg = 'This adopter has submitted an adoption applicaion for pet';
+  $msg = 'This adopter has submitted an adoption application for pet';
   $sql_insert1 = mysqli_query($conn, "INSERT INTO shelternotif_tbl(application_id, message) VALUES('$app_id', '$msg')");
   if($sql_insert1){
     echo"<script>alert('Successfully sent adoption application')</script>";
