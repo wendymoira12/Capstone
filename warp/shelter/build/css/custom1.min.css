@@ -872,7 +872,7 @@ a:visited {
     font-size: 26px;
 }
 .nav.child_menu > li > a {
-    color: rgba(255, 255, 255, 0.75);
+    color: #ff843a;
     font-size: 12px;
     padding: 9px;
 }

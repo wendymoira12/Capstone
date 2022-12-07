@@ -114,6 +114,8 @@ if ($result->num_rows > 0) {
                 </li>
                 <li><a href="shelter_adopted_list.php"><i class="fa fa-paw"></i> Adopted Pet List </a>
                 </li>
+                <li><a href="generate_reports.php"><i class="fa fa-paw"></i> Generate Reports </a>
+                </li>
               </ul>
             </div>
 
