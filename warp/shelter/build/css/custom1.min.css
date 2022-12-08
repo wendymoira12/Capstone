@@ -336,7 +336,7 @@ table.tile_info td p {
 }
 .nav_menu {
     float: left;
-    background: #ededed;
+    background: #fdfdfd;
     border-bottom: 1px solid #d9dee4;
     margin-bottom: 10px;
     width: 100%;
@@ -368,11 +368,10 @@ body .container.body .right_col {
     margin-left: 230px;
 }
 .nav_title {
-    width: 230px;
+    width: 0px;
     float: left;
-    background: #ff843c;
     border-radius: 0;
-    height: 57px;
+    height: 0px;
 }
 @media (max-width: 991px) {
     .nav-md .container.body .right_col,
@@ -496,7 +495,7 @@ body .container.body .right_col {
     background: #d9dee4;
 }
 body {
-    color: #73879c;
+    color: #180b02;
     background: #fffeff;
     font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
     font-size: 13px;
@@ -872,7 +871,7 @@ a:visited {
     font-size: 26px;
 }
 .nav.child_menu > li > a {
-    color: rgba(255, 255, 255, 0.75);
+    color: #ff843a;
     font-size: 12px;
     padding: 9px;
 }
