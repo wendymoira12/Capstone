@@ -61,15 +61,13 @@ if ($result->num_rows > 0) {
   <link rel="stylesheet" href="/warp/shelter/production/css/style.css">
 
 </head>
-
 <body class="nav-md">
-  <div class="container body">
-    <div class="main_container">
-      <div class="col-md-3 left_col menu_fixed">
-        <div class="left_col scroll-view">
-          <div class="logo">
-          </div>
-          <div class="clearfix"></div>
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title">
+            </div>
 
 
           <!-- menu profile quick info -->
@@ -114,8 +112,14 @@ if ($result->num_rows > 0) {
                 </li>
                 <li><a href="shelter_adopted_list.php"><i class="fa fa-paw"></i> Adopted Pet List </a>
                 </li>
-                <li><a href="generate_reports.php"><i class="fa fa-paw"></i> Generate Reports </a>
-                </li>
+                <li><a><i class="fa fa-print"></i> Generate Reports <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="report_shelter_adoptee_list.php"><i class="fa fa-table"></i>Adoptee List</a>
+                        <li><a href="report_shelter_application_list.php"><i class="fa fa-table"></i>Application List</a>
+                        <li><a href="report_shelter_schedule_list.php"><i class="fa fa-table"></i>Schedule List</a>
+                        <li><a href="report_shelter_adopted_list.php"><i class="fa fa-table"></i>Adopted List</a>
+                        </li>
+                    </ul>
               </ul>
             </div>
 
@@ -259,13 +263,13 @@ if ($result->num_rows > 0) {
             <div class="col-md-6 col-sm-6 col-xs-12" style="border:0px solid #e5e5e5;">
               <h3 class="x_title"><?php echo $row['city_name']; ?> </h3>
               <div class="clearfix"></div>
-              <h2>About us</h2>
+              <h2><strong>About us</strong></h2>
               <p><?php echo $row['city_about']; ?></p>
               <br>
-              <h2>Contact us</h2>
+              <h2><strong>Contact us</strong></h2>
               <p><?php echo $row['city_contact']; ?></p>
               <br>
-              <h2>Email Address</h2>
+              <h2><strong>Email Address</strong></h2>
               <p> <?php echo $row['city_email']; ?> </p>
               <br>
               <a href="shelter_account_edit.php?city_id=<?php echo $row['city_id']; ?>">
