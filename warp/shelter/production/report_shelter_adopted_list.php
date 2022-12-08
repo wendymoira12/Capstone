@@ -64,52 +64,9 @@ if ($result->num_rows > 0) {
 </head>
 
 <body class="nav-md">
-  <div class="container body">
-    <div class="main_container">
-      <div class="col-md-3 left_col menu_fixed">
-        <div class="left_col scroll-view">
-          <div class="logo">
-
-          </div>
-          <div class="clearfix"></div>
-
-
-          <!-- menu profile quick info -->
-          <div class="profile clearfix">
-            <a href="">
-              <img src="images/logo.png" alt="">
-            </a>
-            <div class="profile_pic">
-              <img src="/Capstone/warp/shelter/production/images/logo/<?= $row['city_img']; ?>" alt="..." class="img-circle profile_img">
-            </div>
-            <div class="profile_info">
-              <span>Welcome,</span>
-              <h2>
-                <?php
-                echo $row['shelteruser_name'] . ',';
-                ?>
-                <br>
-                <?php
-                echo $row['shelteruser_position'];
-                ?>
-              </h2>
-            </div>
-          </div>
-          <!-- /menu profile quick info -->
-
-          <br />
-
-          <!-- sidebar menu -->
-          <?php
+<?php
                 include "sidebar.php";
                 ?>
-          <!-- /sidebar menu -->
-
-          <!-- /menu footer buttons -->
-
-          <!-- /menu footer buttons -->
-        </div>
-      </div>
 
       <!-- top navigation -->
       <div class="top_nav">

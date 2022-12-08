@@ -935,7 +935,7 @@ a:visited {
 .nav li li.current-page a,
 .nav.child_menu li li a.active,
 .nav.child_menu li li a:hover {
-    color: #fff;
+    color: rgb(228, 24, 228);
 }
 
 .nav.child_menu li li.active,
