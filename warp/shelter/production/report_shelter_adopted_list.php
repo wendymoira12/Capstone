@@ -100,26 +100,9 @@ if ($result->num_rows > 0) {
           <br />
 
           <!-- sidebar menu -->
-          <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-            <div class="menu_section">
-              <h3>General</h3>
-              <ul class="nav side-menu">
-                <li><a href="shelter_account.php"><i class="fa fa-home"></i> Account </a>
-                </li>
-                <li><a href="shelter_adoptee_info.php"><i class="fa fa-edit"></i> Add Adoptee info </a>
-                </li>
-                <li><a href="shelter_adoptee_list.php"><i class="fa fa-paw"></i> Pet Adoptee List </a>
-                </li>
-                <li><a href="shelter_application_list.php"><i class="fa fa-paw"></i> Application List </a>
-                </li>
-                <li><a href="shelter_schedule_list.php"><i class="fa fa-paw"></i> Schedule List </a>
-                </li>
-                <li><a href="shelter_adopted_list.php"><i class="fa fa-paw"></i> Adopted Pet List </a>
-                </li>
-              </ul>
-            </div>
-
-          </div>
+          <?php
+                include "sidebar.php";
+                ?>
           <!-- /sidebar menu -->
 
           <!-- /menu footer buttons -->

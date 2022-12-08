@@ -77,203 +77,147 @@ if ($result->num_rows > 0) {
 </head>
 
 <body class="nav-md">
-  <div class="container body">
-    <div class="main_container">
-      <div class="col-md-3 left_col menu_fixed">
-        <div class="left_col scroll-view">
-          <div class="logo">
-          </div>
-          <div class="clearfix"></div>
+  <?php
+  include "sidebar.php";
+  ?>
 
+  <!-- top navigation -->
+  <div class="top_nav">
+    <div class="nav_menu">
+      <nav>
+        <div class="nav toggle">
+          <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+        </div>
 
-          <!-- menu profile quick info -->
-          <div class="profile clearfix">
-            <a href="">
-              <img src="images/logo.png" alt="">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="">
+            <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+              <img src="/Capstone/warp/shelter/production/images/logo/<?= $row['city_img']; ?>" alt=""><?php echo $_SESSION['user-email'] ?>
+              <span class=" fa fa-angle-down"></span>
             </a>
-            <div class="profile_pic">
-              <img src="/Capstone/warp/shelter/production/images/logo/<?= $row['city_img']; ?>" alt="..." class="img-circle profile_img">
-            </div>
-            <div class="profile_info">
-              <span>Welcome,</span>
-              <h2>
-                <?php
-                echo $row['shelteruser_name'] . ',';
-                ?>
-                <br>
-                <?php
-                echo $row['shelteruser_position'];
-                ?>
-              </h2>
-            </div>
-          </div>
-          <!-- /menu profile quick info -->
+            <ul class="dropdown-menu dropdown-usermenu pull-right">
+              <li><a href="changepass.php"><i class="fa fa-wrench pull-right"></i>Change Password</a></li>
+              <li><a href="/Capstone/warp/logout.php?logout"><i class="fa fa-sign-out pull-right"></i>Log Out</a></li>
+            </ul>
+          </li>
+          <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
+            <!-- NOTIF START -->
+            <?php
+            include "shelter_notif.php";
+            ?>
+            <!-- NOTIF END -->
 
-          <br />
-
-          <!-- sidebar menu -->
-          <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-            <div class="menu_section">
-              <h3>General</h3>
-              <ul class="nav side-menu">
-                <li><a href="shelter_account.php"><i class="fa fa-home"></i> Account </a>
-                </li>
-                <li><a href="shelter_adoptee_info.php"><i class="fa fa-edit"></i> Add Adoptee info </a>
-                </li>
-                <li><a href="shelter_adoptee_list.php"><i class="fa fa-paw"></i> Pet Adoptee List </a>
-                </li>
-                <li><a href="shelter_application_list.php"><i class="fa fa-paw"></i> Application List </a>
-                </li>
-                <li><a href="shelter_schedule_list.php"><i class="fa fa-paw"></i> Schedule List </a>
-                </li>
-                <li><a href="shelter_adopted_list.php"><i class="fa fa-paw"></i> Adopted Pet List </a>
-                </li>
-              </ul>
-            </div>
-
-          </div>
-          <!-- /sidebar menu -->
-
-        </div>
-      </div>
-
-      <!-- top navigation -->
-      <div class="top_nav">
-        <div class="nav_menu">
-          <nav>
-            <div class="nav toggle">
-              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-            </div>
-
-            <ul class="nav navbar-nav navbar-right">
-              <li class="">
-                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="/Capstone/warp/shelter/production/images/logo/<?= $row['city_img']; ?>" alt=""><?php echo $_SESSION['user-email'] ?>
-                  <span class=" fa fa-angle-down"></span>
-                </a>
-                <ul class="dropdown-menu dropdown-usermenu pull-right">
-                  <li><a href="changepass.php"><i class="fa fa-wrench pull-right"></i>Change Password</a></li>
-                  <li><a href="/Capstone/warp/logout.php?logout"><i class="fa fa-sign-out pull-right"></i>Log Out</a></li>
-                </ul>
-              </li>
-              <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
-                <!-- NOTIF START -->
-                <?php
-                include "shelter_notif.php";
-                ?>                
-                <!-- NOTIF END -->
-
-          </nav>
-        </div>
-      </div>
-      <!-- /top navigation -->
-
-      <!-- page content -->
-      <div class="right_col" role="main">
-
-
-        <?php
-        $sql = "SELECT adopter_fname, adopter_lname, adopter_cnum, adopter_currentadd, adopter_permanentadd FROM adopter_tbl WHERE adopter_id = '$adopter_id'";
-        $result = mysqli_query($conn, $sql);
-
-        if ($result->num_rows > 0) {
-          $data = mysqli_fetch_assoc($result);
-        } else {
-          echo "Adopter doesn't exist";
-        }
-
-        ?>
-        <div class="">
-          <div class="page-title">
-            <div class="title_left">
-              <h3>Adopter Information</h3>
-              <br>
-            </div>
-            <div class="title_right">
-              <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-              </div>
-            </div>
-          </div>
-
-          <div class="clearfix"></div>
-
-          <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="x_panel">
-                <div class="x_title">
-
-                  <div class="title_left">
-                    <h3><i class="fa fa-user">&nbsp;</i><?= $data['adopter_fname'] . ' ' . $data['adopter_lname']; ?></h3>
-                  </div>
-                  <div class="title_right">
-                  </div>
-                </div>
-
-                <div class="col-md-8 col-sm-12 col-xs-12" style="border:0px solid #e5e5e5;">
-                  <div class="x_content">
-                    <div class="clearfix"></div>
-                    <h2><i class="fa fa-home">&nbsp;</i>Current Address</h2>
-                    <p><?= $data['adopter_currentadd']; ?></p>
-                    <br>
-                    <h2><i class="fa fa-home">&nbsp;</i>Permanent Address</h2>
-                    <p><?= $data['adopter_permanentadd']; ?></p>
-                    <br>
-                    <h2><i class="fa fa-phone">&nbsp;</i>Contact No.</h2>
-                    <p><?= $data['adopter_cnum']; ?></p>
-                    <br>
-                    <table id="datatable" class="table table-striped table-bordered">
-                      <thead>
-                        <tr>
-                          <th>No.</th>
-                          <th>City</th>
-                          <th>Date</th>
-                          <th>Result</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php
-                        $i = 1;
-                        $sql = "SELECT city_tbl.city_name, applicationform1.date_submitted, applicationresult_tbl.application_status FROM applicationform1 INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN applicationresult_tbl ON applicationform1.application_id = applicationresult_tbl.application_id INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id WHERE applicationform1.adopter_id = '$adopter_id'";
-                        $result = mysqli_query($conn, $sql);
-                        if ($result->num_rows > 0) {
-                          foreach ($result as $rows) {
-                        ?>
-                            <tr>
-                              <td><?= $i++; ?></td>
-                              <td><?= $rows['city_name']; ?></td>
-                              <td><?= $rows['date_submitted']; ?></td>
-                              <td><?= $rows['application_status']; ?></td>
-                            </tr>
-                        <?php
-                          }
-                        }
-                        ?>
-                      </tbody>
-                    </table>
-                    <a href="javascript:history.go(-1)">
-                      <button type="button" class="btn btn-round btn-danger">Go back</button>
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- /page content -->
-
-      <!-- footer content -->
-      <footer>
-        <div class="pull-right">
-          <!-- Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a> -->
-        </div>
-        <div class="clearfix"></div>
-      </footer>
-      <!-- /footer content -->
+      </nav>
     </div>
+  </div>
+  <!-- /top navigation -->
+
+  <!-- page content -->
+  <div class="right_col" role="main">
+
+
+    <?php
+    $sql = "SELECT adopter_fname, adopter_lname, adopter_cnum, adopter_currentadd, adopter_permanentadd FROM adopter_tbl WHERE adopter_id = '$adopter_id'";
+    $result = mysqli_query($conn, $sql);
+
+    if ($result->num_rows > 0) {
+      $data = mysqli_fetch_assoc($result);
+    } else {
+      echo "Adopter doesn't exist";
+    }
+
+    ?>
+    <div class="">
+      <div class="page-title">
+        <div class="title_left">
+          <h3>Adopter Information</h3>
+          <br>
+        </div>
+        <div class="title_right">
+          <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+          </div>
+        </div>
+      </div>
+
+      <div class="clearfix"></div>
+
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+
+              <div class="title_left">
+                <h3><i class="fa fa-user">&nbsp;</i><?= $data['adopter_fname'] . ' ' . $data['adopter_lname']; ?></h3>
+              </div>
+              <div class="title_right">
+              </div>
+            </div>
+
+            <div class="col-md-8 col-sm-12 col-xs-12" style="border:0px solid #e5e5e5;">
+              <div class="x_content">
+                <div class="clearfix"></div>
+                <h2><i class="fa fa-home">&nbsp;</i>Current Address</h2>
+                <p><?= $data['adopter_currentadd']; ?></p>
+                <br>
+                <h2><i class="fa fa-home">&nbsp;</i>Permanent Address</h2>
+                <p><?= $data['adopter_permanentadd']; ?></p>
+                <br>
+                <h2><i class="fa fa-phone">&nbsp;</i>Contact No.</h2>
+                <p><?= $data['adopter_cnum']; ?></p>
+                <br>
+                <table id="datatable" class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th>No.</th>
+                      <th>City</th>
+                      <th>Date</th>
+                      <th>Result</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                    $i = 1;
+                    $sql = "SELECT city_tbl.city_name, applicationform1.date_submitted, applicationresult_tbl.application_status FROM applicationform1 INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN applicationresult_tbl ON applicationform1.application_id = applicationresult_tbl.application_id INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id WHERE applicationform1.adopter_id = '$adopter_id'";
+                    $result = mysqli_query($conn, $sql);
+                    if ($result->num_rows > 0) {
+                      foreach ($result as $rows) {
+                    ?>
+                        <tr>
+                          <td><?= $i++; ?></td>
+                          <td><?= $rows['city_name']; ?></td>
+                          <td><?= $rows['date_submitted']; ?></td>
+                          <td><?= $rows['application_status']; ?></td>
+                        </tr>
+                    <?php
+                      }
+                    }
+                    ?>
+                  </tbody>
+                </table>
+                <a href="javascript:history.go(-1)">
+                  <button type="button" class="btn btn-round btn-danger">Go back</button>
+                </a>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- /page content -->
+
+  <!-- footer content -->
+  <footer>
+    <div class="pull-right">
+      <!-- Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a> -->
+    </div>
+    <div class="clearfix"></div>
+  </footer>
+  <!-- /footer content -->
+  </div>
   </div>
 
   <!-- jQuery -->
