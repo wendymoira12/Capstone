@@ -1,5 +1,5 @@
 <?php
-$notifAt = $date['adopternotif_date'];
+$notifAt = $notifdate['adopternotif_date'];
 
 function convertToUnixTimestamp($value){
     date_default_timezone_set('Asia/Manila');
