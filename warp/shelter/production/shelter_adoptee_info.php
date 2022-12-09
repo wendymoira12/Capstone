@@ -22,6 +22,7 @@ if (isset($_POST['pet-submit'])) {
   $specie = $_POST['specie'];
   $gender = $_POST['gender'];
   $neuter = $_POST['neuter'];
+  $origin = $_POST['origin'];
   $vaccine = $_POST['vaccine'];
   // to print multiple vaccines if multiple vaccines are checked
   $chkstr = implode(", ", $vaccine);
@@ -82,7 +83,7 @@ if (isset($_POST['pet-submit'])) {
   //   echo "Your file is too large, must be less than 30mb";
   // }
 
-  if (empty($pet_img1) && empty($pet_img2) && ($pet_vid) && empty($pet_name) && empty($pet_age) && empty($color) && empty($breed) && empty($specie) && empty($gender) && empty($neuter) &&  empty($chkstr) && empty($weight) && empty($size) && empty($medrec) && empty($sociability) && empty($energy) && empty($affection) && empty($description)) {
+  if (empty($pet_img1) && empty($pet_img2) && ($pet_vid) && empty($pet_name) && empty($pet_age) && empty($color) && empty($breed) && empty($specie) && empty($gender) && empty($neuter) && empty($origin) &&  empty($chkstr) && empty($weight) && empty($size) && empty($medrec) && empty($sociability) && empty($energy) && empty($affection) && empty($description)) {
     $message[] = 'Please fill ouT all fieldS';
   } else {
     $user_id = $_SESSION['user_id'];
@@ -95,7 +96,7 @@ if (isset($_POST['pet-submit'])) {
     if ($result->num_rows > 0) {
       $row = mysqli_fetch_assoc($result);
       $city_id = $row['city_id'];
-      $sql = "INSERT INTO adoptee_tbl(pet_img1, pet_img2, pet_vid, pet_name, pet_age, pet_color, pet_breed, pet_specie, pet_gender, pet_neuter, pet_vax, pet_weight, pet_size, pet_medrec, pet_lsoc, pet_lene, pet_laff, pet_desc, city_id) VALUES('$pet_img1', '$pet_img2', '$pet_vid', '$pet_name', '$pet_age', '$color', '$breed', '$specie', '$gender', '$neuter', '$chkstr', '$weight', '$size', '$medrec', '$sociability', '$energy', '$affection', '$description', '$city_id')";
+      $sql = "INSERT INTO adoptee_tbl(pet_img1, pet_img2, pet_vid, pet_name, pet_age, pet_color, pet_breed, pet_specie, pet_gender, pet_neuter, pet_origin, pet_vax, pet_weight, pet_size, pet_medrec, pet_lsoc, pet_lene, pet_laff, pet_desc, city_id) VALUES('$pet_img1', '$pet_img2', '$pet_vid', '$pet_name', '$pet_age', '$color', '$breed', '$specie', '$gender', '$neuter', '$origin', '$chkstr', '$weight', '$size', '$medrec', '$sociability', '$energy', '$affection', '$description', '$city_id')";
 
       $result = mysqli_query($conn, $sql);
 
@@ -327,6 +328,22 @@ if ($result->num_rows > 0) {
 
                             <!-- <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default" > -->
                             <input type="radio" name="neuter" value="No" required> &nbsp; No &nbsp;
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">This pet has been<span class="required">*</label>
+
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <div class="btn-group" data-toggle="buttons">
+                            <!-- <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"> -->
+                            <input type="radio" name="origin" value="Rescued" required> &nbsp; Rescued &nbsp;
+                            </label>
+
+                            <!-- <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default" > -->
+                            <input type="radio" name="origin" value="Surrendered" required> &nbsp; Surrendered &nbsp;
                             </label>
                           </div>
                         </div>

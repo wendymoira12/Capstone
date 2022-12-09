@@ -210,7 +210,7 @@ if ($result->num_rows > 0) {
                         </div>
                       </div>
                     </div>
-
+                    
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Neuter <span class="required">*</label>
 
@@ -222,6 +222,22 @@ if ($result->num_rows > 0) {
 
                           <!-- <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default" > -->
                           <input type="radio" name="neuter" value="No" <?php echo ($data['pet_neuter'] == "No") ? "checked" : "" ?> required> &nbsp; No &nbsp;
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">This pet has been <span class="required">*</label>
+
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="btn-group" data-toggle="buttons">
+                          <!-- <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"> -->
+                          <input type="radio" name="origin" value="Rescued" <?php echo ($data['pet_origin'] == "Rescued") ? "checked" : "" ?> required> &nbsp; Rescued &nbsp;
+                          </label>
+
+                          <!-- <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default" > -->
+                          <input type="radio" name="origin" value="Surrendered" <?php echo ($data['pet_origin'] == "Surrendered") ? "checked" : "" ?> required> &nbsp; Surrendered &nbsp;
                           </label>
                         </div>
                       </div>
@@ -382,14 +398,14 @@ if ($result->num_rows > 0) {
                     <div class="form-group">
                       <label for="pet-img" class="control-label col-md-3 col-sm-3 col-xs-12">Upload Adoptee Image<span class="required">*</label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="file" accept="" name="pet-img" value="<?= $data['pet_img1'] ?>" required>
+                        <input class="form-control col-md-7 col-xs-12" type="file" accept="" name="pet-img1" value="<?= $data['pet_img1'] ?>" required>
                       </div>
                     </div>
 
                     <div class="form-group">
                       <label for="pet-img" class="control-label col-md-3 col-sm-3 col-xs-12">Upload Adoptee Image<span class="required">*</label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="file" name="pet-img1" value="<?= $data['pet_img2'] ?>" required>
+                        <input class="form-control col-md-7 col-xs-12" type="file" name="pet-img2" value="<?= $data['pet_img2'] ?>" required>
                       </div>
                     </div>
 

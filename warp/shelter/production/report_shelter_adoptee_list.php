@@ -137,6 +137,7 @@ if ($result->num_rows > 0) {
                       <th>Specie</th>
                       <th>Sex</th>
                       <th>Neuter</th>
+                      <th>This pet has been</th>
                       <th>Vax</th>
                       <th>Weight</th>
                       <th>Size</th>
@@ -165,6 +166,7 @@ if ($result->num_rows > 0) {
                           <td><?= $row['pet_specie']; ?></td>
                           <td><?= $row['pet_gender']; ?></td>
                           <td><?= $row['pet_neuter']; ?></td>
+                          <td><?= $row['pet_origin']; ?></td>
                           <td><?= $row['pet_vax']; ?></td>
                           <td><?= $row['pet_weight']; ?>kg</td>
                           <td><?= $row['pet_size']; ?></td>
