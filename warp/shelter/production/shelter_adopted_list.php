@@ -68,7 +68,34 @@ if ($result->num_rows > 0) {
   include "sidebar.php";
   ?>
   <!-- /top navigation -->
+  </div>
 
+<!-- top navigation -->
+<div class="top_nav">
+  <div class="nav_menu">
+    <nav>
+      <div class="nav toggle">
+        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+      </div>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li class="">
+          <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            <img src="/Capstone/warp/shelter/production/images/logo/<?= $row['city_img']; ?>" alt=""><?php echo $_SESSION['user-email'] ?>
+            <span class=" fa fa-angle-down"></span>
+          </a>
+          <ul class="dropdown-menu dropdown-usermenu pull-right">
+          <li><a href="/Capstone/warp/logout.php?logout"><i class="fa fa-sign-out pull-right"></i>Log Out</a></li>
+          </ul>
+        </li>
+        <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
+          <!-- NOTIF START -->
+          <?php
+          include "shelter_notif.php";
+          ?>                
+          <!-- NOTIF END -->
+
+    </nav>
   <!-- page content -->
 
   <div class="right_col" role="main">
