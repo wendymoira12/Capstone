@@ -71,114 +71,116 @@ if ($result->num_rows > 0) {
 </head>
 
 <body class="nav-md">
-  <?php
-  include "sidebar.php";
-  ?>
+  <div class="container body">
+    <div class="main_container">
+      <?php
+      include "sidebar.php";
+      ?>
 
-  <!-- top navigation -->
-  <div class="top_nav">
-    <div class="nav_menu">
-      <nav>
-        <div class="nav toggle">
-          <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-        </div>
+      <!-- top navigation -->
+      <div class="top_nav">
+        <div class="nav_menu">
+          <nav>
+            <div class="nav toggle">
+              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
 
-        <ul class="nav navbar-nav navbar-right">
-          <li class="">
-            <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-              <img src="/Capstone/warp/shelter/production/images/logo/<?= $row['city_img']; ?>" alt=""><?php echo $_SESSION['user-email'] ?>
-              <span class=" fa fa-angle-down"></span>
-            </a>
-            <ul class="dropdown-menu dropdown-usermenu pull-right">
-              <li><a href="/Capstone/warp/logout.php?logout"><i class="fa fa-sign-out pull-right"></i>Log Out</a></li>
-            </ul>
-          </li>
-          <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
-            <!-- NOTIF START -->
-            <?php
-            include "shelter_notif.php";
-            ?>
-            <!-- NOTIF END -->
+            <ul class="nav navbar-nav navbar-right">
+              <li class="">
+                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  <img src="/Capstone/warp/shelter/production/images/logo/<?= $row['city_img']; ?>" alt=""><?php echo $_SESSION['user-email'] ?>
+                  <span class=" fa fa-angle-down"></span>
+                </a>
+                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                  <li><a href="/Capstone/warp/logout.php?logout"><i class="fa fa-sign-out pull-right"></i>Log Out</a></li>
+                </ul>
+              </li>
+              <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
+                <!-- NOTIF START -->
+                <?php
+                include "shelter_notif.php";
+                ?>
+                <!-- NOTIF END -->
 
-      </nav>
-    </div>
-  </div>
-  <!-- /top navigation -->
-
-  <!-- page content -->
-
-  <div class="right_col" role="main">
-    <div class="">
-      <div class="page-title">
-        <div class="title_left">
-          <h3>List of Applications </h3>
-        </div>
-
-        <div class="title_right">
-          <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-
-          </div>
+          </nav>
         </div>
       </div>
+      <!-- /top navigation -->
 
-      <div class="clearfix"></div>
+      <!-- page content -->
 
-      <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="x_panel">
-            <div class="x_content">
+      <div class="right_col" role="main">
+        <div class="">
+          <div class="page-title">
+            <div class="title_left">
+              <h3>List of Applications </h3>
+            </div>
 
-              <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
-                <thead>
-                  <tr>
-                    <th>No.</th>
-                    <th>Adopter</th>
-                    <th>Adoptee</th>
-                    <th>Date Submitted</th>
-                    <th>System Assessment</th>
-                    <th>Application Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php
-                  $i = 1;
-                  $sql = "SELECT applicationform1.adopter_id, applicationform1.pet_id, applicationform1.date_submitted, applicationresult_tbl.application_result, applicationresult_tbl.application_status, adopter_tbl.adopter_fname, applicationresult_tbl.application_id, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, adoptee_tbl.city_id FROM applicationform1 INNER JOIN applicationresult_tbl ON applicationform1.application_id = applicationresult_tbl.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id = '$city_id'";
-                  $result = mysqli_query($conn, $sql);
-                  if ($result->num_rows > 0) {
-                    foreach ($result as $data) {
-                  ?>
-                      <tr>
-                        <td><?= $i++; ?></td>
-                        <td><?= $data['adopter_fname'] . ' ' . $data['adopter_lname']; ?></td>
-                        <td><?= $data['pet_name']; ?></td>
-                        <td><?= $data['date_submitted']; ?></td>
-                        <td><?= $data['application_result']; ?></td>
-                        <td><?= $data['application_status']; ?></td>
-                      </tr>
-                  <?php
-                    }
-                  }
-                  ?>
-                </tbody>
-              </table>
+            <div class="title_right">
+              <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+
+              </div>
             </div>
           </div>
+
+          <div class="clearfix"></div>
+
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                <div class="x_content">
+
+                  <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+                    <thead>
+                      <tr>
+                        <th>No.</th>
+                        <th>Adopter</th>
+                        <th>Adoptee</th>
+                        <th>Date Submitted</th>
+                        <th>System Assessment</th>
+                        <th>Application Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php
+                      $i = 1;
+                      $sql = "SELECT applicationform1.adopter_id, applicationform1.pet_id, applicationform1.date_submitted, applicationresult_tbl.application_result, applicationresult_tbl.application_status, adopter_tbl.adopter_fname, applicationresult_tbl.application_id, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, adoptee_tbl.city_id FROM applicationform1 INNER JOIN applicationresult_tbl ON applicationform1.application_id = applicationresult_tbl.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id = '$city_id'";
+                      $result = mysqli_query($conn, $sql);
+                      if ($result->num_rows > 0) {
+                        foreach ($result as $data) {
+                      ?>
+                          <tr>
+                            <td><?= $i++; ?></td>
+                            <td><?= $data['adopter_fname'] . ' ' . $data['adopter_lname']; ?></td>
+                            <td><?= $data['pet_name']; ?></td>
+                            <td><?= $data['date_submitted']; ?></td>
+                            <td><?= $data['application_result']; ?></td>
+                            <td><?= $data['application_status']; ?></td>
+                          </tr>
+                      <?php
+                        }
+                      }
+                      ?>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
-
       </div>
-    </div>
-  </div>
-  <!-- /page content -->
+      <!-- /page content -->
 
-  <!-- footer content -->
-  <footer>
-    <div class="pull-right">
-      <!-- Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a> -->
+      <!-- footer content -->
+      <footer>
+        <div class="pull-right">
+          <!-- Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a> -->
+        </div>
+        <div class="clearfix"></div>
+      </footer>
+      <!-- /footer content -->
     </div>
-    <div class="clearfix"></div>
-  </footer>
-  <!-- /footer content -->
-  </div>
   </div>
 
   <!-- jQuery -->

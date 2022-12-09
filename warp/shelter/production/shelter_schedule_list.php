@@ -64,114 +64,116 @@ if ($result->num_rows > 0) {
 </head>
 
 <body class="nav-md">
-  <?php
-  include "sidebar.php";
-  ?>
-  <!-- top navigation -->
-  <div class="top_nav">
-    <div class="nav_menu">
-      <nav>
-        <div class="nav toggle">
-          <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-        </div>
+  <div class="container body">
+    <div class="main_container">
+      <?php
+      include "sidebar.php";
+      ?>
+      <!-- top navigation -->
+      <div class="top_nav">
+        <div class="nav_menu">
+          <nav>
+            <div class="nav toggle">
+              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
 
-        <ul class="nav navbar-nav navbar-right">
-          <li class="">
-            <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-              <img src="/Capstone/warp/shelter/production/images/logo/<?= $row['city_img']; ?>" alt=""><?php echo $_SESSION['user-email'] ?>
-              <span class=" fa fa-angle-down"></span>
-            </a>
-            <ul class="dropdown-menu dropdown-usermenu pull-right">
-              <li><a href="/Capstone/warp/logout.php?logout"><i class="fa fa-sign-out pull-right"></i>Log Out</a></li>
-            </ul>
-          </li>
-          <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
-            <!-- NOTIF START -->
-            <?php
-            include "shelter_notif.php";
-            ?>
-            <!-- NOTIF END -->
+            <ul class="nav navbar-nav navbar-right">
+              <li class="">
+                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  <img src="/Capstone/warp/shelter/production/images/logo/<?= $row['city_img']; ?>" alt=""><?php echo $_SESSION['user-email'] ?>
+                  <span class=" fa fa-angle-down"></span>
+                </a>
+                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                  <li><a href="/Capstone/warp/logout.php?logout"><i class="fa fa-sign-out pull-right"></i>Log Out</a></li>
+                </ul>
+              </li>
+              <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
+                <!-- NOTIF START -->
+                <?php
+                include "shelter_notif.php";
+                ?>
+                <!-- NOTIF END -->
 
-      </nav>
-    </div>
-  </div>
-  <!-- /top navigation -->
-
-  <!-- page content -->
-  <div class="right_col" role="main">
-    <div class="">
-      <div class="page-title">
-        <div class="title_left">
-          <h3>Schedule List</h3>
-        </div>
-
-        <div class="title_right">
-          <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-
-          </div>
+          </nav>
         </div>
       </div>
-    </div>
+      <!-- /top navigation -->
 
-    <div class="clearfix"></div>
+      <!-- page content -->
+      <div class="right_col" role="main">
+        <div class="">
+          <div class="page-title">
+            <div class="title_left">
+              <h3>Schedule List</h3>
+            </div>
 
-    <div class="row">
-      <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="x_panel">
-          <div class="x_title">
-            <h4>List of Scheduled Interviews</h4>
-            <div class="clearfix"></div>
+            <div class="title_right">
+              <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+
+              </div>
+            </div>
           </div>
-          <div class="x_content">
-            <table id="datatable" class="table table-striped table-bordered">
-              <thead>
-                <tr>
-                  <th>No.</th>
-                  <th>Scheduled Date</th>
-                  <th>Adopter Name</th>
-                  <th>Adoptee Name</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
+        </div>
 
-              <tbody>
-                <?php
-                $i = 1;
-                $sql = "SELECT schedule_tbl.schedule_id, schedule_tbl.schedule_date, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, schedule_tbl.application_id, adopter_tbl.adopter_id FROM schedule_tbl INNER JOIN applicationform1 ON schedule_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id ='$city_id' AND schedule_tbl.deleted_at IS NULL";
-                $result = mysqli_query($conn, $sql);
-                if ($result->num_rows > 0) {
-                  foreach ($result as $data) {
+        <div class="clearfix"></div>
 
-                ?>
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+              <div class="x_title">
+                <h4>List of Scheduled Interviews</h4>
+                <div class="clearfix"></div>
+              </div>
+              <div class="x_content">
+                <table id="datatable" class="table table-striped table-bordered">
+                  <thead>
                     <tr>
-                      <td><?= $i++; ?></td>
-                      <td><?= $data['schedule_date'] ?></td>
-                      <td><?= $data['adopter_fname'] . ' ' . $data['adopter_lname']; ?></td>
-                      <td><?= $data['pet_name']; ?></td>
-                      <td>
-                        <a href="shelter_schedule_list2.php?id=<?= $data['schedule_id'] ?>">
-                          <button type="submit" class="btn btn-round btn-primary">Edit Date</button>
-                        </a>
-                        <a href="shelter_adopted_insert.php?id=<?= $data['application_id'] ?>">
-                          <button type="button" class="btn btn-round btn-success">Pet Adopted</button>
-                        </a>
-                        <a href="view_adopter.php?id=<?= $data['adopter_id']; ?>">
-                          <button type="button" class="btn btn-round btn-info">Show Adopter Info</button>
-                        </a>
-                      </td>
+                      <th>No.</th>
+                      <th>Scheduled Date</th>
+                      <th>Adopter Name</th>
+                      <th>Adoptee Name</th>
+                      <th>Action</th>
                     </tr>
-                <?php
-                  }
-                }
-                ?>
-              </tbody>
-            </table>
+                  </thead>
+
+                  <tbody>
+                    <?php
+                    $i = 1;
+                    $sql = "SELECT schedule_tbl.schedule_id, schedule_tbl.schedule_date, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, schedule_tbl.application_id, adopter_tbl.adopter_id FROM schedule_tbl INNER JOIN applicationform1 ON schedule_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id ='$city_id' AND schedule_tbl.deleted_at IS NULL";
+                    $result = mysqli_query($conn, $sql);
+                    if ($result->num_rows > 0) {
+                      foreach ($result as $data) {
+
+                    ?>
+                        <tr>
+                          <td><?= $i++; ?></td>
+                          <td><?= $data['schedule_date'] ?></td>
+                          <td><?= $data['adopter_fname'] . ' ' . $data['adopter_lname']; ?></td>
+                          <td><?= $data['pet_name']; ?></td>
+                          <td>
+                            <a href="shelter_schedule_list2.php?id=<?= $data['schedule_id'] ?>">
+                              <button type="submit" class="btn btn-round btn-primary">Edit Date</button>
+                            </a>
+                            <a href="shelter_adopted_insert.php?id=<?= $data['application_id'] ?>">
+                              <button type="button" class="btn btn-round btn-success">Pet Adopted</button>
+                            </a>
+                            <a href="view_adopter.php?id=<?= $data['adopter_id']; ?>">
+                              <button type="button" class="btn btn-round btn-info">Show Adopter Info</button>
+                            </a>
+                          </td>
+                        </tr>
+                    <?php
+                      }
+                    }
+                    ?>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  </div>
   </div>
   </div>
   <!-- /page content -->

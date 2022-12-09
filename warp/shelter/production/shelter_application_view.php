@@ -123,348 +123,350 @@ if ($result->num_rows > 0) {
 </head>
 
 <body class="nav-md">
-  <?php
-  include "sidebar.php";
-  ?>
+  <div class="container body">
+    <div class="main_container">
+      <?php
+      include "sidebar.php";
+      ?>
 
-  <!-- top navigation -->
-  <div class="top_nav">
-    <div class="nav_menu">
-      <nav>
-        <div class="nav toggle">
-          <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-        </div>
+      <!-- top navigation -->
+      <div class="top_nav">
+        <div class="nav_menu">
+          <nav>
+            <div class="nav toggle">
+              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
 
-        <ul class="nav navbar-nav navbar-right">
-          <li class="">
-            <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-              <img src="/Capstone/warp/shelter/production/images/logo/<?= $row['city_img']; ?>" alt=""><?php echo $_SESSION['user-email'] ?>
-              <span class=" fa fa-angle-down"></span>
-            </a>
-            <ul class="dropdown-menu dropdown-usermenu pull-right">
-              <li><a href="/Capstone/warp/logout.php?logout"><i class="fa fa-sign-out pull-right"></i>Log Out</a></li>
-            </ul>
-          </li>
-          <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
-            <!-- NOTIF START -->
-            <?php
-            include "shelter_notif.php";
-            ?>
-            <!-- NOTIF END -->
+            <ul class="nav navbar-nav navbar-right">
+              <li class="">
+                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  <img src="/Capstone/warp/shelter/production/images/logo/<?= $row['city_img']; ?>" alt=""><?php echo $_SESSION['user-email'] ?>
+                  <span class=" fa fa-angle-down"></span>
+                </a>
+                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                  <li><a href="/Capstone/warp/logout.php?logout"><i class="fa fa-sign-out pull-right"></i>Log Out</a></li>
+                </ul>
+              </li>
+              <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
+                <!-- NOTIF START -->
+                <?php
+                include "shelter_notif.php";
+                ?>
+                <!-- NOTIF END -->
 
-      </nav>
-    </div>
-  </div>
-  <!-- /top navigation -->
-
-  <!-- page content -->
-  <div class="right_col" role="main">
-    <div class="">
-      <div class="page-title">
-        <div class="title_left">
-          <h3>Edit Adoptee</h3>
-        </div>
-
-        <div class="title_right">
-          <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-
-          </div>
+          </nav>
         </div>
       </div>
-      <div class="clearfix"></div>
-      <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="x_panel">
-            <div class="x_title">
-              <!-- <h2>Form Design <small>different form elements</small></h2> -->
+      <!-- /top navigation -->
 
-              <div class="clearfix"></div>
+      <!-- page content -->
+      <div class="right_col" role="main">
+        <div class="">
+          <div class="page-title">
+            <div class="title_left">
+              <h3>Edit Adoptee</h3>
             </div>
-            <div class="x_content">
 
-              <form method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+            <div class="title_right">
+              <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
 
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" name="id" for="pet-name">Adopter I.D: </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <!-- Trigger the Modal by clicking the valid id -->
-                    <img id="myImg" src="images/valid_id/<?= $qdata['valid_id']; ?>" alt="valid_id" style="width:100%;max-width:300px">
-                    <div id="myModal" class="modal">
-                      <span class="close">&times;</span>
-                      <img class="modal-content" id="img01">
+              </div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <!-- <h2>Form Design <small>different form elements</small></h2> -->
+
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                  <form method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" name="id" for="pet-name">Adopter I.D: </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <!-- Trigger the Modal by clicking the valid id -->
+                        <img id="myImg" src="images/valid_id/<?= $qdata['valid_id']; ?>" alt="valid_id" style="width:100%;max-width:300px">
+                        <div id="myModal" class="modal">
+                          <span class="close">&times;</span>
+                          <img class="modal-content" id="img01">
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
 
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">First Name: </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" name="adopter_fname" value="<?= $adata['adopter_fname'] ?>" class="form-control col-md-7 col-xs-12" disabled>
-                  </div>
-                </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">First Name: </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" name="adopter_fname" value="<?= $adata['adopter_fname'] ?>" class="form-control col-md-7 col-xs-12" disabled>
+                      </div>
+                    </div>
 
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">Last Name: </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" name="adopter_lname" value="<?= $adata['adopter_lname'] ?>" class="form-control col-md-7 col-xs-12" disabled>
-                  </div>
-                </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">Last Name: </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" name="adopter_lname" value="<?= $adata['adopter_lname'] ?>" class="form-control col-md-7 col-xs-12" disabled>
+                      </div>
+                    </div>
 
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">Age: </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" name="adopter_age" value="<?= $adata['adopter_age'] ?>" class="form-control col-md-7 col-xs-12" disabled>
-                  </div>
-                </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">Age: </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" name="adopter_age" value="<?= $adata['adopter_age'] ?>" class="form-control col-md-7 col-xs-12" disabled>
+                      </div>
+                    </div>
 
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">Home Address: </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" name="adopter_city" value="<?= $adata['adopter_currentadd'] ?>" class="form-control col-md-7 col-xs-12" disabled>
-                  </div>
-                </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">Home Address: </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" name="adopter_city" value="<?= $adata['adopter_currentadd'] ?>" class="form-control col-md-7 col-xs-12" disabled>
+                      </div>
+                    </div>
 
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">Contact Number: </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" name="adopter_cnum" value="<?= $adata['adopter_cnum'] ?>" class="form-control col-md-7 col-xs-12" disabled>
-                  </div>
-                </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">Contact Number: </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" name="adopter_cnum" value="<?= $adata['adopter_cnum'] ?>" class="form-control col-md-7 col-xs-12" disabled>
+                      </div>
+                    </div>
 
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-age">E-mail Address: </span>
-                  </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" name="user_email" value="<?= $adata['user_email'] ?>" class="form-control col-md-7 col-xs-12" disabled>
-                  </div>
-                </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-age">E-mail Address: </span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" name="user_email" value="<?= $adata['user_email'] ?>" class="form-control col-md-7 col-xs-12" disabled>
+                      </div>
+                    </div>
 
-                <div class="form-group">
-                  <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Occupation: </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input class="form-control col-md-7 col-xs-12" type="text" name="q1" value="<?= $qdata['q1'] ?>" disabled>
-                  </div>
-                </div>
+                    <div class="form-group">
+                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Occupation: </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="q1" value="<?= $qdata['q1'] ?>" disabled>
+                      </div>
+                    </div>
 
-                <div class="form-group">
-                  <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Civil Status: </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input class="form-control col-md-7 col-xs-12" type="text" name="q2" value="<?= $qdata['q2'] ?>" disabled>
-                  </div>
-                </div>
+                    <div class="form-group">
+                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Civil Status: </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="q2" value="<?= $qdata['q2'] ?>" disabled>
+                      </div>
+                    </div>
 
-                <div class="form-group">
-                  <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Are there children (below 18) in the house? If yes how old are they? </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input class="form-control col-md-7 col-xs-12" type="text" name="q3" value="<?= $qdata['q3'] ?>" disabled>
-                  </div>
-                </div>
+                    <div class="form-group">
+                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Are there children (below 18) in the house? If yes how old are they? </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="q3" value="<?= $qdata['q3'] ?>" disabled>
+                      </div>
+                    </div>
 
-                <div class="form-group">
-                  <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Do you have other pets? </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input class="form-control col-md-7 col-xs-12" type="text" name="q4" value="<?= $qdata['q4'] ?>" disabled>
-                  </div>
-                </div>
+                    <div class="form-group">
+                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Do you have other pets? </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="q4" value="<?= $qdata['q4'] ?>" disabled>
+                      </div>
+                    </div>
 
-                <div class="form-group">
-                  <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Have you had pets in the past? </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input class="form-control col-md-7 col-xs-12" type="text" name="q5" value="<?= $qdata['q5'] ?>" disabled>
-                  </div>
-                </div>
+                    <div class="form-group">
+                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Have you had pets in the past? </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="q5" value="<?= $qdata['q5'] ?>" disabled>
+                      </div>
+                    </div>
 
-                <div class="form-group">
-                  <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Who else do you live with? </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input class="form-control col-md-7 col-xs-12" type="text" name="q6" value="<?= $qdata['q6'] ?>" disabled>
-                  </div>
-                </div>
+                    <div class="form-group">
+                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Who else do you live with? </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="q6" value="<?= $qdata['q6'] ?>" disabled>
+                      </div>
+                    </div>
 
-                <div class="form-group">
-                  <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Are any members of your household allergic to animals? </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input class="form-control col-md-7 col-xs-12" type="text" name="q7" value="<?= $qdata['q7'] ?>" disabled>
-                  </div>
-                </div>
+                    <div class="form-group">
+                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Are any members of your household allergic to animals? </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="q7" value="<?= $qdata['q7'] ?>" disabled>
+                      </div>
+                    </div>
 
-                <div class="form-group">
-                  <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Who will be responsible for feeding, grooming, and generally caring for your pet? </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input class="form-control col-md-7 col-xs-12" type="text" name="q8" value="<?= $qdata['q8'] ?>" disabled>
-                  </div>
-                </div>
+                    <div class="form-group">
+                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Who will be responsible for feeding, grooming, and generally caring for your pet? </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="q8" value="<?= $qdata['q8'] ?>" disabled>
+                      </div>
+                    </div>
 
-                <div class="form-group">
-                  <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Who will be financially responsible for your pet's needs? </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input class="form-control col-md-7 col-xs-12" type="text" name="q9" value="<?= $qdata['q9'] ?>" disabled>
-                  </div>
-                </div>
+                    <div class="form-group">
+                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Who will be financially responsible for your pet's needs? </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="q9" value="<?= $qdata['q9'] ?>" disabled>
+                      </div>
+                    </div>
 
-                <div class="form-group">
-                  <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Who will look after your pet if you go on vacation or in case of emergency? </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input class="form-control col-md-7 col-xs-12" type="text" name="q10" value="<?= $qdata['q10'] ?>" disabled>
-                  </div>
-                </div>
+                    <div class="form-group">
+                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Who will look after your pet if you go on vacation or in case of emergency? </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="q10" value="<?= $qdata['q10'] ?>" disabled>
+                      </div>
+                    </div>
 
-                <div class="form-group">
-                  <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">How many hours in an average workday will your pet be left alone? </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input class="form-control col-md-7 col-xs-12" type="text" name="q11" value="<?= $qdata['q11'] ?>. hour/s" disabled>
-                  </div>
-                </div>
+                    <div class="form-group">
+                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">How many hours in an average workday will your pet be left alone? </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="q11" value="<?= $qdata['q11'] ?>. hour/s" disabled>
+                      </div>
+                    </div>
 
-                <div class="form-group">
-                  <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Does everyone in the family support your decision to adopt a pet? </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input class="form-control col-md-7 col-xs-12" type="text" name="q12" value="<?= $qdata['q12'] ?>" disabled>
-                  </div>
-                </div>
+                    <div class="form-group">
+                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Does everyone in the family support your decision to adopt a pet? </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="q12" value="<?= $qdata['q12'] ?>" disabled>
+                      </div>
+                    </div>
 
-                <div class="form-group">
-                  <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">What type of building do you live in? </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input class="form-control col-md-7 col-xs-12" type="text" name="q13" value="<?= $qdata['q13'] ?>" disabled>
-                  </div>
-                </div>
+                    <div class="form-group">
+                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">What type of building do you live in? </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="q13" value="<?= $qdata['q13'] ?>" disabled>
+                      </div>
+                    </div>
 
-                <div class="form-group">
-                  <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">If you rent, do you have permission from your landlord to have an animal? </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input class="form-control col-md-7 col-xs-12" type="text" name="q14" value="<?= $qdata['q14'] ?>" disabled>
-                  </div>
-                </div>
+                    <div class="form-group">
+                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">If you rent, do you have permission from your landlord to have an animal? </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="q14" value="<?= $qdata['q14'] ?>" disabled>
+                      </div>
+                    </div>
 
-                <div class="form-group">
-                  <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Are you prepared to spend for the wellness of your pet? If so, how much are you willing to spend in a year? </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input class="form-control col-md-7 col-xs-12" type="text" name="q15" value="<?= $qdata['q15'] ?>" disabled>
-                  </div>
-                </div>
+                    <div class="form-group">
+                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Are you prepared to spend for the wellness of your pet? If so, how much are you willing to spend in a year? </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input class="form-control col-md-7 col-xs-12" type="text" name="q15" value="<?= $qdata['q15'] ?>" disabled>
+                      </div>
+                    </div>
 
-                <div class="ln_solid"></div>
-                <div class="form-group">
-                  <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                    <a href="shelter_application_list.php">
-                      <button class="btn btn-round btn-primary" type="button" onclick="return confirm('Are you sure you want to go back?');">Back</button>
-                    </a>
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                      <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                        <a href="shelter_application_list.php">
+                          <button class="btn btn-round btn-primary" type="button" onclick="return confirm('Are you sure you want to go back?');">Back</button>
+                        </a>
 
-                    <a href="#" data-toggle="modal" data-target="#modalReject">
-                      <button name="reject" class="btn btn-round btn-danger">Reject</button>
-                    </a>
+                        <a href="#" data-toggle="modal" data-target="#modalReject">
+                          <button name="reject" class="btn btn-round btn-danger">Reject</button>
+                        </a>
 
-                    <a href="accept_application.php?id=<?= htmlspecialchars($id) ?>">
-                      <button name="accept_application" type="button" class="btn btn-round btn-success" onclick="return confirm('Are you sure you want to accept this application?');">Accept</button>
-                    </a>
+                        <a href="accept_application.php?id=<?= htmlspecialchars($id) ?>">
+                          <button name="accept_application" type="button" class="btn btn-round btn-success" onclick="return confirm('Are you sure you want to accept this application?');">Accept</button>
+                        </a>
 
-                    <a href="report_generation.php?id=<?= htmlspecialchars($id) ?>">
-                      <button class="btn btn-round btn-primary" type="button">View as PDF</button>
-                    </a>
-                  </div>
+                        <a href="report_generation.php?id=<?= htmlspecialchars($id) ?>">
+                          <button class="btn btn-round btn-primary" type="button">View as PDF</button>
+                        </a>
+                      </div>
 
-                  <?php
-                  //Form Submission for dates
-                  if (isset($_POST['submit-date'])) {
-                    $date = $_POST['date'];
-                    //If date is not empty code will execute
-                    if (!empty($date)) {
-                      //Sql query to check if data exist with same applicatin id in sched table
-                      $sql = "SELECT * FROM schedule_tbl WHERE (application_id = '$id' AND deleted_at IS NULL) LIMIT 1";
-                      $result = mysqli_query($conn, $sql);
-                      if ($result->num_rows > 0) {
-                        echo "<script>alert('Record Exists!')</script>";
-                        echo "<script>window.location.href='shelter_application_list.php';</script>";
-                      } else {
-                        $sql2 = "INSERT INTO schedule_tbl(schedule_date, application_id) VALUES (?, ?)";
-                        $stmt = mysqli_stmt_init($conn);
-                        if (!mysqli_stmt_prepare($stmt, $sql2)) {
-                          echo "SQL Prepared Statement Failed";
-                        } else {
-                          mysqli_stmt_bind_param($stmt, "si", $date, $id);
-                          mysqli_stmt_execute($stmt);
-                          $scheduled = 'Scheduled';
-                          $sql4 = "UPDATE applicationresult_tbl SET application_status= ? WHERE application_id = ?";
-                          $stmt2 = mysqli_stmt_init($conn);
-                          if (!mysqli_stmt_prepare($stmt2, $sql4)) {
-                            echo "SQL Prepared Statement Failed";
-                          } else {
-                            mysqli_stmt_bind_param($stmt2, "si", $scheduled, $id);
-                            mysqli_stmt_execute($stmt2);
-                            echo "<script>alert('Date Input Success')</script>";
+                      <?php
+                      //Form Submission for dates
+                      if (isset($_POST['submit-date'])) {
+                        $date = $_POST['date'];
+                        //If date is not empty code will execute
+                        if (!empty($date)) {
+                          //Sql query to check if data exist with same applicatin id in sched table
+                          $sql = "SELECT * FROM schedule_tbl WHERE (application_id = '$id' AND deleted_at IS NULL) LIMIT 1";
+                          $result = mysqli_query($conn, $sql);
+                          if ($result->num_rows > 0) {
+                            echo "<script>alert('Record Exists!')</script>";
                             echo "<script>window.location.href='shelter_application_list.php';</script>";
+                          } else {
+                            $sql2 = "INSERT INTO schedule_tbl(schedule_date, application_id) VALUES (?, ?)";
+                            $stmt = mysqli_stmt_init($conn);
+                            if (!mysqli_stmt_prepare($stmt, $sql2)) {
+                              echo "SQL Prepared Statement Failed";
+                            } else {
+                              mysqli_stmt_bind_param($stmt, "si", $date, $id);
+                              mysqli_stmt_execute($stmt);
+                              $scheduled = 'Scheduled';
+                              $sql4 = "UPDATE applicationresult_tbl SET application_status= ? WHERE application_id = ?";
+                              $stmt2 = mysqli_stmt_init($conn);
+                              if (!mysqli_stmt_prepare($stmt2, $sql4)) {
+                                echo "SQL Prepared Statement Failed";
+                              } else {
+                                mysqli_stmt_bind_param($stmt2, "si", $scheduled, $id);
+                                mysqli_stmt_execute($stmt2);
+                                echo "<script>alert('Date Input Success')</script>";
+                                echo "<script>window.location.href='shelter_application_list.php';</script>";
+                              }
+                            }
                           }
+                        } else {
+                          echo "<script>alert('No date input')</script>";
                         }
                       }
-                    } else {
-                      echo "<script>alert('No date input')</script>";
-                    }
-                  }
 
-                  ?>
-                  <div class="modal fade" id="modalDate">
-                    <div class="modal-dialog modal-sm">
-                      <div class="modal-content">
-                        <form action="/Capstone/warp/shelter/production/shelter_application_view.php?id=<?= $id ?>" method="POST">
-                          <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-                            </button>
-                            <h4 class="modal-title">Schedule a date for interview</h4>
+                      ?>
+                      <div class="modal fade" id="modalDate">
+                        <div class="modal-dialog modal-sm">
+                          <div class="modal-content">
+                            <form action="/Capstone/warp/shelter/production/shelter_application_view.php?id=<?= $id ?>" method="POST">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                                </button>
+                                <h4 class="modal-title">Schedule a date for interview</h4>
+                              </div>
+                              <div class="modal-body">
+                                <input type="date" name="date">
+                              </div>
+                              <div class="modal-footer">
+                                <button class="btn btn-success" name="submit-date" onclick="return confirm('Are you sure you want to accept this application and proceed with the scheduled date?');">Submit
+                                </button>
+                              </div>
+                            </form>
                           </div>
-                          <div class="modal-body">
-                            <input type="date" name="date">
+                        </div>
+                      </div>
+
+                      <div class="modal fade" id="modalReject">
+                        <div class="modal-dialog modal-sm">
+                          <div class="modal-content">
+                            <form action="/Capstone/warp/shelter/production/shelter_application_view.php?id=<?= $id ?>" method="POST">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                                </button>
+                                <h4 class="modal-title">Please include the reason for rejection</h4>
+                              </div>
+                              <div class="modal-body">
+                                <textarea name="rejectmsg"></textarea>
+                              </div>
+                              <div class="modal-footer">
+                                <button class="btn btn-success" name="submit-reject" onclick="return confirm('Are you sure you want to reject this application?');">Submit
+                                </button>
+                              </div>
+                            </form>
                           </div>
-                          <div class="modal-footer">
-                            <button class="btn btn-success" name="submit-date" onclick="return confirm('Are you sure you want to accept this application and proceed with the scheduled date?');">Submit
-                            </button>
-                          </div>
-                        </form>
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  <div class="modal fade" id="modalReject">
-                    <div class="modal-dialog modal-sm">
-                      <div class="modal-content">
-                        <form action="/Capstone/warp/shelter/production/shelter_application_view.php?id=<?= $id ?>" method="POST">
-                          <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-                            </button>
-                            <h4 class="modal-title">Please include the reason for rejection</h4>
-                          </div>
-                          <div class="modal-body">
-                            <textarea name="rejectmsg"></textarea>
-                          </div>
-                          <div class="modal-footer">
-                            <button class="btn btn-success" name="submit-reject" onclick="return confirm('Are you sure you want to reject this application?');">Submit
-                            </button>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
+                  </form>
                 </div>
-
-              </form>
+              </div>
             </div>
           </div>
+
         </div>
       </div>
+      <!-- /page content -->
 
+      <!-- footer content -->
+      <footer>
+        <div class="pull-right">
+          <!-- Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a> -->
+        </div>
+        <div class="clearfix"></div>
+      </footer>
+      <!-- /footer content -->
     </div>
-  </div>
-  <!-- /page content -->
-
-  <!-- footer content -->
-  <footer>
-    <div class="pull-right">
-      <!-- Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a> -->
-    </div>
-    <div class="clearfix"></div>
-  </footer>
-  <!-- /footer content -->
-  </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>

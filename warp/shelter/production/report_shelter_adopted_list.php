@@ -64,9 +64,11 @@ if ($result->num_rows > 0) {
 </head>
 
 <body class="nav-md">
-<?php
-                include "sidebar.php";
-                ?>
+  <div class="container body">
+    <div class="main_container">
+      <?php
+      include "sidebar.php";
+      ?>
 
       <!-- top navigation -->
       <div class="top_nav">
@@ -83,14 +85,14 @@ if ($result->num_rows > 0) {
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
-                <li><a href="/Capstone/warp/logout.php?logout"><i class="fa fa-sign-out pull-right"></i>Log Out</a></li>
+                  <li><a href="/Capstone/warp/logout.php?logout"><i class="fa fa-sign-out pull-right"></i>Log Out</a></li>
                 </ul>
               </li>
               <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
                 <!-- NOTIF START -->
                 <?php
                 include "shelter_notif.php";
-                ?>                
+                ?>
                 <!-- NOTIF END -->
 
           </nav>
@@ -117,11 +119,11 @@ if ($result->num_rows > 0) {
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
-                
-                
+
+
                 <div class="x_content">
-            
-                <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+
+                  <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
                     <thead>
                       <tr>
                         <th>No.</th>
