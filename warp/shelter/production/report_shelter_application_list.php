@@ -114,6 +114,28 @@ if ($result->num_rows > 0) {
           <div class="page-title">
             <div class="title_left">
               <h3>List of Applications </h3>
+<br>
+
+              <!-- DATA FILTER -->
+              <form method="post">
+				
+				<div class="col-lg-4">
+					<div class="form-group">
+						<input type="date" name="start_date" class="form-control">
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="form-group">
+						<input type="date" name="end_date" class="form-control">
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="form-group">
+						<input type="submit" name="submit_date" class="btn btn-success" value="Filter">
+					</div>
+				</div>
+			</form>
+    
             </div>
 
             <div class="title_right">
@@ -124,12 +146,13 @@ if ($result->num_rows > 0) {
           </div>
 
           <div class="clearfix"></div>
-
           <div class="row">
+            
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_content">
 
+              
                   <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
                     <thead>
                       <tr>
