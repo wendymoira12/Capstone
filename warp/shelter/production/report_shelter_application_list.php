@@ -118,31 +118,36 @@ if ($result->num_rows > 0) {
           <div class="page-title">
             <div class="title_left">
               <h3>List of Applications </h3>
-                  <br>
+              <br>
 
+              <!-- DATA FILTER -->
+            </div>
+            <div class="col-md-10 col-sm-12 col-xs-12">
               <!-- DATA FILTER -->
               <form method="post" action="">
-				
-                  <div class="col-lg-4">
-                    <div class="form-group">
-                      <input type="date" name="start_date" class="form-control">
-                    </div>
-                  </div>
 
-                  <div class="col-lg-4">
-                    <div class="form-group">
-                      <input type="date" name="end_date" class="form-control" required>
-                    </div>
+                <div class="col-lg-3 col-sm-3 col-xs-6">
+                  <div class="form-group">
+                    <input type="date" name="start_date" class="form-control">
+                    <p class="text-muted">&nbsp; Start Date</p>
                   </div>
+                </div>
 
-                  <div class="col-lg-4">
-                    <div class="form-group">
-                      <input type="submit" id="submit" name="submit_date" class="btn btn-success" value="Filter">
-                    </div>
+                <div class="col-lg-3 col-sm-3 col-xs-6">
+                  <div class="form-group">
+
+                    <input type="date" name="end_date" class="form-control" required>
+                    <p class="text-muted">&nbsp; End Date</p>
                   </div>
+                </div>
 
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                  <div class="form-group">
+                    <button type="submit" name="submit_date" class="btn btn-success">Filter</button>
+                    <a href="report_shelter_application_list.php"><button name="reset" class="btn btn-danger" type="button">Reset</button></a>
+                  </div>
+                </div>
               </form>
-              <!-- DATA FILTER -->
             </div>
 
             <div class="title_right">
@@ -153,42 +158,39 @@ if ($result->num_rows > 0) {
 
           <div class="clearfix"></div>
           <div class="row">
-            
+
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
 
-                  <!-- PRIMARY TABLE - SHOWS ALL DATA -->
-                  <div class="x_content">
-                    <?php 
-                    
-                      if (isset($_POST['submit_date'])) {
-                        
-                        $start_date = $_POST['start_date'];
-                        $end_date = $_POST['end_date'];
-                        
-                        $i=1;
-                        $sql = "SELECT applicationform1.adopter_id, applicationform1.pet_id, applicationform1.date_submitted, applicationresult_tbl.application_result, applicationresult_tbl.application_status, adopter_tbl.adopter_fname, applicationresult_tbl.application_id, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, adoptee_tbl.city_id FROM applicationform1 INNER JOIN applicationresult_tbl ON applicationform1.application_id = applicationresult_tbl.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE (applicationform1.date_submitted BETWEEN '$start_date' and '$end_date') AND adoptee_tbl.city_id = '$city_id'";
-                        $result1 = mysqli_query($conn, $sql);
+                <!-- PRIMARY TABLE - SHOWS ALL DATA -->
+                <div class="x_content">
+                  <?php
 
-                        if (mysqli_num_rows($result1)>0) {?>
-                          
-                          
-                          <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+                  if (isset($_POST['submit_date'])) {
 
-                    <thead>
-                      <tr>
-                        <th>No.</th>
-                        <th>Adopter</th>
-                        <th>Adoptee</th>
-                        <th>Date Submitted</th>
-                        <th>System Assessment</th>
-                        <th>Application Status</th>
-                      </tr>
-                    </thead>
+                    $start_date = $_POST['start_date'];
+                    $end_date = $_POST['end_date'];
 
-                    <tbody>
-                        <?php foreach ($result1 as $data1) {?>
+                    $i = 1;
+                    $sql = "SELECT applicationform1.adopter_id, applicationform1.pet_id, applicationform1.date_submitted, applicationresult_tbl.application_result, applicationresult_tbl.application_status, adopter_tbl.adopter_fname, applicationresult_tbl.application_id, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, adoptee_tbl.city_id FROM applicationform1 INNER JOIN applicationresult_tbl ON applicationform1.application_id = applicationresult_tbl.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE (applicationform1.date_submitted BETWEEN '$start_date' and '$end_date') AND adoptee_tbl.city_id = '$city_id'";
+                    $result1 = mysqli_query($conn, $sql);
+
+                    if (mysqli_num_rows($result1) > 0) { ?>
+                      <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+                        <thead>
                           <tr>
+                            <th>No.</th>
+                            <th>Adopter</th>
+                            <th>Adoptee</th>
+                            <th>Date Submitted</th>
+                            <th>System Assessment</th>
+                            <th>Application Status</th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          <?php foreach ($result1 as $data1) { ?>
+                            <tr>
                               <td><?= $i++; ?></td>
                               <td><?= $data1['adopter_fname'] . ' ' . $data1['adopter_lname']; ?></td>
                               <td><?= $data1['pet_name']; ?></td>
@@ -196,21 +198,20 @@ if ($result->num_rows > 0) {
                               <td><?= $data1['application_result']; ?></td>
                               <td><?= $data1['application_status']; ?></td>
                             </tr>
-                        <?php	} ?>
-                      </tbody>
-                    </table>          
-                          <?php	
-                          }
-                          else{
+                          <?php  } ?>
+                        </tbody>
+                      </table>
+                    <?php
+                    } else {
 
-                            echo "No Record Found";
-                          }
+                      echo "No Record Found";
+                    }
+                  }
+                  // SHOWS DATA WITH NO FILTER
+                  else {
 
-                        }
-                        
-                        // SHOWS DATA WITH NO FILTER
-                        else{
-                      ?>
+
+                    ?>
 
                     <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
                       <thead>
@@ -242,32 +243,33 @@ if ($result->num_rows > 0) {
                             </tr>
                         <?php
                           }
-                        } 
+                        }
                         ?>
                       </tbody>
 
                     </table>
 
-                  
+
                     <!-- PRIMARY TABLE - SHOWS ALL DATA -->
-                  
-                <?php } ?>
+
+                  <?php }
+                  ?>
                 </div>
               </div>
             </div>
           </div>
-          </div>
+        </div>
       </div>
-      </div>
-      <!-- /page content -->
-
-      <!-- footer content -->
-      <footer>
-        
-        <div class="clearfix"></div>
-      </footer>
-      <!-- /footer content -->
     </div>
+    <!-- /page content -->
+
+    <!-- footer content -->
+    <footer>
+
+      <div class="clearfix"></div>
+    </footer>
+    <!-- /footer content -->
+  </div>
   </div>
 
   <!-- jQuery -->
