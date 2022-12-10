@@ -137,7 +137,7 @@ if ($result->num_rows > 0) {
 
                   <div class="col-lg-4">
                     <div class="form-group">
-                      <input class="btn" type="submit" id="submit" name="submit_date" class="btn btn-success" value="Filter">
+                      <input type="submit" id="submit" name="submit_date" class="btn btn-success" value="Filter">
                     </div>
                   </div>
 
@@ -203,7 +203,7 @@ if ($result->num_rows > 0) {
                           }
                           else{
 
-                            echo "NO Records Found";
+                            echo "No Record Found";
                           }
 
                         }
@@ -242,7 +242,6 @@ if ($result->num_rows > 0) {
                             </tr>
                         <?php
                           }
-                          echo "hello";
                         } 
                         ?>
                       </tbody>

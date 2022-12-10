@@ -105,6 +105,30 @@ if ($result->num_rows > 0) {
           <div class="page-title">
             <div class="title_left">
               <h3>Schedule List</h3>
+              <br>
+               <!-- DATA FILTER -->
+               <form method="post" action="">
+				
+        <div class="col-lg-4">
+          <div class="form-group">
+            <input type="date" name="start_date" class="form-control">
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="form-group">
+            <input type="date" name="end_date" class="form-control" required>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="form-group">
+            <input type="submit" id="submit" name="submit_date" class="btn btn-success" value="Filter">
+          </div>
+        </div>
+
+    </form>
+    <!-- DATA FILTER -->
             </div>
 
             <div class="title_right">
@@ -121,6 +145,18 @@ if ($result->num_rows > 0) {
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
               <div class="x_content">
+              <?php 
+                    if (isset($_POST['submit_date'])) {
+                      
+                      $start_date = $_POST['start_date'];
+                      $end_date = $_POST['end_date'];
+                      
+                      $i=1;
+                      $sql = "SELECT schedule_tbl.schedule_id, schedule_tbl.schedule_date, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, schedule_tbl.application_id, adopter_tbl.adopter_id FROM schedule_tbl INNER JOIN applicationform1 ON schedule_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id  WHERE (schedule_tbl.schedule_date BETWEEN '$start_date' and '$end_date') AND adoptee_tbl.city_id ='$city_id' AND schedule_tbl.deleted_at IS NULL";
+                      $result1 = mysqli_query($conn, $sql);
+
+                      if (mysqli_num_rows($result1)>0) {?>
+
                 <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
                   <thead>
                     <tr>
@@ -132,26 +168,61 @@ if ($result->num_rows > 0) {
                   </thead>
 
                   <tbody>
-                    <?php
-                    $i = 1;
-                    $sql = "SELECT schedule_tbl.schedule_id, schedule_tbl.schedule_date, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, schedule_tbl.application_id, adopter_tbl.adopter_id FROM schedule_tbl INNER JOIN applicationform1 ON schedule_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id ='$city_id' AND schedule_tbl.deleted_at IS NULL";
-                    $result = mysqli_query($conn, $sql);
-                    if ($result->num_rows > 0) {
-                      foreach ($result as $data) {
-
-                    ?>
+                    <?php foreach ($result1 as $data1) {?>
                         <tr>
                           <td><?= $i++; ?></td>
+                          <td><?= $data1['schedule_date'] ?></td>
+                          <td><?= $data1['adopter_fname'] . ' ' . $data1['adopter_lname']; ?></td>
+                          <td><?= $data1['pet_name']; ?></td>
+                        </tr>
+                        <?php	} ?>
+                  </tbody>
+                </table>
+                <?php	
+                          }
+                          else{
+
+                            echo "No Record Found";
+                          }
+
+                        }
+                        
+                        // SHOWS DATA WITH NO FILTER
+                        else{
+                      ?>
+                      <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+                  <thead>
+                    <tr>
+                      <th>No.</th>
+                      <th>Scheduled Date</th>
+                      <th>Adopter Name</th>
+                      <th>Adoptee Name</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                        <?php
+                        $i = 1;
+                        $sql = "SELECT schedule_tbl.schedule_id, schedule_tbl.schedule_date, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, schedule_tbl.application_id, adopter_tbl.adopter_id FROM schedule_tbl INNER JOIN applicationform1 ON schedule_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id  WHERE adoptee_tbl.city_id ='$city_id' AND schedule_tbl.deleted_at IS NULL";
+                        $result = mysqli_query($conn, $sql);
+                        if ($result->num_rows > 0) {
+                          foreach ($result as $data) {
+                        ?>
+                            <tr>
+                            <td><?= $i++; ?></td>
                           <td><?= $data['schedule_date'] ?></td>
                           <td><?= $data['adopter_fname'] . ' ' . $data['adopter_lname']; ?></td>
                           <td><?= $data['pet_name']; ?></td>
-                        </tr>
-                    <?php
-                      }
-                    }
-                    ?>
-                  </tbody>
-                </table>
+                            </tr>
+                        <?php
+                          }
+                        } 
+                        ?>
+                      </tbody>
+
+                    </table>
+                    <!-- PRIMARY TABLE - SHOWS ALL DATA -->
+                  
+                <?php } ?>
               </div>
             </div>
           </div>
