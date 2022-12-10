@@ -70,34 +70,35 @@ if ($result->num_rows > 0) {
       include "sidebar.php";
       ?>
       <!-- /top navigation -->
-    </div>
 
-    <!-- top navigation -->
-    <div class="top_nav">
-      <div class="nav_menu">
-        <nav>
-          <div class="nav toggle">
-            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-          </div>
 
-          <ul class="nav navbar-nav navbar-right">
-            <li class="">
-              <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                <img src="/Capstone/warp/shelter/production/images/logo/<?= $row['city_img']; ?>" alt=""><?php echo $_SESSION['user-email'] ?>
-                <span class=" fa fa-angle-down"></span>
-              </a>
-              <ul class="dropdown-menu dropdown-usermenu pull-right">
-                <li><a href="/Capstone/warp/logout.php?logout"><i class="fa fa-sign-out pull-right"></i>Log Out</a></li>
-              </ul>
-            </li>
-            <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
-              <!-- NOTIF START -->
-              <?php
-              include "shelter_notif.php";
-              ?>
-              <!-- NOTIF END -->
+      <!-- top navigation -->
+      <div class="top_nav">
+        <div class="nav_menu">
+          <nav>
+            <div class="nav toggle">
+              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
 
-        </nav>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="">
+                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  <img src="/Capstone/warp/shelter/production/images/logo/<?= $row['city_img']; ?>" alt=""><?php echo $_SESSION['user-email'] ?>
+                  <span class=" fa fa-angle-down"></span>
+                </a>
+                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                  <li><a href="/Capstone/warp/logout.php?logout"><i class="fa fa-sign-out pull-right"></i>Log Out</a></li>
+                </ul>
+              </li>
+              <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
+                <!-- NOTIF START -->
+                <?php
+                include "shelter_notif.php";
+                ?>
+                <!-- NOTIF END -->
+          </nav>
+        </div>
+      </div>
         <!-- page content -->
 
         <div class="right_col" role="main">
@@ -177,50 +178,52 @@ if ($result->num_rows > 0) {
               </div>
             </div>
           </div>
-
-          <!-- /page content -->
-
-          <!-- footer content -->
-          <footer>
-            <div class="pull-right">
-              <!-- Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a> -->
-            </div>
-            <div class="clearfix"></div>
-          </footer>
-          <!-- /footer content -->
         </div>
+
+
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            <!-- Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a> -->
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
       </div>
+    </div>
 
-      <!-- jQuery -->
-      <script src="../vendors/jquery/dist/jquery.min.js"></script>
-      <!-- Bootstrap -->
-      <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-      <!-- FastClick -->
-      <script src="../vendors/fastclick/lib/fastclick.js"></script>
-      <!-- NProgress -->
-      <script src="../vendors/nprogress/nprogress.js"></script>
-      <!-- iCheck -->
-      <script src="../vendors/iCheck/icheck.min.js"></script>
-      <!-- Datatables -->
-      <script src="../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-      <script src="../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-      <script src="../vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-      <script src="../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-      <script src="../vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
-      <script src="../vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
-      <script src="../vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
-      <script src="../vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-      <script src="../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-      <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-      <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-      <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-      <script src="../vendors/jszip/dist/jszip.min.js"></script>
-      <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
-      <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+    <!-- jQuery -->
+    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="../vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../vendors/nprogress/nprogress.js"></script>
+    <!-- iCheck -->
+    <script src="../vendors/iCheck/icheck.min.js"></script>
+    <!-- Datatables -->
+    <script src="../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="../vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="../vendors/jszip/dist/jszip.min.js"></script>
+    <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
 
-      <!-- Custom Theme Scripts -->
-      <script src="../build/js/custom.min.js"></script>
-      <!-- <script type="text/javascript">
+    <!-- Custom Theme Scripts -->
+    <script src="../build/js/custom.min.js"></script>
+    <!-- <script type="text/javascript">
       $(document).ready(function() {
         var table = $('#datatable').DataTable();
 

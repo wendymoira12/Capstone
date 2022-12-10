@@ -175,7 +175,7 @@ if ($result->num_rows > 0) {
       </div>
     </div>
   </div>
-  </div>
+  
   <!-- /page content -->
 
   <!-- footer content -->
@@ -186,8 +186,7 @@ if ($result->num_rows > 0) {
     <div class="clearfix"></div>
   </footer>
   <!-- /footer content -->
-  </div>
-  </div>
+  
 
   <!-- jQuery -->
   <script src="../vendors/jquery/dist/jquery.min.js"></script>
