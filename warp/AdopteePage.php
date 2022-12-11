@@ -408,12 +408,12 @@ if (isset($_POST['submit'])) {
 
                     
                     /* PAG AFTER NA MAMONITOR TSAKA PWEDE ULI MAGADOPT */
-                    $monitor = "SELECT monitoring_status from applicationform1, adopted_tbl WHERE applicationform1.adopter_id='$adopter_id' AND applicationform1.application_id = adopted_tbl.application_id ORDER BY applicationform1.application_id DESC;";
+                    $monitor = "SELECT monitoring_status FROM applicationform1, adopted_tbl WHERE applicationform1.adopter_id='$adopter_id' AND applicationform1.application_id = adopted_tbl.application_id;";
                     $monitoring = mysqli_query($conn, $disable);
 
                     if ($monitoring->num_rows != 0) {
-                      $mmonitoring = mysqli_fetch_assoc($monitoring);
-                      // $var2 = $mmonitoring['monitoring_status'];
+                      $var2 = mysqli_fetch_assoc($monitoring);
+                      //$var2 = $mmonitoring['monitoring_status'];
                     }
 
 
@@ -430,7 +430,7 @@ if (isset($_POST['submit'])) {
 
                             // MONITORING STATUS NA LANG PAG DONE DAPAT TSAKA PWEDE MAGADOPT
 
-                          if ((($var == "Pending") OR ($var == "Scheduled")) OR $datedisable >= 3) {
+                            if ((($var == "Pending") OR ($var == "Scheduled")) OR ($datedisable >= 3) OR (($var2=="Not Yet"))) {
 
                             ?> disabled <?php
                             }

@@ -172,6 +172,9 @@ if ($result->num_rows > 0) {
                               <a href="view_adopter.php?id=<?= $data['adopter_id']; ?>">
                                 <button type="button" class="btn btn-round btn-info">Show Adopter Info</button>
                               </a>
+                              <a href="view_pet_status.php?adopted_id=<?= $data['adopted_id']; ?>">
+                                  <button type="button" class="btn btn-round btn-warning">View Remarks</button>
+                              </a>
                             </td>
                           </tr>
                       <?php
