@@ -138,7 +138,7 @@ if ($result3->num_rows > 0) {
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h4>This table shows all the pet that has been adopted. </h4>
+                  <h4>Pet Status</h4>
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
@@ -225,7 +225,7 @@ if ($result3->num_rows > 0) {
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                        <a href="shelter_adopted_list.php">
+                        <a href="javascript:history.go(-1)">
                           <button name="go-back" class="btn btn-round btn-danger" type="button">Go Back</button>
                         </a>
                       </div>
