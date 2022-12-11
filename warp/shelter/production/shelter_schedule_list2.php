@@ -127,7 +127,7 @@ if ($result->num_rows > 0) {
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
               <div class="x_title">
-                <h4>List of Scheduled Interviews</h4>
+              <h4>This table shows all the list of scheduled interviews</h4>
                 <div class="clearfix"></div>
               </div>
               <div class="x_content">
