@@ -175,6 +175,7 @@ if ($result->num_rows > 0) {
                           <th>Date</th>
                           <th>Application Result</th>
                           <th>Monitoring Status</th>
+                          <th>Remarks</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -195,15 +196,39 @@ if ($result->num_rows > 0) {
                                 if ($rows['application_status'] == "Finished") {
                                   $app_id = $rows['application_id'];
                                   $sql2 = "SELECT monitoring_status FROM adopted_tbl WHERE application_id = '$app_id'";
-                                  
-                                  if ($result2 = mysqli_query($conn, $sql)) {
-                                    $rows2 = mysqli_fetch_assoc($result2);
-                                    echo $rows2['monitoring_status'];
-                                  } else {
-                                    echo "N/A";
-                                  }
+                                  $result2 = mysqli_query($conn, $sql2);
+                                  $rows2 = mysqli_fetch_assoc($result2);
+                                  echo $rows2['monitoring_status'];
                                 } else {
                                   echo "N/A";
+                                }
+                                ?>
+                              </td>
+                              <td>
+                                <?php
+                                if ($rows['application_status'] == "Finished") {
+                                  $app_id = $rows['application_id'];
+                                  $sql2 = "SELECT adopted_id, monitoring_status FROM adopted_tbl WHERE application_id = '$app_id'";
+                                  $result2 = mysqli_query($conn, $sql2);
+                                  $rows2 = mysqli_fetch_assoc($result2);
+                                  if ($rows2['monitoring_status'] == "Monitored") {
+                                ?>
+                                    <a href="view_pet_status.php?adopted_id=<?= $rows2['adopted_id']; ?>">
+                                      <button type="button" class="btn btn-round btn-warning">View Remarks</button>
+                                    </a>
+                                  <?php
+                                  } else {
+                                  ?><a href="view_pet_status.php?adopted_id=<?= $rows2['adopted_id']; ?>">
+                                      <button type="button" class="btn btn-round btn-warning" disabled>View Remarks</button>
+                                    </a>
+                                  <?php
+                                  }
+                                } else {
+                                  ?>
+                                  <a href="view_pet_status.php?adopted_id=<?= $rows2['adopted_id']; ?>">
+                                    <button type="button" class="btn btn-round btn-warning" disabled>View Remarks</button>
+                                  </a>
+                                <?php
                                 }
                                 ?>
                               </td>
