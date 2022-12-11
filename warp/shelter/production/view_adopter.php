@@ -173,13 +173,14 @@ if ($result->num_rows > 0) {
                           <th>No.</th>
                           <th>City</th>
                           <th>Date</th>
-                          <th>Result</th>
+                          <th>Application Result</th>
+                          <th>Monitoring Status</th>
                         </tr>
                       </thead>
                       <tbody>
                         <?php
                         $i = 1;
-                        $sql = "SELECT city_tbl.city_name, applicationform1.date_submitted, applicationresult_tbl.application_status FROM applicationform1 INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN applicationresult_tbl ON applicationform1.application_id = applicationresult_tbl.application_id INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id WHERE applicationform1.adopter_id = '$adopter_id'";
+                        $sql = "SELECT city_tbl.city_name, applicationform1.date_submitted, applicationresult_tbl.application_status, applicationform1.application_id FROM applicationform1 INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN applicationresult_tbl ON applicationform1.application_id = applicationresult_tbl.application_id INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id WHERE applicationform1.adopter_id = '$adopter_id'";
                         $result = mysqli_query($conn, $sql);
                         if ($result->num_rows > 0) {
                           foreach ($result as $rows) {
@@ -189,6 +190,23 @@ if ($result->num_rows > 0) {
                               <td><?= $rows['city_name']; ?></td>
                               <td><?= $rows['date_submitted']; ?></td>
                               <td><?= $rows['application_status']; ?></td>
+                              <td>
+                                <?php
+                                if ($rows['application_status'] == "Finished") {
+                                  $app_id = $rows['application_id'];
+                                  $sql2 = "SELECT monitoring_status FROM adopted_tbl WHERE application_id = '$app_id'";
+                                  
+                                  if ($result2 = mysqli_query($conn, $sql)) {
+                                    $rows2 = mysqli_fetch_assoc($result2);
+                                    echo $rows2['monitoring_status'];
+                                  } else {
+                                    echo "N/A";
+                                  }
+                                } else {
+                                  echo "N/A";
+                                }
+                                ?>
+                              </td>
                             </tr>
                         <?php
                           }
