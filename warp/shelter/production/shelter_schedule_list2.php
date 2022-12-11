@@ -139,6 +139,7 @@ if ($result->num_rows > 0) {
                       <th>Adopter Name</th>
                       <th>Adoptee Name</th>
                       <th>Action</th>
+                      <th>Confirmation</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -159,12 +160,22 @@ if ($result->num_rows > 0) {
                             <a href="shelter_schedule_list2.php?id=<?= $data['schedule_id'] ?>">
                               <button type="submit" class="btn btn-round btn-primary">Edit Date</button>
                             </a>
-                            <a href="shelter_adopted_insert.php?id=<?= $data['application_id'] ?>">
-                              <button type="button" class="btn btn-round btn-success">Pet Adopted</button>
-                            </a>
+
                             <a href="view_adopter.php?id=<?= $data['adopter_id']; ?>">
                               <button type="button" class="btn btn-round btn-info">Show Adopter Info</button>
                             </a>
+                          </td>
+
+                          <td>
+                          <a href="applicationform_view.php?id=<?= $data['schedule_id']; ?>">
+                              <button type="button" class="btn btn-round btn-info">Agreement Form</button>
+                            </a>
+                            
+                            <a href="shelter_adopted_insert.php?id=<?= $data['application_id'] ?>">
+                              <button type="button" class="btn btn-round btn-success">Pet Adopted</button>
+                            </a>
+
+                            
                           </td>
 
                         </tr>

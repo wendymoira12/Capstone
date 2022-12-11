@@ -129,7 +129,7 @@ if ($result->num_rows > 0) {
                 <div class="col-lg-3 col-sm-3 col-xs-6">
                   <div class="form-group">
                     <input type="date" name="start_date" class="form-control">
-                    <p class="text-muted">&nbsp; Start Date</p>
+                    <p class="text-muted">&nbsp; Start Date (mm/dd/yyyy)</p>
                   </div>
                 </div>
 
@@ -137,7 +137,7 @@ if ($result->num_rows > 0) {
                   <div class="form-group">
 
                     <input type="date" name="end_date" class="form-control" required>
-                    <p class="text-muted">&nbsp; End Date</p>
+                    <p class="text-muted">&nbsp; End Date (mm/dd/yyyy)</p>
                   </div>
                 </div>
 
