@@ -49,6 +49,7 @@ if (isset($_POST['confirm'])) {
   $accustomed = $_POST['accustomed'];
   $remark = $_POST['remark'];
   $done = "Monitored";
+  $monitor_name = $_POST['monitor_name'];
 
   if (!empty($fed) && !empty($health) && !empty($space) && !empty($clean) && !empty($accustomed) && !empty($remark)) {
     //Check if adopted pet data exist if true proceed
@@ -56,12 +57,12 @@ if (isset($_POST['confirm'])) {
     $result = mysqli_query($conn, $sql);
     if ($result->num_rows > 0) {
       //Insert into adoptedpetstatus_tbl if adopted data exist
-      $sql2 = "INSERT INTO adoptedpetstatus_tbl(q1_fed, q2_health, q3_space, q4_clean, q5_accustomed, petstatus_remark, adopted_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+      $sql2 = "INSERT INTO adoptedpetstatus_tbl(q1_fed, q2_health, q3_space, q4_clean, q5_accustomed, petstatus_remark, monitoredby_name ,adopted_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
       $stmt = mysqli_stmt_init($conn);
       if (!mysqli_stmt_prepare($stmt, $sql2)) {
         echo "SQL Prepared Statement Failed";
       } else {
-        mysqli_stmt_bind_param($stmt, "ssssssi", $fed, $health, $space, $clean, $accustomed, $remark, $adopted_id);
+        mysqli_stmt_bind_param($stmt, "sssssssi", $fed, $health, $space, $clean, $accustomed, $remark, $monitor_name, $adopted_id);
         mysqli_stmt_execute($stmt);
         $sql3 = "UPDATE adopted_tbl SET monitoring_status = ? WHERE adopted_id = ?";
         $stmt2 = mysqli_stmt_init($conn);
@@ -171,7 +172,7 @@ if (isset($_POST['confirm'])) {
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h4>This table shows all the pet that has been adopted. </h4>
+                  <h4>Pet Status</h4>
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
@@ -255,6 +256,15 @@ if (isset($_POST['confirm'])) {
                         <textarea id="textarea" required="required" name="remark" class="form-control col-md-7 col-xs-12"></textarea>
                       </div>
                     </div>
+
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="monitor_name">Evaluated/Monitored by: <span class="required">*</span>
+                      </label>
+                      <div class="col-md-5 col-sm-6 col-xs-12">
+                        <input type="text" name="monitor_name" required class="form-control col-md-7 col-xs-12">
+                      </div>
+                    </div>
+                    
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
