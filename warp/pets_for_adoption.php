@@ -105,7 +105,7 @@ if (isset($_GET['page'])) {
                 <div class="portfolio-gallery">
                     <?php
 
-                    $num_per_page = 3;
+                    $num_per_page = 9;
                     $offset = ($page_no - 1) * $num_per_page;
 
                     $previous_page = $page_no - 1;
