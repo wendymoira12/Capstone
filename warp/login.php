@@ -11,6 +11,7 @@ if (isset($_POST['submit-login'])) {
   $pass_login = $_POST['pass-login'];
   $role_adopter = 1;
   $role_shelter = 2;
+  $_SESSION['password2'] = $pass_login;
   $sql = "SELECT * FROM user_tbl WHERE (user_email='$email_login' AND role_id='$role_adopter') OR (user_email='$email_login' AND role_id='$role_shelter')";
   $result = mysqli_query($conn, $sql);
   //If the query is true, sql will fetch all the data in the row
@@ -32,6 +33,7 @@ if (isset($_POST['submit-login'])) {
     }
   } else {
     echo "<script>alert('Oops! Email or Password is incorrect')</script>";
+    echo 'Error: ' . mysqli_error($conn);
   }
 }
 
@@ -148,7 +150,7 @@ if (isset($_POST["register"])) {
     <div class="forms-container">
       <div class="signin-signup">
         <form action="" method="POST" class="sign-in-form">
-          <h2 class="title">Sign in</h2>
+          <h1 class="title">Sign In</h1>
           <div class="input-field">
             <i class="fas fa-user"></i>
             <input type="email" placeholder="Email" name="email-login" value="<?php echo $email_login; ?>" required />
@@ -164,7 +166,7 @@ if (isset($_POST["register"])) {
 
         </form>
         <form action="#" class="sign-up-form" method="POST">
-          <h2 class="title">Register to WARP</h2>
+          <h1 class="title">Register to WARP</h1>
           <div class="input-field">
             <i class="fas fa-envelope"></i>
             <input type="text" id="email_address" class="form-control <?php echo !$emailErr ?: 'is-invalid'; ?>" placeholder="Email Address" name="email" required autofocus>
@@ -183,7 +185,7 @@ if (isset($_POST["register"])) {
     <div class="panels-container">
       <div class="panel left-panel">
         <div class="content">
-          <h3>New here?</h3>
+          <h1>New here?</h1>
           <p>
           </p>
           <button class="btn transparent" id="sign-up-btn">
@@ -194,7 +196,7 @@ if (isset($_POST["register"])) {
       </div>
       <div class="panel right-panel">
         <div class="content">
-          <h3>Already one of us?</h3>
+          <h1>Already one of us?</h1>
           <br>
           <button class="btn transparent" id="sign-in-btn">
             Sign in
