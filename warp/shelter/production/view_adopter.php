@@ -173,7 +173,7 @@ if ($result->num_rows > 0) {
                           <th>No.</th>
                           <th>City</th>
                           <th>Date</th>
-                          <th>Application Result</th>
+                          <th>Application Status</th>
                           <th>Monitoring Status</th>
                           <th>Remarks</th>
                         </tr>

@@ -166,7 +166,7 @@ if ($result->num_rows > 0) {
                                   <button type="button" class="btn btn-round btn-info">Show Adopter Info</button>
                                 </a>
                                 <a href="view_pet_status.php?adopted_id=<?= $data['adopted_id']; ?>">
-                                  <button type="button" class="btn btn-round btn-warning">View Remarks</button>
+                                  <button type="button" class="btn btn-round btn-warning" <?php if ($data['monitoring_status'] == "Not Yet"){ echo "disabled"; }?> >View Remarks</button>
                                 </a>
                               </td>
                             </tr>
