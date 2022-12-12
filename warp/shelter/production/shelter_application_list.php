@@ -136,13 +136,14 @@ if ($result->num_rows > 0) {
                         <th>Date Submitted</th>
                         <th>System Assessment</th>
                         <th>Application Status</th>
+                        <th>Accepted By</th>
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
                       <?php
                       $i = 1;
-                      $sql = "SELECT applicationform1.adopter_id, applicationform1.pet_id, applicationform1.date_submitted, applicationresult_tbl.application_result, applicationresult_tbl.application_status, adopter_tbl.adopter_fname, applicationresult_tbl.application_id, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, adoptee_tbl.city_id FROM applicationform1 INNER JOIN applicationresult_tbl ON applicationform1.application_id = applicationresult_tbl.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id = '$city_id'";
+                      $sql = "SELECT applicationform1.adopter_id, applicationresult_tbl.acceptedby_name, applicationform1.pet_id, applicationform1.date_submitted, applicationresult_tbl.application_result, applicationresult_tbl.application_status, adopter_tbl.adopter_fname, applicationresult_tbl.application_id, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, adoptee_tbl.city_id FROM applicationform1 INNER JOIN applicationresult_tbl ON applicationform1.application_id = applicationresult_tbl.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id = '$city_id'";
                       $result = mysqli_query($conn, $sql);
                       if ($result->num_rows > 0) {
                         foreach ($result as $data) {
@@ -154,6 +155,7 @@ if ($result->num_rows > 0) {
                             <td><?= $data['date_submitted']; ?></td>
                             <td><?= $data['application_result']; ?></td>
                             <td><?= $data['application_status']; ?></td>
+                            <td><?= $data['acceptedby_name']; ?></td>
                             <td>
                               <a href="shelter_application_view.php?id=<?= $data['application_id']; ?>">
                                 <?php
