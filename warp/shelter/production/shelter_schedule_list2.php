@@ -168,7 +168,7 @@ if ($result->num_rows > 0) {
 
                           <td>
                           <a href="applicationform_view.php?id=<?= $data['schedule_id']; ?>">
-                              <button type="button" class="btn btn-round btn-info">Agreement Form</button>
+                              <button type="button" class="btn btn-round btn-warning">Agreement Form</button>
                             </a>
                             
                             <a href="shelter_adopted_insert.php?id=<?= $data['application_id'] ?>">

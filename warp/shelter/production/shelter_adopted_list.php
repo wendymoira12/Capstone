@@ -157,7 +157,7 @@ if ($result->num_rows > 0) {
                               <td><?= $data['monitoring_status']; ?></td>
                               <td>
                                 <a href="shelter_adopted_list2.php?id=<?= $data['adopted_id'] ?>">
-                                  <button type="submit" class="btn btn-round btn-primary">Edit Date</button>
+                                  <button type="submit" class="btn btn-round btn-primary" <?php if($data['monitoring_status'] == "Monitored"){ echo "disabled";}?>>Edit Date</button>
                                 </a>
                                 <a href="adopted_pet_status_form.php?adopted_id=<?= $data['adopted_id'] ?>">
                                   <button type="submit" class="btn btn-round btn-success" <?php if($data['monitoring_status'] == "Monitored"){ echo "disabled";}?>>Pet Monitored</button>
