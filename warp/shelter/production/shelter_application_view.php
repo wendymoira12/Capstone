@@ -350,8 +350,7 @@ if ($result->num_rows > 0) {
                         $result = mysqli_query($conn, $sql);
                         
                         $rdisable = mysqli_fetch_assoc($result);
-                       $app_id = $rdisable['application_id'];
-                       $disable = "SELECT application_id, application_status from applicationresult_tbl WHERE application_id='$app_id'";
+                       $disable = "SELECT application_id, application_status from applicationresult_tbl WHERE application_id='$id'";
                         $qdisable = mysqli_query($conn, $disable);
                     ?>
                     <div class="ln_solid"></div>
@@ -362,11 +361,36 @@ if ($result->num_rows > 0) {
                         </a>
 
                         <a href="#" data-toggle="modal" data-target="#modalReject">
-                          <button name="reject" class="btn btn-round btn-danger">Reject</button>
+                          <button name="reject" class="btn btn-round btn-danger"
+                          <?php 
+                          if($qdisable->num_rows != 0){
+                            $fdisable = mysqli_fetch_assoc($qdisable);
+                            $var = $fdisable['application_status'];
+
+                            if ($var != "Pending"){
+                                ?> disabled <?php
+                            }
+                          }
+                          ?>>Reject</button>
                         </a>
 
+                        <?php
+                        $disable = "SELECT application_id, application_status from applicationresult_tbl WHERE application_id='$id'";
+                        $qdisable = mysqli_query($conn, $disable);
+                        ?>
+
                         <a href="accept_application.php?id=<?= htmlspecialchars($id) ?>">
-                          <button name="accept_application" type="button" class="btn btn-round btn-success" onclick="return confirm('Are you sure you want to accept this application?');">Accept</button>
+                          <button name="accept_application" type="button" class="btn btn-round btn-success" onclick="return confirm('Are you sure you want to accept this application?');"
+                          <?php 
+                          if($qdisable->num_rows != 0){
+                            $fdisable = mysqli_fetch_assoc($qdisable);
+                            $var = $fdisable['application_status'];
+
+                            if ($var != "Pending"){
+                                ?> disabled <?php
+                            }
+                          }
+                          ?>>Accept</button>
                         </a>
 
                         <a href="report_generation.php?id=<?= htmlspecialchars($id) ?>">
