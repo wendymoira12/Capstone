@@ -197,14 +197,15 @@ if ($result->num_rows > 0) {
                             </br>
                             </br>
                             I hereby commit to caring for the aforementioned pet in a humane and responsible manner and to giving it a clean and suitable home, food, water, and medical attention. I additionally concur that the aforementioned pet must live within my house and is not permitted to roam freely.
-                        </p>
+                            </p>
                         <br>
 
                         <p> <b>Adopter's name:</b> <?= $rowform['adopter_fname'] ." ". $rowform['adopter_lname'] ?></p>
                         <p> <b>Address:</b> <?= $rowform['adopter_address']?></p>
                         <p> <b>Phone Number:</b> <?= $rowform['adopter_cnum']?></p>
                         <br>
-                        <p> I certify that all statements made by me on this adoption agreement are true and correct. I agree that the current owner has the right to confiscate the above described animal in the event that any statements made by me are found to be false and/or my check for the adoption fee is returned for insufficient funds.
+                        <p> 
+                          I confirm that the information on this adoption agreement is accurate and true to the best of my knowledge. I accept that the Animal Shelter has the right to take the aforementioned pet away if any of my claims turn out to be untrue.
                         </p>
                         <br>
                         <br>

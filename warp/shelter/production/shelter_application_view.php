@@ -345,7 +345,15 @@ if ($result->num_rows > 0) {
                         <input class="form-control col-md-7 col-xs-12" type="text" name="q15" value="<?= $qdata['q15'] ?>" disabled>
                       </div>
                     </div>
-
+                    <?php
+                        $sql = "SELECT applicationform1.adopter_id, applicationform1.pet_id, applicationform1.date_submitted, applicationresult_tbl.application_result, applicationresult_tbl.application_status, adopter_tbl.adopter_fname, applicationresult_tbl.application_id, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, adoptee_tbl.city_id FROM applicationform1 INNER JOIN applicationresult_tbl ON applicationform1.application_id = applicationresult_tbl.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id = '$city_id'";
+                        $result = mysqli_query($conn, $sql);
+                        
+                        $rdisable = mysqli_fetch_assoc($result);
+                       $app_id = $rdisable['application_id'];
+                       $disable = "SELECT application_id, application_status from applicationresult_tbl WHERE application_id='$app_id'";
+                        $qdisable = mysqli_query($conn, $disable);
+                    ?>
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
