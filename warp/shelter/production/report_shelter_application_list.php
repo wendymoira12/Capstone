@@ -260,16 +260,16 @@ if ($result->num_rows > 0) {
           </div>
         </div>
       </div>
+
+      <!-- /page content -->
+
+      <!-- footer content -->
+      <footer>
+
+        <div class="clearfix"></div>
+      </footer>
+      <!-- /footer content -->
     </div>
-    <!-- /page content -->
-
-    <!-- footer content -->
-    <footer>
-
-      <div class="clearfix"></div>
-    </footer>
-    <!-- /footer content -->
-  </div>
   </div>
 
   <!-- jQuery -->
