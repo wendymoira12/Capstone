@@ -162,7 +162,7 @@ if ($result->num_rows > 0) {
                           </td>
 
                           <td>
-                          <a href="agreementform_view.php?id=<?= $data['schedule_id']; ?>">
+                          <a href="agreementform_view.php?id=<?= $data['application_id']; ?>">
                               <button type="button" class="btn btn-round btn-info">Agreement Form</button>
                             </a>
                             
