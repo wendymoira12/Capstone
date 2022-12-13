@@ -171,11 +171,14 @@ if ($result->num_rows > 0) {
                     $start_date = $_POST['start_date'];
                     $end_date = $_POST['end_date'];
 
+
                     $i = 1;
                     $sql = "SELECT applicationform1.adopter_id, applicationform1.pet_id, applicationform1.date_submitted, applicationresult_tbl.application_result, applicationresult_tbl.application_status, adopter_tbl.adopter_fname, applicationresult_tbl.application_id, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, adoptee_tbl.city_id FROM applicationform1 INNER JOIN applicationresult_tbl ON applicationform1.application_id = applicationresult_tbl.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE (applicationform1.date_submitted BETWEEN '$start_date' and '$end_date') AND adoptee_tbl.city_id = '$city_id'";
                     $result1 = mysqli_query($conn, $sql);
 
-                    if (mysqli_num_rows($result1) > 0) { ?>
+                    if (mysqli_num_rows($result1) > 0) { 
+                      $total = mysqli_num_rows($result1);
+                      ?>
                       <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                           <tr>
@@ -197,10 +200,17 @@ if ($result->num_rows > 0) {
                               <td><?= $data1['date_submitted']; ?></td>
                               <td><?= $data1['application_result']; ?></td>
                               <td><?= $data1['application_status']; ?></td>
+                              
                             </tr>
                           <?php  } ?>
                         </tbody>
+
                       </table>
+                       
+                      <?php 
+                      $totalecho = "Total Applications from"." ".$start_date." "."to"." ".$end_date." "."is"." ".$total;
+                      echo ($totalecho); ?>
+
                     <?php
                     } else {
 
@@ -256,6 +266,7 @@ if ($result->num_rows > 0) {
 
                   <?php }
                   ?>
+                  
                 </div>
               </div>
             </div>

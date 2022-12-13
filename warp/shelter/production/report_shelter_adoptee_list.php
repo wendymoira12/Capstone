@@ -162,7 +162,9 @@ if ($result->num_rows > 0) {
                     $sql = "SELECT * FROM adoptee_tbl WHERE (created_at BETWEEN '$start_date' and '$end_date') AND adoptee_tbl.city_id = '$city_id' AND deleted_at IS NULL";
                     $result1 = mysqli_query($conn, $sql);
 
-                    if (mysqli_num_rows($result1) > 0) { ?>
+                    if (mysqli_num_rows($result1) > 0) {
+                      $total = mysqli_num_rows($result1);
+                       ?>
 
                       <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
 
@@ -213,6 +215,9 @@ if ($result->num_rows > 0) {
                           <?php  } ?>
                         </tbody>
                       </table>
+                      <?php 
+                      $totalecho = "Total still available Adoptees from"." ".$start_date." "."to"." ".$end_date." "."is"." ".$total;
+                      echo ($totalecho); ?>
                     <?php
                     } else {
 

@@ -159,7 +159,9 @@ if ($result->num_rows > 0) {
                     $sql = "SELECT adopter_tbl.adopter_id, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_img1, adoptee_tbl.pet_img2, adoptee_tbl.pet_name, adopted_tbl.date_adopted, adopted_tbl.monitoring_date, adopted_tbl.monitoring_status, adopted_tbl.adopted_id FROM adopted_tbl INNER JOIN applicationform1 ON adopted_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE (adopted_tbl.date_adopted BETWEEN '$start_date' and '$end_date') AND adoptee_tbl.city_id = '$city_id'";
                     $result1 = mysqli_query($conn, $sql);
 
-                    if (mysqli_num_rows($result1) > 0) { ?>
+                    if (mysqli_num_rows($result1) > 0) { 
+                      $total = mysqli_num_rows($result1);
+                      ?>
 
                       <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
                         <thead>
@@ -184,7 +186,11 @@ if ($result->num_rows > 0) {
                             </tr>
                           <?php  } ?>
                         </tbody>
+                        <?php echo $total ?>
                       </table>
+                      <?php 
+                      $totalecho = "Total Adopted Pets from"." ".$start_date." "."to"." ".$end_date." "."is"." ".$total;
+                      echo ($totalecho); ?>
                     <?php
                     } else {
 
