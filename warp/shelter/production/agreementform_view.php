@@ -144,7 +144,6 @@ if ($result->num_rows > 0) {
         <div class="">
           <div class="page-title">
             <div class="title_left">
-            
             </div>
 
             <div class="title_right">
@@ -171,13 +170,14 @@ if ($result->num_rows > 0) {
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name"></label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                      <h1> Agreement Form </h1>
+                      <h2><?php echo $row['city_name']." "."Animal Shelter"?></h2>
+                      <h3>Agreement Form</h3>
                         </br>
                         </br>
                         <?php 
 
                         date_default_timezone_set('Asia/Manila');
-                        $dateform = date('Y-m-d');
+                        $dateform = date("F j, Y");
                         $sqlform = "SELECT applicationform1.adopter_address, schedule_tbl.schedule_id, schedule_tbl.schedule_date, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adopter_tbl.adopter_cnum, adoptee_tbl.pet_name, adoptee_tbl.pet_specie,adoptee_tbl.pet_breed, adoptee_tbl.pet_color,adoptee_tbl.pet_gender, schedule_tbl.application_id, adopter_tbl.adopter_id FROM schedule_tbl INNER JOIN applicationform1 ON schedule_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id ='$city_id' AND schedule_tbl.deleted_at IS NULL";
 
                         $resultform = mysqli_query($conn, $sqlform);
