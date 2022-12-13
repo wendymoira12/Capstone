@@ -188,7 +188,7 @@ if ($result->num_rows > 0) {
                               $result3 = mysqli_query($conn, $sql3);
                               $data3 = mysqli_fetch_assoc($result3);
                               //Pag accepted, message pati yung isang message with pet name and schedule ng interview
-                              echo $notif['message'] . ' ' . $notif['pet_name'] . '. ' . $notif['message1'] . ' ' . $data3['schedule_date'];
+                              echo $notif['message'] . ' ' . $notif['pet_name'] . '.';
                             } else {
                               $sql4 = "SELECT schedule_date FROM schedule_tbl";
                               $result4 = mysqli_query($conn, $sql4);
@@ -274,6 +274,14 @@ if ($result->num_rows > 0) {
                                   echo $data['application_status'];
                                   ?> <br>
                                   <?php echo $data1['message1'];
+                                }else if($data['application_status'] == 'Scheduled'){
+                                  $app_id = $data['application_id'];
+                                  $sql2 = "SELECT schedule_date FROM schedule_tbl WHERE application_id = '$app_id'";
+                                  $result2 = mysqli_query($conn, $sql2);
+                                  $data2 = mysqli_fetch_assoc($result2);
+                                  echo $data['application_status'];
+                                  ?> <br>
+                                  <?php echo "Interview date" . " " .$data2['schedule_date'];
                                 }else{
                                   echo $data['application_status'];
                                 }
