@@ -184,17 +184,20 @@ if ($result->num_rows > 0) {
                               echo $notif['message'] . ' ' . $notif['pet_name'] . '. ';
                               echo $notif['message1'];
                             } else if ($notif['isAccepted'] == '1') {
-                              $sql3 = "SELECT schedule_date FROM schedule_tbl";
-                              $result3 = mysqli_query($conn, $sql3);
-                              $data3 = mysqli_fetch_assoc($result3);
-                              //Pag accepted, message pati yung isang message with pet name and schedule ng interview
+                              // $sql3 = "SELECT schedule_date FROM schedule_tbl";
+                              // $result3 = mysqli_query($conn, $sql3);
+                              // $data3 = mysqli_fetch_assoc($result3);
+                              //Pag accepted, message with pet name 
                               echo $notif['message'] . ' ' . $notif['pet_name'] . '.';
+                            } else if ($notif['isAccepted'] == '4') {
+                              //Pag accepted, message pati yung isang message with pet name and schedule ng interview
+                              echo $notif['message'].' '.$notif['pet_name'].'.';
                             } else {
                               $sql4 = "SELECT schedule_date FROM schedule_tbl";
                               $result4 = mysqli_query($conn, $sql4);
                               $data4 = mysqli_fetch_assoc($result4);
                               //Pag pinalitan ni shelter yung interview date, dito lalabas
-                              echo $notif['message'] . ' ' . $data4['schedule_date'] . '. ' . $notif['message1'] . ' ' . $notif['pet_name'];
+                              echo $notif['message'].$notif['pet_name'].'.';
                             }
                             ?>
                           </span>
@@ -281,7 +284,7 @@ if ($result->num_rows > 0) {
                                   $data2 = mysqli_fetch_assoc($result2);
                                   echo $data['application_status'];
                                   ?> <br>
-                                  <?php echo "Interview date" . " " .$data2['schedule_date'];
+                                  <?php echo "Interview date: ".$data2['schedule_date'];
                                 }else{
                                   echo $data['application_status'];
                                 }

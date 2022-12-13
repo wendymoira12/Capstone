@@ -34,6 +34,11 @@ if (isset($_GET['id'])) {
                     }
                 }
             }
+            $finish = '4';
+            //notif sa pagclick ng pet adopted, pag finish na transaction
+            $msg = 'Thank you for adopting ';
+            $sql6 = mysqli_query($conn, "INSERT INTO adopternotif_tbl(application_id, message, isAccepted) VALUES('$application_id', '$msg', '$finish')");
+
         }
     }
 

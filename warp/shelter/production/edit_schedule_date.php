@@ -21,9 +21,8 @@ if (isset($_GET['sched_id']) && isset($_POST['submit-date'])) {
                 $app_id = $data['application_id'];
                 $change = '2';
                 //notif para sa pagaccept ng application form
-                $msg = 'This shelter has changed your interview date to'; //message if ever na papalitan ni shelter yung interview date ni adopter
-                $msg1 = 'for pet';
-                $sql_insert = "INSERT INTO adopternotif_tbl(application_id, schedule_id,  message, message1, isAccepted) VALUES('$app_id', '$id', '$msg', '$msg1', '$change')"; //Di ko alam pano ipapasok yung user_id para ma specify kung para kaninong adopter lang lalabas yung notif
+                $msg = 'This shelter has changed your interview date for pet '; //message if ever na papalitan ni shelter yung interview date ni adopter
+                $sql_insert = "INSERT INTO adopternotif_tbl(application_id, schedule_id,  message, isAccepted) VALUES('$app_id', '$id', '$msg', '$change')"; //Di ko alam pano ipapasok yung user_id para ma specify kung para kaninong adopter lang lalabas yung notif
 
                 if (mysqli_query($conn, $sql_insert)) {
                     //unset($_SESSION['app_id'], $_SESSION['sched_id']);
