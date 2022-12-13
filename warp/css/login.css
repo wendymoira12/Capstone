@@ -46,7 +46,7 @@ form {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 0rem 5rem;
+  padding: 0rem 2rem;
   transition: all 0.2s 0.7s;
   overflow: hidden;
   grid-column: 1 / 2;
@@ -63,7 +63,7 @@ form.sign-in-form {
 }
 
 .title {
-  font-size: 2.2rem;
+  font-size: 3.2rem;
   color: #444;
   margin-bottom: 10px;
 }
@@ -72,8 +72,8 @@ form.sign-in-form {
   max-width: 380px;
   width: 100%;
   background-color: #fff;
-  margin: 10px 0;
-  height: 50px;
+  margin: 12px 0;
+  height: 65px;
   border-radius: 40px;
   display: grid;
   grid-template-columns: 15% 85%;
@@ -83,10 +83,10 @@ form.sign-in-form {
 
 .input-field i {
   text-align: center;
-  line-height: 40px;
+  line-height: 55px;
   color: #acacac;
   transition: 0.5s;
-  font-size: 1.1rem;
+  font-size: 1.8rem;
 }
 
 .input-field input {
@@ -135,11 +135,11 @@ form.sign-in-form {
 }
 
 .btn {
-  width: 150px;
+  width: 180px;
   background-image: -webkit-linear-gradient(0deg, #f94cff 0%, #f94cff 99%);
   border: none;
   outline: none;
-  height: 49px;
+  height: 55px;
   border-radius: 49px;
   color: #fff;
   text-transform: uppercase;
@@ -168,7 +168,7 @@ form.sign-in-form {
   height: 2000px;
   width: 2000px;
   top: -10%;
-  right: 48%;
+  right:40%;
   transform: translateY(-50%);
   background-image: -webkit-linear-gradient(0deg,  #ff843a 0%, #f94cff 99%);
   transition: 1.8s ease-in-out;
@@ -237,7 +237,7 @@ form.sign-in-form {
 
 .container.sign-up-mode:before {
   transform: translate(100%, -50%);
-  right: 52%;
+  right: 55%;
 }
 
 .container.sign-up-mode .left-panel .image,
