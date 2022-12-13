@@ -60,7 +60,7 @@ if ($result3->num_rows > 0) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" type="image/x-icon" href="/warp/img/WARP_LOGO copy.png">
-  <title>Animal Shelter | Adopted Pet List</title>
+  <title><?php echo $row['city_name']; ?> | Pet Status</title>
 
   <!-- Bootstrap -->
   <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">

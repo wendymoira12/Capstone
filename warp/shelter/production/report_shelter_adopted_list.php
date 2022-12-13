@@ -41,7 +41,7 @@ if ($result->num_rows > 0) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" type="image/x-icon" href="/warp/img/WARP_LOGO copy.png">
-  <title>Animal Shelter | Adopted Pet List</title>
+  <title><?php echo $row['city_name']; ?> | Adopted Pet List</title>
 
   <!-- Bootstrap -->
   <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -166,7 +166,6 @@ if ($result->num_rows > 0) {
                           <tr>
                             <th>No.</th>
                             <th>Adopter Name</th>
-                            <th>Pet Image</th>
                             <th>Pet Name</th>
                             <th>Date Adopted</th>
                             <th>Monitoring Date</th>
@@ -178,7 +177,6 @@ if ($result->num_rows > 0) {
                             <tr>
                               <td><?= $i++; ?></td>
                               <td><?= $data1['adopter_fname'] . ' ' . $data1['adopter_lname']; ?></td>
-                              <td><?= '<img src="images/pet_img1/' . $data1['pet_img1'] . '" alt="pet" width="100">'; ?></td>
                               <td><?= $data1['pet_name']; ?></td>
                               <td><?= $data1['date_adopted']; ?></td>
                               <td><?= $data1['monitoring_date']; ?></td>
@@ -202,7 +200,6 @@ if ($result->num_rows > 0) {
                         <tr>
                           <th>No.</th>
                           <th>Adopter Name</th>
-                          <th>Pet Image</th>
                           <th>Pet Name</th>
                           <th>Date Adopted</th>
                           <th>Monitoring Date</th>
@@ -220,7 +217,6 @@ if ($result->num_rows > 0) {
                             <tr>
                               <td><?= $i++; ?></td>
                               <td><?= $data['adopter_fname'] . ' ' . $data['adopter_lname']; ?></td>
-                              <td><?= '<img src="images/pet_img1/' . $data['pet_img1'] . '" alt="pet" width="100">'; ?></td>
                               <td><?= $data['pet_name']; ?></td>
                               <td><?= $data['date_adopted']; ?></td>
                               <td><?= $data['monitoring_date']; ?></td>
