@@ -46,7 +46,7 @@ form {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 0rem 2rem;
+  padding: 0rem 1.5rem;
   transition: all 0.2s 0.7s;
   overflow: hidden;
   grid-column: 1 / 2;
@@ -221,11 +221,11 @@ form.sign-in-form {
 .btn.transparent {
   margin: 0;
   background: none;
-  border: 2px solid #fff;
+  border: 3px solid #fff;
   width: 130px;
-  height: 41px;
+  height: 50px;
   font-weight: 600;
-  font-size: 0.8rem;
+  font-size: 1.1rem;
 }
 
 .right-panel .image,
@@ -237,7 +237,7 @@ form.sign-in-form {
 
 .container.sign-up-mode:before {
   transform: translate(100%, -50%);
-  right: 55%;
+  right: 63%;
 }
 
 .container.sign-up-mode .left-panel .image,

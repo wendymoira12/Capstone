@@ -150,6 +150,7 @@ if (isset($_POST["register"])) {
     <div class="forms-container">
       <div class="signin-signup">
         <form action="" method="POST" class="sign-in-form">
+        <a href="home-guest.php"><img src="img/LOGOWITHTEXT.png" alt="" width="300px" height="160px"></a>
           <h1 class="title">Sign In</h1>
           <div class="input-field">
             <i class="fas fa-user"></i>
@@ -166,7 +167,8 @@ if (isset($_POST["register"])) {
 
         </form>
         <form action="#" class="sign-up-form" method="POST">
-          <h1 class="title">Register to WARP</h1>
+        <a href="home-guest.php"><img src="img/LOGOWITHTEXT.png" alt="" width="320px" height="180px"> </a>
+          <h1 class="title">Register</h1>
           <div class="input-field">
             <i class="fas fa-envelope"></i>
             <input type="text" id="email_address" class="form-control <?php echo !$emailErr ?: 'is-invalid'; ?>" placeholder="Email Address" name="email" required autofocus>
@@ -192,7 +194,7 @@ if (isset($_POST["register"])) {
             Sign up
           </button>
         </div>
-        <img src="img/WARP_Logo_Orange.png" class="image" alt="" />
+        <a href="home-guest.php"> <img src="img/dog.png" class="image" alt="" /> </a>
       </div>
       <div class="panel right-panel">
         <div class="content">
@@ -202,7 +204,7 @@ if (isset($_POST["register"])) {
             Sign in
           </button>
         </div>
-        <img src="img/WARP_LOGO copy.png" class="image" alt="" />
+        <a href="home-guest.php"><img src="img/cat.png" class="image" alt="" /></a>
       </div>
     </div>
   </div>
