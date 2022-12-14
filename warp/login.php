@@ -168,7 +168,7 @@ if (isset($_POST["register"])) {
         </form>
         <form action="#" class="sign-up-form" method="POST">
         <a href="home-guest.php"><img src="img/LOGOWITHTEXT.png" alt="" width="320px" height="180px"> </a>
-          <h1 class="title">Register</h1>
+          <h1 class="title">Sign Up</h1>
           <div class="input-field">
             <i class="fas fa-envelope"></i>
             <input type="text" id="email_address" class="form-control <?php echo !$emailErr ?: 'is-invalid'; ?>" placeholder="Email Address" name="email" required autofocus>
