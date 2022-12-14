@@ -10,17 +10,6 @@ if (!isset($_SESSION['mail'])) {
 if (isset($_POST['resetPassword'])) {
 
   // Validate current password
-  if (empty($_POST['current_password'])) {
-    $curpassErr = 'Current Password is required';
-  } else {
-    $curpass = filter_input(
-      INPUT_POST,
-      'current_password',
-      FILTER_SANITIZE_FULL_SPECIAL_CHARS
-    );
-  }
-
-  // Validate current password
   if (empty($_POST['new_password'])) {
     $newpassErr = 'New Password is required';
   } else {
@@ -43,48 +32,27 @@ if (isset($_POST['resetPassword'])) {
   }
   $email = $_SESSION['mail'];
 
-  if (empty($curpassErr) && empty($newpassErr) && empty($cnewpassErr)) {
-    $sql = "SELECT user_password FROM user_tbl WHERE user_email = ? AND deleted_at IS NULL";
-    $stmt = mysqli_stmt_init($conn);
-    if (!mysqli_stmt_prepare($stmt, $sql)) {
-      echo "SQL Prepared Statement Failed";
-    } else {
-      mysqli_stmt_bind_param($stmt, "s", $email);
-      mysqli_stmt_execute($stmt);
-      $result = mysqli_stmt_get_result($stmt);
-      if ($result->num_rows > 0) {
-        $row = mysqli_fetch_assoc($result);
-        $curhashpass = $row['user_password'];
-        if (password_verify($curpass, $curhashpass)) {
-          if ($newpass == $cnewpass) {
-            $pass = password_hash($newpass, PASSWORD_DEFAULT);
-            $sql2 = "UPDATE user_tbl SET user_password = ? WHERE user_email = ? AND deleted_at IS NULL";
-            $stmt2 = mysqli_stmt_init($conn);
-            if (!mysqli_stmt_prepare($stmt2, $sql2)) {
-              echo "SQL Prepared Statement Failed";
-            } else {
-              mysqli_stmt_bind_param($stmt2, "ss", $pass, $email);
-              mysqli_stmt_execute($stmt2);
-              unset($_SESSION['otp'], $_SESSION['mail']);
-              echo "<script>alert('Password Changed Successfully!')</script>";
-              echo "<script>window.location.href='login.php';</script>";
-              
-            }
-          } else {
-            echo "<script>alert('Your new password doesnt match with the confirm new password!')</script>";
-            echo "<script>window.location.href='reset_pw.php';</script>";
-          }
-        } else {
-          echo "<script>alert('Your new password doesnt match with the current password!')</script>";
-          echo "<script>window.location.href='reset_pw.php';</script>";
-        }
+  if (empty($newpassErr) && empty($cnewpassErr)) {
+    if ($newpass == $cnewpass) {
+      $pass = password_hash($newpass, PASSWORD_DEFAULT);
+      $sql2 = "UPDATE user_tbl SET user_password = ? WHERE user_email = ? AND deleted_at IS NULL";
+      $stmt2 = mysqli_stmt_init($conn);
+      if (!mysqli_stmt_prepare($stmt2, $sql2)) {
+        echo "SQL Prepared Statement Failed";
       } else {
-        echo "<script>alert('The account doesn't exist!')</script>";
+        mysqli_stmt_bind_param($stmt2, "ss", $pass, $email);
+        mysqli_stmt_execute($stmt2);
+        unset($_SESSION['otp'], $_SESSION['mail']);
+        echo "<script>alert('Password Changed Successfully!')</script>";
         echo "<script>window.location.href='login.php';</script>";
       }
+    } else {
+      echo "<script>alert('Your new password doesnt match with the confirm new password!')</script>";
+      echo "<script>window.location.href='reset_pw.php';</script>";
     }
   }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -113,10 +81,6 @@ if (isset($_POST['resetPassword'])) {
         <div class="signin-signup">
           <form action="#" method="POST" name="reset">
             <h2 class="title">Reset Password</h2>
-            <div class="input-field">
-              <i class="fas fa-lock"></i>
-              <input type="password" placeholder="Current Password" name="current_password" value="" required />
-            </div>
             <div class="input-field">
               <i class="fas fa-lock"></i>
               <input type="password" placeholder="New Password" name="new_password" value="" required />

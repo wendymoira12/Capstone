@@ -26,7 +26,7 @@ if (isset($_POST['submit-login'])) {
     $hashpass = $_SESSION['password-login'];
     // To check if $pass_login == $hashpass(session variable)
     if (password_verify($pass_login, $hashpass)) {
-      unset($_SESSION['password-login']);
+      unset($_SESSION['password-login'], $_SESSION['password2']);
       header("Location: home.php");
     } else {
       echo "<script>alert('Incorrect Email or Password')</script>";

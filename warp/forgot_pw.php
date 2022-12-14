@@ -66,7 +66,7 @@ if (isset($_POST["forgot-pw"])) {
           } else {
           ?>
             <script>
-              alert("<?php echo "Security code sent to " . $email ?>");
+              alert("<?php echo "Verification code sent to " . $email ?>");
               window.location.replace('security_code.php');
             </script>
 <?php
