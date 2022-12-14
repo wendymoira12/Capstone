@@ -133,10 +133,12 @@ if (isset($_GET['page'])) {
                                         <a href="AdopteePage.php?id=<?php echo $data['pet_id']; ?>">
                                             <h3><?= $data['pet_name']; ?></h3>
                                         </a>
-                                        <h5> <b> Gender:</b> <?= $data['pet_gender']; ?> <br>
+                                        <h5> <br>
                                             <b> Age:</b> <?= $data['pet_age']; ?> <br>
                                             <b> Size:</b> <?= $data['pet_size']; ?> <br>
-                                            <b> Neutered:</b> <?= $data['pet_neuter']; ?>
+                                            <b> Gender:</b> <?= $data['pet_gender']; ?> <br>
+                                            <b> Neutered:</b> <?= $data['pet_neuter']; ?> 
+                                            
                                         </h5>
 
                                     </div>

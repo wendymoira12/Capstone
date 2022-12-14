@@ -3954,8 +3954,10 @@ h6 {
 /* line 347, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_elements.scss */
 .generic-blockquote {
   padding: 50px 100px 50px 100px;
-  background: #f9f9ff;
-  border-left: 30px solid #222222;
+  background: #fdfaf7;
+  border-left: 15px solid #d735dd;
+  border-right: 15px solid #d735dd;
+
 }
 
 /* line 353, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_elements.scss */
@@ -3965,8 +3967,8 @@ h6 {
 
 /* line 357, ../../Arafath/CL/january 2020/240. Animal/HTML/scss/_elements.scss */
 .progress-table {
-  background: #f9f9ff;
-  padding: 15px 0px 30px 0px;
+  background: #fcf2ec;
+  padding: 15px 1px 30px 1px;
   min-width: 800px;
 }
 
@@ -6867,7 +6869,7 @@ h6 {
   width: 400px;
  }
 .portfolio .portfolio-gallery .item{
-  padding: 55px 45px 55px 45px;
+  padding: 50px 45px 55px 45px;
     border: 1px solid #ffc5c2;
     -webkit-border-radius: 10px;
     -moz-border-radius: 20px;
@@ -6933,3 +6935,5 @@ h6 {
   background-color: #ddd;
   border-radius: 5px;
 }
+.logo-img {
+  filter: invert(1);}

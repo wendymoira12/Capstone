@@ -69,7 +69,7 @@ if ($result->num_rows > 0) {
                     <div class="bradcam_text text-center">
                         <h3><?php echo $row['city_name']; ?></h3>
                         <br>
-                        <h4 style="color:white;"> <img src="img/phone.svg" width="30px" height="30px"> &nbsp <?php echo $row['city_contact']; ?>&nbsp &nbsp &nbsp &nbsp <img src="img/envelope-open.svg" width="30px" height="30px">
+                        <h4 style="color:white;"> <img src="img/phone.svg" class="logo-img" width="30px" height="30px"> &nbsp <?php echo $row['city_contact']; ?> &nbsp &nbsp &nbsp &nbsp <img src="img/envelope-open.svg" width="30px" height="30px" class="logo-img">&nbsp
                             <?php if ($row['city_email'] == TRUE) {
                                 echo $row['city_email'];
                             } else {
@@ -136,9 +136,10 @@ if ($result->num_rows > 0) {
                                         <a href="AdopteePage.php?id=<?php echo $data['pet_id']; ?>">
                                             <h3><?= $data['pet_name']; ?></h3>
                                         </a>
-                                        <h5> <b> Gender:</b> <?= $data['pet_gender']; ?> <br>
+                                        <h5> 
                                             <b> Age:</b> <?= $data['pet_age']; ?> <br>
                                             <b> Size:</b> <?= $data['pet_size']; ?> <br>
+                                            <b> Gender:</b> <?= $data['pet_gender']; ?> <br>
                                             <b> Neutered:</b> <?= $data['pet_neuter']; ?>
                                         </h5>
                                     </div>
