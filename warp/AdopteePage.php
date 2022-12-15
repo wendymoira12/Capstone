@@ -422,7 +422,7 @@ if (isset($_POST['submit'])) {
 
                             // MONITORING STATUS NA LANG PAG DONE DAPAT TSAKA PWEDE MAGADOPT
 
-                            if ((((($var == "Pending") OR ($var == "Scheduled")) OR $datedisable >= 9))) {
+                            if ((((($var == "Pending") OR ($var == "Scheduled")) OR $datedisable >= 3))) {
                               
                             ?> disabled <?php
                             }
