@@ -1,8 +1,8 @@
 <?php
 
 $server = "localhost";
-$username = "root";
-$password = "";
+$username = "nbqdsxfp_warp";
+$password = "C{22fpbGdk(~";
 $database = "warp_capstone";
 
 $conn = mysqli_connect($server, $username, $password, $database);
