@@ -128,7 +128,8 @@ if (isset($_POST['submit'])) {
                     </div>
                 
                     <div class="modal-body">
-                      <input type="file" name="adopter_pfp" id="myBtn" alt=""> </input>
+                    <img src="/Capstone/warp/shelter/production/images/adopter_pic/<?= $row['adopter_pfp']; ?>" alt="..." class="proileupdate profileupdate img" height="20" width="20">
+                      <input type="file" name="adopter_pfp" id="myBtn" alt="" accept="image/*" required> </input>
                     </div>
                       <div class="modal-footer">
                       <!-- <a href=""> -->

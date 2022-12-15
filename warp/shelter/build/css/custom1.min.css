@@ -336,6 +336,23 @@ table.tile_info td p {
 }
 
 .img-circle.profile_img {
+  /* object-fit: cover; */
+  background: #f7efeb;
+  margin-left: 30%;
+  z-index: 1000;
+  /* position: inherit; */
+  margin-top: 20px;
+  border: 1px solid rgba(255, 167, 90, 0.797);
+  padding: 4px;
+  display: inline-block; 
+  position: relative; 
+  width: 55px; 
+  height: 55px; 
+  overflow: hidden; 
+  border-radius: 50%; 
+  /* overflow: hidden; */
+}
+/* .img-circle.profile_img {
     width: 70%;
     height: 70%;
     object-fit: cover;
@@ -346,6 +363,38 @@ table.tile_info td p {
     margin-top: 20px;
     border: 1px solid rgba(253, 127, 16, 0.797);
     padding: 4px;
+    /* overflow: hidden; 
+} 
+/* .circular--landscape { 
+    display: inline-block; 
+    position: relative; 
+    width: 200px; 
+    height: 200px; 
+    overflow: hidden; 
+    border-radius: 50%; 
+}  */
+
+.profileupdate img { 
+    width: 100%; 
+    height: 100%; 
+    /* margin-left: -50px;  */
+}
+
+.profileupdate {
+    /* object-fit: cover; */
+    background: #f7efeb;
+    margin-left: 30%;
+    z-index: 1000;
+    /* position: inherit; */
+    margin-top: 20px;
+    border: 1px solid rgba(255, 167, 90, 0.797);
+    padding: 4px;
+    display: inline-block; 
+    position: relative; 
+    width: 200px; 
+    height: 200px; 
+    overflow: hidden; 
+    border-radius: 50%; 
     /* overflow: hidden; */
 }
 
