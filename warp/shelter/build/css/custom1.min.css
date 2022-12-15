@@ -331,11 +331,10 @@ table.tile_info td p {
 
 .profile_pic {
     width: 35%;
-
     float: left;
 }
 
-.img-circle.profile_img {
+.img-circle.profile_img2 {
   /* object-fit: cover; */
   background: #f7efeb;
   margin-left: 30%;
@@ -352,7 +351,7 @@ table.tile_info td p {
   border-radius: 50%; 
   /* overflow: hidden; */
 }
-/* .img-circle.profile_img {
+.img-circle.profile_img {
     width: 70%;
     height: 70%;
     object-fit: cover;
@@ -363,7 +362,7 @@ table.tile_info td p {
     margin-top: 20px;
     border: 1px solid rgba(253, 127, 16, 0.797);
     padding: 4px;
-    /* overflow: hidden; 
+    /* overflow: hidden;  */
 } 
 /* .circular--landscape { 
     display: inline-block; 

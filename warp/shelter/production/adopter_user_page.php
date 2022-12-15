@@ -115,7 +115,7 @@ if (isset($_POST['submit'])) {
             </a>
             <div class="profile_pic">
               <!-- Profile Picture -->
-                  <img id="myBtn" src="/Capstone/warp/shelter/production/images/adopter_pic/<?= $row['adopter_pfp']; ?>" alt="..." class="img-circle profile_img">
+                  <img id="myBtn" src="/Capstone/warp/shelter/production/images/adopter_pic/<?= $row['adopter_pfp']; ?>" alt="..." class="img-circle profile_img2">
                 <div id="myModal" class="modal">
 
                   <!-- Modal content -->
