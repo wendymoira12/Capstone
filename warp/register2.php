@@ -115,7 +115,7 @@ if (isset($_POST['submit'])) {
           </div>
           <div class="input-field">
             <i class="fa-solid fa-phone"></i>
-            <input type="text" placeholder="Cellphone Number" name="cnumber" required>
+            <input minlength="11" maxlength="11" type="text" placeholder="Cellphone Number" name="cnumber" required>
           </div>
           <div class="input-field">
             <i class="fa-solid fa-location-dot"></i>
