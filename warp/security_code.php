@@ -30,7 +30,7 @@
           <h2 class="title">Verify your Account</h2>
           <h5> Please enter your Security Code here: </h5>
           <div class="input-field">
-            <i class="fa-solid fa-lock-hashtag"></i>
+            <i class="fa-solid fa-lock"></i>
             <input type="text" id="otp" class="form-control" name="otp_code" required autofocus>
             <label for="email_address"></label>
           </div>
