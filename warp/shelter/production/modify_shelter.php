@@ -51,7 +51,7 @@ if (isset($_GET['city_id']) && isset($_POST['edit-shelter-submit'])) {
 
     $img = $_FILES['logo']['name'];
     $img_tmp_name = $_FILES['logo']['tmp_name'];
-    $img_folder = '../../../../images/logo/' . $img;
+    $img_folder = '/images/logo/' . $img;
 
 
     if (empty($cityErr) && empty($contactErr) && empty($aboutErr) && !empty($img)) {
@@ -63,24 +63,14 @@ if (isset($_GET['city_id']) && isset($_POST['edit-shelter-submit'])) {
         } else {
             mysqli_stmt_bind_param($stmt, "ssssi", $city, $contact, $about, $img, $id);
             mysqli_stmt_execute($stmt);
-            header('Location:shelter_account.php');
+            move_uploaded_file($img_tmp_name, __DIR__ . $img_folder);
+            header('Location: shelter_account.php');
         }
     } else {
         echo "All fields must be filled out";
     }
 } else {
     echo "Id is invalid";
-}
-
-// UPLOAD THE IMAGES IN THE IMAGES FOLDER
-if ($result) {
-    move_uploaded_file($img_tmp_name, $img_folder);
-
-    echo "<script>alert('Shelter updated successfully')</script>";
-    header("Location: shelter_account.php");
-} else {
-    echo "<script>alert('Oops! Something went wrong')</script>";
-    header("Location: shelter_account.php");
 }
 
 ?>
