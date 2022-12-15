@@ -130,7 +130,7 @@ if ($result->num_rows > 0) {
                   <table id="datatable" class="table table-striped table-bordered">
                     <thead>
                       <tr>
-                        <th>No.</th>
+                        <th>Application ID</th>
                         <th>Adopter</th>
                         <th>Adoptee</th>
                         <th>Date Submitted</th>
@@ -149,7 +149,7 @@ if ($result->num_rows > 0) {
                         foreach ($result as $data) {
                       ?>
                           <tr>
-                            <td><?= $i++; ?></td>
+                            <td><?= $data['application_id'] ?></td>
                             <td><?= $data['adopter_fname'] . ' ' . $data['adopter_lname']; ?></td>
                             <td><?= $data['pet_name']; ?></td>
                             <td><?= $data['date_submitted']; ?></td>
