@@ -8,7 +8,7 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
     header('Location: login.php');
 }
 
-$sql = "SELECT * FROM city_tbl";
+$sql = "SELECT * FROM city_tbl WHERE deleted at IS NULL";
 $result = mysqli_query($conn, $sql);
 
 $row = mysqli_fetch_assoc($result);

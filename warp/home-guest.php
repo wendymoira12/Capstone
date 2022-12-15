@@ -2,7 +2,7 @@
 include 'config.php';
 include('connect/connection.php');
 session_start();
-$sql = "SELECT * FROM city_tbl";
+$sql = "SELECT * FROM city_tbl WHERE deleted_at IS NULL";
 $result = mysqli_query($conn, $sql);
 
 $row = mysqli_fetch_assoc($result);
