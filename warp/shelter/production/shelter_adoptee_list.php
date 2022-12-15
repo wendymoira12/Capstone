@@ -164,8 +164,8 @@ if ($result->num_rows > 0) {
                     ?>
                         <tr>
                           <td><?= $i++; ?></td>
-                          <td><?= '<img src="images/pet_img1/' . $row['pet_img1'] . '" alt="pet" width="100">'; ?></td>
-                          <td><?= '<img src="images/pet_img2/' . $row['pet_img2'] . '" alt="pet" width="100">'; ?></td>
+                          <td><?= '<img src="images/pet_img1/' . $row['pet_img1'] . '" alt="pet" width="100px" height="100px";>'; ?></td>
+                          <td><?= '<img src="images/pet_img2/' . $row['pet_img2'] . '" alt="pet" width="100px" height="100px";>'; ?></td>
                           <td><?= $row['pet_name']; ?></td>
                           <td><?= $row['pet_age']; ?></td>
                           <td><?= $row['pet_color']; ?></td>

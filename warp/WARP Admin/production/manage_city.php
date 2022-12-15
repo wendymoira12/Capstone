@@ -225,7 +225,7 @@ if (isset($_POST['submit'])) {
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Contact <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" maxlength="11" id="contact" name="contact" required="required" class="form-control col-md-7 col-xs-12" onkeypress="return /[0-9]/i.test(event.key)">
+                          <input type="text" minlength="11" maxlength="11" id="contact" name="contact" required="required" class="form-control col-md-7 col-xs-12" onkeypress="return /[0-9]/i.test(event.key)">
                         </div>
                       </div>
                       <div class="form-group">

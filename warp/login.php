@@ -12,7 +12,7 @@ if (isset($_POST['submit-login'])) {
   $role_adopter = 1;
   $role_shelter = 2;
   $_SESSION['password2'] = $pass_login;
-  $sql = "SELECT * FROM user_tbl WHERE (user_email='$email_login' AND role_id='$role_adopter') OR (user_email='$email_login' AND role_id='$role_shelter')";
+  $sql = "SELECT * FROM user_tbl WHERE (user_email='$email_login' AND role_id='$role_adopter' AND deleted_at IS  NULL) OR (user_email='$email_login' AND role_id='$role_shelter' AND deleted_at IS  NULL)";
   $result = mysqli_query($conn, $sql);
   //If the query is true, sql will fetch all the data in the row
   if ($result->num_rows > 0) {
@@ -33,7 +33,6 @@ if (isset($_POST['submit-login'])) {
     }
   } else {
     echo "<script>alert('Oops! Email or Password is incorrect')</script>";
-    echo 'Error: ' . mysqli_error($conn);
   }
 }
 

@@ -26,6 +26,48 @@ if ($result->num_rows > 0) {
 }
 ?>
 
+<?php
+if (isset($_POST['submit'])) {
+    $adopter_pfp = mysqli_real_escape_string($conn, $_FILES['adopter_pfp']['tmp_name']);
+    $adopter_img_tmp_name = $_FILES['adopter_pfp']['tmp_name'];
+    // upload image to folder named images/
+ 
+    // only images can be uploaded
+    $adopter_img_imagetype = exif_imagetype($adopter_img_tmp_name);
+    // $adopter_img_folder = '/images/adopter_pic/' . $adopter_pfp;
+    
+    if(!$adopter_img_imagetype) {
+      echo('Uploaded file is not an image.');
+    }
+  
+
+    //extension nung file dapat JPEG PNG GIF XBM XPM WBMP WebP BMP
+    $image_extension = image_type_to_extension($adopter_img_imagetype, true);
+  
+    //converts image name into hexadecimal
+    $image_name = bin2hex(random_bytes(16)) . $image_extension;
+  
+    if (!empty($adopter_pfp)) {
+
+        $sql = "UPDATE adopter_tbl SET adopter_pfp = '$image_name' WHERE adopter_id = '$adopter_id'";
+        $result = $conn->query($sql);
+  
+    } 
+
+  // UPLOAD THE IMAGES AND VIDEOS IN THE IMAGES FOLDER
+  if ($result) {
+      move_uploaded_file($adopter_img_tmp_name, __DIR__ . "/images/adopter_pic/" . $image_name);
+
+      echo "<script>alert('Adoptee added successfully')</script>";
+      header("Location: adopter_user_page.php");
+    } else {
+      echo "<script>alert('Oops! Something went wrong')</script>";
+      header("Location: adopter_user_page.php");
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -72,29 +114,38 @@ if ($result->num_rows > 0) {
               <img src="images/logo.png" alt="">
             </a>
             <div class="profile_pic">
+              <!-- Profile Picture -->
+                  <img id="myBtn" src="/Capstone/warp/shelter/production/images/adopter_pic/<?= $row['adopter_pfp']; ?>" alt="..." class="img-circle profile_img2">
+                <div id="myModal" class="modal">
 
+                  <!-- Modal content -->
+                  <div class="modal-content">
+                  <form enctype="multipart/form-data" action="" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
-              <img id="myBtn" src="images/user.png" alt="..." class="img-circle profile_img">
-              <div id="myModal" class="modal">
-
-                <!-- Modal content -->
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <span class="close">&times;</span>
-                    <h2>Modal Header</h2>
-                  </div>
-                  <div class="modal-body">
-                    <p>Some text in the Modal Body</p>
-                    <p>Some other text...</p>
-                  </div>
-                  <div class="modal-footer">
-                    <h3>Modal Footer</h3>
-                  </div>
+                    <div class="modal-header">
+                      <span class="close">&times;</span>
+                      <h2>Update Profile Picture</h2>
+                    </div>
+                
+                    <div class="modal-body">
+                    <img src="/Capstone/warp/shelter/production/images/adopter_pic/<?= $row['adopter_pfp']; ?>" alt="..." class="proileupdate profileupdate img" height="20" width="20">
+                      <input type="file" name="adopter_pfp" id="myBtn" alt="" accept="image/*" required> </input>
+                    </div>
+                      <div class="modal-footer">
+                      <!-- <a href=""> -->
+                        <input class="btn" type="submit" name="submit" id="submit">Submit</button>
+                      <!-- </a>  -->
+                      </div>          
+                  
+                  </form>
                 </div>
-
+                
+                <!-- Modal content -->
               </div>
 
             </div>
+            <!-- Profile picture -->
+
             <div class="profile_info">
               <span>Welcome,</span>
               <h2><?php echo $row['adopter_fname']; ?></h2>
@@ -240,7 +291,7 @@ if ($result->num_rows > 0) {
                     <table id="datatable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>No.</th>
+                          <!-- <th>No.</th> -->
                           <th>Application ID</th>
                           <th>Pet Name</th>
                           <th>Date Submitted</th>
@@ -263,7 +314,7 @@ if ($result->num_rows > 0) {
 
                         ?>
                             <tr>
-                              <th><?= $i++; ?></th>
+                              <!-- <th><?= $i++; ?></th> -->
                               <th><?php echo $data['application_id']; ?></th>
                               <th><?php echo $data['pet_name']; ?></th>
                               <td><?php echo $data['date_submitted']; ?></td>

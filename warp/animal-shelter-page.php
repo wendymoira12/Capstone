@@ -7,9 +7,13 @@ session_start();
 <?php
 if (isset($_GET['id']) && $_GET['page']) {
     $page_no = $_GET['page'];
-} else {
-    die('Id not provided');
+}  
+else {
+    header('Location:/Capstone/warp/login.php'); 
 }
+// else {
+//     die('Id not provided');
+// }
 $city_id = $_GET['id'];
 
 // Query to check kung anong shelter
