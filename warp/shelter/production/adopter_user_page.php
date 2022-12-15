@@ -291,7 +291,7 @@ if (isset($_POST['submit'])) {
                     <table id="datatable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>No.</th>
+                          <!-- <th>No.</th> -->
                           <th>Application ID</th>
                           <th>Pet Name</th>
                           <th>Date Submitted</th>
@@ -304,7 +304,7 @@ if (isset($_POST['submit'])) {
 
                         $i = 1;
                         //Columns needed to query = No., Date Submitted, Adopter Name, Adoptee name, Application Status
-                        $sqlapp = "SELECT applicationform1.date_submitted, applicationform1.adopter_id, applicationform1.pet_id, applicationresult_tbl.application_status, applicationform1.application_id, adoptee_tbl.pet_name FROM applicationform1 INNER JOIN applicationresult_tbl ON applicationform1.application_id = applicationresult_tbl.application_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id WHERE adopter_tbl.adopter_id = '$adopter_id'";
+                        $sqlapp = "SELECT applicationform1.date_submitted, applicationform1.adopter_id, applicationform1.pet_id, applicationresult_tbl.application_status, applicationform1.application_id, adoptee_tbl.pet_name FROM applicationform1 INNER JOIN applicationresult_tbl ON applicationform1.application_id = applicationresult_tbl.application_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id WHERE adopter_tbl.adopter_id = '$adopter_id' ORDER BY applicationform1.date_submitted DESC";
 
                         //$sqlapp= "SELECT * FROM applicationform1, applicationresult_tbl WHERE adopter_id ='$adopter_id';";
 
@@ -314,7 +314,7 @@ if (isset($_POST['submit'])) {
 
                         ?>
                             <tr>
-                              <th><?= $i++; ?></th>
+                              <!-- <th><?= $i++; ?></th> -->
                               <th><?php echo $data['application_id']; ?></th>
                               <th><?php echo $data['pet_name']; ?></th>
                               <td><?php echo $data['date_submitted']; ?></td>
