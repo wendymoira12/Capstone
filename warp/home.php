@@ -8,7 +8,7 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
     header('Location: login.php');
 }
 
-$sql = "SELECT * FROM city_tbl WHERE deleted at IS NULL";
+$sql = "SELECT * FROM city_tbl WHERE deleted_at IS NULL";
 $result = mysqli_query($conn, $sql);
 
 $row = mysqli_fetch_assoc($result);
@@ -150,7 +150,7 @@ $row = mysqli_fetch_assoc($result);
                                                     }
                                                     ?>
                                                     <div class="single_adapt text-center">
-                                                        <img src="img/adapt_icon/1.png" alt="">
+                                                        <!-- <img src="img/adapt_icon/1.png" alt=""> -->
                                                         <div class="adapt_content">
                                                             <h3 class="counter"><?= $totaladoptedpet ?></h3>
                                                             <p>Pets Adopted</p>
@@ -191,7 +191,7 @@ $row = mysqli_fetch_assoc($result);
                                                 }
                                                 ?>
                                                 <div class="single_adapt text-center">
-                                                    <img src="img/adapt_icon/3.png" alt="">
+                                                    <!-- <img src="img/adapt_icon/3.png" alt=""> -->
                                                     <div class="adapt_content">
                                                         <h3><span class="counter"><?= $totalcats ?></span>+</h3>
                                                         <p>Cats Available</p>
@@ -212,7 +212,7 @@ $row = mysqli_fetch_assoc($result);
                                                 }
                                                 ?>
                                                 <div class="single_adapt text-center">
-                                                    <img src="img/adapt_icon/2.png" alt="">
+                                                    <!-- <img src="img/adapt_icon/2.png" alt=""> -->
                                                     <div class="adapt_content">
                                                         <h3><span class="counter"><?= $totaldogs ?></span>+</h3>
                                                         <p>Dogs Available</p>

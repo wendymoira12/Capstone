@@ -148,7 +148,7 @@ session_regenerate_id();
                                                     }
                                                     ?>
                                                     <div class="single_adapt text-center">
-                                                        <img src="img/adapt_icon/1.png" alt="">
+                                                        <!-- <img src="img/adapt_icon/1.png" alt=""> -->
                                                         <div class="adapt_content">
                                                             <h3 class="counter"><?= $totaladoptedpet ?></h3>
                                                             <p>Pets Adopted</p>
@@ -189,7 +189,7 @@ session_regenerate_id();
                                                 }
                                                 ?>
                                                 <div class="single_adapt text-center">
-                                                    <img src="img/adapt_icon/3.png" alt="">
+                                                    <!-- <img src="img/adapt_icon/3.png" alt=""> -->
                                                     <div class="adapt_content">
                                                         <h3><span class="counter"><?= $totalcats ?></span>+</h3>
                                                         <p>Cats Available</p>
@@ -210,7 +210,7 @@ session_regenerate_id();
                                                 }
                                                 ?>
                                                 <div class="single_adapt text-center">
-                                                    <img src="img/adapt_icon/2.png" alt="">
+                                                    <!-- <img src="img/adapt_icon/2.png" alt=""> -->
                                                     <div class="adapt_content">
                                                         <h3><span class="counter"><?= $totaldogs ?></span>+</h3>
                                                         <p>Dogs Available</p>
