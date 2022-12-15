@@ -30,7 +30,7 @@ if (isset($_POST['submit'])) {
     $adopter_pfp = mysqli_real_escape_string($conn, $_FILES['adopter_pfp']['tmp_name']);
     $adopter_img_tmp_name = $_FILES['adopter_pfp']['tmp_name'];
     // upload image to folder named images/
-    $adopter_img_folder = '/images/adopter_pfp/' . $adopter_pfp;
+
     // only images can be uploaded
     $adopter_img_imagetype = exif_imagetype($adopter_img_tmp_name);
     if(!$adopter_img_imagetype) {
