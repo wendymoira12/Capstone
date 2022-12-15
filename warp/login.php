@@ -149,7 +149,7 @@ if (isset($_POST["register"])) {
     <div class="forms-container">
       <div class="signin-signup">
         <form action="" method="POST" class="sign-in-form">
-        <a href="home-guest.php"><img src="img/LOGOWITHTEXT.png" alt="" width="300px" height="160px"></a>
+        <a href="index.php"><img src="img/LOGOWITHTEXT.png" alt="" width="300px" height="160px"></a>
           <h1 class="title">Sign In</h1>
           <div class="input-field">
             <i class="fas fa-user"></i>
@@ -166,7 +166,7 @@ if (isset($_POST["register"])) {
 
         </form>
         <form action="#" class="sign-up-form" method="POST">
-        <a href="home-guest.php"><img src="img/LOGOWITHTEXT.png" alt="" width="320px" height="180px"> </a>
+        <a href="index.php"><img src="img/LOGOWITHTEXT.png" alt="" width="320px" height="180px"> </a>
           <h1 class="title">Sign Up</h1>
           <div class="input-field">
             <i class="fas fa-envelope"></i>
@@ -193,7 +193,7 @@ if (isset($_POST["register"])) {
             Sign up
           </button>
         </div>
-        <a href="home-guest.php"> <img src="img/dog.png" class="image" alt="" /> </a>
+        <a href="index.php"> <img src="img/dog.png" class="image" alt="" /> </a>
       </div>
       <div class="panel right-panel">
         <div class="content">
@@ -203,7 +203,7 @@ if (isset($_POST["register"])) {
             Sign in
           </button>
         </div>
-        <a href="home-guest.php"><img src="img/cat.png" class="image" alt="" /></a>
+        <a href="index.php"><img src="img/cat.png" class="image" alt="" /></a>
       </div>
     </div>
   </div>

@@ -4,9 +4,9 @@
     if (isset($_GET['logout'])){
         session_unset();
         session_destroy();
-        header("Location: home-guest.php");
+        header("Location: index.php");
     } 
     else{
-        header("Location: home-guest.php");
+        header("Location: index.php");
     }
 ?>

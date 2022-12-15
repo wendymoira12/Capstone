@@ -125,7 +125,7 @@ if (isset($_POST["forgot-pw"])) {
             <button class="btn transparent">Sign in</button>
           </a>
         </div>
-        <a href="home-guest.php"><img src="img/dog.png" class="image" alt="" /></a>
+        <a href="index.php"><img src="img/dog.png" class="image" alt="" /></a>
       </div>
       <script src="js/app.js"></script>
 </body>

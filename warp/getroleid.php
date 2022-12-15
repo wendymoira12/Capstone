@@ -12,7 +12,7 @@ if (isset($_GET['id'])){
     } elseif ($role_id == 2){
         header('Location:/Capstone/warp/shelter/production/shelter_account.php');
     } else {
-        header('Location: home-guest.php');
+        header('Location: index.php');
     }
     //Nice
 }

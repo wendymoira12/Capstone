@@ -30,7 +30,7 @@
                             <div class="main-menu  d-none d-lg-block">
                                 <nav>
                                     <ul id="navigation">
-                                        <li><a href="home-guest.php">Home</a></li>
+                                        <li><a href="index.php">Home</a></li>
                                         <li> <a href="pets_for_adoption.php">Pets for Adoption</a> </li>                              
 
                                     </ul>
