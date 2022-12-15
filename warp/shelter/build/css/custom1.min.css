@@ -331,18 +331,22 @@ table.tile_info td p {
 
 .profile_pic {
     width: 35%;
+
     float: left;
 }
 
 .img-circle.profile_img {
     width: 70%;
+    height: 70%;
+    object-fit: cover;
     background: #f7efeb;
     margin-left: 15%;
     z-index: 1000;
     position: inherit;
     margin-top: 20px;
-    border: 1px solid rgba(52, 73, 94, 0.44);
+    border: 1px solid rgba(253, 127, 16, 0.797);
     padding: 4px;
+    /* overflow: hidden; */
 }
 
 .profile_info {

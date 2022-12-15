@@ -149,8 +149,8 @@ if ($result->num_rows > 0) {
                             <tr>
                               <td><?= $i++; ?></td>
                               <td><?= $data['adopter_fname'] . ' ' . $data['adopter_lname']; ?></td>
-                              <td><?= '<img src="images/pet_img1/' . $data['pet_img1'] . '" alt="pet" width="100">'; ?></td>
-                              <td><?= '<img src="images/pet_img2/' . $data['pet_img2'] . '" alt="pet" width="100">'; ?></td>
+                              <td><?= '<img src="images/pet_img1/' . $data['pet_img1'] . '" alt="pet" width="100" height="100">'; ?></td>
+                              <td><?= '<img src="images/pet_img2/' . $data['pet_img2'] . '" alt="pet" width="100" height="100">'; ?></td>
                               <td><?= $data['pet_name']; ?></td>
                               <td><?= $data['date_adopted']; ?></td>
                               <td><?= $data['monitoring_date']; ?></td>
