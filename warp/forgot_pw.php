@@ -102,8 +102,8 @@ if (isset($_POST["forgot-pw"])) {
       <div class="forms-container">
         <div class="signin-signup">
           <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
-            <h2 class="title">Enter your Email Address</h2>
-            <p>Please enter your email to receive a verification code. WARP will send you the code to confirm your account. </p>
+            <h2 class="title">Enter Email Address</h2>
+            <p>Please enter your email to receive a verification code.<br> WARP will send you the code to confirm your account. </p>
             <div class="input-field">
               <i class="fas fa-user"></i>
               <input type="text" id="email_address" class="form-control <?php echo !$emailErr ?: 'is-invalid'; ?>" placeholder="Email Address" name="email" required autofocus>
@@ -125,9 +125,8 @@ if (isset($_POST["forgot-pw"])) {
             <button class="btn transparent">Sign in</button>
           </a>
         </div>
-        <img src="img/WARP_Logo_Orange.png" class="image" alt="" />
+        <a href="home-guest.php"><img src="img/dog.png" class="image" alt="" /></a>
       </div>
-
       <script src="js/app.js"></script>
 </body>
 

@@ -159,7 +159,7 @@ if (isset($_POST['submit'])) {
           </p>
 
         </div>
-        <img src="img/WARP_Logo_Orange.png" class="image" alt="" />
+        <img src="img/dog.png" class="image" alt="" />
       </div>
 
     </div>

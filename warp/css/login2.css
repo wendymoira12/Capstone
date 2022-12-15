@@ -167,7 +167,7 @@ form.sign-in-form {
   height: 2000px;
   width: 2000px;
   top: -10%;
-  right: 48%;
+  right: 40%;
   transform: translateY(-50%);
   background-image: -webkit-linear-gradient(0deg,  #ff843a 0%, #f94cff 99%);
   transition: 1.8s ease-in-out;
