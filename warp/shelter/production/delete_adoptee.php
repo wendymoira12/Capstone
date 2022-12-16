@@ -11,6 +11,6 @@ if (isset($_GET['pet_id'])) {
         mysqli_stmt_bind_param($stmt, "i", $pet_id);
         mysqli_stmt_execute($stmt);
         echo "<script>alert('Successfully Deleted')</script>";
-        header("Location: shelter_adoptee_list.php");
+        echo "<script>window.location.href='shelter_adoptee_list.php';</script>";
     }
 }

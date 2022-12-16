@@ -4,14 +4,14 @@ session_start();
 
 //if hindi nakaset si user-email and user-role-id babalik sya sa login.php
 
-if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'],$_SESSION['user_id'])) {
-  header('Location:/Capstone/warp/login.php');
+if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'], $_SESSION['user_id'])) {
+  header('Location:/login.php');
 } else {
   $role_id = $_SESSION['user-role-id'];
   if ($role_id == 1) {
     htmlspecialchars($_SERVER['PHP_SELF']);
   } else {
-    header('Location:/Capstone/warp/home.php');
+    header('Location:/home.php');
   }
 }
 
@@ -55,15 +55,15 @@ if (isset($_POST['cancel'])) {
   // if($result_city->num_rows > 0){
   //   $city = mysqli_fetch_assoc($result_city);
   //   $city_id = $city['city_id'];
-    //function sa cancelled by adopter na notif
-    $msg = 'This adopter has cancelled their adoption application for pet'; //Eto yung message sa notif tas concat yung name ng pet sa dulo
-    $sql_insert = mysqli_query($conn, "INSERT INTO shelternotif_tbl(application_id, message) VALUES('$id', '$msg')"); //Di ko alam pano ipapasok yung city_id para ma specify kung saang shelter lang dapat lalabas yung notif, may WHERE pa dapat
-    if($sql_insert){
-      echo"<script>alert('Successfully cancelled adoption')</script>";
-    }else{
-      echo mysqli_error($conn);
-      exit;
-    }
+  //function sa cancelled by adopter na notif
+  $msg = 'This adopter has cancelled their adoption application for pet'; //Eto yung message sa notif tas concat yung name ng pet sa dulo
+  $sql_insert = mysqli_query($conn, "INSERT INTO shelternotif_tbl(application_id, message) VALUES('$id', '$msg')"); //Di ko alam pano ipapasok yung city_id para ma specify kung saang shelter lang dapat lalabas yung notif, may WHERE pa dapat
+  if ($sql_insert) {
+    echo "<script>alert('Successfully cancelled adoption')</script>";
+  } else {
+    echo mysqli_error($conn);
+    exit;
+  }
 
   // }
 }
@@ -80,10 +80,10 @@ $result = mysqli_query($conn, $sql);
 if ($result->num_rows > 0) {
   $row = mysqli_fetch_assoc($result);
   $city_id = $row['city_id'];
-  $sql = "SELECT * FROM city_tbl INNER JOIN shelteruser_tbl ON city_tbl.city_id = shelteruser_tbl.city_id WHERE city_tbl.city_id AND shelteruser_tbl.city_id ='$city_id'";
-  $result = mysqli_query($conn, $sql);
-  if ($result == TRUE) {
-    $row = mysqli_fetch_assoc($result);
+  $sql2 = "SELECT * FROM city_tbl INNER JOIN shelteruser_tbl ON city_tbl.city_id = shelteruser_tbl.city_id WHERE city_tbl.city_id AND shelteruser_tbl.city_id ='$city_id'";
+  $result2 = mysqli_query($conn, $sql2);
+  if ($result2 == TRUE) {
+    $row2 = mysqli_fetch_assoc($result2);
   }
 }
 
@@ -112,18 +112,19 @@ if ($result->num_rows > 0) {
   <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
   <!-- iCheck -->
   <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-  
+
 
   <!-- Custom Theme Style -->
   <link href="../build/css/custom.min.css" rel="stylesheet">
   <link rel="stylesheet" href="Capstone/warp/shelter/production/css/style.css">
   <link rel="stylesheet" href="css/imagepopup.css">
- 
+
 
 </head>
 <style>
 
 </style>
+
 <body class="nav-md">
   <div class="container body">
     <div class="main_container">
@@ -170,24 +171,24 @@ if ($result->num_rows > 0) {
       </div>
 
       <!-- top navigation -->
-        <div class="top_nav">
-            <div class="nav_menu">
-              <nav>
-                <div class="nav toggle">
-                  <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-                </div>
+      <div class="top_nav">
+        <div class="nav_menu">
+          <nav>
+            <div class="nav toggle">
+              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
 
-                <ul class="nav navbar-nav navbar-right">
-                  <li class="">
-                    
-                    <ul class="dropdown-menu dropdown-usermenu pull-right">
-                      <li><a href="logout.php?logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-                    </ul>
-                  </li>
-                  <li><a href="logout.php?logout">Logout </i></a>
-                  <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
-              <!-- Notification bell -->
-              <?php
+            <ul class="nav navbar-nav navbar-right">
+              <li class="">
+
+                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                  <li><a href="logout.php?logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                </ul>
+              </li>
+              <li><a href="logout.php?logout">Logout </i></a>
+              <li> <a href="/home.php">Go to Homepage </i></a>
+                <!-- Notification bell -->
+                <?php
 
                 $sqlr = "SELECT city_tbl.city_name, city_tbl.city_img, schedule_tbl.schedule_date, adoptee_tbl.pet_name, adopternotif_tbl.message, adopternotif_tbl.message1, adopternotif_tbl.isAccepted, adopter_tbl.user_id FROM adopternotif_tbl INNER JOIN applicationform1 ON adopternotif_tbl.application_id = applicationform1.application_id INNER JOIN schedule_tbl ON applicationform1.application_id = schedule_tbl.application_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id WHERE adopternotif_tbl.status = '0' AND adoptee_tbl.city_id = city_tbl.city_id AND adopter_tbl.user_id = '$user_id'";
                 $resultr = mysqli_query($conn, $sqlr);
@@ -249,11 +250,11 @@ if ($result->num_rows > 0) {
                 </ul>
               </li>
 
-                  
-              </nav>
-            </div>
-          </div>
-          
+
+          </nav>
+        </div>
+      </div>
+
       <!-- page content -->
       <div class="right_col" role="main">
         <div class="">
@@ -285,12 +286,12 @@ if ($result->num_rows > 0) {
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name">Adopter I.D: </label>
 
-                            <!-- Trigger the Modal by clicking the valid id -->
-                            <img id="myImg" src="images/valid_id/<?= $qdata['valid_id']; ?>" alt="valid_id" style="width:100%;max-width:300px">
-                            <div id="myModal" class="modal">
-                              <span class="close">&times;</span>
-                              <img class="modal-content" id="img01">
-                            </div>
+                      <!-- Trigger the Modal by clicking the valid id -->
+                      <img id="myImg" src="images/valid_id/<?= $qdata['valid_id']; ?>" alt="valid_id" style="width:100%;max-width:300px">
+                      <div id="myModal" class="modal">
+                        <span class="close">&times;</span>
+                        <img class="modal-content" id="img01">
+                      </div>
 
                     </div>
 
@@ -445,27 +446,26 @@ if ($result->num_rows > 0) {
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                      <a href="adopter_user_page.php">
-                            <button type="button" class="btn btn-round btn-success">Back</button>
-                         </a>
-                         <?php
-                            $disable = "SELECT adopter_id, application_status from applicationform1, applicationresult_tbl WHERE applicationform1.adopter_id='$adopter_id' ORDER BY applicationresult_tbl.application_id DESC;";
-                            $qdisable = mysqli_query($conn, $disable); 
-                            ?>
-                      <button name="cancel" class="btn btn-round btn-danger" onclick="return confirm('Are you sure you want to cacncel this application?')"
-                      <?php
-                      
-                      if ($qdisable->num_rows != 0) {
-                              $fdisable = mysqli_fetch_assoc($qdisable);
-                              $var=$fdisable['application_status'];
+                        <a href="adopter_user_page.php">
+                          <button type="button" class="btn btn-round btn-success">Back</button>
+                        </a>
+                        <?php
+                        $disable = "SELECT adopter_id, application_status from applicationform1, applicationresult_tbl WHERE applicationform1.adopter_id='$adopter_id' ORDER BY applicationresult_tbl.application_id DESC;";
+                        $qdisable = mysqli_query($conn, $disable);
+                        ?>
+                        <button name="cancel" class="btn btn-round btn-danger" onclick="return confirm('Are you sure you want to cacncel this application?')" <?php
 
-                              if ($var != "Pending") {
-    
-                                ?> disabled <?php 
-                                }
-                              }
-                          ?>>Cancel Application</button>
-                    </div>
+                                                                                                                                                              if ($qdisable->num_rows != 0) {
+                                                                                                                                                                $fdisable = mysqli_fetch_assoc($qdisable);
+                                                                                                                                                                $var = $fdisable['application_status'];
+
+                                                                                                                                                                if ($var != "Pending") {
+
+                                                                                                                                                              ?> disabled <?php
+                                                                                                                                                                }
+                                                                                                                                                              }
+                                            ?>>Cancel Application</button>
+                      </div>
 
                   </form>
                 </div>
@@ -478,44 +478,44 @@ if ($result->num_rows > 0) {
       <!-- /page content -->
 
 
-        <!-- footer content -->
-        <footer>
-          <div class="pull-right">
-            <!-- Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a> -->
-          </div>
-          <div class="clearfix"></div>
-        </footer>
-        <!-- /footer content -->
-      </div>
+      <!-- footer content -->
+      <footer>
+        <div class="pull-right">
+          <!-- Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a> -->
+        </div>
+        <div class="clearfix"></div>
+      </footer>
+      <!-- /footer content -->
     </div>
+  </div>
 
-    <!-- jQuery -->
-    <script src="../vendors/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- FastClick -->
-    <script src="../vendors/fastclick/lib/fastclick.js"></script>
-    <!-- NProgress -->
-    <script src="../vendors/nprogress/nprogress.js"></script>
-    <!-- iCheck -->
-    <script src="../vendors/iCheck/icheck.min.js"></script>
+  <!-- jQuery -->
+  <script src="../vendors/jquery/dist/jquery.min.js"></script>
+  <!-- Bootstrap -->
+  <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+  <!-- FastClick -->
+  <script src="../vendors/fastclick/lib/fastclick.js"></script>
+  <!-- NProgress -->
+  <script src="../vendors/nprogress/nprogress.js"></script>
+  <!-- iCheck -->
+  <script src="../vendors/iCheck/icheck.min.js"></script>
 
-    <!-- Custom Theme Scripts -->
-    <script src="../build/js/custom.min.js"></script>
-    <script>
-          var modal = document.getElementById("myModal");
-          var img = document.getElementById("myImg");
-          var modalImg = document.getElementById("img01");
-          img.onclick = function(){
-            modal.style.display = "block";
-            modalImg.src = this.src;
-            captionText.innerHTML = this.alt;
-          }
-          var span = document.getElementsByClassName("close")[0];
-          span.onclick = function() {
-            modal.style.display = "none";
-          }
-    </script>
+  <!-- Custom Theme Scripts -->
+  <script src="../build/js/custom.min.js"></script>
+  <script>
+    var modal = document.getElementById("myModal");
+    var img = document.getElementById("myImg");
+    var modalImg = document.getElementById("img01");
+    img.onclick = function() {
+      modal.style.display = "block";
+      modalImg.src = this.src;
+      captionText.innerHTML = this.alt;
+    }
+    var span = document.getElementsByClassName("close")[0];
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+  </script>
 
 </body>
 

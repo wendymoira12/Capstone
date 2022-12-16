@@ -69,10 +69,10 @@ if (isset($_POST['submit'])) {
             echo "<script>alert('Oops! Something went wrong')</script>";
           }
         } else {
-          echo 'Error' . mysqli_error($conn);
+          echo "<script>alert('Oops! Something went wrong')</script>";
         }
       } else {
-        echo 'Error' . mysqli_error($conn);
+        echo "<script>alert('Oops! Something went wrong')</script>";
       }
     } else {
       echo "<script>alert('Password doesnt Match')</script>";

@@ -3,13 +3,13 @@ session_start();
 include 'config.php';
 
 if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
-  header('Location:/Capstone/warp/login.php');
+  header('Location:/login.php');
 } else {
   $role_id = $_SESSION['user-role-id'];
   if ($role_id == 2) {
     htmlspecialchars($_SERVER['PHP_SELF']);
   } else {
-    header('Location:/Capstone/warp/home.php');
+    header('Location:/home.php');
   }
 }
 ?>
@@ -24,10 +24,10 @@ $result = mysqli_query($conn, $sql);
 if ($result->num_rows > 0) {
   $row = mysqli_fetch_assoc($result);
   $city_id = $row['city_id'];
-  $sql = "SELECT * FROM city_tbl INNER JOIN shelteruser_tbl ON city_tbl.city_id = shelteruser_tbl.city_id WHERE city_tbl.city_id AND shelteruser_tbl.city_id ='$city_id'";
-  $result = mysqli_query($conn, $sql);
-  if ($result == TRUE) {
-    $row = mysqli_fetch_assoc($result);
+  $sql2 = "SELECT * FROM city_tbl INNER JOIN shelteruser_tbl ON city_tbl.city_id = shelteruser_tbl.city_id WHERE city_tbl.city_id AND shelteruser_tbl.city_id ='$city_id'";
+  $result2 = mysqli_query($conn, $sql2);
+  if ($result2 == TRUE) {
+    $row2 = mysqli_fetch_assoc($result2);
   }
 }
 ?>
@@ -57,16 +57,16 @@ if (isset($_POST['confirm'])) {
     $result = mysqli_query($conn, $sql);
     if ($result->num_rows > 0) {
       //Insert into adoptedpetstatus_tbl if adopted data exist
-      $sql2 = "INSERT INTO adoptedpetstatus_tbl(q1_fed, q2_health, q3_space, q4_clean, q5_accustomed, petstatus_remark, monitoredby_name ,adopted_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+      $sql3 = "INSERT INTO adoptedpetstatus_tbl(q1_fed, q2_health, q3_space, q4_clean, q5_accustomed, petstatus_remark, monitoredby_name ,adopted_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
       $stmt = mysqli_stmt_init($conn);
-      if (!mysqli_stmt_prepare($stmt, $sql2)) {
+      if (!mysqli_stmt_prepare($stmt, $sql3)) {
         echo "SQL Prepared Statement Failed";
       } else {
         mysqli_stmt_bind_param($stmt, "sssssssi", $fed, $health, $space, $clean, $accustomed, $remark, $monitor_name, $adopted_id);
         mysqli_stmt_execute($stmt);
-        $sql3 = "UPDATE adopted_tbl SET monitoring_status = ? WHERE adopted_id = ?";
+        $sql4 = "UPDATE adopted_tbl SET monitoring_status = ? WHERE adopted_id = ?";
         $stmt2 = mysqli_stmt_init($conn);
-        if (!mysqli_stmt_prepare($stmt2, $sql3)) {
+        if (!mysqli_stmt_prepare($stmt2, $sql4)) {
           echo "SQL Prepared Statement Failed";
         } else {
           mysqli_stmt_bind_param($stmt2, "si", $done, $adopted_id);
@@ -136,14 +136,14 @@ if (isset($_POST['confirm'])) {
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="/Capstone/warp/shelter/production/images/logo/<?= $row['city_img']; ?>" alt=""><?php echo $_SESSION['user-email'] ?>
+                  <img src="/shelter/production/images/logo/<?= $row2['city_img']; ?>" alt=""><?php echo $_SESSION['user-email'] ?>
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
-                  <li><a href="/Capstone/warp/logout.php?logout"><i class="fa fa-sign-out pull-right"></i>Log Out</a></li>
+                  <li><a href="/logout.php?logout"><i class="fa fa-sign-out pull-right"></i>Log Out</a></li>
                 </ul>
               </li>
-              <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
+              <li> <a href="/home.php">Go to Homepage </i></a>
                 <!-- NOTIF START -->
                 <?php
                 include "shelter_notif.php";

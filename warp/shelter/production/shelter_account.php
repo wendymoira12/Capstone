@@ -248,5 +248,4 @@ if ($result->num_rows > 0) {
   <!-- Custom Theme Scripts -->
   <script src="../build/js/custom.min.js"></script>
 </body>
-
 </html>

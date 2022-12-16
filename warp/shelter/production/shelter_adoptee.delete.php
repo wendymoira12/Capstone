@@ -11,11 +11,11 @@
         if ($conn->query($sql) == true)
             {
                 echo "Adoptee deleted successfully";
-                header('Location: shelter_adoptee_list.php');
+                echo "<script>window.location.href='shelter_adoptee_list.php';</script>";
             }else
             {
                 echo "Something went wrong";
-                header('Location: shelter_adoptee_list.php');
+                echo "<script>window.location.href='shelter_adoptee_list.php';</script>";
             }
 
     }else

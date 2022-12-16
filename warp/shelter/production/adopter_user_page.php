@@ -28,42 +28,41 @@ if ($result->num_rows > 0) {
 
 <?php
 if (isset($_POST['submit'])) {
-    $adopter_pfp = mysqli_real_escape_string($conn, $_FILES['adopter_pfp']['tmp_name']);
-    $adopter_img_tmp_name = $_FILES['adopter_pfp']['tmp_name'];
-    // upload image to folder named images/
- 
-    // only images can be uploaded
-    $adopter_img_imagetype = exif_imagetype($adopter_img_tmp_name);
-    // $adopter_img_folder = '/images/adopter_pic/' . $adopter_pfp;
-    
-    if(!$adopter_img_imagetype) {
-      echo('Uploaded file is not an image.');
-    }
-  
+  $adopter_pfp = mysqli_real_escape_string($conn, $_FILES['adopter_pfp']['tmp_name']);
+  $adopter_img_tmp_name = $_FILES['adopter_pfp']['tmp_name'];
+  // upload image to folder named images/
 
-    //extension nung file dapat JPEG PNG GIF XBM XPM WBMP WebP BMP
-    $image_extension = image_type_to_extension($adopter_img_imagetype, true);
-  
-    //converts image name into hexadecimal
-    $image_name = bin2hex(random_bytes(16)) . $image_extension;
-  
-    if (!empty($adopter_pfp)) {
+  // only images can be uploaded
+  $adopter_img_imagetype = exif_imagetype($adopter_img_tmp_name);
+  // $adopter_img_folder = '/images/adopter_pic/' . $adopter_pfp;
 
-        $sql = "UPDATE adopter_tbl SET adopter_pfp = '$image_name' WHERE adopter_id = '$adopter_id'";
-        $result = $conn->query($sql);
-  
-    } 
+  if (!$adopter_img_imagetype) {
+    echo ('Uploaded file is not an image.');
+  }
+
+
+  //extension nung file dapat JPEG PNG GIF XBM XPM WBMP WebP BMP
+  $image_extension = image_type_to_extension($adopter_img_imagetype, true);
+
+  //converts image name into hexadecimal
+  $image_name = bin2hex(random_bytes(16)) . $image_extension;
+
+  if (!empty($adopter_pfp)) {
+
+    $sql = "UPDATE adopter_tbl SET adopter_pfp = '$image_name' WHERE adopter_id = '$adopter_id'";
+    $result = $conn->query($sql);
+  }
 
   // UPLOAD THE IMAGES AND VIDEOS IN THE IMAGES FOLDER
   if ($result) {
-      move_uploaded_file($adopter_img_tmp_name, __DIR__ . "/images/adopter_pic/" . $image_name);
+    move_uploaded_file($adopter_img_tmp_name, __DIR__ . "/images/adopter_pic/" . $image_name);
 
-      echo "<script>alert('Adoptee added successfully')</script>";
-      echo "<script>window.location.href='adopter_user_page.php';</script>";
-    } else {
-      echo "<script>alert('Oops! Something went wrong')</script>";
-      echo "<script>window.location.href='adopter_user_page.php';</script>";
-    }
+    echo "<script>alert('Adoptee added successfully')</script>";
+    echo "<script>window.location.href='adopter_user_page.php';</script>";
+  } else {
+    echo "<script>alert('Oops! Something went wrong')</script>";
+    echo "<script>window.location.href='adopter_user_page.php';</script>";
+  }
 }
 
 ?>
@@ -115,31 +114,31 @@ if (isset($_POST['submit'])) {
             </a>
             <div class="profile_pic">
               <!-- Profile Picture -->
-                  <img id="myBtn" src="/shelter/production/images/adopter_pic/<?= $row['adopter_pfp']; ?>" alt="..." class="img-circle profile_img2">
-                <div id="myModal" class="modal">
+              <img id="myBtn" src="/shelter/production/images/adopter_pic/<?= $row['adopter_pfp']; ?>" alt="..." class="img-circle profile_img2">
+              <div id="myModal" class="modal">
 
-                  <!-- Modal content -->
-                  <div class="modal-content">
+                <!-- Modal content -->
+                <div class="modal-content">
                   <form enctype="multipart/form-data" action="" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
                     <div class="modal-header">
                       <span class="close">&times;</span>
                       <h2>Update Profile Picture</h2>
                     </div>
-                
+
                     <div class="modal-body">
-                    <img src="/shelter/production/images/adopter_pic/<?= $row['adopter_pfp']; ?>" alt="..." class="proileupdate profileupdate img" height="20" width="20">
+                      <img src="/shelter/production/images/adopter_pic/<?= $row['adopter_pfp']; ?>" alt="..." class="proileupdate profileupdate img" height="20" width="20">
                       <input type="file" name="adopter_pfp" id="myBtn" alt="" accept="image/*" required> </input>
                     </div>
-                      <div class="modal-footer">
+                    <div class="modal-footer">
                       <!-- <a href=""> -->
-                        <input class="btn" type="submit" name="submit" id="submit">Submit</button>
+                      <input class="btn" type="submit" name="submit" id="submit">Submit</button>
                       <!-- </a>  -->
-                      </div>          
-                  
+                    </div>
+
                   </form>
                 </div>
-                
+
                 <!-- Modal content -->
               </div>
 
@@ -221,12 +220,13 @@ if (isset($_POST['submit'])) {
                           <span class="image"><?php echo '<img src="images/logo/' . $notif['city_img'] . '" alt="shelter logo"'; ?></span>
                           <span>
                             <span style="font-weight: 900;">
-                              <?php 
+                              <?php
                               echo $notif['adopternotif_date'];
                               // $unixTimestamp = convertToUnixTimestamp($notifAt);
                               // echo convertToAgoFormat($unixTimestamp);
                               ?></span><br>
-                            <span"><?php echo $notif['city_name']; ?></span>
+                            <span"><?php echo $notif['city_name']; ?>
+                          </span>
                           </span>
                           <span class="message">
                             <?php
@@ -242,13 +242,13 @@ if (isset($_POST['submit'])) {
                               echo $notif['message'] . ' ' . $notif['pet_name'] . '.';
                             } else if ($notif['isAccepted'] == '4') {
                               //Pag accepted, message pati yung isang message with pet name and schedule ng interview
-                              echo $notif['message'].' '.$notif['pet_name'].'.';
+                              echo $notif['message'] . ' ' . $notif['pet_name'] . '.';
                             } else {
                               $sql4 = "SELECT schedule_date FROM schedule_tbl";
                               $result4 = mysqli_query($conn, $sql4);
                               $data4 = mysqli_fetch_assoc($result4);
                               //Pag pinalitan ni shelter yung interview date, dito lalabas
-                              echo $notif['message'].$notif['pet_name'].'.';
+                              echo $notif['message'] . $notif['pet_name'] . '.';
                             }
                             ?>
                           </span>
@@ -319,24 +319,24 @@ if (isset($_POST['submit'])) {
                               <th><?php echo $data['pet_name']; ?></th>
                               <td><?php echo $data['date_submitted']; ?></td>
                               <td>
-                                <?php 
-                                if($data['application_status'] == 'Rejected'){
+                                <?php
+                                if ($data['application_status'] == 'Rejected') {
                                   $app_id = $data['application_id'];
                                   $sql = "SELECT message1 FROM adopternotif_tbl WHERE application_id = '$app_id'";
                                   $result = mysqli_query($conn, $sql);
                                   $data1 = mysqli_fetch_assoc($result);
                                   echo $data['application_status'];
-                                  ?> <br>
-                                  <?php echo $data1['message1'];
-                                }else if($data['application_status'] == 'Scheduled'){
+                                ?> <br>
+                                <?php echo $data1['message1'];
+                                } else if ($data['application_status'] == 'Scheduled') {
                                   $app_id = $data['application_id'];
                                   $sql2 = "SELECT schedule_date FROM schedule_tbl WHERE application_id = '$app_id'";
                                   $result2 = mysqli_query($conn, $sql2);
                                   $data2 = mysqli_fetch_assoc($result2);
                                   echo $data['application_status'];
-                                  ?> <br>
-                                  <?php echo "Interview date: ".$data2['schedule_date'];
-                                }else{
+                                ?> <br>
+                                <?php echo "Interview date: " . $data2['schedule_date'];
+                                } else {
                                   echo $data['application_status'];
                                 }
                                 ?>
@@ -344,23 +344,22 @@ if (isset($_POST['submit'])) {
                               <td>
                                 <a href="adopter_application_view.php?id=<?= $data['application_id']; ?>">
                                   <?php
-                                    $app_id = $data['application_id'];
-                                    $disable = "SELECT application_id, application_status from applicationresult_tbl WHERE application_id='$app_id'";
-                                    $qdisable = mysqli_query($conn, $disable); 
+                                  $app_id = $data['application_id'];
+                                  $disable = "SELECT application_id, application_status from applicationresult_tbl WHERE application_id='$app_id'";
+                                  $qdisable = mysqli_query($conn, $disable);
                                   ?>
-                                  <button type="button" class="btn btn-round btn-success"
-                                  <?php
-                                  
-                                  if ($qdisable->num_rows != 0) {
-                                          $fdisable = mysqli_fetch_assoc($qdisable);
-                                          $var=$fdisable['application_status'];
+                                  <button type="button" class="btn btn-round btn-success" <?php
 
-                                          if ($var != "Pending") {
-                
-                                            ?> disabled <?php 
-                                            }
-                                          }
-                                      ?>>View</button>
+                                                                                          if ($qdisable->num_rows != 0) {
+                                                                                            $fdisable = mysqli_fetch_assoc($qdisable);
+                                                                                            $var = $fdisable['application_status'];
+
+                                                                                            if ($var != "Pending") {
+
+                                                                                          ?> disabled <?php
+                                                                                            }
+                                                                                          }
+                                                        ?>>View</button>
                                 </a>
                               </td>
                             </tr>

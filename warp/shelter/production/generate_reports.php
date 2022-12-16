@@ -3,13 +3,13 @@ session_start();
 include 'config.php';
 
 if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
-  header('Location:/Capstone/warp/login.php');
+  header('Location:/login.php');
 } else {
   $role_id = $_SESSION['user-role-id'];
   if ($role_id == 2) {
     htmlspecialchars($_SERVER['PHP_SELF']);
   } else {
-    header('Location:/Capstone/warp/home.php');
+    header('Location:/home.php');
   }
 }
 ?>
@@ -24,10 +24,10 @@ $result = mysqli_query($conn, $sql);
 if ($result->num_rows > 0) {
   $row = mysqli_fetch_assoc($result);
   $city_id = $row['city_id'];
-  $sql = "SELECT * FROM city_tbl INNER JOIN shelteruser_tbl ON city_tbl.city_id = shelteruser_tbl.city_id WHERE city_tbl.city_id AND shelteruser_tbl.city_id ='$city_id'";
-  $result = mysqli_query($conn, $sql);
-  if ($result == TRUE) {
-    $row = mysqli_fetch_assoc($result);
+  $sql2 = "SELECT * FROM city_tbl INNER JOIN shelteruser_tbl ON city_tbl.city_id = shelteruser_tbl.city_id WHERE city_tbl.city_id AND shelteruser_tbl.city_id ='$city_id'";
+  $result2 = mysqli_query($conn, $sql2);
+  if ($result2 == TRUE) {
+    $row2 = mysqli_fetch_assoc($result2);
   }
 }
 ?>
@@ -80,7 +80,7 @@ if ($result->num_rows > 0) {
               <img src="images/logo.png" alt="">
             </a>
             <div class="profile_pic">
-              <img src="/Capstone/warp/shelter/production/images/logo/<?= $row['city_img']; ?>" alt="..." class="img-circle profile_img">
+              <img src="/Capstone/warp/shelter/production/images/logo/<?= $row2['city_img']; ?>" alt="..." class="img-circle profile_img">
             </div>
             <div class="profile_info">
               <span>Welcome,</span>

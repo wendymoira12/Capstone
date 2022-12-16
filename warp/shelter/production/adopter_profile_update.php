@@ -5,13 +5,13 @@ session_start();
 include 'config.php';
 
 if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
-    header('Location:/Capstone/warp/login.php');
+    header('Location:/login.php');
 } else {
     $role_id = $_SESSION['user-role-id'];
     if ($role_id == 1) {
         htmlspecialchars($_SERVER['PHP_SELF']);
     } else {
-        header('Location:/Capstone/warp/home.php');
+        header('Location:/home.php');
     }
 
 }
@@ -66,10 +66,10 @@ if ($result) {
     move_uploaded_file($adopter_img_tmp_name, __DIR__ . "/shelter/production/images/adopter_pic/" . $image_name);
 
     echo "<script>alert('Adoptee added successfully')</script>";
-    header("Location: adopter_user_page.php");
+    echo "<script>window.location.href='adopter_user_page.php';</script>";
   } else {
     echo "<script>alert('Oops! Something went wrong')</script>";
-    header("Location: adopter_user_page.php");
+    echo "<script>window.location.href='adopter_user_page.php';</script>";
   }
 
 ?>

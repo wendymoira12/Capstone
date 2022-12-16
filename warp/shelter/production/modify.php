@@ -1,17 +1,16 @@
-<!-- MODIFY DATABASE BASED ON SHELTER_ADOPTEE_EDIT.PHP -->
 <?php
 
 session_start();
 include 'config.php';
 
 if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
-    header('Location:/Capstone/warp/login.php');
+    header('Location:/login.php');
 } else {
     $role_id = $_SESSION['user-role-id'];
     if ($role_id == 2) {
         htmlspecialchars($_SERVER['PHP_SELF']);
     } else {
-        header('Location:/Capstone/warp/home.php');
+        header('Location:/home.php');
     }
 }
 
@@ -110,10 +109,10 @@ if ($result) {
     move_uploaded_file($pet_vid_tmp_name, __DIR__ . $pet_vid_folder);
 
     echo "<script>alert('Adoptee added successfully')</script>";
-    header("Location: shelter_adoptee_list.php");
+    echo "<script>window.location.href='shelter_adoptee_list.php';</script>";
   } else {
     echo "<script>alert('Oops! Something went wrong')</script>";
-    header("Location: shelter_adoptee_list.php");
+    echo "<script>window.location.href='shelter_adoptee_list.php';</script>";
   }
 
 ?>

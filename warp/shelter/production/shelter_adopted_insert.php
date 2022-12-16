@@ -41,6 +41,5 @@ if (isset($_GET['id'])) {
 
         }
     }
-
-    //Monitoring algorithm
 }
+?>

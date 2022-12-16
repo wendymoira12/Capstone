@@ -20,14 +20,14 @@ if (!isset($_GET['id'])) {
 }
 
 $id = $_GET['id'];
-$sql = "SELECT * FROM adoptee_tbl WHERE pet_id = $id";
-$result = $conn->query($sql);
+$sql3 = "SELECT * FROM adoptee_tbl WHERE pet_id = $id";
+$result3 = $conn->query($sql3);
 
-if ($result->num_rows != 1) {
+if ($result3->num_rows != 1) {
   die('id not found');
 }
 
-$data = mysqli_fetch_assoc($result);
+$data = mysqli_fetch_assoc($result3);
 $chkvalues = explode(", ", $data["pet_vax"]);
 
 ?>
@@ -41,10 +41,10 @@ $result = mysqli_query($conn, $sql);
 if ($result->num_rows > 0) {
   $row = mysqli_fetch_assoc($result);
   $city_id = $row['city_id'];
-  $sql = "SELECT * FROM city_tbl INNER JOIN shelteruser_tbl ON city_tbl.city_id = shelteruser_tbl.city_id WHERE city_tbl.city_id AND shelteruser_tbl.city_id ='$city_id'";
-  $result = mysqli_query($conn, $sql);
-  if ($result == TRUE) {
-    $row = mysqli_fetch_assoc($result);
+  $sql2 = "SELECT * FROM city_tbl INNER JOIN shelteruser_tbl ON city_tbl.city_id = shelteruser_tbl.city_id WHERE city_tbl.city_id AND shelteruser_tbl.city_id ='$city_id'";
+  $result2 = mysqli_query($conn, $sql2);
+  if ($result2 == TRUE) {
+    $row2 = mysqli_fetch_assoc($result2);
   }
 }
 ?>
@@ -58,7 +58,7 @@ if ($result->num_rows > 0) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" type="image/x-icon" href="/warp/img/WARP_LOGO copy.png">
-  <title><?php echo $row['city_name']; ?> | Adoptee Pet Information</title>
+  <title><?php echo $row2['city_name']; ?> | Adoptee Pet Information</title>
 
   <!-- Bootstrap -->
   <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -102,14 +102,14 @@ if ($result->num_rows > 0) {
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="/Capstone/warp/shelter/production/images/logo/<?= $row['city_img']; ?>" alt=""><?php echo $_SESSION['user-email'] ?>
+                  <img src="/shelter/production/images/logo/<?= $row2['city_img']; ?>" alt=""><?php echo $_SESSION['user-email'] ?>
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
-                  <li><a href="/Capstone/warp/logout.php?logout"><i class="fa fa-sign-out pull-right"></i>Log Out</a></li>
+                  <li><a href="/logout.php?logout"><i class="fa fa-sign-out pull-right"></i>Log Out</a></li>
                 </ul>
               </li>
-              <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
+              <li> <a href="/home.php">Go to Homepage </i></a>
                 <!-- NOTIF START -->
                 <?php
                 include "shelter_notif.php";
