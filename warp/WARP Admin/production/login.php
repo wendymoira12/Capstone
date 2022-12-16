@@ -1,7 +1,6 @@
 <?php
-
-include 'config/database.php'; ?>
-
+include 'config/database.php'; 
+?>
 <?php
 // Form submit
 if (isset($_POST['submit'])) {
@@ -45,9 +44,7 @@ if (isset($_POST['submit'])) {
     }
   }
 }
-
 ?>
-
 <?php
 session_start();
 session_regenerate_id();

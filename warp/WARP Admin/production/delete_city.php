@@ -11,6 +11,8 @@ if (isset($_GET['city_id'])) {
         mysqli_stmt_bind_param($stmt, "i", $city_id);
         mysqli_stmt_execute($stmt);
         echo "<script>alert('Successfully Deleted')</script>";
+        echo "<script>window.location.href='manage_city.php';</script>";
         header("Location: manage_city.php");
     }
 }
+?>

@@ -3,10 +3,9 @@ include 'config/database.php';
 session_start();
 
 if (!isset($_SESSION['email-login'])) {
-  header('Location: login.php');
+  header('Location:login.php');
 }
 ?>
-
 <?php
 // Form submit for City Creation
 if (isset($_POST['submit'])) {
@@ -263,9 +262,6 @@ if (isset($_POST['submit'])) {
               </div>
             </div>
           </div>
-
-
-
 
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">

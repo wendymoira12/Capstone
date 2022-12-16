@@ -168,7 +168,6 @@ if (!isset($_SESSION['email-login'])) {
                       <th>Action</th>
                     </tr>
                   </thead>
-
                   <tbody>
                     <?php
                     $i = 1;

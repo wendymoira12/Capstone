@@ -6,7 +6,6 @@ if (!isset($_SESSION['email-login'])) {
   header('Location: login.php');
 }
 ?>
-
 <?php
 // Form submit for shelter update
 if (isset($_POST['submit-update'])) {
@@ -43,7 +42,6 @@ if (isset($_POST['submit-update'])) {
 
   $user_id = $_SESSION['user_id'];
   $shelteruser_id = $_SESSION['shelteruser_id'];
-  $about = $_POST['about'];
 
   //If there are no errors the function will execute
   if (empty($emailErr) && empty($nameErr) && empty($positionErr)) {
@@ -67,11 +65,9 @@ if (isset($_POST['submit-update'])) {
     }
   }
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <!-- Meta, title, CSS, favicons, etc. -->
@@ -135,7 +131,7 @@ if (isset($_POST['submit-update'])) {
                 if (isset($_SESSION['email-login'])) {
                   echo $_SESSION['email-login'];
                 } else {
-                  header("Location: login.php");
+                  header("Location:login.php");
                 }
                 ?></h2>
             </div>
@@ -189,8 +185,6 @@ if (isset($_POST['submit-update'])) {
       <!-- /top navigation -->
 
       <!-- page content -->
-
-
       <div class="right_col" role="main">
         <div class="">
           <div class="page-title">
@@ -223,7 +217,6 @@ if (isset($_POST['submit-update'])) {
                           $_SESSION['rows'] = $rows;
                           $_SESSION['user_id'] = $rows['user_id'];
                           $_SESSION['shelteruser_id'] = $rows['shelteruser_id'];
-
                     ?>
                           <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
                             <div class="form-group">
@@ -337,5 +330,4 @@ if (isset($_POST['submit-update'])) {
   <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
 
 </body>
-
 </html>

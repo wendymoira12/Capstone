@@ -6,11 +6,9 @@ if (!isset($_SESSION['email-login'])) {
   header('Location: login.php');
 }
 ?>
-
 <?php
 // Form submit for shelter update
 if (isset($_POST['submit-update'])) {
-
 
   // Store in variables other data to be updated
   $name = $_POST['city_name'];
@@ -34,8 +32,6 @@ if (isset($_POST['submit-update'])) {
     echo "Error" . mysqli_error($conn);
   }
 }
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -103,7 +99,7 @@ if (isset($_POST['submit-update'])) {
                 if (isset($_SESSION['email-login'])) {
                   echo $_SESSION['email-login'];
                 } else {
-                  header("Location: login.php");
+                  header("Location:login.php");
                 }
                 ?></h2>
             </div>

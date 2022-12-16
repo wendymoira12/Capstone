@@ -24,9 +24,10 @@ if (isset($_GET['adopter_id'])) {
                 mysqli_stmt_bind_param($stmt2,"i", $user_id);
                 mysqli_stmt_execute($stmt2);
                 echo "<script>alert('Successfully Deleted')</script>";
-                header("Location: manage_adopter.php");
-                
+                echo "<script>window.location.href='manage_adopter.php';</script>";
+               // header("Location: manage_adopter.php"); 
             }
         }
     }
 }
+?>

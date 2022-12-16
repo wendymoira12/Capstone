@@ -6,7 +6,6 @@ if (!isset($_SESSION['email-login'])) {
   header('Location: login.php');
 }
 ?>
-
 <?php
 // Form submit for shelter creation
 if (isset($_POST['submit'])) {
@@ -66,7 +65,7 @@ if (isset($_POST['submit'])) {
             // success
             $_SESSION['role_id'] = $role;
             $_SESSION['user_email'] = $email;
-            header('Location: manage_shelter_2.php');
+            header('Location:manage_shelter_2.php');
           }
         } else {
           echo "<script>alert('Oops! Email already used')</script>";

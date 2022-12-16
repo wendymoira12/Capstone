@@ -3,10 +3,9 @@ include 'config/database.php';
 session_start();
 
 if (!isset($_SESSION['email-login'])) {
-  header('Location: login.php');
+  header('Location:login.php');
 }
 ?>
-
 <?php
 // Form submit
 if (isset($_POST['submit'])) {
@@ -55,7 +54,7 @@ if (isset($_POST['submit'])) {
         mysqli_stmt_bind_param($stmt, "ssii", $name, $position, $userid, $city_id);
         mysqli_stmt_execute($stmt);
         unset($_SESSION['user_id'], $_SESSION['role_id'], $_SESSION['user_email']);
-        header('Location: manage_shelter.php');
+        header('Location:manage_shelter.php');
       }
     } else {
       echo 'Error' . mysqli_error($conn);
