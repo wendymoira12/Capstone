@@ -212,7 +212,7 @@ if ($result->num_rows > 0) {
               <h2><strong>Email Address</strong></h2>
               <p> <?php echo $row2['city_email']; ?> </p>
               <br>
-              <a href="shelter_account_edit.php?city_id=<?php $city_id ?>">
+              <a href="shelter_account_edit.php?city_id=<?= $city_id ?>">
                 <button type="button" class="btn btn-success btn-primary" onclick="return confirm('Are you sure you want to edit shelter information?');">Edit Information</button>
               </a>
             </div>
