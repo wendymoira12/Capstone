@@ -99,7 +99,7 @@ session_regenerate_id();
                                         <!-- removed service_icon_bg_1 -->
                                         <div class="service_thumb d-flex align-items-center justify-content-center">
                                             <div class="service_icon">
-                                                <img src="/Capstone/warp/shelter/production/images/logo/<?= $row['city_img']; ?>" alt="Shelter logo" height="200" width="200">
+                                                <img src="/shelter/production/images/logo/<?= $row['city_img']; ?>" alt="Shelter logo" height="200" width="200">
                                             </div>
                                         </div>
                                         <div class="service_content text-center">
