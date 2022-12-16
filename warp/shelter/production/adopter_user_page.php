@@ -5,13 +5,13 @@ session_start();
 //if hindi nakaset si user-email and user-role-id babalik sya sa login.php
 
 if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'], $_SESSION['user_id'])) {
-  header('Location:/Capstone/warp/login.php');
+  header('Location:/login.php');
 } else {
   $role_id = $_SESSION['user-role-id'];
   if ($role_id == 1) {
     htmlspecialchars($_SERVER['PHP_SELF']);
   } else {
-    header('Location:/Capstone/warp/home.php');
+    header('Location:/home.php');
   }
 }
 
@@ -59,10 +59,10 @@ if (isset($_POST['submit'])) {
       move_uploaded_file($adopter_img_tmp_name, __DIR__ . "/images/adopter_pic/" . $image_name);
 
       echo "<script>alert('Adoptee added successfully')</script>";
-      header("Location: adopter_user_page.php");
+      echo "<script>window.location.href='adopter_user_page.php';</script>";
     } else {
       echo "<script>alert('Oops! Something went wrong')</script>";
-      header("Location: adopter_user_page.php");
+      echo "<script>window.location.href='adopter_user_page.php';</script>";
     }
 }
 
@@ -115,7 +115,7 @@ if (isset($_POST['submit'])) {
             </a>
             <div class="profile_pic">
               <!-- Profile Picture -->
-                  <img id="myBtn" src="/Capstone/warp/shelter/production/images/adopter_pic/<?= $row['adopter_pfp']; ?>" alt="..." class="img-circle profile_img2">
+                  <img id="myBtn" src="/shelter/production/images/adopter_pic/<?= $row['adopter_pfp']; ?>" alt="..." class="img-circle profile_img2">
                 <div id="myModal" class="modal">
 
                   <!-- Modal content -->
@@ -128,7 +128,7 @@ if (isset($_POST['submit'])) {
                     </div>
                 
                     <div class="modal-body">
-                    <img src="/Capstone/warp/shelter/production/images/adopter_pic/<?= $row['adopter_pfp']; ?>" alt="..." class="proileupdate profileupdate img" height="20" width="20">
+                    <img src="/shelter/production/images/adopter_pic/<?= $row['adopter_pfp']; ?>" alt="..." class="proileupdate profileupdate img" height="20" width="20">
                       <input type="file" name="adopter_pfp" id="myBtn" alt="" accept="image/*" required> </input>
                     </div>
                       <div class="modal-footer">
@@ -186,11 +186,11 @@ if (isset($_POST['submit'])) {
               <li class="">
 
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
-                  <li><a href="logout.php?logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                  <li><a href="/logout.php?logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                 </ul>
               </li>
-              <li><a href="/Capstone/warp/logout.php?logout">Logout </i></a>
-              <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
+              <li><a href="/logout.php?logout">Logout </i></a>
+              <li> <a href="/home.php">Go to Homepage </i></a>
                 <!-- Notification bell -->
                 <?php
 
