@@ -64,7 +64,7 @@ if (isset($_POST['submit'])) {
           if ($result3) {
             echo "<script>alert('Registration complete')</script>";
             //$_SESSION['adopter-email'] = $email;
-            header("Location: Home-guest.php");
+            echo "<script>window.location.href='index.php';</script>";
           } else {
             echo "<script>alert('Oops! Something went wrong')</script>";
           }
@@ -79,9 +79,7 @@ if (isset($_POST['submit'])) {
     }
   }
 }
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 

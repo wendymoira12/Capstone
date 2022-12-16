@@ -1,9 +1,8 @@
-<!-- MODIFY DATABASE BASED ON SHELTER_ADOPTEE_EDIT.PHP -->
 <?php
-
-session_start();
 include 'config.php';
-
+session_start();
+?>
+<?php
 if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
     header('Location:/Capstone/warp/login.php');
 } else {
@@ -58,13 +57,13 @@ if (isset($_GET['city_id']) && isset($_POST['edit-shelter-submit'])) {
 
         $sql = "UPDATE city_tbl SET city_name = ?, city_contact = ?, city_about = ?, city_img = ? WHERE city_id = ?";
         $stmt = mysqli_stmt_init($conn);
-        if (!mysqli_stmt_prepare($stmt, $sql)){
+        if (!mysqli_stmt_prepare($stmt, $sql)) {
             echo "SQL Prepare Statement Failed";
         } else {
             mysqli_stmt_bind_param($stmt, "ssssi", $city, $contact, $about, $img, $id);
             mysqli_stmt_execute($stmt);
             move_uploaded_file($img_tmp_name, __DIR__ . $img_folder);
-            header('Location: shelter_account.php');
+            echo "<script>window.location.href='shelter_account.php';</script>";
         }
     } else {
         echo "All fields must be filled out";
@@ -72,5 +71,4 @@ if (isset($_GET['city_id']) && isset($_POST['edit-shelter-submit'])) {
 } else {
     echo "Id is invalid";
 }
-
 ?>
