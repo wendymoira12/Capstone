@@ -10,7 +10,7 @@
         <img src="images/logo.png" alt="">
       </a>
       <div class="profile_pic">
-        <img src="/Capstone/warp/shelter/production/images/logo/<?= $row['city_img']; ?>" alt="..." class="img-circle profile_img">
+        <img src="/shelter/production/images/logo/<?= $row2['city_img']; ?>" alt="..." class="img-circle profile_img">
       </div>
       <div class="profile_info">
         <span>Welcome,</span>

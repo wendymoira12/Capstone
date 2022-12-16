@@ -1,9 +1,9 @@
 <?php
 
 define('DB_SERVER', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_NAME', 'warp_capstone');
+define('DB_USER', 'nbqdsxfp_warp');
+define('DB_PASS', 'C{22fpbGdk(~');
+define('DB_NAME', 'nbqdsxfp_warp_capstone');
 
 $conn = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
 

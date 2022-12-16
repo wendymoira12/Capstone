@@ -4,9 +4,9 @@
     if (isset($_GET['logout'])){
         session_unset();
         session_destroy();
-        header("Location: /Capstone/warp/login.php");
+        header("Location:login.php");
     } 
     else{
-        header("Location: /Capstone/warp/login.php");
+        header("Location:login.php");
     }
 ?>

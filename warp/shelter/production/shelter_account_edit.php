@@ -20,10 +20,6 @@ if (!isset($_GET['city_id'])) {
 }
 
 $id = $_GET['city_id'];
-$sql = "SELECT * FROM city_tbl WHERE city_id = $id";
-$result = $conn->query($sql);
-$data = mysqli_fetch_assoc($result);
-
 ?>
 
 <?php
@@ -31,15 +27,14 @@ $data = mysqli_fetch_assoc($result);
 $user_id = $_SESSION['user_id'];
 // Query to check if user_id from the login shesh = shelteruser_id to get the city 
 $sql1 = "SELECT * FROM shelteruser_tbl WHERE user_id ='$user_id'";
-$result1 = mysqli_query($conn, $sql);
+$result1 = mysqli_query($conn, $sql1);
 
 if ($result1->num_rows > 0) {
   $row = mysqli_fetch_assoc($result);
-  $city_id = $row['city_id'];
-  $sql2 = "SELECT city_img FROM city_tbl WHERE city_id='$city_id'";
-  $result = mysqli_query($conn, $sql);
-  if ($result == TRUE) {
-    $row = mysqli_fetch_assoc($result);
+  $sql2 = "SELECT * FROM city_tbl WHERE city_id='$id'";
+  $result2 = mysqli_query($conn, $sql);
+  if ($result2 == TRUE) {
+    $row2 = mysqli_fetch_assoc($result2);
   }
 }
 ?>
@@ -53,7 +48,7 @@ if ($result1->num_rows > 0) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" type="image/x-icon" href="/warp/img/WARP_LOGO copy.png">
-  <title><?php echo $row['city_name']; ?> | Adoptee Pet Information</title>
+  <title><?php echo $row2['city_name']; ?> | Adoptee Pet Information</title>
 
   <!-- Bootstrap -->
   <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -96,14 +91,14 @@ if ($result1->num_rows > 0) {
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="/Capstone/warp/shelter/production/images/logo/<?= $row['city_img']; ?>" alt=""><?php echo $_SESSION['user-email'] ?>
+                  <img src="/shelter/production/images/logo/<?= $row2['city_img']; ?>" alt=""><?php echo $_SESSION['user-email'] ?>
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
-                  <li><a href="/Capstone/warp/logout.php?logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                  <li><a href="logout.php?logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                 </ul>
               </li>
-              <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
+              <li> <a href="home.php">Go to Homepage </i></a>
                 <!-- NOTIF START -->
                 <?php
                 // include "shelter_notif.php";
@@ -165,7 +160,7 @@ if ($result1->num_rows > 0) {
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="city">Shelter City Name <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" name="city" value="<?= $data['city_name'] ?>" required class="form-control col-md-7 col-xs-12">
+                        <input type="text" name="city" value="<?= $row2['city_name'] ?>" required class="form-control col-md-7 col-xs-12">
                       </div>
                     </div>
 
@@ -173,7 +168,7 @@ if ($result1->num_rows > 0) {
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="city">Shelter Email Address <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" name="emailAdd" value="<?= $data['city_email'] ?>" required class="form-control col-md-7 col-xs-12">
+                        <input type="text" name="emailAdd" value="<?= $row2['city_email'] ?>" required class="form-control col-md-7 col-xs-12">
                       </div>
                     </div>
 
@@ -181,7 +176,7 @@ if ($result1->num_rows > 0) {
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="contact">Contact Number <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" name="contact" maxlength="11" value="<?= $data['city_contact'] ?>" required class="form-control col-md-7 col-xs-12" onkeypress="return /[0-9]/i.test(event.key)">
+                        <input type="text" name="contact" maxlength="11" value="<?= $row2['city_contact'] ?>" required class="form-control col-md-7 col-xs-12" onkeypress="return /[0-9]/i.test(event.key)">
                       </div>
                     </div>
 
@@ -189,14 +184,14 @@ if ($result1->num_rows > 0) {
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">Shelter About <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <textarea name="about" class="form-control col-md-7 col-xs-12" required> <?= $data['city_about'] ?> </textarea>
+                        <textarea name="about" class="form-control col-md-7 col-xs-12" required> <?= $row2['city_about'] ?> </textarea>
                       </div>
                     </div>
 
                     <div class="form-group">
                       <label for="pet-img" class="control-label col-md-3 col-sm-3 col-xs-12">Upload Shelter Logo<span class="required">*</label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="form-control col-md-7 col-xs-12" type="file" name="logo" value="<?= $data['city_img'] ?>" required>
+                        <input class="form-control col-md-7 col-xs-12" type="file" name="logo" value="<?= $row2['city_img'] ?>" required>
                       </div>
                     </div>
 
