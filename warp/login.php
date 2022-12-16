@@ -85,15 +85,16 @@ if (isset($_POST["register"])) {
       $mail = new PHPMailer;
 
       $mail->isSMTP();
-      $mail->Host = 'smtp.gmail.com';
+      $mail->Host = 'mail.warppets.com';
       $mail->Port = 587;
+      $mail->SMTPAutoTLS = false;
       $mail->SMTPAuth = true;
       $mail->SMTPSecure = 'tls';
 
-      $mail->Username = 'warp.pup@gmail.com';
-      $mail->Password = 'zulriaypcszobrgp';
+      $mail->Username = 'adopt@warppets.com';
+      $mail->Password = 'N=R#BY8A&}we';
 
-      $mail->setFrom('warp.pup@gmail.com', 'WARP');
+      $mail->setFrom('adopt@warppets.com', 'WARP');
       $mail->addAddress($_POST["email"]);
 
       $mail->isHTML(true);
@@ -109,14 +110,14 @@ if (isset($_POST["register"])) {
       if (!$mail->send()) {
       ?>
         <script>
-          alert("<?php echo "Register Failed, Invalid Email " ?>");
+          alert("<?php echo "Register Failed, Invalid Email" ?>");
         </script>
       <?php
       } else {
       ?>
         <script>
           alert("<?php echo "Register Successfully, OTP sent to " . $email ?>");
-          window.location.replace('verification.php');
+          window.location.replace('/verification.php');
         </script>
 <?php
       }
@@ -126,7 +127,6 @@ if (isset($_POST["register"])) {
 }
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 

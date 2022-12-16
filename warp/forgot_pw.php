@@ -35,17 +35,18 @@ if (isset($_POST["forgot-pw"])) {
         require "Mail/phpmailer/PHPMailerAutoload.php";
         $mail = new PHPMailer;
 
-        $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';
-        $mail->Port = 587;
-        $mail->SMTPAuth = true;
-        $mail->SMTPSecure = 'tls';
+         $mail->isSMTP();
+      $mail->Host = 'mail.warppets.com';
+      $mail->Port = 587;
+      $mail->SMTPAutoTLS = false;
+      $mail->SMTPAuth = true;
+      $mail->SMTPSecure = 'tls';
 
-        $mail->Username = 'warp.pup@gmail.com';
-        $mail->Password = 'zulriaypcszobrgp';
+      $mail->Username = 'adopt@warppets.com';
+      $mail->Password = 'N=R#BY8A&}we';
 
-        $mail->setFrom('warp.pup@gmail.com', 'WARP');
-        $mail->addAddress($_POST["email"]);
+      $mail->setFrom('adopt@warppets.com', 'WARP');
+      $mail->addAddress($_POST["email"]);
 
         $mail->isHTML(true);
         $mail->Subject = "WARP: Forgot Password";
