@@ -3,13 +3,13 @@ session_start();
 include 'config.php';
 
 if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
-  header('Location:login.php');
+  header('Location:/login.php');
 } else {
   $role_id = $_SESSION['user-role-id'];
   if ($role_id == 2) {
     htmlspecialchars($_SERVER['PHP_SELF']);
   } else {
-    header('Location:home.php');
+    header('Location:/home.php');
   }
 }
 ?>
@@ -80,15 +80,15 @@ if ($result->num_rows > 0) {
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="shelter/production/images/logo/<?= $row2['city_img']; ?>" alt=""><?php echo $_SESSION['user-email'] ?>
+                  <img src="/shelter/production/images/logo/<?= $row2['city_img']; ?>" alt=""><?php echo $_SESSION['user-email'] ?>
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
                   <li><a href="changepass.php"><i class="fa fa-wrench pull-right"></i>Change Password</a></li>
-                  <li><a href="logout.php?logout"><i class="fa fa-sign-out pull-right"></i>Log Out</a></li>
+                  <li><a href="/logout.php?logout"><i class="fa fa-sign-out pull-right"></i>Log Out</a></li>
                 </ul>
               </li>
-              <li> <a href="home.php">Go to Homepage </i></a>
+              <li> <a href="/home.php">Go to Homepage </i></a>
                 <!-- NOTIF START -->
                 <?php
                 include "shelter_notif.php";
@@ -212,7 +212,7 @@ if ($result->num_rows > 0) {
               <h2><strong>Email Address</strong></h2>
               <p> <?php echo $row2['city_email']; ?> </p>
               <br>
-              <a href="shelter_account_edit.php?city_id=<?php echo $row2['city_id']; ?>">
+              <a href="shelter_account_edit.php?city_id=<?= $city_id ?>">
                 <button type="button" class="btn btn-success btn-primary" onclick="return confirm('Are you sure you want to edit shelter information?');">Edit Information</button>
               </a>
             </div>

@@ -5,23 +5,21 @@ session_start();
 include 'config.php';
 
 if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
-  header('Location:/Capstone/warp/login.php');
+  header('Location:/login.php');
 } else {
   $role_id = $_SESSION['user-role-id'];
   if ($role_id == 2) {
     htmlspecialchars($_SERVER['PHP_SELF']);
   } else {
-    header('Location:/Capstone/warp/home.php');
+    header('Location:/home.php');
   }
 }
 
 if (!isset($_GET['city_id'])) {
   die('Id not provided');
 }
-
 $id = $_GET['city_id'];
 ?>
-
 <?php
 // Get the user ID from the login sesh
 $user_id = $_SESSION['user_id'];
@@ -30,9 +28,9 @@ $sql1 = "SELECT * FROM shelteruser_tbl WHERE user_id ='$user_id'";
 $result1 = mysqli_query($conn, $sql1);
 
 if ($result1->num_rows > 0) {
-  $row = mysqli_fetch_assoc($result);
+  $row = mysqli_fetch_assoc($result1);
   $sql2 = "SELECT * FROM city_tbl WHERE city_id='$id'";
-  $result2 = mysqli_query($conn, $sql);
+  $result2 = mysqli_query($conn, $sql2);
   if ($result2 == TRUE) {
     $row2 = mysqli_fetch_assoc($result2);
   }
@@ -95,10 +93,10 @@ if ($result1->num_rows > 0) {
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
-                  <li><a href="logout.php?logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                  <li><a href="/logout.php?logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                 </ul>
               </li>
-              <li> <a href="home.php">Go to Homepage </i></a>
+              <li> <a href="/home.php">Go to Homepage </i></a>
                 <!-- NOTIF START -->
                 <?php
                 // include "shelter_notif.php";
