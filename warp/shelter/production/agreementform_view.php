@@ -38,10 +38,7 @@ if ($result->num_rows > 0) {
     die('id not found');
   }
 }
-
-
 ?>
-
 <?php
 // Get the user ID from the login sesh
 $user_id = $_SESSION['user_id'];
@@ -59,8 +56,6 @@ if ($result->num_rows > 0) {
   }
 }
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -170,7 +165,7 @@ if ($result->num_rows > 0) {
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name"></label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                      <h2><?php echo $row['city_name']." "."Animal Shelter"?></h2>
+                      <h2><?php echo $row2['city_name']." "."Animal Shelter"?></h2>
                       <h3>Agreement Form</h3>
                         </br>
                         </br>

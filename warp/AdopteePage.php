@@ -1,25 +1,18 @@
 <?php
-/*<!--<?php         
-$app1d = "SELECT * from applicationresult_tbl ORDER BY application_id DESC;";
-$query9 = mysqli_query($conn,$app1d);
-$row9 = mysqli_fetch_assoc($query9);
-if ($app1d['application_status'] != "Cancelled by adopter" && "Rejected" ){ 
-  ?> disabled 
-  <?php   
-} ?>-->*/
+
 include 'config.php';
 session_start();
 
 //if hindi nakaset si user-email and user-role-id babalik sya sa login.php
 
 if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'], $_SESSION['user_id'])) {
-  header('Location:/Capstone/warp/login.php');
+  header('Location:login.php');
 } else {
   $role_id = $_SESSION['user-role-id'];
   if ($role_id == 1) {
     htmlspecialchars($_SERVER['PHP_SELF']);
   } else {
-    header('Location:/Capstone/warp/home.php');
+    header('Location:home.php');
   }
 }
 
@@ -41,7 +34,6 @@ if ($result->num_rows > 0) {
     $adopterresult = mysqli_fetch_assoc($result);
   }
 }
-
 ?>
 <?php
 if (!isset($_GET['id'])) {
@@ -60,7 +52,6 @@ if ($result->num_rows != 1) {
 
 $data = mysqli_fetch_assoc($result);
 $chkvalues = explode(", ", $data["pet_vax"]);
-
 ?>
 <?php
 $sql = "SELECT * FROM applicationform1";
@@ -71,7 +62,6 @@ if (!$result) {
 }
 ?>
 <?php
-
 //kuhain yung mga sagot sa application form lagay sa database: applicationform1
 if (isset($_POST['submit'])) {
   /* valid id */
@@ -126,17 +116,14 @@ if (isset($_POST['submit'])) {
   $msg = 'This adopter has submitted an adoption application for pet';
   $sql_insert1 = mysqli_query($conn, "INSERT INTO shelternotif_tbl(application_id, message) VALUES('$app_id', '$msg')");
   if($sql_insert1){
-    echo"<script>alert('Successfully sent adoption application')</script>";
-    header('Location:/Capstone/warp/pets_for_adoption.php');
+    echo "<script>alert('Successfully sent adoption application')</script>";
+    echo "<script>window.location.href='pets_for_adoption.php';</script>";
   }else{
     echo mysqli_error($conn);
     exit;
   }
-
 }
 ?>
-
-
 <!doctype html>
 <html lang="en">
 

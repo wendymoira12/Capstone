@@ -3,13 +3,13 @@ session_start();
 include 'config.php';
 
 if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
-  header('Location:/Capstone/warp/login.php');
+  header('Location:/login.php');
 } else {
   $role_id = $_SESSION['user-role-id'];
   if ($role_id == 2) {
     htmlspecialchars($_SERVER['PHP_SELF']);
   } else {
-    header('Location:/Capstone/warp/home.php');
+    header('Location:/home.php');
   }
 }
 ?>
@@ -38,10 +38,7 @@ if ($result->num_rows > 0) {
     die('id not found');
   }
 }
-
-
 ?>
-
 <?php
 // Get the user ID from the login sesh
 $user_id = $_SESSION['user_id'];
@@ -52,10 +49,10 @@ $result = mysqli_query($conn, $sql);
 if ($result->num_rows > 0) {
   $row = mysqli_fetch_assoc($result);
   $city_id = $row['city_id'];
-  $sql = "SELECT * FROM city_tbl INNER JOIN shelteruser_tbl ON city_tbl.city_id = shelteruser_tbl.city_id WHERE city_tbl.city_id AND shelteruser_tbl.city_id ='$city_id'";
-  $result = mysqli_query($conn, $sql);
-  if ($result == TRUE) {
-    $row = mysqli_fetch_assoc($result);
+  $sql2 = "SELECT * FROM city_tbl INNER JOIN shelteruser_tbl ON city_tbl.city_id = shelteruser_tbl.city_id WHERE city_tbl.city_id AND shelteruser_tbl.city_id ='$city_id'";
+  $result2 = mysqli_query($conn, $sql2);
+  if ($result2 == TRUE) {
+    $row2 = mysqli_fetch_assoc($result2);
   }
 }
 ?>
@@ -107,7 +104,7 @@ if ($result->num_rows > 0) {
         <div class="">
           <div class="page-title">
             <div class="title_left">
-            <h2><?php echo $row['city_name']." "."Animal Shelter"?></h2>
+            <h2><?php echo $row2['city_name']." "."Animal Shelter"?></h2>
             <h3>Agreement Form</h3>
             </div>
 

@@ -121,7 +121,7 @@ if ($result->num_rows > 0) {
                     $next_page = $page_no + 1;
 
                     // Query to get the total count of records
-                    $pr_query = "SELECT COUNT(*) as total_records FROM warp_capstone.adoptee_tbl WHERE city_id='$city_id' AND deleted_at IS NULL";
+                    $pr_query = "SELECT COUNT(*) as total_records FROM nbqdsxfp_warp_capstone.adoptee_tbl WHERE city_id='$city_id' AND deleted_at IS NULL";
                     $pr_result = mysqli_query($conn, $pr_query);
                     $records = mysqli_fetch_array($pr_result);
                     $total_record = $records['total_records'];

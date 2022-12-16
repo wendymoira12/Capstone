@@ -13,7 +13,6 @@ if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
   }
 }
 ?>
-
 <?php
 // Get the user ID from the login sesh
 $user_id = $_SESSION['user_id'];

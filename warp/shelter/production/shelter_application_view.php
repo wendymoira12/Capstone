@@ -60,10 +60,7 @@ if (isset($_POST['submit-reject'])) {
     }
   }
 }
-
-
 ?>
-
 <?php
 // Get the user ID from the login sesh
 $user_id = $_SESSION['user_id'];
@@ -440,7 +437,7 @@ if ($result->num_rows > 0) {
                       <div class="modal fade" id="modalDate">
                         <div class="modal-dialog modal-sm">
                           <div class="modal-content">
-                            <form action="/Capstone/warp/shelter/production/shelter_application_view.php?id=<?= $id ?>" method="POST">
+                            <form action="/shelter/production/shelter_application_view.php?id=<?= $id ?>" method="POST">
                               <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                                 </button>
@@ -461,7 +458,7 @@ if ($result->num_rows > 0) {
                       <div class="modal fade" id="modalReject">
                         <div class="modal-dialog modal-sm">
                           <div class="modal-content">
-                            <form action="/Capstone/warp/shelter/production/shelter_application_view.php?id=<?= $id ?>" method="POST">
+                            <form action="/shelter/production/shelter_application_view.php?id=<?= $id ?>" method="POST">
                               <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                                 </button>

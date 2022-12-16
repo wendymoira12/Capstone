@@ -56,8 +56,7 @@ if (isset($_POST['submit'])) {
   // UPLOAD THE IMAGES AND VIDEOS IN THE IMAGES FOLDER
   if ($result) {
     move_uploaded_file($adopter_img_tmp_name, __DIR__ . "/images/adopter_pic/" . $image_name);
-
-    echo "<script>alert('Adoptee added successfully')</script>";
+    echo "<script>alert('Profile Picture Changed Successfully')</script>";
     echo "<script>window.location.href='adopter_user_page.php';</script>";
   } else {
     echo "<script>alert('Oops! Something went wrong')</script>";

@@ -31,7 +31,6 @@ if ($result->num_rows > 0) {
   }
 }
 ?>
-
 <?php
 
 if (!isset($_GET['adopted_id'])) {
@@ -82,7 +81,6 @@ if (isset($_POST['confirm'])) {
     echo "<script>alert('Empty Fields')</script>";
   }
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

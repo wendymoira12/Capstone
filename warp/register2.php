@@ -44,11 +44,7 @@ if (isset($_POST['submit'])) {
       $password_hash = password_hash($password, PASSWORD_DEFAULT);
       $role = 1;
       $sql = "INSERT INTO user_tbl (user_email, user_password, role_id) VALUES ('$email', '$password_hash', '$role')";
-      $result = mysqli_query($conn, $sql);
-      //If the query is false, add user data to database and execute another query for adopter tbl
-      if (!$result->num_rows > 0) {
-        //Success inserting user account
-        //Then ichecheck sa db ung email and role id = 1
+      if (mysqli_query($conn, $sql)) {
         $sql2 = "SELECT * FROM user_tbl WHERE user_email='$email' AND role_id='$role'";
         $result2 = mysqli_query($conn, $sql2);
         //If true then iistore in temp variable si user id to save in adopter table
@@ -74,11 +70,12 @@ if (isset($_POST['submit'])) {
       } else {
         echo "<script>alert('Oops! Something went wrong')</script>";
       }
-    } else {
-      echo "<script>alert('Password doesnt Match')</script>";
     }
+  } else {
+    echo "<script>alert('Password doesnt Match')</script>";
   }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -120,16 +117,16 @@ if (isset($_POST['submit'])) {
             <input type="text" placeholder="Current Address" name="currentadd" required>
           </div>
           <div class="guide">
-          <h6> Unit Number, House Number, Street, Barangay, City/Municipality.</h6>
+            <h6> Unit Number, House Number, Street, Barangay, City/Municipality.</h6>
           </div>
           <div class="input-field">
             <i class="fa-solid fa-location-dot"></i>
-            <input type="text" placeholder="Permanent Address" name="permanentadd" required>  
+            <input type="text" placeholder="Permanent Address" name="permanentadd" required>
           </div>
-          <div class="guide"> 
+          <div class="guide">
             <h6> Unit Number, House Number, Street, Barangay, City/Municipality.</h6>
           </div>
-            <div class="input-field">
+          <div class="input-field">
             <i class="fa-solid fas fa-lock"></i>
             <input type="password" class="<?php echo !$passErr ?: 'is-invalid'; ?>" placeholder="Password" name="password" required>
           </div>
