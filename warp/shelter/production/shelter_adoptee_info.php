@@ -1,6 +1,7 @@
 <?php
-session_start();
+
 include 'config.php';
+session_start();
 
 if (!isset($_SESSION['user-email'], $_SESSION['user-role-id'])) {
   header('Location:/login.php');
@@ -40,38 +41,38 @@ if (isset($_POST['pet-submit'])) {
   // upload image to folder named images/
   $pet_img_folder = '/images/pet_img1/' . $pet_img1;
   // only images can be uploaded
-  $pet_img_imagetype = exif_imagetype($pet_img_tmp_name);
-  if (!$pet_img_imagetype) {
-    echo ('Uploaded file is not an image.');
-  }
+  //$pet_img_imagetype = exif_imagetype($pet_img_tmp_name);
+  //if (!$pet_img_imagetype) {
+  //echo ('Uploaded file is not an image.');
+  //}
 
   $pet_img2 = $_FILES['pet-img2']['name'];
   $pet_img_tmp_name1 = $_FILES['pet-img2']['tmp_name'];
   // upload image to folder named images/
   $pet_img_folder1 = '/images/pet_img2/' . $pet_img2;
   // only images can be uploaded
-  $pet_img_imagetype1 = exif_imagetype($pet_img_tmp_name1);
-  if (!$pet_img_imagetype1) {
-    echo ('Uploaded file is not an image.');
-  }
+  //$pet_img_imagetype1 = exif_imagetype($pet_img_tmp_name1);
+  //if (!$pet_img_imagetype1) {
+  // echo ('Uploaded file is not an image.');
+  //}
 
   //Check pet_img size
-  if ($_FILES["pet_img"]["size"] > 5000000000) {
-    echo "Your file is too large, must be less than 5mb";
-  }
+  // if ($_FILES["pet_img1"]["size"] > 5000000000) {
+  //   echo "Your file is too large, must be less than 5mb";
+  // }
 
   //Check pet_img1 size
-  if ($_FILES["pet_img1"]["size"] > 5000000000) {
-    echo "Your file is too large, must be less than 5mb";
-  }
+  // if ($_FILES["pet_img2"]["size"] > 5000000000) {
+  //   echo "Your file is too large, must be less than 5mb";
+  // }
 
   //extension nung file dapat JPEG PNG GIF XBM XPM WBMP WebP BMP
-  $image_extension1 = image_type_to_extension($pet_img_imagetype, true);
-  $image_extension2 = image_type_to_extension($pet_img_imagetype1, true);
+  //$image_extension1 = image_type_to_extension($pet_img_imagetype, true);
+  //$image_extension2 = image_type_to_extension($pet_img_imagetype1, true);
 
   //converts image name into hexadecimal
-  $image_name1 = bin2hex(random_bytes(16)) . $image_extension1;
-  $image_name2 = bin2hex(random_bytes(16)) . $image_extension2;
+  //$image_name1 = bin2hex(random_bytes(16)) . $image_extension1;
+  //$image_name2 = bin2hex(random_bytes(16)) . $image_extension2;
 
   $pet_vid = $_FILES['pet-vid']['name'];
   $pet_vid_tmp_name = $_FILES['pet-vid']['tmp_name'];
@@ -96,47 +97,35 @@ if (isset($_POST['pet-submit'])) {
     if ($result->num_rows > 0) {
       $row = mysqli_fetch_assoc($result);
       $city_id = $row['city_id'];
-      $sql = "INSERT INTO adoptee_tbl(pet_img1, pet_img2, pet_vid, pet_name, pet_age, pet_color, pet_breed, pet_specie, pet_gender, pet_neuter, pet_origin, pet_vax, pet_weight, pet_size, pet_medrec, pet_lsoc, pet_lene, pet_laff, pet_desc, city_id) VALUES('$pet_img1', '$pet_img2', '$pet_vid', '$pet_name', '$pet_age', '$color', '$breed', '$specie', '$gender', '$neuter', '$origin', '$chkstr', '$weight', '$size', '$medrec', '$sociability', '$energy', '$affection', '$description', '$city_id')";
+      $sql3 = "INSERT INTO adoptee_tbl(pet_img1, pet_img2, pet_vid, pet_name, pet_age, pet_color, pet_breed, pet_specie, pet_gender, pet_neuter, pet_origin, pet_vax, pet_weight, pet_size, pet_medrec, pet_lsoc, pet_lene, pet_laff, pet_desc, city_id) VALUES('$pet_img1', '$pet_img2', '$pet_vid', '$pet_name', '$pet_age', '$color', '$breed', '$specie', '$gender', '$neuter', '$origin', '$chkstr', '$weight', '$size', '$medrec', '$sociability', '$energy', '$affection', '$description', '$city_id')";
 
-      $result = mysqli_query($conn, $sql);
+      $result3 = mysqli_query($conn, $sql3);
 
       // UPLOAD THE IMAGES AND VIDEOS IN THE IMAGES FOLDER
-      if ($result == TRUE) {
+      if ($result3 == TRUE) {
         move_uploaded_file($pet_img_tmp_name, __DIR__ . $pet_img_folder);
         move_uploaded_file($pet_img_tmp_name1, __DIR__ . $pet_img_folder1);
         move_uploaded_file($pet_vid_tmp_name, __DIR__ . $pet_vid_folder);
 
         echo "<script>alert('Adoptee added successfully')</script>";
-        header("Location: shelter_adoptee_info.php");
+        echo "<script>window.location.href='shelter_adoptee_list.php';</script>";
       } else {
         echo "<script>alert('Oops! Something went wrong')</script>";
-        header("Location: shelter_adoptee_info.php");
+        echo "<script>window.location.href='shelter_adoptee_list.php';</script>";
       }
     } else {
       echo "<script>alert('Oops! Something went wrong')</script>";
     }
   }
-};
-?>
-
-<?php
-// Get the user ID from the login sesh
-$user_id = $_SESSION['user_id'];
-// Query to check if user_id from the login shesh = shelteruser_id to get the city 
-$sql = "SELECT * FROM shelteruser_tbl WHERE user_id ='$user_id'";
-$result = mysqli_query($conn, $sql);
-
-if ($result->num_rows > 0) {
-  $row = mysqli_fetch_assoc($result);
-  $city_id = $row['city_id'];
-  $sql = "SELECT * FROM city_tbl INNER JOIN shelteruser_tbl ON city_tbl.city_id = shelteruser_tbl.city_id WHERE city_tbl.city_id AND shelteruser_tbl.city_id ='$city_id'";
-  $result2 = mysqli_query($conn, $sql);
-  if ($result2 == TRUE) {
-    $row2 = mysqli_fetch_assoc($result2);
-  }
 }
 ?>
-
+<?php
+$sql2 = "SELECT * FROM city_tbl INNER JOIN shelteruser_tbl ON city_tbl.city_id = shelteruser_tbl.city_id WHERE city_tbl.city_id AND shelteruser_tbl.city_id ='$city_id'";
+$result2 = mysqli_query($conn, $sql2);
+if ($result2 == TRUE) {
+  $row2 = mysqli_fetch_assoc($result2);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -147,7 +136,7 @@ if ($result->num_rows > 0) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" type="image/x-icon" href="/warp/img/WARP_LOGO copy.png">
-  <title><?php echo $row['city_name']; ?> | Adoptee Pet Information</title>
+  <title><?php echo $row2['city_name']; ?> | Adoptee Pet Information</title>
 
   <!-- Bootstrap -->
   <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -332,7 +321,7 @@ if ($result->num_rows > 0) {
                           </div>
                         </div>
                       </div>
-                      
+
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">This pet has been<span class="required">*</label>
 
