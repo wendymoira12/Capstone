@@ -120,10 +120,20 @@ if (isset($_POST['pet-submit'])) {
 }
 ?>
 <?php
-$sql2 = "SELECT * FROM city_tbl INNER JOIN shelteruser_tbl ON city_tbl.city_id = shelteruser_tbl.city_id WHERE city_tbl.city_id AND shelteruser_tbl.city_id ='$city_id'";
-$result2 = mysqli_query($conn, $sql2);
-if ($result2 == TRUE) {
-  $row2 = mysqli_fetch_assoc($result2);
+// Get the user ID from the login sesh
+$user_id = $_SESSION['user_id'];
+// Query to check if user_id from the login shesh = shelteruser_id to get the city 
+$sql = "SELECT * FROM shelteruser_tbl WHERE user_id ='$user_id'";
+$result = mysqli_query($conn, $sql);
+
+if ($result->num_rows > 0) {
+  $row = mysqli_fetch_assoc($result);
+  $city_id = $row['city_id'];
+  $sql2 = "SELECT * FROM city_tbl INNER JOIN shelteruser_tbl ON city_tbl.city_id = shelteruser_tbl.city_id WHERE city_tbl.city_id AND shelteruser_tbl.city_id ='$city_id'";
+  $result2 = mysqli_query($conn, $sql2);
+  if ($result2 == TRUE) {
+    $row2 = mysqli_fetch_assoc($result2);
+  }
 }
 ?>
 <!DOCTYPE html>

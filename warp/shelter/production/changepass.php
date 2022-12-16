@@ -28,10 +28,10 @@ $result = mysqli_query($conn, $sql);
 if ($result->num_rows > 0) {
   $row = mysqli_fetch_assoc($result);
   $city_id = $row['city_id'];
-  $sql = "SELECT * FROM city_tbl INNER JOIN shelteruser_tbl ON city_tbl.city_id = shelteruser_tbl.city_id WHERE city_tbl.city_id AND shelteruser_tbl.city_id ='$city_id'";
-  $result = mysqli_query($conn, $sql);
-  if ($result == TRUE) {
-    $row = mysqli_fetch_assoc($result);
+  $sql2 = "SELECT * FROM city_tbl INNER JOIN shelteruser_tbl ON city_tbl.city_id = shelteruser_tbl.city_id WHERE city_tbl.city_id AND shelteruser_tbl.city_id ='$city_id'";
+  $result2 = mysqli_query($conn, $sql2);
+  if ($result2 == TRUE) {
+    $row2 = mysqli_fetch_assoc($result2);
   }
 }
 ?>
@@ -84,7 +84,7 @@ if ($result->num_rows > 0) {
               <img src="images/logo.png" alt="">
             </a>
             <div class="profile_pic">
-              <img src="/Capstone/warp/WARP Admin/production/images/<?= $row['city_img']; ?>" alt="..." class="img-circle profile_img">
+              <img src="/shelter/production/images/logo/<?= $row2['city_img']; ?>" alt="..." class="img-circle profile_img">
             </div>
             <div class="profile_info">
               <span>Welcome,</span>
@@ -140,7 +140,7 @@ if ($result->num_rows > 0) {
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="/Capstone/warp/WARP Admin/production/images/<?= $row['city_img']; ?>" alt=""><?php echo $_SESSION['user-email'] ?>
+                  <img src="/shelter/production/images/logo/<?= $row2['city_img']; ?>" alt=""><?php echo $_SESSION['user-email'] ?>
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
