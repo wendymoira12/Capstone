@@ -293,6 +293,7 @@ if (isset($_POST['submit'])) {
                           <!-- <th>No.</th> -->
                           <th>Application ID</th>
                           <th>Pet Name</th>
+                          <th>City</th>
                           <th>Date Submitted</th>
                           <th>Application Status</th>
                           <th>Action</th>
@@ -303,7 +304,7 @@ if (isset($_POST['submit'])) {
 
                         $i = 1;
                         //Columns needed to query = No., Date Submitted, Adopter Name, Adoptee name, Application Status
-                        $sqlapp = "SELECT applicationform1.date_submitted, applicationform1.adopter_id, applicationform1.pet_id, applicationresult_tbl.application_status, applicationform1.application_id, adoptee_tbl.pet_name FROM applicationform1 INNER JOIN applicationresult_tbl ON applicationform1.application_id = applicationresult_tbl.application_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id WHERE adopter_tbl.adopter_id = '$adopter_id' ORDER BY applicationform1.date_submitted DESC";
+                        $sqlapp = "SELECT applicationform1.date_submitted, applicationform1.adopter_id, applicationform1.pet_id, applicationresult_tbl.application_status, applicationform1.application_id, adoptee_tbl.pet_name, city_tbl.city_name FROM applicationform1 INNER JOIN applicationresult_tbl ON applicationform1.application_id = applicationresult_tbl.application_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN city_tbl ON city_tbl.city_id = adoptee_tbl.city_id WHERE adopter_tbl.adopter_id = '$adopter_id' AND city_tbl.city_id = adoptee_tbl.city_id ORDER BY applicationform1.date_submitted DESC";
 
                         //$sqlapp= "SELECT * FROM applicationform1, applicationresult_tbl WHERE adopter_id ='$adopter_id';";
 
@@ -316,6 +317,7 @@ if (isset($_POST['submit'])) {
                               <!-- <th><?= $i++; ?></th> -->
                               <th><?php echo $data['application_id']; ?></th>
                               <th><?php echo $data['pet_name']; ?></th>
+                              <th><?php echo $data['city_name']; ?></th>
                               <td><?php echo $data['date_submitted']; ?></td>
                               <td>
                                 <?php
