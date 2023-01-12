@@ -127,7 +127,7 @@ if ($result->num_rows > 0) {
 
                   <!-- DataTables has most features enabled by default, so all you need to do to use it with your own tables is to call the construction function: <code>$().DataTable();</code> -->
                 </p>
-                <table id="datatable" class="table table-striped table-bordered">
+                <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline collapsed" cellspacing="0" width="100%" role="grid" aria-describedby="datatable-responsive_info" style="width: 100%;">
                   <thead>
                     <tr>
                       <th>No. </th>
