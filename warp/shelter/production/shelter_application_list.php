@@ -126,7 +126,7 @@ if ($result->num_rows > 0) {
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                  <table id="datatable" class="table table-striped table-bordered">
+                <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline collapsed" cellspacing="0" width="100%" role="grid" aria-describedby="datatable-responsive_info" style="width: 100%;">
                     <thead>
                       <tr>
                         <th>Application ID</th>
