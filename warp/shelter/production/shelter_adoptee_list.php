@@ -43,7 +43,7 @@ if ($result->num_rows > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title><?php echo $row2['city_name']; ?> | Adoptee Pet List</title>
-    <link rel="shortcut icon" type="image/x-icon" href="/warp/img/WARP_LOGO copy.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/img/WARP_LOGO copy.png">
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->

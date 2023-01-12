@@ -53,7 +53,7 @@ if (!$result) {
 
 
   <!-- <link rel="manifest" href="site.webmanifest"> -->
-  <link rel="shortcut icon" type="image/x-icon" href="/Capstone/warp/img/WARP_LOGO copy.png">
+  <link rel="shortcut icon" type="image/x-icon" href="/img/WARP_LOGO copy.png">
   <!-- Place favicon.ico in the root directory -->
 
   <!-- CSS here -->
