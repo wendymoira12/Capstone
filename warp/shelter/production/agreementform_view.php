@@ -232,7 +232,7 @@ if ($result->num_rows > 0) {
                           <button class="btn btn-round btn-primary" type="button" onclick="return confirm('Are you sure you want to go back?');">Back</button>
                         </a> 
 
-                        <a href="agreementform_pdf.php?id=<?= htmlspecialchars($id) ?>">
+                        <a href="agreementform_pdf.php?id=<?= htmlspecialchars($id) ?>" target="_blank">
                           <button class="btn btn-round btn-primary" type="button">View as PDF</button>
                         </a>
 
