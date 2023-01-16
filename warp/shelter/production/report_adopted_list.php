@@ -141,16 +141,18 @@ if ($result->num_rows > 0) {
             <h3><?= $row['city_name'] . " " . "Animal Shelter"; ?></h3>
         </div>
         <div class="report_filter">
-            <p>Application List:
+            <p>Adopted Pet List:
                 <?php
                 if (isset($_SESSION['start_date'], $_SESSION['end_date'])) {
                     $start_date = $_SESSION['start_date'];
                     $end_date = $_SESSION['end_date'];
-                    echo "Filtered by date from" . " $start_date " . " to " . " $end_date ";
-                } else if (isset($_SESSION['result'])) {
-                    echo "System Assessment";
-                } else if (isset($_SESSION['status'])) {
-                    echo "Application Status";
+                    echo "Filtered by date adopted from" . " $start_date " . " to " . " $end_date ";
+                } else if (isset($_SESSION['monitor_start_date'], $_SESSION['monitor_end_date'])) {
+                    $monitor_start_date = $_SESSION['monitor_start_date'];
+                    $monitor_end_date = $_SESSION['monitor_end_date'];
+                    echo "Filtered by monitoring date from" . " $monitor_start_date " . " to " . " $monitor_end_date ";
+                } else if (isset($_SESSION['monitor_status'])) {
+                    echo "Monitoring Status";
                 } else {
                     echo "No Filter";
                 }
@@ -176,9 +178,8 @@ if ($result->num_rows > 0) {
                 $i = 1;
                 $start_date = $_SESSION['start_date'];
                 $end_date = $_SESSION['end_date'];
-                $sql = "SELECT applicationform1.adopter_id, applicationform1.pet_id, applicationform1.date_submitted, applicationresult_tbl.application_result, applicationresult_tbl.application_status, adopter_tbl.adopter_fname, applicationresult_tbl.application_id, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, adoptee_tbl.city_id, applicationresult_tbl.acceptedby_name FROM applicationform1 INNER JOIN applicationresult_tbl ON applicationform1.application_id = applicationresult_tbl.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE (applicationform1.date_submitted BETWEEN '$start_date' and '$end_date') AND adoptee_tbl.city_id = '$city_id'";
+                $sql = "SELECT adopter_tbl.adopter_id, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_img1, adoptee_tbl.pet_img2, adoptee_tbl.pet_name, adopted_tbl.date_adopted, adopted_tbl.monitoring_date, adopted_tbl.monitoring_status, adopted_tbl.adopted_id FROM adopted_tbl INNER JOIN applicationform1 ON adopted_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE (adopted_tbl.date_adopted BETWEEN '$start_date' and '$end_date') AND adoptee_tbl.city_id = '$city_id'";
                 $result1 = mysqli_query($conn, $sql);
-
                 if (mysqli_num_rows($result1) > 0) {
                     $total = mysqli_num_rows($result1);
             ?>
@@ -187,12 +188,11 @@ if ($result->num_rows > 0) {
                             <thead>
                                 <tr>
                                     <th>No.</th>
-                                    <th>Adopter</th>
-                                    <th>Adoptee</th>
-                                    <th>Date Submitted</th>
-                                    <th>System Assessment</th>
-                                    <th>Application Status</th>
-                                    <th>Accepted By</th>
+                                    <th>Adopter Name</th>
+                                    <th>Pet Name</th>
+                                    <th>Date Adopted</th>
+                                    <th>Monitoring Date</th>
+                                    <th>Monitoring Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -201,25 +201,25 @@ if ($result->num_rows > 0) {
                                         <td><?= $i++; ?></td>
                                         <td><?= $data1['adopter_fname'] . ' ' . $data1['adopter_lname']; ?></td>
                                         <td><?= $data1['pet_name']; ?></td>
-                                        <td><?= $data1['date_submitted']; ?></td>
-                                        <td><?= $data1['application_result']; ?></td>
-                                        <td><?= $data1['application_status']; ?></td>
-                                        <td><?= $data1['acceptedby_name']; ?></td>
+                                        <td><?= $data1['date_adopted']; ?></td>
+                                        <td><?= $data1['monitoring_date']; ?></td>
+                                        <td><?= $data1['monitoring_status']; ?></td>
                                     </tr>
                                 <?php  }
                                 ?>
                             </tbody>
                         </table>
                     <?php
-                    unset($_SESSION['start_date'], $_SESSION['end_date']);
                 } else {
                     echo "No Record Found";
                 }
                 unset($_SESSION['start_date'], $_SESSION['end_date']);
-            } else if (isset($_SESSION['result'])) {
+            } else if (isset($_SESSION['monitor_start_date'], $_SESSION['monitor_end_date'])) {
+                $monitor_start_date = $_SESSION['monitor_start_date'];
+                $monitor_end_date = $_SESSION['monitor_end_date'];
+
                 $i = 1;
-                $appli_result = $_SESSION['result'];
-                $sql = "SELECT applicationform1.adopter_id, applicationform1.pet_id, applicationform1.date_submitted, applicationresult_tbl.application_result, applicationresult_tbl.application_status, adopter_tbl.adopter_fname, applicationresult_tbl.application_id, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, adoptee_tbl.city_id, applicationresult_tbl.acceptedby_name FROM applicationform1 INNER JOIN applicationresult_tbl ON applicationform1.application_id = applicationresult_tbl.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id = '$city_id' AND applicationresult_tbl.application_result = '$appli_result'";
+                $sql = "SELECT adopter_tbl.adopter_id, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_img1, adoptee_tbl.pet_img2, adoptee_tbl.pet_name, adopted_tbl.date_adopted, adopted_tbl.monitoring_date, adopted_tbl.monitoring_status, adopted_tbl.adopted_id FROM adopted_tbl INNER JOIN applicationform1 ON adopted_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE (adopted_tbl.monitoring_date BETWEEN '$monitor_start_date' and '$monitor_end_date') AND adoptee_tbl.city_id = '$city_id'";
                 $result2 = mysqli_query($conn, $sql);
                 if (mysqli_num_rows($result2) > 0) {
                     $total = mysqli_num_rows($result2);
@@ -229,12 +229,11 @@ if ($result->num_rows > 0) {
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>Adopter</th>
-                                        <th>Adoptee</th>
-                                        <th>Date Submitted</th>
-                                        <th>System Assessment</th>
-                                        <th>Application Status</th>
-                                        <th>Accepted By</th>
+                                        <th>Adopter Name</th>
+                                        <th>Pet Name</th>
+                                        <th>Date Adopted</th>
+                                        <th>Monitoring Date</th>
+                                        <th>Monitoring Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -243,10 +242,9 @@ if ($result->num_rows > 0) {
                                             <td><?= $i++; ?></td>
                                             <td><?= $data2['adopter_fname'] . ' ' . $data2['adopter_lname']; ?></td>
                                             <td><?= $data2['pet_name']; ?></td>
-                                            <td><?= $data2['date_submitted']; ?></td>
-                                            <td><?= $data2['application_result']; ?></td>
-                                            <td><?= $data2['application_status']; ?></td>
-                                            <td><?= $data2['acceptedby_name']; ?></td>
+                                            <td><?= $data2['date_adopted']; ?></td>
+                                            <td><?= $data2['monitoring_date']; ?></td>
+                                            <td><?= $data2['monitoring_status']; ?></td>
                                         </tr>
                                     <?php  }
                                     ?>
@@ -256,11 +254,11 @@ if ($result->num_rows > 0) {
                     } else {
                         echo "No Record Found";
                     }
-                    unset($_SESSION['result']);
-                } else if (isset($_SESSION['status'])) {
+                    unset($_SESSION['monitor_start_date'], $_SESSION['monitor_end_date']);
+                } else if (isset($_SESSION['monitor_status'])) {
+                    $monitor_status = $_SESSION['monitor_status'];
                     $i = 1;
-                    $appli_status = $_SESSION['status'];
-                    $sql = "SELECT applicationform1.adopter_id, applicationform1.pet_id, applicationform1.date_submitted, applicationresult_tbl.application_result, applicationresult_tbl.application_status, adopter_tbl.adopter_fname, applicationresult_tbl.application_id, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, adoptee_tbl.city_id, applicationresult_tbl.acceptedby_name FROM applicationform1 INNER JOIN applicationresult_tbl ON applicationform1.application_id = applicationresult_tbl.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id = '$city_id' AND applicationresult_tbl.application_status = '$appli_status'";
+                    $sql = "SELECT adopter_tbl.adopter_id, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_img1, adoptee_tbl.pet_img2, adoptee_tbl.pet_name, adopted_tbl.date_adopted, adopted_tbl.monitoring_date, adopted_tbl.monitoring_status, adopted_tbl.adopted_id FROM adopted_tbl INNER JOIN applicationform1 ON adopted_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adopted_tbl.monitoring_status = '$monitor_status' AND adoptee_tbl.city_id = '$city_id'";
                     $result3 = mysqli_query($conn, $sql);
                     if (mysqli_num_rows($result3) > 0) {
                         $total = mysqli_num_rows($result3);
@@ -270,12 +268,11 @@ if ($result->num_rows > 0) {
                                     <thead>
                                         <tr>
                                             <th>No.</th>
-                                            <th>Adopter</th>
-                                            <th>Adoptee</th>
-                                            <th>Date Submitted</th>
-                                            <th>System Assessment</th>
-                                            <th>Application Status</th>
-                                            <th>Accepted By</th>
+                                            <th>Adopter Name</th>
+                                            <th>Pet Name</th>
+                                            <th>Date Adopted</th>
+                                            <th>Monitoring Date</th>
+                                            <th>Monitoring Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -284,10 +281,9 @@ if ($result->num_rows > 0) {
                                                 <td><?= $i++; ?></td>
                                                 <td><?= $data3['adopter_fname'] . ' ' . $data3['adopter_lname']; ?></td>
                                                 <td><?= $data3['pet_name']; ?></td>
-                                                <td><?= $data3['date_submitted']; ?></td>
-                                                <td><?= $data3['application_result']; ?></td>
-                                                <td><?= $data3['application_status']; ?></td>
-                                                <td><?= $data3['acceptedby_name']; ?></td>
+                                                <td><?= $data3['date_adopted']; ?></td>
+                                                <td><?= $data3['monitoring_date']; ?></td>
+                                                <td><?= $data3['monitoring_status']; ?></td>
                                             </tr>
                                         <?php  }
                                         ?>
@@ -297,26 +293,25 @@ if ($result->num_rows > 0) {
                         } else {
                             echo "No Record Found";
                         }
-                        unset($_SESSION['status']);
+                        unset($_SESSION['monitor_status']);
                     } else {
                             ?>
                             <table>
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>Adopter</th>
-                                        <th>Adoptee</th>
-                                        <th>Date Submitted</th>
-                                        <th>System Assessment</th>
-                                        <th>Application Status</th>
-                                        <th>Accepted By</th>
+                                        <th>Adopter Name</th>
+                                        <th>Pet Name</th>
+                                        <th>Date Adopted</th>
+                                        <th>Monitoring Date</th>
+                                        <th>Monitoring Status</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
                                     <?php
                                     $i = 1;
-                                    $sql = "SELECT applicationform1.adopter_id, applicationresult_tbl.acceptedby_name, applicationform1.pet_id, applicationform1.date_submitted, applicationresult_tbl.application_result, applicationresult_tbl.application_status, adopter_tbl.adopter_fname, applicationresult_tbl.application_id, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, adoptee_tbl.city_id FROM applicationform1 INNER JOIN applicationresult_tbl ON applicationform1.application_id = applicationresult_tbl.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id = '$city_id'";
+                                    $sql = "SELECT adopter_tbl.adopter_id, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_img1, adoptee_tbl.pet_img2, adoptee_tbl.pet_name, adopted_tbl.date_adopted, adopted_tbl.monitoring_date, adopted_tbl.monitoring_status, adopted_tbl.adopted_id FROM adopted_tbl INNER JOIN applicationform1 ON adopted_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id = '$city_id'";
                                     $result = mysqli_query($conn, $sql);
                                     if ($result->num_rows > 0) {
                                         foreach ($result as $data) {
@@ -325,10 +320,9 @@ if ($result->num_rows > 0) {
                                                 <td><?= $i++; ?></td>
                                                 <td><?= $data['adopter_fname'] . ' ' . $data['adopter_lname']; ?></td>
                                                 <td><?= $data['pet_name']; ?></td>
-                                                <td><?= $data['date_submitted']; ?></td>
-                                                <td><?= $data['application_result']; ?></td>
-                                                <td><?= $data['application_status']; ?></td>
-                                                <td><?= $data['acceptedby_name']; ?></td>
+                                                <td><?= $data['date_adopted']; ?></td>
+                                                <td><?= $data['monitoring_date']; ?></td>
+                                                <td><?= $data['monitoring_status']; ?></td>
                                             </tr>
                                     <?php
                                         }
@@ -344,8 +338,6 @@ if ($result->num_rows > 0) {
                         <br>
                             </div>
                         </div>
-                    </div>
-        </div>
     </main>
 </body>
 

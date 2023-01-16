@@ -31,6 +31,12 @@ if ($result->num_rows > 0) {
   }
 }
 ?>
+
+<?php
+if (isset($_POST['submit_reset'])) {
+  unset($_SESSION['start_date'], $_SESSION['end_date'], $_SESSION['result'], $_SESSION['status']);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -107,10 +113,12 @@ if ($result->num_rows > 0) {
               <h3>Schedule List</h3>
               <br>
             </div>
+          </div>
+
+          <div class="x_content">
             <div class="col-md-10 col-sm-12 col-xs-12">
               <!-- DATA FILTER -->
               <form method="post" action="">
-
                 <div class="col-lg-3 col-sm-3 col-xs-6">
                   <div class="form-group">
                     <input type="date" name="start_date" class="form-control">
@@ -129,22 +137,26 @@ if ($result->num_rows > 0) {
                 <div class="col-md-3 col-sm-3 col-xs-12">
                   <div class="form-group">
                     <button type="submit" name="submit_date" class="btn btn-success">Filter</button>
-                    <a href="report_shelter_schedule_list.php"><button name="reset" class="btn btn-danger" type="button">Reset</button></a>
                   </div>
                 </div>
               </form>
             </div>
+          </div>
 
-            <div class="title_right">
-              <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-              </div>
+          <div class="x_content">
+            <div class="col-md-10 col-sm-12 col-xs-12">
+              <form action="" method="POST">
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                  <a href="report_shelter_application_list.php"><button name="submit_reset" class="btn btn-danger" type="submit">Reset</button></a>
+                  <a href="report_schedule_list_pdf.php" target="_blank"><button name="viewPDF" class="btn btn-primary" type="button">View as PDF</button></a>
+                </div>
+              </form>
             </div>
           </div>
         </div>
-
         <div class="clearfix"></div>
-
         <div class="row">
+          <br>
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
               <div class="x_content">
@@ -154,15 +166,18 @@ if ($result->num_rows > 0) {
                   $start_date = $_POST['start_date'];
                   $end_date = $_POST['end_date'];
 
+                  $_SESSION['start_date'] = $_POST['start_date'];
+                  $_SESSION['end_date'] = $_POST['end_date'];
+
                   $i = 1;
-                  $sql = "SELECT schedule_tbl.schedule_id, schedule_tbl.schedule_date, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, schedule_tbl.application_id, adopter_tbl.adopter_id FROM schedule_tbl INNER JOIN applicationform1 ON schedule_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id  WHERE (schedule_tbl.schedule_date BETWEEN '$start_date' and '$end_date') AND adoptee_tbl.city_id ='$city_id' AND schedule_tbl.deleted_at IS NULL";
+                  $sql = "SELECT schedule_tbl.schedule_id, schedule_tbl.schedule_date, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, schedule_tbl.application_id, adopter_tbl.adopter_id FROM schedule_tbl INNER JOIN applicationform1 ON schedule_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id  WHERE (schedule_tbl.schedule_date BETWEEN '$start_date' and '$end_date') AND adoptee_tbl.city_id ='$city_id'";
                   $result1 = mysqli_query($conn, $sql);
 
-                  if (mysqli_num_rows($result1) > 0) { 
+                  if (mysqli_num_rows($result1) > 0) {
                     $total = mysqli_num_rows($result1);
-                    ?>
+                ?>
 
-                    <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+                    <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                       <thead>
                         <tr>
                           <th>No.</th>
@@ -183,9 +198,9 @@ if ($result->num_rows > 0) {
                         <?php  } ?>
                       </tbody>
                     </table>
-                    <?php 
-                      $totalecho = "Total Scheduled Seminars from"." ".$start_date." "."to"." ".$end_date." "."is"." ".$total;
-                      echo ($totalecho); ?>
+                    <?php
+                    $totalecho = "Total Scheduled Seminars from" . " " . $start_date . " " . "to" . " " . $end_date . " " . "is" . " " . $total;
+                    echo ($totalecho); ?>
                   <?php
                   } else {
 
@@ -196,7 +211,7 @@ if ($result->num_rows > 0) {
                 // SHOWS DATA WITH NO FILTER
                 else {
                   ?>
-                  <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+                  <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                     <thead>
                       <tr>
                         <th>No.</th>
@@ -208,7 +223,7 @@ if ($result->num_rows > 0) {
                     <tbody>
                       <?php
                       $i = 1;
-                      $sql = "SELECT schedule_tbl.schedule_id, schedule_tbl.schedule_date, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, schedule_tbl.application_id, adopter_tbl.adopter_id FROM schedule_tbl INNER JOIN applicationform1 ON schedule_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id  WHERE adoptee_tbl.city_id ='$city_id' AND schedule_tbl.deleted_at IS NULL";
+                      $sql = "SELECT schedule_tbl.schedule_id, schedule_tbl.schedule_date, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, schedule_tbl.application_id, adopter_tbl.adopter_id FROM schedule_tbl INNER JOIN applicationform1 ON schedule_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id  WHERE adoptee_tbl.city_id ='$city_id'";
                       $result = mysqli_query($conn, $sql);
                       if ($result->num_rows > 0) {
                         foreach ($result as $data) {
@@ -221,32 +236,33 @@ if ($result->num_rows > 0) {
                           </tr>
                       <?php
                         }
+                      } else {
+                        echo "No Record Found";
                       }
                       ?>
                     </tbody>
-
                   </table>
                   <!-- PRIMARY TABLE - SHOWS ALL DATA -->
-
-                <?php } ?>
+                <?php }
+                ?>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      <!-- /page content -->
-
-      <!-- footer content -->
-      <footer>
-        <div class="pull-right">
-          <!-- Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a> -->
-        </div>
-        <div class="clearfix"></div>
-      </footer>
-      <!-- /footer content -->
-
     </div>
+  </div>
+  <!-- /page content -->
+
+  <!-- footer content -->
+  <footer>
+    <div class="pull-right">
+      <!-- Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a> -->
+    </div>
+    <div class="clearfix"></div>
+  </footer>
+  <!-- /footer content -->
+
   </div>
 
   <!-- jQuery -->

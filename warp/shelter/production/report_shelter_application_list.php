@@ -122,6 +122,9 @@ if (isset($_POST['submit_reset'])) {
               <h3>List of Applications</h3>
               <br>
             </div>
+          </div>
+
+          <div class="x_content">
             <div class="col-md-10 col-sm-12 col-xs-12">
               <!-- DATA FILTER -->
               <form method="post" action="">
@@ -147,7 +150,9 @@ if (isset($_POST['submit_reset'])) {
                 </div>
               </form>
             </div>
+          </div>
 
+          <div class="x_content">
             <div class="col-md-10 col-sm-12 col-xs-12">
               <form action="" method="POST">
                 <div class="col-md-3 col-sm-3 col-xs-12">
@@ -168,6 +173,9 @@ if (isset($_POST['submit_reset'])) {
                 </div>
               </form>
             </div>
+          </div>
+
+          <div class="x_content">
             <div class="col-md-10 col-sm-12 col-xs-12">
               <form action="" method="POST">
                 <div class="col-md-3 col-sm-3 col-xs-12">
@@ -191,21 +199,22 @@ if (isset($_POST['submit_reset'])) {
                 </div>
               </form>
             </div>
+          </div>
 
+          <div class="x_content">
             <div class="col-md-10 col-sm-12 col-xs-12">
-            <form action="" method="POST">
-              <div class="col-md-3 col-sm-3 col-xs-12">
+              <form action="" method="POST">
+                <div class="col-md-3 col-sm-3 col-xs-12">
                   <a href="report_shelter_application_list.php"><button name="submit_reset" class="btn btn-danger" type="submit">Reset</button></a>
                   <a href="report_application_list_pdf.php" target="_blank"><button name="viewPDF" class="btn btn-primary" type="button">View as PDF</button></a>
-              </div>
+                </div>
               </form>
             </div>
           </div>
 
-
           <div class="clearfix"></div>
           <div class="row">
-
+            <br>
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
 
@@ -228,7 +237,7 @@ if (isset($_POST['submit_reset'])) {
                     if (mysqli_num_rows($result1) > 0) {
                       $total = mysqli_num_rows($result1);
                   ?>
-                      <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+                      <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                           <tr>
                             <th>No.</th>
@@ -277,7 +286,7 @@ if (isset($_POST['submit_reset'])) {
                     if (mysqli_num_rows($result2) > 0) {
                       $total = mysqli_num_rows($result2);
                     ?>
-                      <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+                      <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                           <tr>
                             <th>No.</th>
@@ -320,7 +329,7 @@ if (isset($_POST['submit_reset'])) {
                     if (mysqli_num_rows($result3) > 0) {
                       $total = mysqli_num_rows($result3);
                     ?>
-                      <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+                      <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                           <tr>
                             <th>No.</th>
@@ -356,7 +365,7 @@ if (isset($_POST['submit_reset'])) {
                   else {
                     ?>
 
-                    <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+                    <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                       <thead>
                         <tr>
                           <th>No.</th>
@@ -401,16 +410,18 @@ if (isset($_POST['submit_reset'])) {
           </div>
         </div>
       </div>
-
-      <!-- /page content -->
-
-      <!-- footer content -->
-      <footer>
-
-        <div class="clearfix"></div>
-      </footer>
-      <!-- /footer content -->
     </div>
+  </div>
+
+  <!-- /page content -->
+
+  <!-- footer content -->
+  <footer>
+
+    <div class="clearfix"></div>
+  </footer>
+  <!-- /footer content -->
+  </div>
   </div>
 
   <!-- jQuery -->
