@@ -209,7 +209,10 @@ if ($result->num_rows > 0) {
                                 ?>
                             </tbody>
                         </table>
-                    <?php
+                        <br>
+                        <?php echo "Total number of rows:" . "$total"; ?>
+                    </div>
+                <?php
                 } else {
                     echo "No Record Found";
                 }
@@ -223,121 +226,127 @@ if ($result->num_rows > 0) {
                 $result2 = mysqli_query($conn, $sql);
                 if (mysqli_num_rows($result2) > 0) {
                     $total = mysqli_num_rows($result2);
-                    ?>
-                        <div>
-                            <table>
-                                <thead>
+                ?>
+                    <div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Adopter Name</th>
+                                    <th>Pet Name</th>
+                                    <th>Date Adopted</th>
+                                    <th>Monitoring Date</th>
+                                    <th>Monitoring Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($result2 as $data2) { ?>
                                     <tr>
-                                        <th>No.</th>
-                                        <th>Adopter Name</th>
-                                        <th>Pet Name</th>
-                                        <th>Date Adopted</th>
-                                        <th>Monitoring Date</th>
-                                        <th>Monitoring Status</th>
+                                        <td><?= $i++; ?></td>
+                                        <td><?= $data2['adopter_fname'] . ' ' . $data2['adopter_lname']; ?></td>
+                                        <td><?= $data2['pet_name']; ?></td>
+                                        <td><?= $data2['date_adopted']; ?></td>
+                                        <td><?= $data2['monitoring_date']; ?></td>
+                                        <td><?= $data2['monitoring_status']; ?></td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($result2 as $data2) { ?>
-                                        <tr>
-                                            <td><?= $i++; ?></td>
-                                            <td><?= $data2['adopter_fname'] . ' ' . $data2['adopter_lname']; ?></td>
-                                            <td><?= $data2['pet_name']; ?></td>
-                                            <td><?= $data2['date_adopted']; ?></td>
-                                            <td><?= $data2['monitoring_date']; ?></td>
-                                            <td><?= $data2['monitoring_status']; ?></td>
-                                        </tr>
-                                    <?php  }
-                                    ?>
-                                </tbody>
-                            </table>
+                                <?php  }
+                                ?>
+                            </tbody>
+                        </table>
+                        <br>
+                        <?php echo "Total number of rows:" . "$total"; ?>
+                    </div>
+                <?php
+                } else {
+                    echo "No Record Found";
+                }
+                unset($_SESSION['monitor_start_date'], $_SESSION['monitor_end_date']);
+            } else if (isset($_SESSION['monitor_status'])) {
+                $monitor_status = $_SESSION['monitor_status'];
+                $i = 1;
+                $sql = "SELECT adopter_tbl.adopter_id, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_img1, adoptee_tbl.pet_img2, adoptee_tbl.pet_name, adopted_tbl.date_adopted, adopted_tbl.monitoring_date, adopted_tbl.monitoring_status, adopted_tbl.adopted_id FROM adopted_tbl INNER JOIN applicationform1 ON adopted_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adopted_tbl.monitoring_status = '$monitor_status' AND adoptee_tbl.city_id = '$city_id'";
+                $result3 = mysqli_query($conn, $sql);
+                if (mysqli_num_rows($result3) > 0) {
+                    $total = mysqli_num_rows($result3);
+                ?>
+                    <div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Adopter Name</th>
+                                    <th>Pet Name</th>
+                                    <th>Date Adopted</th>
+                                    <th>Monitoring Date</th>
+                                    <th>Monitoring Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($result3 as $data3) { ?>
+                                    <tr>
+                                        <td><?= $i++; ?></td>
+                                        <td><?= $data3['adopter_fname'] . ' ' . $data3['adopter_lname']; ?></td>
+                                        <td><?= $data3['pet_name']; ?></td>
+                                        <td><?= $data3['date_adopted']; ?></td>
+                                        <td><?= $data3['monitoring_date']; ?></td>
+                                        <td><?= $data3['monitoring_status']; ?></td>
+                                    </tr>
+                                <?php  }
+                                ?>
+                            </tbody>
+                        </table>
+                        <br>
+                        <?php echo "Total number of rows:" . "$total"; ?>
+                    </div>
+                <?php
+                } else {
+                    echo "No Record Found";
+                }
+                unset($_SESSION['monitor_status']);
+            } else {
+                ?>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Adopter Name</th>
+                            <th>Pet Name</th>
+                            <th>Date Adopted</th>
+                            <th>Monitoring Date</th>
+                            <th>Monitoring Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
                         <?php
-                    } else {
-                        echo "No Record Found";
-                    }
-                    unset($_SESSION['monitor_start_date'], $_SESSION['monitor_end_date']);
-                } else if (isset($_SESSION['monitor_status'])) {
-                    $monitor_status = $_SESSION['monitor_status'];
-                    $i = 1;
-                    $sql = "SELECT adopter_tbl.adopter_id, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_img1, adoptee_tbl.pet_img2, adoptee_tbl.pet_name, adopted_tbl.date_adopted, adopted_tbl.monitoring_date, adopted_tbl.monitoring_status, adopted_tbl.adopted_id FROM adopted_tbl INNER JOIN applicationform1 ON adopted_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adopted_tbl.monitoring_status = '$monitor_status' AND adoptee_tbl.city_id = '$city_id'";
-                    $result3 = mysqli_query($conn, $sql);
-                    if (mysqli_num_rows($result3) > 0) {
-                        $total = mysqli_num_rows($result3);
+                        $i = 1;
+                        $sql = "SELECT adopter_tbl.adopter_id, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_img1, adoptee_tbl.pet_img2, adoptee_tbl.pet_name, adopted_tbl.date_adopted, adopted_tbl.monitoring_date, adopted_tbl.monitoring_status, adopted_tbl.adopted_id FROM adopted_tbl INNER JOIN applicationform1 ON adopted_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id = '$city_id'";
+                        $result = mysqli_query($conn, $sql);
+                        if ($result->num_rows > 0) {
+                            foreach ($result as $data) {
                         ?>
-                            <div>
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>No.</th>
-                                            <th>Adopter Name</th>
-                                            <th>Pet Name</th>
-                                            <th>Date Adopted</th>
-                                            <th>Monitoring Date</th>
-                                            <th>Monitoring Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php foreach ($result3 as $data3) { ?>
-                                            <tr>
-                                                <td><?= $i++; ?></td>
-                                                <td><?= $data3['adopter_fname'] . ' ' . $data3['adopter_lname']; ?></td>
-                                                <td><?= $data3['pet_name']; ?></td>
-                                                <td><?= $data3['date_adopted']; ?></td>
-                                                <td><?= $data3['monitoring_date']; ?></td>
-                                                <td><?= $data3['monitoring_status']; ?></td>
-                                            </tr>
-                                        <?php  }
-                                        ?>
-                                    </tbody>
-                                </table>
-                            <?php
+                                <tr>
+                                    <td><?= $i++; ?></td>
+                                    <td><?= $data['adopter_fname'] . ' ' . $data['adopter_lname']; ?></td>
+                                    <td><?= $data['pet_name']; ?></td>
+                                    <td><?= $data['date_adopted']; ?></td>
+                                    <td><?= $data['monitoring_date']; ?></td>
+                                    <td><?= $data['monitoring_status']; ?></td>
+                                </tr>
+                        <?php
+                            }
                         } else {
                             echo "No Record Found";
                         }
-                        unset($_SESSION['monitor_status']);
-                    } else {
-                            ?>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>No.</th>
-                                        <th>Adopter Name</th>
-                                        <th>Pet Name</th>
-                                        <th>Date Adopted</th>
-                                        <th>Monitoring Date</th>
-                                        <th>Monitoring Status</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    <?php
-                                    $i = 1;
-                                    $sql = "SELECT adopter_tbl.adopter_id, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_img1, adoptee_tbl.pet_img2, adoptee_tbl.pet_name, adopted_tbl.date_adopted, adopted_tbl.monitoring_date, adopted_tbl.monitoring_status, adopted_tbl.adopted_id FROM adopted_tbl INNER JOIN applicationform1 ON adopted_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id = '$city_id'";
-                                    $result = mysqli_query($conn, $sql);
-                                    if ($result->num_rows > 0) {
-                                        foreach ($result as $data) {
-                                    ?>
-                                            <tr>
-                                                <td><?= $i++; ?></td>
-                                                <td><?= $data['adopter_fname'] . ' ' . $data['adopter_lname']; ?></td>
-                                                <td><?= $data['pet_name']; ?></td>
-                                                <td><?= $data['date_adopted']; ?></td>
-                                                <td><?= $data['monitoring_date']; ?></td>
-                                                <td><?= $data['monitoring_status']; ?></td>
-                                            </tr>
-                                    <?php
-                                        }
-                                    } else {
-                                        echo "No Record Found";
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
-                        <?php
-                    }
                         ?>
-                        <br>
-                            </div>
-                        </div>
+                    </tbody>
+                </table>
+            <?php
+            }
+            ?>
+            <br>
+        </div>
+        </div>
     </main>
 </body>
 

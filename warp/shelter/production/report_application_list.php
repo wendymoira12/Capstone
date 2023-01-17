@@ -210,7 +210,10 @@ if ($result->num_rows > 0) {
                                 ?>
                             </tbody>
                         </table>
-                    <?php
+                        <br>
+                        <?php echo "Total number of rows:" . "$total"; ?>
+                    </div>
+                <?php
                     unset($_SESSION['start_date'], $_SESSION['end_date']);
                 } else {
                     echo "No Record Found";
@@ -223,128 +226,134 @@ if ($result->num_rows > 0) {
                 $result2 = mysqli_query($conn, $sql);
                 if (mysqli_num_rows($result2) > 0) {
                     $total = mysqli_num_rows($result2);
-                    ?>
-                        <div>
-                            <table>
-                                <thead>
+                ?>
+                    <div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Adopter</th>
+                                    <th>Adoptee</th>
+                                    <th>Date Submitted</th>
+                                    <th>System Assessment</th>
+                                    <th>Application Status</th>
+                                    <th>Accepted By</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($result2 as $data2) { ?>
                                     <tr>
-                                        <th>No.</th>
-                                        <th>Adopter</th>
-                                        <th>Adoptee</th>
-                                        <th>Date Submitted</th>
-                                        <th>System Assessment</th>
-                                        <th>Application Status</th>
-                                        <th>Accepted By</th>
+                                        <td><?= $i++; ?></td>
+                                        <td><?= $data2['adopter_fname'] . ' ' . $data2['adopter_lname']; ?></td>
+                                        <td><?= $data2['pet_name']; ?></td>
+                                        <td><?= $data2['date_submitted']; ?></td>
+                                        <td><?= $data2['application_result']; ?></td>
+                                        <td><?= $data2['application_status']; ?></td>
+                                        <td><?= $data2['acceptedby_name']; ?></td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($result2 as $data2) { ?>
-                                        <tr>
-                                            <td><?= $i++; ?></td>
-                                            <td><?= $data2['adopter_fname'] . ' ' . $data2['adopter_lname']; ?></td>
-                                            <td><?= $data2['pet_name']; ?></td>
-                                            <td><?= $data2['date_submitted']; ?></td>
-                                            <td><?= $data2['application_result']; ?></td>
-                                            <td><?= $data2['application_status']; ?></td>
-                                            <td><?= $data2['acceptedby_name']; ?></td>
-                                        </tr>
-                                    <?php  }
-                                    ?>
-                                </tbody>
-                            </table>
+                                <?php  }
+                                ?>
+                            </tbody>
+                        </table>
+                        <br>
+                        <?php echo "Total number of rows:" . "$total"; ?>
+                    </div>
+                <?php
+                } else {
+                    echo "No Record Found";
+                }
+                unset($_SESSION['result']);
+            } else if (isset($_SESSION['status'])) {
+                $i = 1;
+                $appli_status = $_SESSION['status'];
+                $sql = "SELECT applicationform1.adopter_id, applicationform1.pet_id, applicationform1.date_submitted, applicationresult_tbl.application_result, applicationresult_tbl.application_status, adopter_tbl.adopter_fname, applicationresult_tbl.application_id, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, adoptee_tbl.city_id, applicationresult_tbl.acceptedby_name FROM applicationform1 INNER JOIN applicationresult_tbl ON applicationform1.application_id = applicationresult_tbl.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id = '$city_id' AND applicationresult_tbl.application_status = '$appli_status'";
+                $result3 = mysqli_query($conn, $sql);
+                if (mysqli_num_rows($result3) > 0) {
+                    $total = mysqli_num_rows($result3);
+                ?>
+                    <div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Adopter</th>
+                                    <th>Adoptee</th>
+                                    <th>Date Submitted</th>
+                                    <th>System Assessment</th>
+                                    <th>Application Status</th>
+                                    <th>Accepted By</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($result3 as $data3) { ?>
+                                    <tr>
+                                        <td><?= $i++; ?></td>
+                                        <td><?= $data3['adopter_fname'] . ' ' . $data3['adopter_lname']; ?></td>
+                                        <td><?= $data3['pet_name']; ?></td>
+                                        <td><?= $data3['date_submitted']; ?></td>
+                                        <td><?= $data3['application_result']; ?></td>
+                                        <td><?= $data3['application_status']; ?></td>
+                                        <td><?= $data3['acceptedby_name']; ?></td>
+                                    </tr>
+                                <?php  }
+                                ?>
+                            </tbody>
+                        </table>
+                        <br>
+                        <?php echo "Total number of rows:" . "$total"; ?>
+                    </div>
+                <?php
+                } else {
+                    echo "No Record Found";
+                }
+                unset($_SESSION['status']);
+            } else {
+                ?>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Adopter</th>
+                            <th>Adoptee</th>
+                            <th>Date Submitted</th>
+                            <th>System Assessment</th>
+                            <th>Application Status</th>
+                            <th>Accepted By</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
                         <?php
-                    } else {
-                        echo "No Record Found";
-                    }
-                    unset($_SESSION['result']);
-                } else if (isset($_SESSION['status'])) {
-                    $i = 1;
-                    $appli_status = $_SESSION['status'];
-                    $sql = "SELECT applicationform1.adopter_id, applicationform1.pet_id, applicationform1.date_submitted, applicationresult_tbl.application_result, applicationresult_tbl.application_status, adopter_tbl.adopter_fname, applicationresult_tbl.application_id, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, adoptee_tbl.city_id, applicationresult_tbl.acceptedby_name FROM applicationform1 INNER JOIN applicationresult_tbl ON applicationform1.application_id = applicationresult_tbl.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id = '$city_id' AND applicationresult_tbl.application_status = '$appli_status'";
-                    $result3 = mysqli_query($conn, $sql);
-                    if (mysqli_num_rows($result3) > 0) {
-                        $total = mysqli_num_rows($result3);
+                        $i = 1;
+                        $sql = "SELECT applicationform1.adopter_id, applicationresult_tbl.acceptedby_name, applicationform1.pet_id, applicationform1.date_submitted, applicationresult_tbl.application_result, applicationresult_tbl.application_status, adopter_tbl.adopter_fname, applicationresult_tbl.application_id, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, adoptee_tbl.city_id FROM applicationform1 INNER JOIN applicationresult_tbl ON applicationform1.application_id = applicationresult_tbl.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id = '$city_id'";
+                        $result = mysqli_query($conn, $sql);
+                        if ($result->num_rows > 0) {
+                            foreach ($result as $data) {
                         ?>
-                            <div>
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>No.</th>
-                                            <th>Adopter</th>
-                                            <th>Adoptee</th>
-                                            <th>Date Submitted</th>
-                                            <th>System Assessment</th>
-                                            <th>Application Status</th>
-                                            <th>Accepted By</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php foreach ($result3 as $data3) { ?>
-                                            <tr>
-                                                <td><?= $i++; ?></td>
-                                                <td><?= $data3['adopter_fname'] . ' ' . $data3['adopter_lname']; ?></td>
-                                                <td><?= $data3['pet_name']; ?></td>
-                                                <td><?= $data3['date_submitted']; ?></td>
-                                                <td><?= $data3['application_result']; ?></td>
-                                                <td><?= $data3['application_status']; ?></td>
-                                                <td><?= $data3['acceptedby_name']; ?></td>
-                                            </tr>
-                                        <?php  }
-                                        ?>
-                                    </tbody>
-                                </table>
-                            <?php
+                                <tr>
+                                    <td><?= $i++; ?></td>
+                                    <td><?= $data['adopter_fname'] . ' ' . $data['adopter_lname']; ?></td>
+                                    <td><?= $data['pet_name']; ?></td>
+                                    <td><?= $data['date_submitted']; ?></td>
+                                    <td><?= $data['application_result']; ?></td>
+                                    <td><?= $data['application_status']; ?></td>
+                                    <td><?= $data['acceptedby_name']; ?></td>
+                                </tr>
+                        <?php
+                            }
                         } else {
                             echo "No Record Found";
                         }
-                        unset($_SESSION['status']);
-                    } else {
-                            ?>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>No.</th>
-                                        <th>Adopter</th>
-                                        <th>Adoptee</th>
-                                        <th>Date Submitted</th>
-                                        <th>System Assessment</th>
-                                        <th>Application Status</th>
-                                        <th>Accepted By</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    <?php
-                                    $i = 1;
-                                    $sql = "SELECT applicationform1.adopter_id, applicationresult_tbl.acceptedby_name, applicationform1.pet_id, applicationform1.date_submitted, applicationresult_tbl.application_result, applicationresult_tbl.application_status, adopter_tbl.adopter_fname, applicationresult_tbl.application_id, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, adoptee_tbl.city_id FROM applicationform1 INNER JOIN applicationresult_tbl ON applicationform1.application_id = applicationresult_tbl.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id = '$city_id'";
-                                    $result = mysqli_query($conn, $sql);
-                                    if ($result->num_rows > 0) {
-                                        foreach ($result as $data) {
-                                    ?>
-                                            <tr>
-                                                <td><?= $i++; ?></td>
-                                                <td><?= $data['adopter_fname'] . ' ' . $data['adopter_lname']; ?></td>
-                                                <td><?= $data['pet_name']; ?></td>
-                                                <td><?= $data['date_submitted']; ?></td>
-                                                <td><?= $data['application_result']; ?></td>
-                                                <td><?= $data['application_status']; ?></td>
-                                                <td><?= $data['acceptedby_name']; ?></td>
-                                            </tr>
-                                    <?php
-                                        }
-                                    } else {
-                                        echo "No Record Found";
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
-                        <?php
-                    }
                         ?>
-                        <br>
-                            </div>
-                        </div>
-                    </div>
+                    </tbody>
+                </table>
+            <?php
+            }
+            ?>
+            <br>
+        </div>
+        </div>
+        </div>
         </div>
     </main>
 </body>

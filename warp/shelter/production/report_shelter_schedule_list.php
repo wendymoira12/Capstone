@@ -129,31 +129,23 @@ if (isset($_POST['submit_reset'])) {
                 <div class="col-lg-3 col-sm-3 col-xs-6">
                   <div class="form-group">
 
-                    <input type="date" name="end_date" class="form-control" required>
+                    <input type="date" name="end_date" class="form-control">
                     <p class="text-muted">&nbsp; End Date (mm/dd/yyyy)</p>
                   </div>
                 </div>
 
-                <div class="col-md-3 col-sm-3 col-xs-12">
+                <div class="col-md-3 col-sm-6 col-xs-12">
                   <div class="form-group">
                     <button type="submit" name="submit_date" class="btn btn-success">Filter</button>
+                    <a href="report_shelter_application_list.php"><button name="submit_reset" class="btn btn-danger" type="submit">Reset</button></a>
+                    <a href="report_schedule_list_pdf.php" target="_blank"><button name="viewPDF" class="btn btn-primary" type="button">View as PDF</button></a>
                   </div>
-                </div>
-              </form>
-            </div>
-          </div>
-
-          <div class="x_content">
-            <div class="col-md-10 col-sm-12 col-xs-12">
-              <form action="" method="POST">
-                <div class="col-md-3 col-sm-3 col-xs-12">
-                  <a href="report_shelter_application_list.php"><button name="submit_reset" class="btn btn-danger" type="submit">Reset</button></a>
-                  <a href="report_schedule_list_pdf.php" target="_blank"><button name="viewPDF" class="btn btn-primary" type="button">View as PDF</button></a>
                 </div>
               </form>
             </div>
           </div>
         </div>
+
         <div class="clearfix"></div>
         <div class="row">
           <br>
@@ -198,9 +190,6 @@ if (isset($_POST['submit_reset'])) {
                         <?php  } ?>
                       </tbody>
                     </table>
-                    <?php
-                    $totalecho = "Total Scheduled Seminars from" . " " . $start_date . " " . "to" . " " . $end_date . " " . "is" . " " . $total;
-                    echo ($totalecho); ?>
                   <?php
                   } else {
 

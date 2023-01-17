@@ -122,7 +122,7 @@ if (isset($_POST['submit_reset'])) {
 
                 <div class="col-lg-3 col-sm-3 col-xs-6">
                   <div class="form-group">
-                    <input type="date" name="start_date" class="form-control" required>
+                    <input type="date" name="start_date" class="form-control">
                     <p class="text-muted">&nbsp; Start Date (mm/dd/yyyy)</p>
                   </div>
                 </div>
@@ -130,14 +130,16 @@ if (isset($_POST['submit_reset'])) {
                 <div class="col-lg-3 col-sm-3 col-xs-6">
                   <div class="form-group">
 
-                    <input type="date" name="end_date" class="form-control" required>
+                    <input type="date" name="end_date" class="form-control">
                     <p class="text-muted">&nbsp; End Date (mm/dd/yyyy)</p>
                   </div>
                 </div>
 
-                <div class="col-md-3 col-sm-3 col-xs-12">
+                <div class="col-md-3 col-sm-6 col-xs-12">
                   <div class="form-group">
                     <button type="submit" name="submit_date" class="btn btn-success">Filter</button>
+                    <a href="report_shelter_adopted_list.php"><button name="submit_reset" class="btn btn-danger" type="submit">Reset</button></a>
+                    <a href="report_adopted_list_pdf.php" target="_blank"><button name="viewPDF" class="btn btn-primary" type="button">View as PDF</button></a>
                   </div>
                 </div>
               </form>
@@ -151,7 +153,7 @@ if (isset($_POST['submit_reset'])) {
 
                 <div class="col-lg-3 col-sm-3 col-xs-6">
                   <div class="form-group">
-                    <input type="date" name="monitor_start_date" class="form-control" required>
+                    <input type="date" name="monitor_start_date" class="form-control">
                     <p class="text-muted">&nbsp; Monitoring Start Date (mm/dd/yyyy)</p>
                   </div>
                 </div>
@@ -159,27 +161,20 @@ if (isset($_POST['submit_reset'])) {
                 <div class="col-lg-3 col-sm-3 col-xs-6">
                   <div class="form-group">
 
-                    <input type="date" name="monitor_end_date" class="form-control" required>
+                    <input type="date" name="monitor_end_date" class="form-control">
                     <p class="text-muted">&nbsp; Monitoring End Date (mm/dd/yyyy)</p>
                   </div>
                 </div>
 
-                <div class="col-md-3 col-sm-3 col-xs-12">
+                <div class="col-md-1 col-sm-6 col-xs-12">
                   <div class="form-group">
                     <button type="submit" name="submit_monitor_date" class="btn btn-success">Filter</button>
                   </div>
                 </div>
-              </form>
-            </div>
-          </div>
 
-          <div class="x_content">
-            <div class="col-md-10 col-sm-12 col-xs-12">
-              <form action="" method="POST">
                 <div class="col-md-3 col-sm-3 col-xs-12">
-
                   <div class="form-group">
-                    <select name="monitor_status" class="select2_single form-control" tabindex="-1" required>
+                    <select name="monitor_status" class="select2_single form-control" tabindex="-1">
                       <option></option>
                       <option value="Not Yet">Not Yet</option>
                       <option value="Monitored">Monitored</option>
@@ -187,7 +182,7 @@ if (isset($_POST['submit_reset'])) {
                     <p class="text-muted">&nbsp; Monitoring Status</p>
                   </div>
                 </div>
-                <div class="col-md-1 col-sm-2 col-xs-12">
+                <div class="col-md-1 col-sm-6 col-xs-12">
                   <div class="form-group">
                     <button type="submit" name="submit_monitor_status" class="btn btn-success">Filter</button>
                   </div>
@@ -196,16 +191,8 @@ if (isset($_POST['submit_reset'])) {
             </div>
           </div>
 
-          <div class="x_content">
-            <div class="col-md-10 col-sm-12 col-xs-12">
-              <form action="" method="POST">
-                <div class="col-md-3 col-sm-3 col-xs-12">
-                  <a href="report_shelter_adopted_list.php"><button name="submit_reset" class="btn btn-danger" type="submit">Reset</button></a>
-                  <a href="report_adopted_list_pdf.php" target="_blank"><button name="viewPDF" class="btn btn-primary" type="button">View as PDF</button></a>
-                </div>
-              </form>
-            </div>
-          </div>
+
+
 
           <div class="clearfix"></div>
           <div class="row">
@@ -255,9 +242,6 @@ if (isset($_POST['submit_reset'])) {
                           <?php  } ?>
                         </tbody>
                       </table>
-                      <?php
-                      $totalecho = "Total Adopted Pets from" . " " . $start_date . " " . "to" . " " . $end_date . " " . "is" . " " . $total;
-                      echo ($totalecho); ?>
                     <?php
                     } else {
 
