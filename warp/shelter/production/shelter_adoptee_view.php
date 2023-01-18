@@ -18,7 +18,7 @@ if (!isset($_GET['id'])) {
 }
 
 $id = $_GET['id'];
-$sql = "SELECT * FROM adoptee_tbl WHERE pet_id = $id";
+$sql = "SELECT adoptee_tbl.*, city_tbl.city_name FROM adoptee_tbl INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id WHERE adoptee_tbl.pet_id = '$id'";
 $result = $conn->query($sql);
 
 if ($result->num_rows != 1) {
@@ -69,8 +69,8 @@ if (!$result) {
   <link rel="stylesheet" href="../../css/slicknav.css">
   <link rel="stylesheet" href="../../css/style.css">
   <link rel="stylesheet" href="../../css/AF.css">
- <!-- SLIDER CSS AND JS -->
- <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+  <!-- SLIDER CSS AND JS -->
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
   <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
 
   <!-- <link rel="stylesheet" href="css/responsive.css"> -->
@@ -127,6 +127,7 @@ if (!$result) {
     text-align: center;
   }
 </style>
+
 <body>
   <header>
     <div class="header-area ">
@@ -198,6 +199,7 @@ if (!$result) {
               <h2 style="text-align: center;"><?php echo $data['pet_name']; ?></h2>
 
               <p class="excert">
+                <b>City:</b> <?php echo $data['city_name']; ?><br>
                 <b>Age:</b> <?php echo $data['pet_age']; ?><br>
                 <b>Breed:</b> <?php echo $data['pet_breed']; ?><br>
                 <b>Size:</b> <?php echo $data['pet_size']; ?><br>
@@ -330,7 +332,7 @@ if (!$result) {
 
                             </div>
                             <!--start popup confirmation message-->
-                           
+
                           </div>
                         </div>
                       </div>
@@ -359,11 +361,11 @@ if (!$result) {
   <!--================ Blog Area end =================-->
 
   <!-- footer_start  -->
-    <footer class="footer">
-      <?php
-        include "../../footer.php";
-      ?>
-    </footer>
+  <footer class="footer">
+    <?php
+    include "../../footer.php";
+    ?>
+  </footer>
   <!-- footer_end  -->
 
 
@@ -389,8 +391,8 @@ if (!$result) {
   <script src="../../js/plugins.js"></script>
   <script src="../../js/gijgo.min.js"></script>
 
-<!-- SLIDER-->
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+  <!-- SLIDER-->
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
   <script type="text/javascript">
     $(document).on('ready', function() {
       $('.single-item').slick();
@@ -406,7 +408,7 @@ if (!$result) {
       rtl: true
     });
   </script>
-  
+
   <!--contact js-->
   <script src="../../js/contact.js"></script>
   <script src="../../js/jquery.ajaxchimp.min.js"></script>
