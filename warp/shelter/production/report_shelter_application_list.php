@@ -26,16 +26,18 @@ $result = mysqli_query($conn, $sql);
 if ($result->num_rows > 0) {
   $row = mysqli_fetch_assoc($result);
   $city_id = $row['city_id'];
-  $sql2 = "SELECT * FROM city_tbl INNER JOIN shelteruser_tbl ON city_tbl.city_id = shelteruser_tbl.city_id WHERE city_tbl.city_id AND shelteruser_tbl.city_id ='$city_id'";
-  $result2 = mysqli_query($conn, $sql2);
-  if ($result2 == TRUE) {
-    $row2 = mysqli_fetch_assoc($result2);
+  $sql = "SELECT * FROM city_tbl INNER JOIN shelteruser_tbl ON city_tbl.city_id = shelteruser_tbl.city_id WHERE city_tbl.city_id AND shelteruser_tbl.city_id ='$city_id'";
+  $result = mysqli_query($conn, $sql);
+  if ($result == TRUE) {
+    $row = mysqli_fetch_assoc($result);
   }
 }
 ?>
 
 <?php
-
+if (isset($_POST['submit_reset'])) {
+  unset($_SESSION['start_date'], $_SESSION['end_date'], $_SESSION['result'], $_SESSION['status']);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,7 +49,7 @@ if ($result->num_rows > 0) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title> <?php echo $row2['city_name']; ?> | Application List</title>
+  <title> <?php echo $row['city_name']; ?> | Application List</title>
   <link rel="shortcut icon" type="image/x-icon" href="/img/WARP_LOGO copy.png">
   <!-- Bootstrap -->
   <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -92,10 +94,11 @@ if ($result->num_rows > 0) {
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="/shelter/production/images/logo/<?= $row2['city_img']; ?>" alt=""><?php echo $_SESSION['user-email'] ?>
+                  <img src="/shelter/production/images/logo/<?= $row['city_img']; ?>" alt=""><?php echo $_SESSION['user-email'] ?>
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
+                  <li><a href="changepass.php"><i class="fa fa-wrench pull-right"></i>Change Password</a></li>
                   <li><a href="/logout.php?logout"><i class="fa fa-sign-out pull-right"></i>Log Out</a></li>
                 </ul>
               </li>
@@ -117,11 +120,12 @@ if ($result->num_rows > 0) {
         <div class="">
           <div class="page-title">
             <div class="title_left">
-              <h3>List of Applications </h3>
+              <h3>List of Applications</h3>
               <br>
-
-              <!-- DATA FILTER -->
             </div>
+          </div>
+
+          <div class="x_content">
             <div class="col-md-10 col-sm-12 col-xs-12">
               <!-- DATA FILTER -->
               <form method="post" action="">
@@ -135,30 +139,66 @@ if ($result->num_rows > 0) {
 
                 <div class="col-lg-3 col-sm-3 col-xs-6">
                   <div class="form-group">
-
-                    <input type="date" name="end_date" class="form-control" required>
+                    <input type="date" name="end_date" class="form-control">
                     <p class="text-muted">&nbsp; End Date (mm/dd/yyyy)</p>
+                  </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6 col-xs-6">
+                  <div class="form-group">
+                    <button type="submit" name="submit_date" class="btn btn-success">Filter</button>
+                    <a href="report_shelter_application_list.php"><button name="submit_reset" class="btn btn-danger" type="submit">Reset</button></a>
+                    <a href="report_application_list_pdf.php" target="_blank"><button name="viewPDF" class="btn btn-primary" type="button">View as PDF</button></a>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="x_content">
+            <div class="col-md-10 col-sm-12 col-xs-12">
+              <form action="" method="POST">
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                  <div class="form-group">
+                    <select name="result" class="select2_single form-control" tabindex="-1">
+                      <option></option>
+                      <option value="Not Qualified">Not Qualified</option>
+                      <option value="Qualified">Qualified</option>
+                    </select>
+                    <p class="text-muted">&nbsp; System Assessment</p>
+                  </div>
+                </div>
+                <div class="col-md-1 col-sm-2 col-xs-12">
+                  <div class="form-group">
+                    <button type="submit" name="submit_result" class="btn btn-success">Filter</button>
                   </div>
                 </div>
 
                 <div class="col-md-3 col-sm-3 col-xs-12">
                   <div class="form-group">
-                    <button type="submit" name="submit_date" class="btn btn-success">Filter</button>
-                    <a href="report_shelter_application_list.php"><button name="reset" class="btn btn-danger" type="button">Reset</button></a>
+                    <select name="status" class="select2_single form-control" tabindex="-1">
+                      <option></option>
+                      <option value="Pending">Pending</option>
+                      <option value="Scheduled">Scheduled</option>
+                      <option value="Cancelled by adopter">Cancelled by adopter</option>
+                      <option value="Rejected">Rejected</option>
+                      <option value="Finished">Finished</option>
+                    </select>
+                    <p class="text-muted">&nbsp; Application Status</p>
+                  </div>
+                </div>
+                <div class="col-md-1 col-sm-2 col-xs-12">
+                  <div class="form-group">
+                    <button type="submit" name="submit_status" class="btn btn-success">Filter</button>
                   </div>
                 </div>
               </form>
-            </div>
-
-            <div class="title_right">
-              <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-              </div>
             </div>
           </div>
 
           <div class="clearfix"></div>
           <div class="row">
-
+            <br>
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
 
@@ -171,15 +211,17 @@ if ($result->num_rows > 0) {
                     $start_date = $_POST['start_date'];
                     $end_date = $_POST['end_date'];
 
+                    $_SESSION['start_date'] = $_POST['start_date'];
+                    $_SESSION['end_date'] = $_POST['end_date'];
 
                     $i = 1;
-                    $sql = "SELECT applicationform1.adopter_id, applicationform1.pet_id, applicationform1.date_submitted, applicationresult_tbl.application_result, applicationresult_tbl.application_status, adopter_tbl.adopter_fname, applicationresult_tbl.application_id, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, adoptee_tbl.city_id FROM applicationform1 INNER JOIN applicationresult_tbl ON applicationform1.application_id = applicationresult_tbl.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE (applicationform1.date_submitted BETWEEN '$start_date' and '$end_date') AND adoptee_tbl.city_id = '$city_id'";
+                    $sql = "SELECT applicationform1.adopter_id, applicationform1.pet_id, applicationform1.date_submitted, applicationresult_tbl.application_result, applicationresult_tbl.application_status, adopter_tbl.adopter_fname, applicationresult_tbl.application_id, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, adoptee_tbl.city_id, applicationresult_tbl.acceptedby_name FROM applicationform1 INNER JOIN applicationresult_tbl ON applicationform1.application_id = applicationresult_tbl.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE (applicationform1.date_submitted BETWEEN '$start_date' and '$end_date') AND adoptee_tbl.city_id = '$city_id'";
                     $result1 = mysqli_query($conn, $sql);
 
-                    if (mysqli_num_rows($result1) > 0) { 
+                    if (mysqli_num_rows($result1) > 0) {
                       $total = mysqli_num_rows($result1);
-                      ?>
-                      <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+                  ?>
+                      <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                           <tr>
                             <th>No.</th>
@@ -188,6 +230,7 @@ if ($result->num_rows > 0) {
                             <th>Date Submitted</th>
                             <th>System Assessment</th>
                             <th>Application Status</th>
+                            <th>Accepted By</th>
                           </tr>
                         </thead>
 
@@ -200,30 +243,107 @@ if ($result->num_rows > 0) {
                               <td><?= $data1['date_submitted']; ?></td>
                               <td><?= $data1['application_result']; ?></td>
                               <td><?= $data1['application_status']; ?></td>
-                              
+                              <td><?= $data1['acceptedby_name']; ?></td>
                             </tr>
                           <?php  } ?>
                         </tbody>
-
                       </table>
-                       
-                      <?php 
-                      $totalecho = "Total Applications from"." ".$start_date." "."to"." ".$end_date." "."is"." ".$total;
-                      echo ($totalecho); ?>
-
                     <?php
                     } else {
+                      echo "No Record Found";
+                    }
+                  }
 
+                  // SHOWS DATA WITH SYSTEM ASSESSMENT FILTER
+                  else if (isset($_POST['submit_result'])) {
+                    $appli_result = $_POST['result'];
+                    $_SESSION['result'] = $_POST['result'];
+                    $i = 1;
+                    $sql = "SELECT applicationform1.adopter_id, applicationform1.pet_id, applicationform1.date_submitted, applicationresult_tbl.application_result, applicationresult_tbl.application_status, adopter_tbl.adopter_fname, applicationresult_tbl.application_id, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, adoptee_tbl.city_id, applicationresult_tbl.acceptedby_name FROM applicationform1 INNER JOIN applicationresult_tbl ON applicationform1.application_id = applicationresult_tbl.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id = '$city_id' AND applicationresult_tbl.application_result = '$appli_result'";
+                    $result2 = mysqli_query($conn, $sql);
+                    if (mysqli_num_rows($result2) > 0) {
+                      $total = mysqli_num_rows($result2);
+                    ?>
+                      <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                          <tr>
+                            <th>No.</th>
+                            <th>Adopter</th>
+                            <th>Adoptee</th>
+                            <th>Date Submitted</th>
+                            <th>System Assessment</th>
+                            <th>Application Status</th>
+                            <th>Accepted By</th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          <?php foreach ($result2 as $data2) { ?>
+                            <tr>
+                              <td><?= $i++; ?></td>
+                              <td><?= $data2['adopter_fname'] . ' ' . $data2['adopter_lname']; ?></td>
+                              <td><?= $data2['pet_name']; ?></td>
+                              <td><?= $data2['date_submitted']; ?></td>
+                              <td><?= $data2['application_result']; ?></td>
+                              <td><?= $data2['application_status']; ?></td>
+                              <td><?= $data2['acceptedby_name']; ?></td>
+                            </tr>
+                          <?php  } ?>
+                        </tbody>
+                      </table>
+                    <?php
+                    } else {
+                      echo "No Record Found";
+                    }
+                  }
+
+                  // SHOWS DATA WITH STATUS FILTERED
+                  else if (isset($_POST['submit_status'])) {
+                    $appli_status = $_POST['status'];
+                    $_SESSION['status'] = $_POST['status'];
+                    $i = 1;
+                    $sql = "SELECT applicationform1.adopter_id, applicationform1.pet_id, applicationform1.date_submitted, applicationresult_tbl.application_result, applicationresult_tbl.application_status, adopter_tbl.adopter_fname, applicationresult_tbl.application_id, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, adoptee_tbl.city_id, applicationresult_tbl.acceptedby_name FROM applicationform1 INNER JOIN applicationresult_tbl ON applicationform1.application_id = applicationresult_tbl.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id WHERE adoptee_tbl.city_id = '$city_id' AND applicationresult_tbl.application_status = '$appli_status'";
+                    $result3 = mysqli_query($conn, $sql);
+                    if (mysqli_num_rows($result3) > 0) {
+                      $total = mysqli_num_rows($result3);
+                    ?>
+                      <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                          <tr>
+                            <th>No.</th>
+                            <th>Adopter</th>
+                            <th>Adoptee</th>
+                            <th>Date Submitted</th>
+                            <th>System Assessment</th>
+                            <th>Application Status</th>
+                            <th>Accepted By</th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          <?php foreach ($result3 as $data3) { ?>
+                            <tr>
+                              <td><?= $i++; ?></td>
+                              <td><?= $data3['adopter_fname'] . ' ' . $data3['adopter_lname']; ?></td>
+                              <td><?= $data3['pet_name']; ?></td>
+                              <td><?= $data3['date_submitted']; ?></td>
+                              <td><?= $data3['application_result']; ?></td>
+                              <td><?= $data3['application_status']; ?></td>
+                              <td><?= $data3['acceptedby_name']; ?></td>
+                            </tr>
+                          <?php  } ?>
+                        </tbody>
+                      </table>
+                    <?php
+                    } else {
                       echo "No Record Found";
                     }
                   }
                   // SHOWS DATA WITH NO FILTER
                   else {
-
-
                     ?>
 
-                    <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+                    <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                       <thead>
                         <tr>
                           <th>No.</th>
@@ -258,31 +378,28 @@ if ($result->num_rows > 0) {
                         }
                         ?>
                       </tbody>
-
                     </table>
-
-
-                    <!-- PRIMARY TABLE - SHOWS ALL DATA -->
-
-                  <?php }
+                  <?php
+                  }
                   ?>
-                  
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      <!-- /page content -->
-
-      <!-- footer content -->
-      <footer>
-
-        <div class="clearfix"></div>
-      </footer>
-      <!-- /footer content -->
     </div>
+  </div>
+
+  <!-- /page content -->
+
+  <!-- footer content -->
+  <footer>
+
+    <div class="clearfix"></div>
+  </footer>
+  <!-- /footer content -->
+  </div>
   </div>
 
   <!-- jQuery -->
