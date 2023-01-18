@@ -27,9 +27,9 @@ if ($result->num_rows > 0) {
   $row = mysqli_fetch_assoc($result);
   $city_id = $row['city_id'];
   $sql = "SELECT * FROM city_tbl INNER JOIN shelteruser_tbl ON city_tbl.city_id = shelteruser_tbl.city_id WHERE city_tbl.city_id AND shelteruser_tbl.city_id ='$city_id'";
-  $result = mysqli_query($conn, $sql);
-  if ($result == TRUE) {
-    $row = mysqli_fetch_assoc($result);
+  $result2 = mysqli_query($conn, $sql);
+  if ($result2 == TRUE) {
+    $row2 = mysqli_fetch_assoc($result2);
   }
 }
 ?>
@@ -49,7 +49,7 @@ if (isset($_POST['submit_reset'])) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title> <?php echo $row['city_name']; ?> | Adoptee Pet List</title>
+  <title> <?php echo $row2['city_name']; ?> | Adoptee Pet List</title>
   <link rel="shortcut icon" type="image/x-icon" href="/img/WARP_LOGO copy.png">
   <!-- Bootstrap -->
   <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -89,7 +89,7 @@ if (isset($_POST['submit_reset'])) {
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="/shelter/production/images/logo/<?= $data['city_img']; ?>" alt=""><?= $_SESSION['user-email'] ?>
+                  <img src="/shelter/production/images/logo/<?= $row2['city_img']; ?>" alt=""><?= $_SESSION['user-email'] ?>
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
