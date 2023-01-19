@@ -246,8 +246,7 @@ if (isset($_POST['submit_reset'])) {
                       $total = mysqli_num_rows($result1);
                   ?>
 
-                      <table id="datatable" class="table table-striped table-bordered" style="width:100%">
-
+                     <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline collapsed" cellspacing="0" width="100%" role="grid" aria-describedby="datatable-responsive_info" style="width: 100%;">
                         <thead>
                           <tr>
                             <th>No. </th>
@@ -316,7 +315,7 @@ if (isset($_POST['submit_reset'])) {
                       $total = mysqli_num_rows($result2);
                     ?>
 
-                      <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+                      <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline collapsed" cellspacing="0" width="100%" role="grid" aria-describedby="datatable-responsive_info" style="width: 100%;">
 
                         <thead>
                           <tr>
@@ -386,7 +385,7 @@ if (isset($_POST['submit_reset'])) {
                       $total = mysqli_num_rows($result3);
                     ?>
 
-                      <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+                      <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline collapsed" cellspacing="0" width="100%" role="grid" aria-describedby="datatable-responsive_info" style="width: 100%;">
 
                         <thead>
                           <tr>
@@ -455,7 +454,7 @@ if (isset($_POST['submit_reset'])) {
                       $total = mysqli_num_rows($result4);
                     ?>
 
-                      <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+                      <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline collapsed" cellspacing="0" width="100%" role="grid" aria-describedby="datatable-responsive_info" style="width: 100%;">
 
                         <thead>
                           <tr>
@@ -524,7 +523,7 @@ if (isset($_POST['submit_reset'])) {
                       $total = mysqli_num_rows($result5);
                     ?>
 
-                      <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+                      <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline collapsed" cellspacing="0" width="100%" role="grid" aria-describedby="datatable-responsive_info" style="width: 100%;">
 
                         <thead>
                           <tr>
@@ -582,7 +581,7 @@ if (isset($_POST['submit_reset'])) {
                   // SHOWS DATA WITH NO FILTER
                   else {
                     ?>
-                    <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+                    <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline collapsed" cellspacing="0" width="100%" role="grid" aria-describedby="datatable-responsive_info" style="width: 100%;">
                       <thead>
                         <tr>
                           <th>No. </th>
