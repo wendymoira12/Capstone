@@ -41,7 +41,7 @@ if (!isset($_GET['id'])) {
 }
 
 $id = $_GET['id'];
-$sql = "SELECT * FROM adoptee_tbl WHERE pet_id = $id";
+$sql = "SELECT * FROM adoptee_tbl INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id WHERE pet_id = $id";
 
 $result = $conn->query($sql);
 
@@ -276,6 +276,7 @@ if (isset($_POST['submit'])) {
               <h2 style="text-align: center;"><?php echo $data['pet_name']; ?></h2>
 
               <p class="excert">
+                <b>City:</b> <?php echo $data['city_name']; ?><br>
                 <b>Age:</b> <?php echo $data['pet_age']; ?><br>
                 <b>Breed:</b> <?php echo $data['pet_breed']; ?><br>
                 <b>Size:</b> <?php echo $data['pet_size']; ?><br>
