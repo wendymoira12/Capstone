@@ -96,10 +96,11 @@ if (isset($_POST['submit'])) {
   $q14 = mysqli_real_escape_string($conn, $_POST["allow"]);
   $q15 = mysqli_real_escape_string($conn, $_POST["spending"]);
   $address = mysqli_real_escape_string($conn, $_POST["address"]);
+  $timezone = date_default_timezone_set('Asia/Manila');
+  $date = date('Y-m-d');
 
-  $row = "INSERT INTO applicationform1 (adopter_id,pet_id,adopter_address,valid_id,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15) VALUES ('$adopter_id','$id','$address','$image_name','$q1','$q2','$q3','$q4','$q5','$q6','$q7','$q8','$q9','$q10','$q11','$q12','$q13','$q14','$q15');";
+  $row = "INSERT INTO applicationform1 (adopter_id,pet_id,adopter_address,valid_id,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,date_submitted) VALUES ('$adopter_id','$id','$address','$image_name','$q1','$q2','$q3','$q4','$q5','$q6','$q7','$q8','$q9','$q10','$q11','$q12','$q13','$q14','$q15','$date');";
   $query3 = mysqli_query($conn, $row);
-
   //tulog muna ng mga 4 seconds para smooth sa next process
   usleep(250000);
 
@@ -382,20 +383,20 @@ if (isset($_POST['submit'])) {
 
                     <!-- ADOPT ME! - trigger ng application form pop up-->
                     <?php
-                    $disable = "SELECT adopter_id, application_status from applicationform1, applicationresult_tbl WHERE applicationform1.adopter_id='$adopter_id' ORDER BY applicationresult_tbl.application_id DESC;";
+                    $disable = "SELECT application_status from applicationform1, applicationresult_tbl WHERE applicationform1.adopter_id='$adopter_id' ORDER BY applicationresult_tbl.application_id DESC";
                     $qdisable = mysqli_query($conn, $disable);
+                    $fdisable = mysqli_fetch_assoc($qdisable);
+                    
 
                     /* GET YUNG CURRENT DATE TAS ICOCOMPARE SA DATABASE NG APPLICATIONFORM1 DATE_SUBMITTED COLUMN */
                     $timezone = date_default_timezone_set('Asia/Manila');
                     //echo "$timezone";
-                    $date = date('Y-m-d h:i:s');
+                    $date = date('Y-m-d');
                     //echo "$date";
                     $disable2 = "SELECT application_id FROM applicationform1 WHERE adopter_id='$adopter_id' AND date_submitted = '$date';";
                     $qdisable2 = mysqli_query($conn, $disable2);
                     $datedisable = mysqli_num_rows($qdisable2);
                     //echo $datedisable;
-
-                  
 
                     ?>
                     <button type="button" class="btn btn-primary btn-lg show-modal" data-toggle="modal" data-target="#myModal" 
@@ -403,14 +404,14 @@ if (isset($_POST['submit'])) {
                       <?php
                       if ($qdisable->num_rows != 0) {
                         $fdisable = mysqli_fetch_assoc($qdisable);
-                        $var = $fdisable['application_status'];
+                        //$var = $fdisable['application_status'];
                       
                            /* IF HINDI CANCELLED BY ADOPTER YUNG STATUS - DISABLED YUNG BUTTON, 
                             IF NAKA 3 PASA NA NG APPLICATION YUNG  ADOPTER DISABLED ULI */
 
                             // MONITORING STATUS NA LANG PAG DONE DAPAT TSAKA PWEDE MAGADOPT
 
-                            if ((((($var == "Pending") OR ($var == "Scheduled")) OR $datedisable >= "3"))) {
+                            if ((((($fdisable == "Pending") OR ($fdisable == "Scheduled")) OR $datedisable >= "3"))) {
                               
                             ?> disabled <?php
                             }
