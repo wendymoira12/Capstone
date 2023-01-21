@@ -1,13 +1,21 @@
 <?php
 require_once 'dompdf/autoload.inc.php';
 use Dompdf\Dompdf;
-$dompdf = new Dompdf();
+use Dompdf\Options;
+
+$options = new Options;
+$options->set('defaultFont', 'Helvetica');
+$options->setIsRemoteEnabled(true);
+$options->setChroot(__DIR__);
+$options->setIsPhpEnabled(true);
+$dompdf = new Dompdf($options);
 
 // instantiate and use the dompdf class
 ob_start();
 require('pdf.php');
-$html =ob_get_contents();
+$html = ob_get_contents();
 ob_get_clean();
+
 
 $dompdf->loadHtml($html);
 
@@ -18,7 +26,4 @@ $dompdf->setPaper('A4', 'portrait');
 $dompdf->render();
 
 // Output the generated PDF to Browser
-$dompdf->stream('print-details.pdf',['Attachment'=>false]);
-
-
-?>
+$dompdf->stream('report_generation.pdf',['Attachment'=>false]);

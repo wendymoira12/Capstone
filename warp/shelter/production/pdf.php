@@ -78,7 +78,7 @@ if ($result->num_rows > 0) {
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" type="image/x-icon" href="/warp/img/WARP_LOGO copy.png">
+  <link rel="shortcut icon" type="image/x-icon" href="/img/WARP_LOGO copy.png">
   <title>Animal Adoption Application Form</title>
 
   <!-- Bootstrap -->
@@ -109,11 +109,15 @@ if ($result->num_rows > 0) {
 </head>
 
 
-
+<header>
+     <div>
+    <img src="sample3.jpg" width="205" height="75">
+        </div>
+</header>
 
      
       <!-- page content -->
-      <h1>WARP Application Form</h1>
+      <h1><?php echo $row['city_name']; ?> - WARP Application Form</h1>
 <br>
                   <form method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="">
 
