@@ -209,7 +209,7 @@ if (isset($_POST['submit_reset'])) {
                       <option value="Yes">Yes</option>
                       <option value="No">No</option>
                     </select>
-                    <p class="text-muted">&nbsp; Neuter</p>
+                    <p class="text-muted">&nbsp; Neutered/Spayed</p>
                   </div>
                 </div>
                 <div class="col-md-1 col-sm-2 col-xs-12">
@@ -256,7 +256,7 @@ if (isset($_POST['submit_reset'])) {
                             <th>Breed</th>
                             <th>Specie</th>
                             <th>Sex</th>
-                            <th>Neuter</th>
+                            <th>Neutered/Spayed</th>
                             <th>This pet has been</th>
                             <th>Vax</th>
                             <th>Weight</th>
@@ -326,7 +326,7 @@ if (isset($_POST['submit_reset'])) {
                             <th>Breed</th>
                             <th>Specie</th>
                             <th>Sex</th>
-                            <th>Neuter</th>
+                            <th>Neutered/Spayed</th>
                             <th>This pet has been</th>
                             <th>Vax</th>
                             <th>Weight</th>
@@ -396,7 +396,7 @@ if (isset($_POST['submit_reset'])) {
                             <th>Breed</th>
                             <th>Specie</th>
                             <th>Sex</th>
-                            <th>Neuter</th>
+                            <th>Neutered/Spayed</th>
                             <th>This pet has been</th>
                             <th>Vax</th>
                             <th>Weight</th>
@@ -465,7 +465,7 @@ if (isset($_POST['submit_reset'])) {
                             <th>Breed</th>
                             <th>Specie</th>
                             <th>Sex</th>
-                            <th>Neuter</th>
+                            <th>Neutered/Spayed</th>
                             <th>This pet has been</th>
                             <th>Vax</th>
                             <th>Weight</th>
@@ -534,7 +534,7 @@ if (isset($_POST['submit_reset'])) {
                             <th>Breed</th>
                             <th>Specie</th>
                             <th>Sex</th>
-                            <th>Neuter</th>
+                            <th>Neutered/Spayed</th>
                             <th>This pet has been</th>
                             <th>Vax</th>
                             <th>Weight</th>
@@ -591,7 +591,7 @@ if (isset($_POST['submit_reset'])) {
                           <th>Breed</th>
                           <th>Specie</th>
                           <th>Sex</th>
-                          <th>Neuter</th>
+                          <th>Neutered/Spayed</th>
                           <th>This pet has been</th>
                           <th>Vax</th>
                           <th>Weight</th>

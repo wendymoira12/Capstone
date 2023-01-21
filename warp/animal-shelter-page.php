@@ -144,7 +144,7 @@ if ($result->num_rows > 0) {
                                             <b> Age:</b> <?= $data['pet_age']; ?> <br>
                                             <b> Size:</b> <?= $data['pet_size']; ?> <br>
                                             <b> Gender:</b> <?= $data['pet_gender']; ?> <br>
-                                            <b> Neutered:</b> <?= $data['pet_neuter']; ?>
+                                            <b> Neutered/Spayed:</b> <?= $data['pet_neuter']; ?>
                                         </h5>
                                     </div>
                                 </div>

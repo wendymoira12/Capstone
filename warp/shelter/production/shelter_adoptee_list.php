@@ -139,7 +139,7 @@ if ($result->num_rows > 0) {
                       <th>Breed</th>
                       <th>Specie</th>
                       <th>Sex</th>
-                      <th>Neuter</th>
+                      <th>Neutered/Spayed</th>
                       <th>This pet has been</th>
                       <th>Vax</th>
                       <th>Weight</th>

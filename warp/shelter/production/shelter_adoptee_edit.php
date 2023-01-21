@@ -212,7 +212,7 @@ if ($result->num_rows > 0) {
                     </div>
                     
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Neuter <span class="required">*</label>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Neutered/Spayed <span class="required">*</label>
 
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <div class="btn-group" data-toggle="buttons">
@@ -222,22 +222,6 @@ if ($result->num_rows > 0) {
 
                           <!-- <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default" > -->
                           <input type="radio" name="neuter" value="No" <?php echo ($data['pet_neuter'] == "No") ? "checked" : "" ?> required> &nbsp; No &nbsp;
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">This pet has been <span class="required">*</label>
-
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <div class="btn-group" data-toggle="buttons">
-                          <!-- <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default"> -->
-                          <input type="radio" name="origin" value="Rescued" <?php echo ($data['pet_origin'] == "Rescued") ? "checked" : "" ?> required> &nbsp; Rescued &nbsp;
-                          </label>
-
-                          <!-- <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default" > -->
-                          <input type="radio" name="origin" value="Surrendered" <?php echo ($data['pet_origin'] == "Surrendered") ? "checked" : "" ?> required> &nbsp; Surrendered &nbsp;
                           </label>
                         </div>
                       </div>
@@ -307,6 +291,18 @@ if ($result->num_rows > 0) {
                         <input class="form-control col-md-7 col-xs-12" type="text" name="weight" value="<?= $data['pet_weight'] ?>" required>
                       </div>
                     </div>
+                      
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">This pet has been <span class="required">*</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select name="origin" class="select2_single form-control" tabindex="-1" required>
+                            <option></option>
+                            <option value="Rescued">Rescued</option>
+                            <option value="Surrendered">Surrendered</option>
+                            <option value="Stray Captured">Stray Captured</option>
+                          </select>
+                        </div>
+                      </div>
 
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Size <span class="required">*</label>

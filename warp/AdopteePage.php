@@ -281,10 +281,10 @@ if (isset($_POST['submit'])) {
                 <b>Age:</b> <?php echo $data['pet_age']; ?><br>
                 <b>Breed:</b> <?php echo $data['pet_breed']; ?><br>
                 <b>Size:</b> <?php echo $data['pet_size']; ?><br>
-                <b>Weight(kg):</b> <?php echo $data['pet_weight']; ?> kg<br>
+                <b>Weight:</b> <?php echo $data['pet_weight']; ?> kg<br>
                 <b>Color:</b> <?php echo $data['pet_color']; ?><br>
                 <b>Gender: </b> <?php echo $data['pet_gender']; ?> <br>
-                <b>Neutered:</b> <?php echo $data['pet_neuter']; ?> <br>
+                <b>Neutered/Spayed:</b> <?php echo $data['pet_neuter']; ?> <br>
                 <b>Vaccine:</b> <?php echo $data['pet_vax']; ?> <br>
                 <b>Medical Records:</b> <?php echo $data['pet_medrec']; ?> <br>
                 <b>This pet was </b> <?php echo $data['pet_origin']; ?> <br>
