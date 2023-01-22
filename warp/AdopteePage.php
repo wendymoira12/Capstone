@@ -382,26 +382,28 @@ if (isset($_POST['submit'])) {
                   <div class="modal-box">
 
                     <!-- ADOPT ME! - trigger ng application form pop up-->
-                    <?php
-                    $disable = "SELECT application_status from applicationform1, applicationresult_tbl WHERE applicationform1.adopter_id='$adopter_id' ORDER BY applicationresult_tbl.application_id DESC";
-                    $qdisable = mysqli_query($conn, $disable);
-                    //$fdisable = mysqli_fetch_assoc($qdisable);
-                    //$implode = implode($fdisable);
-                    //echo $implode;
-
-                    /* GET YUNG CURRENT DATE TAS ICOCOMPARE SA DATABASE NG APPLICATIONFORM1 DATE_SUBMITTED COLUMN */
-                    $timezone = date_default_timezone_set('Asia/Manila');
-                    //echo "$timezone";
-                    $date = date('Y-m-d');
-                    //echo "$date";
-                    $disable2 = "SELECT application_id FROM applicationform1 WHERE adopter_id='$adopter_id' AND date_submitted = '$date';";
-                    $qdisable2 = mysqli_query($conn, $disable2);
-                    $datedisable = mysqli_num_rows($qdisable2);
-                    //echo $datedisable;
-                    ?>
+                    
                     <button type="button" class="btn btn-primary btn-lg show-modal" data-toggle="modal" data-target="#myModal" 
                       
                       <?php
+                      //SQL QUERY FOR APPLICATION STATUS LIMITATIONS
+                        $disable = "SELECT application_status FROM applicationresult_tbl INNER JOIN applicationform1 ON applicationform1.application_id = applicationresult_tbl.application_id WHERE applicationform1.adopter_id='$adopter_id' ORDER BY applicationform1.date_submitted DESC;";
+                        $qdisable = mysqli_query($conn, $disable);
+                        //$fdisable = mysqli_fetch_assoc($qdisable);
+                        //$implodesamp = implode($fdisable);
+                        //echo $implodesamp;
+
+                        /* GET YUNG CURRENT DATE TAS ICOCOMPARE SA DATABASE NG APPLICATIONFORM1 DATE_SUBMITTED COLUMN */
+                        $timezone = date_default_timezone_set('Asia/Manila');
+                        //echo "$timezone";
+                        $date = date('Y-m-d');
+                        //echo "$date";
+                        $disable2 = "SELECT application_id FROM applicationform1 WHERE adopter_id='$adopter_id' AND date_submitted = '$date';";
+                        $qdisable2 = mysqli_query($conn, $disable2);
+                        $datedisable = mysqli_num_rows($qdisable2);
+                        //echo $datedisable;
+                     //SQL QUERY FOR APPLICATION STATUS LIMITATIONS
+                     
                       if ($qdisable->num_rows != 0) {
                         $fdisable = mysqli_fetch_assoc($qdisable);
                         $implode = implode($fdisable);
@@ -435,7 +437,6 @@ if (isset($_POST['submit'])) {
                             ?> disabled <?php
                             }
                           }
-
                         ?>
                         >
                         Adopt Me!
