@@ -103,16 +103,6 @@ if ($result->num_rows > 0) {
       <?php
       include "sidebar.php";
       ?>
-      <?php
-
-        $city_id = $row['city_id'];
-        $sql = "SELECT city_img FROM city_tbl WHERE city_tbl.city_id ='$city_id'";
-        $result = mysqli_query($conn, $sql);
-        if ($result == TRUE) {
-          $row = mysqli_fetch_assoc($result);
-        }
-
-    ?>
 
       <!-- top navigation -->
       <div class="top_nav">
@@ -125,7 +115,7 @@ if ($result->num_rows > 0) {
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="/shelter/production/images/logo/<?= $row2['city_img']; ?>" alt=""><?php echo $_SESSION['user-email'] ?>
+                  <img src="/shelter/production/images/logo/<?= $row2['city_img']; ?>" alt="" ><?php echo $_SESSION['user-email'] ?>
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -174,8 +164,8 @@ if ($result->num_rows > 0) {
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name"></label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <div class="container">
-                            <div class="img">
-                                <img src="images/logo/<?= $row['city_img']; ?>" alt="" width="120" height="100">
+                            <div class="imagelogo">
+                                <img src="images/logo/<?= $row2['city_img']; ?>" alt="" width="100" height="100">
                             </div>
                             <div class="text">
                                 <h3><?php echo $row2['city_name']." "."Animal Shelter"?></h3>
@@ -336,7 +326,7 @@ if ($result->num_rows > 0) {
     justify-content: center;
   }
   
-      img {
+      .imagelogo {
         
         float: left;
         padding-right: 20px;
