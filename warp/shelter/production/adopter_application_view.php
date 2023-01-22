@@ -357,7 +357,7 @@ if ($result->num_rows > 0) {
                     </div>
 
                     <div class="form-group">
-                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Do you have other children? </label>
+                      <label for="color" class="control-label col-md-3 col-sm-3 col-xs-12">Do you have other pets? If yes, how many do you currently have? </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input class="form-control col-md-7 col-xs-12" type="text" name="" value="<?= $qdata['q4'] ?>" disabled>
                       </div>
