@@ -387,7 +387,7 @@ if (isset($_POST['submit'])) {
                       
                       <?php
                       //SQL QUERY FOR APPLICATION STATUS LIMITATIONS
-                        $disable = "SELECT application_status FROM applicationresult_tbl INNER JOIN applicationform1 ON applicationform1.application_id = applicationresult_tbl.application_id WHERE applicationform1.adopter_id='$adopter_id' ORDER BY applicationform1.date_submitted DESC;";
+                        $disable = "SELECT application_status FROM applicationresult_tbl INNER JOIN applicationform1 ON applicationform1.application_id = applicationresult_tbl.application_id WHERE applicationform1.adopter_id='$adopter_id' ORDER BY applicationform1.application_id DESC;";
                         $qdisable = mysqli_query($conn, $disable);
                         //$fdisable = mysqli_fetch_assoc($qdisable);
                         //$implodesamp = implode($fdisable);
