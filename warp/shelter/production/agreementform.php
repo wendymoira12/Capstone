@@ -97,38 +97,35 @@ if ($result->num_rows > 0) {
 
 
 
+<body>
+     <?php
 
-     
+        $city_id = $row['city_id'];
+        $sql = "SELECT city_img FROM city_tbl WHERE city_tbl.city_id ='$city_id'";
+        $result = mysqli_query($conn, $sql);
+        if ($result == TRUE) {
+          $row = mysqli_fetch_assoc($result);
+        }
+
+    ?>
+    <div class="container">
+                <div class="img">
+                    <img src="images/logo/<?= $row['city_img']; ?>" alt="" width="100" height="100">
+                </div>
+                <div class="text">
+                    <h1><?php echo $row2['city_name']." "."Animal Shelter"?></h1>
+                    <h3>Agreement Form</h3>
+                </div>
+    </div>
+    
             <!-- page content -->
-            <div class="right_col" role="main">
+    <div class="right_col" role="main">
         <div class="">
-          <div class="page-title">
-            <div class="title_left">
-            <h2><?php echo $row2['city_name']." "."Animal Shelter"?></h2>
-            <h3>Agreement Form</h3>
-            </div>
-
-            <div class="title_right">
-              <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-
-              </div>
-            </div>
-          </div>
-          <div class="clearfix"></div>
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
-                <div class="x_title">
-                  <!-- <h2>Form Design <small>different form elements</small></h2> -->
-
-                  <div class="clearfix"></div>
-                </div>
                 <div class="x_content">
-
-
-                    
-
-                <div class="form-group">
+                    <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name"></label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                       
@@ -149,7 +146,7 @@ if ($result->num_rows > 0) {
                       
                             ?>
                         <h5>Pet Details</h5>
-                        <p><b>Specie: </b> <?= $rowform['pet_specie']?> <b>Name: </b> <?= $rowform['pet_name']?>  <b>Breed: </b> <?= $rowform['pet_breed']?>  <b>Sex: </b> <?= $rowform['pet_gender'] ?>  <b>Color: </b> <?= $rowform['pet_color']?>    </p>
+                        <p><b>Specie:</b> <?= $rowform['pet_specie']?> &nbsp; <b>Name:</b><?= $rowform['pet_name']?> &nbsp; <b>Breed:</b> <?= $rowform['pet_breed']?> &nbsp; <b>Sex:</b> <?= $rowform['pet_gender'] ?> &nbsp; <b>Color:</b> <?= $rowform['pet_color']?></p>
 
                             
                             
@@ -163,10 +160,9 @@ if ($result->num_rows > 0) {
                         <p> <b>Adopter's name:</b> <?= $rowform['adopter_fname'] ." ". $rowform['adopter_lname'] ?></p>
                         <p> <b>Address:</b> <?= $rowform['adopter_address']?></p>
                         <p> <b>Phone Number:</b> <?= $rowform['adopter_cnum']?></p>
-                        <br>
+
                         <p> I confirm that the information on this adoption agreement is accurate and true to the best of my knowledge. I accept that the Animal Shelter has the right to take the aforementioned pet away if any of my claims turn out to be untrue.
                         </p>
-                        <br>
                         <br>
                         <br>
                         <p>  ____________________________________ </p>
@@ -198,8 +194,6 @@ if ($result->num_rows > 0) {
         <div class="clearfix"></div>
       </footer>
       <!-- /footer content -->
-    </div>
-  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 
@@ -244,20 +238,6 @@ if ($result->num_rows > 0) {
   <script src="../vendors/starrr/dist/starrr.js"></script>
   <!-- Custom Theme Scripts -->
   <script src="../build/js/custom.min.js"></script>
-<?php
-
-    $city_id = $row['city_id'];
-    $sql = "SELECT * FROM city_tbl INNER JOIN shelteruser_tbl ON city_tbl.city_id = shelteruser_tbl.city_id WHERE city_tbl.city_id AND shelteruser_tbl.city_id ='$city_id'";
-    $result = mysqli_query($conn, $sql);
-    if ($result == TRUE) {
-      $row = mysqli_fetch_assoc($result);
-    }
-    $city = $row['city_img'];
-
-    // $data = file_get_contents("/Capstone/warp/shelter/production/images/logo/$row[city_img]");
-    // $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-
-?>
   
   <style>
     @page{
@@ -308,8 +288,29 @@ if ($result->num_rows > 0) {
         background-repeat: no-repeat;
         background-attachment: fixed;  
         background-size: cover; */
-    
     }
+    
+    .container {
+    align-items: center;
+    justify-content: center;
+  }
+  
+      img {
+        
+        float: left;
+        padding-right: 20px;
+      }
+  
+    text {
+        float: left;
+        padding-left: 20px;
+        padding-right: 20px;
+        line-height: 80%;
+  }
+  h3 {
+        line-height: 0px;
+  }
+  
   </style>
 
 </body>

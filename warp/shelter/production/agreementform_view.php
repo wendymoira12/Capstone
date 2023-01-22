@@ -103,6 +103,16 @@ if ($result->num_rows > 0) {
       <?php
       include "sidebar.php";
       ?>
+      <?php
+
+        $city_id = $row['city_id'];
+        $sql = "SELECT city_img FROM city_tbl WHERE city_tbl.city_id ='$city_id'";
+        $result = mysqli_query($conn, $sql);
+        if ($result == TRUE) {
+          $row = mysqli_fetch_assoc($result);
+        }
+
+    ?>
 
       <!-- top navigation -->
       <div class="top_nav">
@@ -160,13 +170,18 @@ if ($result->num_rows > 0) {
 
                   <form method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
-                    
-
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-name"></label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                      <h2><?php echo $row2['city_name']." "."Animal Shelter"?></h2>
-                      <h3>Agreement Form</h3>
+                        <div class="container">
+                            <div class="img">
+                                <img src="images/logo/<?= $row['city_img']; ?>" alt="" width="120" height="100">
+                            </div>
+                            <div class="text">
+                                <h3><?php echo $row2['city_name']." "."Animal Shelter"?></h3>
+                                <h4>Agreement Form</h4>
+                            </div>
+                        </div>
                         </br>
                         </br>
                         <?php 
@@ -315,7 +330,30 @@ if ($result->num_rows > 0) {
       modal.style.display = "none";
     }
   </script>
-
+<style>
+    .container {
+    align-items: center;
+    justify-content: center;
+  }
+  
+      img {
+        
+        float: left;
+        padding-right: 20px;
+      }
+  
+    text {
+        float: left;
+        padding-left: 20px;
+        padding-right: 20px;
+  }
+  h4 {
+        line-height: 0px;
+  }
+  h3 {
+        padding-top: 20px;
+  }
+</style>
 
 </body>
 

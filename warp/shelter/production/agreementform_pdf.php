@@ -1,7 +1,14 @@
 <?php
 require_once 'dompdf/autoload.inc.php';
 use Dompdf\Dompdf;
-$dompdf = new Dompdf();
+use Dompdf\Options;
+
+$options = new Options;
+$options->set('defaultFont', 'Helvetica');
+$options->setIsRemoteEnabled(true);
+$options->setChroot(__DIR__);
+$options->setIsPhpEnabled(true);
+$dompdf = new Dompdf($options);
 
 // instantiate and use the dompdf class
 ob_start();
