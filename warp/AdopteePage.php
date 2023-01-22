@@ -385,8 +385,9 @@ if (isset($_POST['submit'])) {
                     <?php
                     $disable = "SELECT application_status from applicationform1, applicationresult_tbl WHERE applicationform1.adopter_id='$adopter_id' ORDER BY applicationresult_tbl.application_id DESC";
                     $qdisable = mysqli_query($conn, $disable);
-                    $fdisable = mysqli_fetch_assoc($qdisable);
-                    
+                    //$fdisable = mysqli_fetch_assoc($qdisable);
+                    //$implode = implode($fdisable);
+                    //echo $implode;
 
                     /* GET YUNG CURRENT DATE TAS ICOCOMPARE SA DATABASE NG APPLICATIONFORM1 DATE_SUBMITTED COLUMN */
                     $timezone = date_default_timezone_set('Asia/Manila');
@@ -397,13 +398,13 @@ if (isset($_POST['submit'])) {
                     $qdisable2 = mysqli_query($conn, $disable2);
                     $datedisable = mysqli_num_rows($qdisable2);
                     //echo $datedisable;
-
                     ?>
                     <button type="button" class="btn btn-primary btn-lg show-modal" data-toggle="modal" data-target="#myModal" 
                       
                       <?php
                       if ($qdisable->num_rows != 0) {
                         $fdisable = mysqli_fetch_assoc($qdisable);
+                        $implode = implode($fdisable);
                         //$var = $fdisable['application_status'];
                       
                            /* IF HINDI CANCELLED BY ADOPTER YUNG STATUS - DISABLED YUNG BUTTON, 
@@ -411,7 +412,7 @@ if (isset($_POST['submit'])) {
 
                             // MONITORING STATUS NA LANG PAG DONE DAPAT TSAKA PWEDE MAGADOPT
 
-                            if ((((($fdisable == "Pending") OR ($fdisable == "Scheduled")) OR $datedisable >= "3"))) {
+                            if ((((($implode == "Pending") OR ($implode == "Scheduled")) OR $datedisable >= 3))) {
                               
                             ?> disabled <?php
                             }
