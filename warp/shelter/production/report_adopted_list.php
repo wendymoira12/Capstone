@@ -35,6 +35,7 @@ if ($result->num_rows > 0) {
   }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -76,14 +77,14 @@ if ($result->num_rows > 0) {
             display: inline-block;
             position: absolute;
             top: 0px;
-            left: 230px;
+            left: 100px;
         }
 
         header .report_filter {
             display: inline-block;
             position: absolute;
             top: 32px;
-            left: 230px;
+            left: 100px;
         }
 
         header .report_time {
@@ -135,7 +136,7 @@ if ($result->num_rows > 0) {
 <body>
     <header>
         <div>
-            <img src="sample3.jpg" width="205" height="75">
+            <img src="images/logo/<?= $row2['city_img']; ?>" alt="" width="80" height="80">
         </div>
         <div class="report_title">
             <h3><?= $row2['city_name'] . " " . "Animal Shelter"; ?></h3>
