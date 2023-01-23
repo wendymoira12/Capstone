@@ -17,7 +17,8 @@ input {
   width: 100%;
   background-color: #FFF4EC;
   min-height: 100vh;
-  overflow: hidden;
+  max-height: calc(100vh - 9rem);
+  overflow-y: auto;
 }
 
 .forms-container {
@@ -32,7 +33,7 @@ input {
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
-  left: 75%;
+  left: 50%;
   width: 50%;
   transition: 1s 0.7s ease-in-out;
   display: grid;
@@ -62,7 +63,7 @@ form.sign-in-form {
 }
 
 .title {
-  font-size: 2.2rem;
+  font-size: 2rem;
   color: #444;
   margin-bottom: 10px;
 }
@@ -93,7 +94,7 @@ form.sign-in-form {
   outline: none;
   border: none;
   line-height: 1;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 1.1rem;
   color: #333;
 }
@@ -161,19 +162,6 @@ form.sign-in-form {
   grid-template-columns: repeat(2, 1fr);
 }
 
-.container:before {
-  content: "";
-  position: absolute;
-  height: 2000px;
-  width: 2000px;
-  top: -10%;
-  right: 40%;
-  transform: translateY(-50%);
-  background-image: -webkit-linear-gradient(0deg,  #ff843a 0%, #f94cff 99%);
-  transition: 1.8s ease-in-out;
-  border-radius: 50%;
-  z-index: 6;
-}
 
 .image {
   width: 100%;
