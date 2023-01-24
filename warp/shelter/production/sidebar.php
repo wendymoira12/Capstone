@@ -54,6 +54,7 @@
               <li><a href="report_shelter_adopted_list.php"><i class="fa fa-table"></i>Adopted List</a>
               </li>
             </ul>
+          </li>
         </ul>
       </div>
 
