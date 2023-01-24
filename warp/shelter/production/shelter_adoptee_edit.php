@@ -296,10 +296,11 @@ if ($result->num_rows > 0) {
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">This pet has been <span class="required">*</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select name="origin" class="select2_single form-control" tabindex="-1" required>
-                            <option></option>
-                            <option value="Rescued">Rescued</option>
-                            <option value="Surrendered">Surrendered</option>
-                            <option value="Stray Captured">Stray Captured</option>
+
+                            <option value="Rescued" <?php echo ($data['pet_origin'] == "Rescued") ? "selected" : "" ?>>Rescued</option>
+                            <option value="Surrendered" <?php echo ($data['pet_origin'] == "Surrendered") ? "selected" : "" ?>>Surrendered</option>
+                            <option value="Stray Captured" <?php echo ($data['pet_origin'] == "Stray Captured") ? "selected" : "" ?>>Stray Captured</option>
+
                           </select>
                         </div>
                       </div>
