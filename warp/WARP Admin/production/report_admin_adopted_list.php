@@ -90,7 +90,7 @@ if (isset($_POST['submit_reset'])) {
                         <div class="menu_section">
                             <h3>General</h3>
                             <ul class="nav side-menu">
-                                <li><a><i class="fa fa-home"></i> Home </a></li>
+                                <li><a href="admin_home.php"><i class="fa fa-home"></i> Home <span></span></a></li>
                                 <li><a href="manage_city.php"><i class="fa fa-building-o"></i> Manage Cities </a></li>
                                 <li><a><i class="fa fa-users"></i> Manage Accounts </a>
                                     <ul class="nav child_menu">
