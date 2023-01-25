@@ -121,6 +121,15 @@ if (isset($_POST['submit-update'])) {
                     <li><a href="manage_adopter.php">Adopter</a></li>
                   </ul>
                 </li>
+                <li><a><i class="fa fa-print"></i> Generate Reports <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li><a href="report_admin_adoptee_list.php"><i class="fa fa-table"></i>Adoptee List</a>
+                    <li><a href="report_admin_application_list.php"><i class="fa fa-table"></i>Application List</a>
+                    <li><a href="report_admin_schedule_list.php"><i class="fa fa-table"></i>Schedule List</a>
+                    <li><a href="report_admin_adopted_list.php"><i class="fa fa-table"></i>Adopted List</a>
+                    </li>
+                  </ul>
+                </li>
               </ul>
             </div>
 

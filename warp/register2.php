@@ -145,22 +145,9 @@ if (isset($_POST['submit'])) {
       </div>
     </div>
 
-    <div class="panels-container">
-      <div class="panel left-panel">
-        <div class="content">
-          <h3>Thank you for verifying your account. <br> <br>
-            Please complete your registration by filling out this form.</h3>
-          <p>
-          </p>
 
-        </div>
-        <img src="img/dog.png" class="image" alt="" />
-      </div>
 
-    </div>
-  </div>
 
-  <script src="js/app.js"></script>
 </body>
 
 </html>
