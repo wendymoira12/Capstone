@@ -144,7 +144,7 @@ if (isset($_POST['submit_reset'])) {
                   </div>
                 </div>
 
-                <div class="col-md-3 col-sm-6 col-xs-6">
+                <div class="col-md-6 col-sm-12 col-xs-12">
                   <div class="form-group">
                     <button type="submit" name="submit_date" class="btn btn-success">Filter</button>
                     <a href="report_shelter_application_list.php"><button name="submit_reset" class="btn btn-danger" type="submit">Reset</button></a>
@@ -168,7 +168,7 @@ if (isset($_POST['submit_reset'])) {
                     <p class="text-muted">&nbsp; System Assessment</p>
                   </div>
                 </div>
-                <div class="col-md-1 col-sm-2 col-xs-12">
+                <div class="col-md-2 col-sm-2 col-xs-12">
                   <div class="form-group">
                     <button type="submit" name="submit_result" class="btn btn-success">Filter</button>
                   </div>
@@ -187,7 +187,7 @@ if (isset($_POST['submit_reset'])) {
                     <p class="text-muted">&nbsp; Application Status</p>
                   </div>
                 </div>
-                <div class="col-md-1 col-sm-2 col-xs-12">
+                <div class="col-md-2 col-sm-2 col-xs-12">
                   <div class="form-group">
                     <button type="submit" name="submit_status" class="btn btn-success">Filter</button>
                   </div>
