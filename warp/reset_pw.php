@@ -83,11 +83,11 @@ if (isset($_POST['resetPassword'])) {
             <h2 class="title">Reset Password</h2>
             <div class="input-field">
               <i class="fas fa-lock"></i>
-              <input type="password" placeholder="New Password" name="new_password" value="" required />
+              <input type="password" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}" title="Must contain at least 1 upper and lower case, numeric, and special character" required placeholder="New Password" name="new_password" value="" required />
             </div>
             <div class="input-field">
               <i class="fas fa-lock"></i>
-              <input type="password" placeholder="Confirm New Password" name="cnew_password" value="" required />
+              <input type="password" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}" title="Must contain at least 1 upper and lower case, numeric, and special character" required placeholder="Confirm New Password" name="cnew_password" value="" required />
             </div>
             <input type="submit" value="Reset Password" name="resetPassword" class="btn solid" />
           </form>
