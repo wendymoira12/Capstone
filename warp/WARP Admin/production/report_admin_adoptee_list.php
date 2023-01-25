@@ -173,7 +173,7 @@ if (isset($_POST['submit_reset'])) {
                                     </div>
                                 </div>
 
-                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
                                     <div class="form-group">
                                         <button type="submit" name="submit_date" class="btn btn-success">Filter</button>
                                         <a href="report_shelter_adoptee_list.php"><button name="submit_reset" class="btn btn-danger" type="submit">Reset</button></a>
