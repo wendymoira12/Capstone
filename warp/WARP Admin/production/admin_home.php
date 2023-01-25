@@ -167,7 +167,7 @@ if (!isset($_SESSION['email-login'])) {
 
           <?php
           // Make a query to get the total pet adoptee listed by counting all the pet_id
-          $sql = "SELECT COUNT(pet_id) AS totalpetadoptee FROM adoptee_tbl";
+          $sql = "SELECT COUNT(pet_id) AS totalpetadoptee FROM adoptee_tbl WHERE deleted_at IS NULL";
           $result = mysqli_query($conn, $sql);
           if ($result) {
             $row = mysqli_fetch_assoc($result);
@@ -181,7 +181,7 @@ if (!isset($_SESSION['email-login'])) {
 
           <?php
           // Make a query to get the total pet adopted by COUNTing all the user with role id == 1
-          $sql = "SELECT COUNT(adopted_id) AS totaladoptedpet FROM adopted_tbl";
+          $sql = "SELECT COUNT(adopted_id) AS totaladoptedpet FROM adopted_tbl INNER JOIN applicationform1 ON adopted_tbl.application_id = applicationform1.application_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id";
           $result = mysqli_query($conn, $sql);
           if ($result) {
             $row = mysqli_fetch_assoc($result);
