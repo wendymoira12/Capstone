@@ -16,7 +16,7 @@ session_regenerate_id();
     <script src="https://kit.fontawesome.com/b6742a828f.js" crossorigin="anonymous"></script>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Animal</title>
+    <title>WARP: Web Application for Rehoming Pets</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
