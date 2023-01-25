@@ -452,12 +452,14 @@ if ($result->num_rows > 0) {
                             ?>
                       <button name="cancel" class="btn btn-round btn-danger" onclick="return confirm('Are you sure you want to cacncel this application?')"
                       <?php
+                            $disable = "SELECT application_status FROM applicationresult_tbl INNER JOIN applicationform1 ON applicationform1.application_id = applicationresult_tbl.application_id WHERE applicationform1.adopter_id='$adopter_id' ORDER BY applicationform1.application_id DESC;";
+                            $qdisable = mysqli_query($conn, $disable); 
                       
-                      if ($qdisable->num_rows != 0) {
+                            if ($qdisable->num_rows != 0) {
                               $fdisable = mysqli_fetch_assoc($qdisable);
-                              $var=$fdisable['application_status'];
+                              $implode = implode($fdisable);
 
-                              if ($var != "Pending") {
+                              if ($implode != "Pending") {
     
                                 ?> disabled <?php 
                                 }
