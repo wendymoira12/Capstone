@@ -182,8 +182,8 @@ if ($result->num_rows > 0) {
                       <li><a href="logout.php?logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                     </ul>
                   </li>
-                  <li><a href="logout.php?logout">Logout </i></a>
-                  <li> <a href="/Capstone/warp/home.php">Go to Homepage </i></a>
+                  <li><a href="/logout.php?logout">Logout </i></a>
+                  <li> <a href="/home.php">Go to Homepage </i></a>
               <!-- Notification bell -->
               <?php
 
