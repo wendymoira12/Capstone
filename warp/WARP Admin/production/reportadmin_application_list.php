@@ -357,6 +357,7 @@ if (!isset($_SESSION['email-login'])) {
                             $sql = "SELECT applicationform1.adopter_id, applicationresult_tbl.acceptedby_name, applicationform1.pet_id, applicationform1.date_submitted, applicationresult_tbl.application_result, applicationresult_tbl.application_status, adopter_tbl.adopter_fname, applicationresult_tbl.application_id, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, adoptee_tbl.city_id, city_tbl.city_name FROM applicationform1 INNER JOIN applicationresult_tbl ON applicationform1.application_id = applicationresult_tbl.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id";
                             $result = mysqli_query($conn, $sql);
                             if ($result->num_rows > 0) {
+                                $total = mysqli_num_rows($result);
                                 foreach ($result as $data) {
                             ?>
                                     <tr>
@@ -375,6 +376,8 @@ if (!isset($_SESSION['email-login'])) {
                                 echo "No Record Found";
                             }
                             ?>
+                            <br>
+                            <?php echo "Total number of rows:" . "$total"; ?>
                         </tbody>
                     </table>
                 <?php

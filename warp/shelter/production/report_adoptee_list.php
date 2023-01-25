@@ -466,6 +466,7 @@ if ($result->num_rows > 0) {
                         $sql = "SELECT * FROM adoptee_tbl WHERE city_id='$city_id'";
                         $result = mysqli_query($conn, $sql);
                         if ($result->num_rows > 0) {
+                            $total = mysqli_num_rows($result);
                             foreach ($result as $data) {
                         ?>
                                 <tr>
@@ -487,6 +488,8 @@ if ($result->num_rows > 0) {
                             echo "No Record Found";
                         }
                         ?>
+                        <br>
+                        <?php echo "Total number of rows:" . "$total"; ?>
                     </tbody>
                 </table>
             <?php
