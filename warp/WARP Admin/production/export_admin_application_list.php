@@ -67,4 +67,6 @@ if (isset($_POST['export'], $_SESSION['result'])) {
         fputcsv($output, $row4);
     }
     fclose($output);
+} else {
+    echo "<script>alert('Something went wrong.')</script>";
 }
