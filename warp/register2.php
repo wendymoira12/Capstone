@@ -95,7 +95,8 @@ if (isset($_POST['submit'])) {
     <div class="forms-container">
       <div class="signin-signup">
         <form action="" method="POST" class="sign-in-form">
-          <h2 class="title"> You're almost done!</h2>
+            <br><br><br>
+          <h3 class="title"> You're almost done!</h3>
           <div class="input-field">
             <i class="fas fa-user"></i>
             <input type="text" placeholder="First Name" name="fname" required>
@@ -130,6 +131,7 @@ if (isset($_POST['submit'])) {
             <i class="fa-solid fas fa-lock"></i>
             <input type="password" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}" title="Must contain at least 1 upper and lower case, numeric, and special character" required class="<?php echo !$passErr ?: 'is-invalid'; ?>" placeholder="Password" name="password" required>
           </div>
+                    <h6> Password must contain at least 1 upper and lower case,<br>numeric, and special character</h6>
           <div class="input-field">
             <i class="fa-solid fas fa-lock"></i>
             <input type="password" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}" title="Must contain at least 1 upper and lower case, numeric, and special character" required class="<?php echo !$cpassErr ?: 'is-invalid'; ?>" placeholder="Confirm Password" name="cpassword" required>
