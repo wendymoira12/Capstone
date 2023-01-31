@@ -108,7 +108,7 @@ if (isset($_POST['submit'])) {
           <div class="input-field">
             <i class="fa-solid fa-cake-candles"></i>
             <input type="number" min="18" max="100" placeholder="Age" name="age" required>
-                    <h6 > Age must be 18 years old or above.</h6>
+                    <h6 >You must be at least 18 years old to register.</h6>
           </div>
           <div class="input-field">
             <i class="fa-solid fa-phone"></i>
