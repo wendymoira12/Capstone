@@ -107,7 +107,8 @@ if (isset($_POST['submit'])) {
           </div>
           <div class="input-field">
             <i class="fa-solid fa-cake-candles"></i>
-            <input type="number" placeholder="Age" name="age" required>
+            <input type="number" min="18" max="100" placeholder="Age" name="age" required>
+                    <h6 > Age must be 18 years old or above.</h6>
           </div>
           <div class="input-field">
             <i class="fa-solid fa-phone"></i>
@@ -131,7 +132,7 @@ if (isset($_POST['submit'])) {
             <i class="fa-solid fas fa-lock"></i>
             <input type="password" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}" title="Must contain at least 1 upper and lower case, numeric, and special character" required class="<?php echo !$passErr ?: 'is-invalid'; ?>" placeholder="Password" name="password" required>
           </div>
-                    <h6> Password must contain at least 1 upper and lower case,<br>numeric, and special character</h6>
+                    <h6> Password must be a minimum of 8 characters, and contains<br> at least 1 upper and lower case, numeric, and special character</h6>
           <div class="input-field">
             <i class="fa-solid fas fa-lock"></i>
             <input type="password" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}" title="Must contain at least 1 upper and lower case, numeric, and special character" required class="<?php echo !$cpassErr ?: 'is-invalid'; ?>" placeholder="Confirm Password" name="cpassword" required>

@@ -282,7 +282,7 @@ if (isset($_POST['submit'])) {
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Applications</h2>
+                    <p class="text-muted font-13 m-b-30">*Please note that you can only send a maximum of three(3) applications within twenty-four(24) hours.</p>
 
                     <div class="clearfix"></div>
                   </div>
