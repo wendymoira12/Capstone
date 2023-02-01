@@ -149,6 +149,7 @@ if (isset($_POST['submit_reset'])) {
                     <button type="submit" name="submit_date" class="btn btn-success">Filter</button>
                     <a href="report_shelter_application_list.php"><button name="submit_reset" class="btn btn-danger" type="submit">Reset</button></a>
                     <a href="report_application_list_pdf.php" target="_blank"><button name="viewPDF" class="btn btn-primary" type="button">View as PDF</button></a>
+                    <button type="submit" name="export" class="btn btn-warning" formaction="export_application_list.php">Export as CSV</button>
                   </div>
                 </div>
               </form>
