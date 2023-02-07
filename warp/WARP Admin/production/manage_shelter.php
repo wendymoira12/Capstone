@@ -234,7 +234,7 @@ if (isset($_POST['submit'])) {
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Password">Password<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="password" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}" title="Must at least 8 characters and contain 1 upper and lower case, numeric, and special character" required id="password" name="password" required="required" class="form-control col-md-7 col-xs-12 <?php echo !$passErr ?: 'is-invalid'; ?>">
+                          <input type="password" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}" title="Must be at least 8 characters and contain 1 upper and lower case, numeric, and special character" required id="password" name="password" required="required" class="form-control col-md-7 col-xs-12 <?php echo !$passErr ?: 'is-invalid'; ?>">
                         </div>
                       </div>
                       <h6> <center> Password must be a minimum of 8 characters, and contain<br> at least 1 upper and lower case, numeric, and special character</center></h6>
@@ -242,7 +242,7 @@ if (isset($_POST['submit'])) {
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Password">Confirm Password<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="password" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}" title="Must at least 8 characters and contain 1 upper and lower case, numeric, and special character" required id="cpassword" name="cpassword" required="required" class="form-control col-md-7 col-xs-12 <?php echo !$cpassErr ?: 'is-invalid'; ?>">
+                          <input type="password" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}" title="Must be at least 8 characters and contain 1 upper and lower case, numeric, and special character" required id="cpassword" name="cpassword" required="required" class="form-control col-md-7 col-xs-12 <?php echo !$cpassErr ?: 'is-invalid'; ?>">
                         </div>
                       </div>
                       

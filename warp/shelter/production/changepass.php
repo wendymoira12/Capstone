@@ -188,7 +188,7 @@ if ($result->num_rows > 0) {
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="newpass">New Password<span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="password" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}" title="Must at least 8 characters and contain 1 upper and lower case, numeric, and special character" required id="newpass" name="newpassword" required="required" class="form-control col-md-7 col-xs-12 <?= !$newpassErr ?: 'is-invalid'; ?>">
+                      <input type="password" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}" title="Must be at least 8 characters and contain 1 upper and lower case, numeric, and special character" required id="newpass" name="newpassword" required="required" class="form-control col-md-7 col-xs-12 <?= !$newpassErr ?: 'is-invalid'; ?>">
                     </div>
                   </div>
                   <h6> <center> Password must be a minimum of 8 characters, and contain<br> at least 1 upper and lower case, numeric, and special character</center></h6>
@@ -196,7 +196,7 @@ if ($result->num_rows > 0) {
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="confirmpass">Confirm New Password<span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="password" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}" title="Must at least 8 characters and contain 1 upper and lower case, numeric, and special character" required id="confirmpass" name="conpassword" required="required" class="form-control col-md-7 col-xs-12 <?= !$conpassErr ?: 'is-invalid'; ?>">
+                      <input type="password" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}" title="Must be at least 8 characters and contain 1 upper and lower case, numeric, and special character" required id="confirmpass" name="conpassword" required="required" class="form-control col-md-7 col-xs-12 <?= !$conpassErr ?: 'is-invalid'; ?>">
                     </div>
                   </div>
                   <div class="ln_solid"></div>
