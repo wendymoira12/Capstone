@@ -176,7 +176,7 @@ if (!isset($_SESSION['email-login'])) {
                             </tbody>
                         </table>
                         <br>
-                        <?php echo "Total number of rows:" . "$total"; ?>
+                        <?php echo "Total number of rows:" . " " . "$total"; ?>
                     </div>
                 <?php
                     unset($_SESSION['start_date'], $_SESSION['end_date']);
@@ -217,7 +217,7 @@ if (!isset($_SESSION['email-login'])) {
                             </tbody>
                         </table>
                         <br>
-                        <?php echo "Total number of rows:" . "$total"; ?>
+                        <?php echo "Total number of rows:" . " " . "$total"; ?>
                     </div>
                 <?php
                 } else {
@@ -225,28 +225,28 @@ if (!isset($_SESSION['email-login'])) {
                 }
                 unset($_SESSION['city']);
             } else {
+                $i = 1;
+                $sql = "SELECT schedule_tbl.schedule_id, schedule_tbl.schedule_date, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, schedule_tbl.application_id, adopter_tbl.adopter_id, city_tbl.city_name FROM schedule_tbl  INNER JOIN applicationform1 ON schedule_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id";
+                $result = mysqli_query($conn, $sql);
+                if ($result->num_rows > 0) {
+                    $total = mysqli_num_rows($result);
                 ?>
-                <div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>No.</th>
-                                <th>Scheduled Date</th>
-                                <th>Adopter Name</th>
-                                <th>City</th>
-                                <th>Adoptee Name</th>
-                            </tr>
-                        </thead>
+                    <div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Scheduled Date</th>
+                                    <th>Adopter Name</th>
+                                    <th>City</th>
+                                    <th>Adoptee Name</th>
+                                </tr>
+                            </thead>
 
-                        <tbody>
-                            <?php
-                            $i = 1;
-                            $sql = "SELECT schedule_tbl.schedule_id, schedule_tbl.schedule_date, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, schedule_tbl.application_id, adopter_tbl.adopter_id, city_tbl.city_name FROM schedule_tbl  INNER JOIN applicationform1 ON schedule_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id";
-                            $result = mysqli_query($conn, $sql);
-                            if ($result->num_rows > 0) {
-                                $total = mysqli_num_rows($result);
+                            <tbody>
+                                <?php
                                 foreach ($result as $data) {
-                            ?>
+                                ?>
                                     <tr>
                                         <td><?= $i++; ?></td>
                                         <td><?= $data['schedule_date'] ?></td>
@@ -260,15 +260,19 @@ if (!isset($_SESSION['email-login'])) {
                                 echo "No Record Found";
                             }
                             ?>
-                            <br>
-                            <?php echo "Total number of rows:" . "$total"; ?>
-                        </tbody>
-                    </table>
-                <?php
-            }
-                ?>
-                <br>
-                </div>
+                            </tbody>
+                        </table>
+                        <br>
+                        <?php
+                        if (!empty($total)) {
+                            echo "Total number of rows:" . " " . "$total";
+                        }
+                        ?>
+                    <?php
+                }
+                    ?>
+                    <br>
+                    </div>
         </div>
     </main>
 </body>

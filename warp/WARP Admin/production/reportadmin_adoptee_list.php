@@ -196,7 +196,7 @@ if (!isset($_SESSION['email-login'])) {
                             </tbody>
                         </table>
                         <br>
-                        <?php echo "Total number of rows:" . "$total"; ?>
+                        <?php echo "Total number of rows:" . " " . "$total"; ?>
                     </div>
                 <?php
                 } else {
@@ -249,7 +249,7 @@ if (!isset($_SESSION['email-login'])) {
                             </tbody>
                         </table>
                         <br>
-                        <?php echo "Total number of rows:" . "$total"; ?>
+                        <?php echo "Total number of rows:" . " " . "$total"; ?>
                     </div>
                 <?php
                 } else {
@@ -302,7 +302,7 @@ if (!isset($_SESSION['email-login'])) {
                             </tbody>
                         </table>
                         <br>
-                        <?php echo "Total number of rows:" . "$total"; ?>
+                        <?php echo "Total number of rows:" . " " . "$total"; ?>
                     </div>
                 <?php
                 } else {
@@ -355,7 +355,7 @@ if (!isset($_SESSION['email-login'])) {
                             </tbody>
                         </table>
                         <br>
-                        <?php echo "Total number of rows:" . "$total"; ?>
+                        <?php echo "Total number of rows:" . " " . "$total"; ?>
                     </div>
                 <?php
                 } else {
@@ -408,7 +408,7 @@ if (!isset($_SESSION['email-login'])) {
                             </tbody>
                         </table>
                         <br>
-                        <?php echo "Total number of rows:" . "$total"; ?>
+                        <?php echo "Total number of rows:" . " " . "$total"; ?>
                     </div>
                 <?php
                 } else {
@@ -461,7 +461,7 @@ if (!isset($_SESSION['email-login'])) {
                             </tbody>
                         </table>
                         <br>
-                        <?php echo "Total number of rows:" . "$total"; ?>
+                        <?php echo "Total number of rows:" . " " . "$total"; ?>
                     </div>
                 <?php
                 } else {
@@ -469,34 +469,34 @@ if (!isset($_SESSION['email-login'])) {
                 }
                 unset($_SESSION['city']);
             } else {
+                $i = 1;
+                $sql = "SELECT *, city_tbl.city_name FROM adoptee_tbl INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id";
+                $result = mysqli_query($conn, $sql);
+                if ($result->num_rows > 0) {
+                    $total = mysqli_num_rows($result);
                 ?>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>No. </th>
-                            <th>City</th>
-                            <th>Name</th>
-                            <th>Age</th>
-                            <th>Color</th>
-                            <th>Breed</th>
-                            <th>Specie</th>
-                            <th>Sex</th>
-                            <th>Neuter/Spayed</th>
-                            <th>Size</th>
-                            <th>Date&nbsp;Created</th>
-                        </tr>
-                    </thead>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>No. </th>
+                                <th>City</th>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Color</th>
+                                <th>Breed</th>
+                                <th>Specie</th>
+                                <th>Sex</th>
+                                <th>Neuter/Spayed</th>
+                                <th>Size</th>
+                                <th>Date&nbsp;Created</th>
+                            </tr>
+                        </thead>
 
-                    <tbody>
-                        <?php
-                        $i = 1;
-                        $sql = "SELECT *, city_tbl.city_name FROM adoptee_tbl INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id";
-                        $result = mysqli_query($conn, $sql);
-                        if ($result->num_rows > 0) {
-                            $total = mysqli_num_rows($result);
+                        <tbody>
+                            <?php
                             foreach ($result as $data) {
 
-                        ?>
+                            ?>
                                 <tr>
                                     <td><?= $i++; ?></td>
                                     <td><?= $data['city_name']; ?></td>
@@ -516,14 +516,19 @@ if (!isset($_SESSION['email-login'])) {
                             echo "No Record Found";
                         }
                         ?>
-                        <br>
-                        <?php echo "Total number of rows:" . "$total"; ?>
-                    </tbody>
-                </table>
-            <?php
+
+                        </tbody>
+                    </table>
+                    <br>
+                    <?php
+                    if (!empty($total)) {
+                        echo "Total number of rows:" . " " . "$total";
+                    }
+                    ?>
+                <?php
             }
-            ?>
-            <br>
+                ?>
+                <br>
         </div>
     </main>
 </body>

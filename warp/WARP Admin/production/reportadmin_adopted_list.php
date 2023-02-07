@@ -186,7 +186,7 @@ if (!isset($_SESSION['email-login'])) {
                             </tbody>
                         </table>
                         <br>
-                        <?php echo "Total number of rows:" . "$total"; ?>
+                        <?php echo "Total number of rows:" . " " . "$total"; ?>
                     </div>
                 <?php
                 } else {
@@ -232,7 +232,7 @@ if (!isset($_SESSION['email-login'])) {
                             </tbody>
                         </table>
                         <br>
-                        <?php echo "Total number of rows:" . "$total"; ?>
+                        <?php echo "Total number of rows:" . " " . "$total"; ?>
                     </div>
                 <?php
                 } else {
@@ -276,7 +276,7 @@ if (!isset($_SESSION['email-login'])) {
                             </tbody>
                         </table>
                         <br>
-                        <?php echo "Total number of rows:" . "$total"; ?>
+                        <?php echo "Total number of rows:" . " " . "$total"; ?>
                     </div>
                 <?php
                 } else {
@@ -320,7 +320,7 @@ if (!isset($_SESSION['email-login'])) {
                             </tbody>
                         </table>
                         <br>
-                        <?php echo "Total number of rows:" . "$total"; ?>
+                        <?php echo "Total number of rows:" . " " . "$total"; ?>
                     </div>
                 <?php
                 } else {
@@ -328,29 +328,29 @@ if (!isset($_SESSION['email-login'])) {
                 }
                 unset($_SESSION['city']);
             } else {
+                $i = 1;
+                $sql = "SELECT adopter_tbl.adopter_id, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_img1, adoptee_tbl.pet_img2, adoptee_tbl.pet_name, adopted_tbl.date_adopted, adopted_tbl.monitoring_date, adopted_tbl.monitoring_status, adopted_tbl.adopted_id, city_tbl.city_name FROM adopted_tbl INNER JOIN applicationform1 ON adopted_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id";
+                $result = mysqli_query($conn, $sql);
+                if ($result->num_rows > 0) {
+                    $total = mysqli_num_rows($result);
                 ?>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>No.</th>
-                            <th>Adopter Name</th>
-                            <th>City</th>
-                            <th>Pet Name</th>
-                            <th>Date Adopted</th>
-                            <th>Monitoring Date</th>
-                            <th>Monitoring Status</th>
-                        </tr>
-                    </thead>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Adopter Name</th>
+                                <th>City</th>
+                                <th>Pet Name</th>
+                                <th>Date Adopted</th>
+                                <th>Monitoring Date</th>
+                                <th>Monitoring Status</th>
+                            </tr>
+                        </thead>
 
-                    <tbody>
-                        <?php
-                        $i = 1;
-                        $sql = "SELECT adopter_tbl.adopter_id, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_img1, adoptee_tbl.pet_img2, adoptee_tbl.pet_name, adopted_tbl.date_adopted, adopted_tbl.monitoring_date, adopted_tbl.monitoring_status, adopted_tbl.adopted_id, city_tbl.city_name FROM adopted_tbl INNER JOIN applicationform1 ON adopted_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id";
-                        $result = mysqli_query($conn, $sql);
-                        if ($result->num_rows > 0) {
-                            $total = mysqli_num_rows($result);
+                        <tbody>
+                            <?php
                             foreach ($result as $data) {
-                        ?>
+                            ?>
                                 <tr>
                                     <td><?= $i++; ?></td>
                                     <td><?= $data['adopter_fname'] . ' ' . $data['adopter_lname']; ?></td>
@@ -366,14 +366,18 @@ if (!isset($_SESSION['email-login'])) {
                             echo "No Record Found";
                         }
                         ?>
-                        <br>
-                        <?php echo "Total number of rows:" . "$total"; ?>
-                    </tbody>
-                </table>
-            <?php
+                        </tbody>
+                    </table>
+                    <br>
+                    <?php
+                    if (!empty($total)) {
+                        echo "Total number of rows:" . " " . "$total";
+                    }
+                    ?>
+                <?php
             }
-            ?>
-            <br>
+                ?>
+                <br>
         </div>
     </main>
 </body>

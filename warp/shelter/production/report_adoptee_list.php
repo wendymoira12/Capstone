@@ -30,9 +30,9 @@ if ($result->num_rows > 0) {
     $sql = "SELECT * FROM city_tbl INNER JOIN shelteruser_tbl ON city_tbl.city_id = shelteruser_tbl.city_id WHERE city_tbl.city_id AND shelteruser_tbl.city_id ='$city_id'";
     $result2 = mysqli_query($conn, $sql);
     if ($result2 == TRUE) {
-      $row2 = mysqli_fetch_assoc($result2);
+        $row2 = mysqli_fetch_assoc($result2);
     }
-  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -222,7 +222,7 @@ if ($result->num_rows > 0) {
                             </tbody>
                         </table>
                         <br>
-                        <?php echo "Total number of rows:" . "$total"; ?>
+                        <?php echo "Total number of rows:" . " " . "$total"; ?>
                     </div>
                 <?php
                 } else {
@@ -275,7 +275,7 @@ if ($result->num_rows > 0) {
                             </tbody>
                         </table>
                         <br>
-                        <?php echo "Total number of rows:" . "$total"; ?>
+                        <?php echo "Total number of rows:" . " " . "$total"; ?>
                     </div>
                 <?php
                 } else {
@@ -328,7 +328,7 @@ if ($result->num_rows > 0) {
                             </tbody>
                         </table>
                         <br>
-                        <?php echo "Total number of rows:" . "$total"; ?>
+                        <?php echo "Total number of rows:" . " " . "$total"; ?>
                     </div>
                 <?php
                 } else {
@@ -381,7 +381,7 @@ if ($result->num_rows > 0) {
                             </tbody>
                         </table>
                         <br>
-                        <?php echo "Total number of rows:" . "$total"; ?>
+                        <?php echo "Total number of rows:" . " " . "$total"; ?>
                     </div>
                 <?php
                 } else {
@@ -434,7 +434,7 @@ if ($result->num_rows > 0) {
                             </tbody>
                         </table>
                         <br>
-                        <?php echo "Total number of rows:" . "$total"; ?>
+                        <?php echo "Total number of rows:" . " " . "$total"; ?>
                     </div>
                 <?php
                 } else {
@@ -442,33 +442,33 @@ if ($result->num_rows > 0) {
                 }
                 unset($_SESSION['neuter']);
             } else {
+                $i = 1;
+                $sql = "SELECT * FROM adoptee_tbl WHERE city_id='$city_id'";
+                $result = mysqli_query($conn, $sql);
+                if ($result->num_rows > 0) {
+                    $total = mysqli_num_rows($result);
                 ?>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>No. </th>
-                            <th>Name</th>
-                            <th>Age</th>
-                            <th>Color</th>
-                            <th>Breed</th>
-                            <th>Specie</th>
-                            <th>Sex</th>
-                            <th>Neutered/Spayed</th>
-                            <th>Weight</th>
-                            <th>Size</th>
-                            <th>Date&nbsp;Created</th>
-                        </tr>
-                    </thead>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>No. </th>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Color</th>
+                                <th>Breed</th>
+                                <th>Specie</th>
+                                <th>Sex</th>
+                                <th>Neutered/Spayed</th>
+                                <th>Weight</th>
+                                <th>Size</th>
+                                <th>Date&nbsp;Created</th>
+                            </tr>
+                        </thead>
 
-                    <tbody>
-                        <?php
-                        $i = 1;
-                        $sql = "SELECT * FROM adoptee_tbl WHERE city_id='$city_id'";
-                        $result = mysqli_query($conn, $sql);
-                        if ($result->num_rows > 0) {
-                            $total = mysqli_num_rows($result);
+                        <tbody>
+                            <?php
                             foreach ($result as $data) {
-                        ?>
+                            ?>
                                 <tr>
                                     <td><?= $i++; ?></td>
                                     <td><?= $data['pet_name']; ?></td>
@@ -488,14 +488,18 @@ if ($result->num_rows > 0) {
                             echo "No Record Found";
                         }
                         ?>
-                        <br>
-                        <?php echo "Total number of rows:" . "$total"; ?>
-                    </tbody>
-                </table>
-            <?php
+                        </tbody>
+                    </table>
+                    <br>
+                    <?php
+                    if (!empty($total)) {
+                        echo "Total number of rows:" . " " . "$total";
+                    }
+                    ?>
+                <?php
             }
-            ?>
-            <br>
+                ?>
+                <br>
         </div>
         </div>
     </main>

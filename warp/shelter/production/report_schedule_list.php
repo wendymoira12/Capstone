@@ -30,9 +30,9 @@ if ($result->num_rows > 0) {
     $sql = "SELECT * FROM city_tbl INNER JOIN shelteruser_tbl ON city_tbl.city_id = shelteruser_tbl.city_id WHERE city_tbl.city_id AND shelteruser_tbl.city_id ='$city_id'";
     $result2 = mysqli_query($conn, $sql);
     if ($result2 == TRUE) {
-      $row2 = mysqli_fetch_assoc($result2);
+        $row2 = mysqli_fetch_assoc($result2);
     }
-  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -199,7 +199,7 @@ if ($result->num_rows > 0) {
                             </tbody>
                         </table>
                         <br>
-                        <?php echo "Total number of rows:" . "$total"; ?>
+                        <?php echo "Total number of rows:". " " . "$total"; ?>
                     </div>
                 <?php
                 } else {
@@ -207,26 +207,27 @@ if ($result->num_rows > 0) {
                 }
                 unset($_SESSION['start_date'], $_SESSION['end_date']);
             } else {
+                $i = 1;
+                $sql = "SELECT schedule_tbl.schedule_id, schedule_tbl.schedule_date, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, schedule_tbl.application_id, adopter_tbl.adopter_id FROM schedule_tbl INNER JOIN applicationform1 ON schedule_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id  WHERE adoptee_tbl.city_id ='$city_id'";
+                $result = mysqli_query($conn, $sql);
+                if ($result->num_rows > 0) {
+                    $total = mysqli_num_rows($result);
                 ?>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>No.</th>
-                            <th>Scheduled Date</th>
-                            <th>Adopter Name</th>
-                            <th>Adoptee Name</th>
-                        </tr>
-                    </thead>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Scheduled Date</th>
+                                <th>Adopter Name</th>
+                                <th>Adoptee Name</th>
+                            </tr>
+                        </thead>
 
-                    <tbody>
-                        <?php
-                        $i = 1;
-                        $sql = "SELECT schedule_tbl.schedule_id, schedule_tbl.schedule_date, adopter_tbl.adopter_fname, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, schedule_tbl.application_id, adopter_tbl.adopter_id FROM schedule_tbl INNER JOIN applicationform1 ON schedule_tbl.application_id = applicationform1.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id  WHERE adoptee_tbl.city_id ='$city_id'";
-                        $result = mysqli_query($conn, $sql);
-                        if ($result->num_rows > 0) {
-                            $total = mysqli_num_rows($result);
+                        <tbody>
+                            <?php
+
                             foreach ($result as $data) {
-                        ?>
+                            ?>
                                 <tr>
                                     <td><?= $i++; ?></td>
                                     <td><?= $data['schedule_date'] ?></td>
@@ -239,14 +240,18 @@ if ($result->num_rows > 0) {
                             echo "No Record Found";
                         }
                         ?>
-                        <br>
-                        <?php echo "Total number of rows:" . "$total"; ?>
-                    </tbody>
-                </table>
-            <?php
+                        </tbody>
+                    </table>
+                    <br>
+                    <?php
+                    if (!empty($total)) {
+                        echo "Total number of rows:" . " " . "$total";
+                    }
+                    ?>
+                <?php
             }
-            ?>
-            <br>
+                ?>
+                <br>
         </div>
         </div>
     </main>

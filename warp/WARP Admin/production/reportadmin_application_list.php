@@ -187,7 +187,7 @@ if (!isset($_SESSION['email-login'])) {
                             </tbody>
                         </table>
                         <br>
-                        <?php echo "Total number of rows:" . "$total"; ?>
+                        <?php echo "Total number of rows:" . " " . "$total"; ?>
                     </div>
                 <?php
                     unset($_SESSION['start_date'], $_SESSION['end_date']);
@@ -235,7 +235,7 @@ if (!isset($_SESSION['email-login'])) {
                             </tbody>
                         </table>
                         <br>
-                        <?php echo "Total number of rows:" . "$total"; ?>
+                        <?php echo "Total number of rows:" . " " . "$total"; ?>
                     </div>
                 <?php
                 } else {
@@ -281,7 +281,7 @@ if (!isset($_SESSION['email-login'])) {
                             </tbody>
                         </table>
                         <br>
-                        <?php echo "Total number of rows:" . "$total"; ?>
+                        <?php echo "Total number of rows:" . " " . "$total"; ?>
                     </div>
                 <?php
                 } else {
@@ -327,7 +327,7 @@ if (!isset($_SESSION['email-login'])) {
                             </tbody>
                         </table>
                         <br>
-                        <?php echo "Total number of rows:" . "$total"; ?>
+                        <?php echo "Total number of rows:" . " " . "$total"; ?>
                     </div>
                 <?php
                 } else {
@@ -335,31 +335,31 @@ if (!isset($_SESSION['email-login'])) {
                 }
                 unset($_SESSION['city']);
             } else {
+                $i = 1;
+                $sql = "SELECT applicationform1.adopter_id, applicationresult_tbl.acceptedby_name, applicationform1.pet_id, applicationform1.date_submitted, applicationresult_tbl.application_result, applicationresult_tbl.application_status, adopter_tbl.adopter_fname, applicationresult_tbl.application_id, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, adoptee_tbl.city_id, city_tbl.city_name FROM applicationform1 INNER JOIN applicationresult_tbl ON applicationform1.application_id = applicationresult_tbl.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id";
+                $result = mysqli_query($conn, $sql);
+                if ($result->num_rows > 0) {
+                    $total = mysqli_num_rows($result);
                 ?>
-                <div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>No.</th>
-                                <th>Adopter</th>
-                                <th>City</th>
-                                <th>Adoptee</th>
-                                <th>Date&nbsp;Submitted&nbsp;</th>
-                                <th>System&nbsp;Assessment&nbsp;</th>
-                                <th>Application&nbsp;Status&nbsp;</th>
-                                <th>Accepted&nbsp;By&nbsp;</th>
-                            </tr>
-                        </thead>
+                    <div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Adopter</th>
+                                    <th>City</th>
+                                    <th>Adoptee</th>
+                                    <th>Date&nbsp;Submitted&nbsp;</th>
+                                    <th>System&nbsp;Assessment&nbsp;</th>
+                                    <th>Application&nbsp;Status&nbsp;</th>
+                                    <th>Accepted&nbsp;By&nbsp;</th>
+                                </tr>
+                            </thead>
 
-                        <tbody>
-                            <?php
-                            $i = 1;
-                            $sql = "SELECT applicationform1.adopter_id, applicationresult_tbl.acceptedby_name, applicationform1.pet_id, applicationform1.date_submitted, applicationresult_tbl.application_result, applicationresult_tbl.application_status, adopter_tbl.adopter_fname, applicationresult_tbl.application_id, adopter_tbl.adopter_lname, adoptee_tbl.pet_name, adoptee_tbl.city_id, city_tbl.city_name FROM applicationform1 INNER JOIN applicationresult_tbl ON applicationform1.application_id = applicationresult_tbl.application_id INNER JOIN adopter_tbl ON applicationform1.adopter_id = adopter_tbl.adopter_id INNER JOIN adoptee_tbl ON applicationform1.pet_id = adoptee_tbl.pet_id INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id";
-                            $result = mysqli_query($conn, $sql);
-                            if ($result->num_rows > 0) {
-                                $total = mysqli_num_rows($result);
+                            <tbody>
+                                <?php
                                 foreach ($result as $data) {
-                            ?>
+                                ?>
                                     <tr>
                                         <td><?= $i++; ?></td>
                                         <td><?= $data['adopter_fname'] . ' ' . $data['adopter_lname']; ?></td>
@@ -376,15 +376,19 @@ if (!isset($_SESSION['email-login'])) {
                                 echo "No Record Found";
                             }
                             ?>
-                            <br>
-                            <?php echo "Total number of rows:" . "$total"; ?>
-                        </tbody>
-                    </table>
-                <?php
-            }
-                ?>
-                <br>
-                </div>
+                            </tbody>
+                        </table>
+                        <br>
+                        <?php
+                        if (!empty($total)) {
+                            echo "Total number of rows:" . " " . "$total";
+                        }
+                        ?>
+                    <?php
+                }
+                    ?>
+                    <br>
+                    </div>
         </div>
     </main>
 </body>

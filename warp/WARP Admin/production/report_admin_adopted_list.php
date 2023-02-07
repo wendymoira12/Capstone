@@ -483,8 +483,6 @@ if (isset($_POST['submit_reset'])) {
                                                     </tr>
                                             <?php
                                                 }
-                                            } else {
-                                                echo "No Record Found";
                                             }
                                             ?>
                                         </tbody>
