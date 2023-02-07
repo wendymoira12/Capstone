@@ -180,7 +180,7 @@ if ($result->num_rows > 0) {
                 $i = 1;
                 $start_date = $_SESSION['start_date'];
                 $end_date = $_SESSION['end_date'];
-                $sql = "SELECT * FROM adoptee_tbl WHERE (created_at BETWEEN '$start_date' and '$end_date') AND adoptee_tbl.city_id = '$city_id' AND deleted_at IS NULL";
+                $sql = "SELECT * FROM adoptee_tbl WHERE (created_at BETWEEN '$start_date' and '$end_date') AND adoptee_tbl.city_id = '$city_id' AND adoptee_tbl.deleted_at IS NULL";
                 $result1 = mysqli_query($conn, $sql);
                 if (mysqli_num_rows($result1) > 0) {
                     $total = mysqli_num_rows($result1);
@@ -232,7 +232,7 @@ if ($result->num_rows > 0) {
             } else if (isset($_SESSION['specie'])) {
                 $i = 1;
                 $specie = $_SESSION['specie'];
-                $sql = "SELECT * FROM adoptee_tbl WHERE adoptee_tbl.pet_specie = '$specie' AND adoptee_tbl.city_id = '$city_id' AND deleted_at IS NULL";
+                $sql = "SELECT * FROM adoptee_tbl WHERE adoptee_tbl.pet_specie = '$specie' AND adoptee_tbl.city_id = '$city_id' AND adoptee_tbl.deleted_at IS NULL";
                 $result2 = mysqli_query($conn, $sql);
 
                 if (mysqli_num_rows($result2) > 0) {
@@ -285,7 +285,7 @@ if ($result->num_rows > 0) {
             } else if (isset($_SESSION['gender'])) {
                 $i = 1;
                 $gender = $_SESSION['gender'];
-                $sql = "SELECT * FROM adoptee_tbl WHERE adoptee_tbl.pet_gender = '$gender' AND adoptee_tbl.city_id = '$city_id' AND deleted_at IS NULL";
+                $sql = "SELECT * FROM adoptee_tbl WHERE adoptee_tbl.pet_gender = '$gender' AND adoptee_tbl.city_id = '$city_id' AND adoptee_tbl.deleted_at IS NULL";
                 $result3 = mysqli_query($conn, $sql);
 
                 if (mysqli_num_rows($result3) > 0) {
@@ -338,7 +338,7 @@ if ($result->num_rows > 0) {
             } else if (isset($_SESSION['size'])) {
                 $i = 1;
                 $size = $_SESSION['size'];
-                $sql = "SELECT * FROM adoptee_tbl WHERE adoptee_tbl.pet_size = '$size' AND adoptee_tbl.city_id = '$city_id' AND deleted_at IS NULL";
+                $sql = "SELECT * FROM adoptee_tbl WHERE adoptee_tbl.pet_size = '$size' AND adoptee_tbl.city_id = '$city_id' AND adoptee_tbl.deleted_at IS NULL";
                 $result4 = mysqli_query($conn, $sql);
 
                 if (mysqli_num_rows($result4) > 0) {
@@ -391,7 +391,7 @@ if ($result->num_rows > 0) {
             } else if (isset($_SESSION['neuter'])) {
                 $i = 1;
                 $neuter = $_SESSION['neuter'];
-                $sql = "SELECT * FROM adoptee_tbl WHERE adoptee_tbl.pet_neuter = '$neuter' AND adoptee_tbl.city_id = '$city_id' AND deleted_at IS NULL";
+                $sql = "SELECT * FROM adoptee_tbl WHERE adoptee_tbl.pet_neuter = '$neuter' AND adoptee_tbl.city_id = '$city_id' AND adoptee_tbl.deleted_at IS NULL";
                 $result5 = mysqli_query($conn, $sql);
 
                 if (mysqli_num_rows($result5) > 0) {
@@ -443,7 +443,7 @@ if ($result->num_rows > 0) {
                 unset($_SESSION['neuter']);
             } else {
                 $i = 1;
-                $sql = "SELECT * FROM adoptee_tbl WHERE city_id='$city_id' AND deleted_at IS NULL";
+                $sql = "SELECT * FROM adoptee_tbl WHERE city_id='$city_id' AND adoptee_tbl.deleted_at IS NULL";
                 $result = mysqli_query($conn, $sql);
                 if ($result->num_rows > 0) {
                     $total = mysqli_num_rows($result);
