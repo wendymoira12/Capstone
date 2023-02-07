@@ -308,7 +308,7 @@ if (isset($_POST['submit_reset'])) {
                                     $_SESSION['end_date'] = $_POST['end_date'];
 
                                     $i = 1;
-                                    $sql = "SELECT *, city_tbl.city_name FROM adoptee_tbl INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id WHERE (created_at BETWEEN '$start_date' and '$end_date')";
+                                    $sql = "SELECT *, city_tbl.city_name FROM adoptee_tbl INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id WHERE (created_at BETWEEN '$start_date' and '$end_date') AND deleted_at IS NULL";
                                     $result1 = mysqli_query($conn, $sql);
 
                                     if (mysqli_num_rows($result1) > 0) {
@@ -380,7 +380,7 @@ if (isset($_POST['submit_reset'])) {
                                     $_SESSION['specie'] = $_POST['specie'];
 
                                     $i = 1;
-                                    $sql = "SELECT *, city_tbl.city_name FROM adoptee_tbl INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id WHERE adoptee_tbl.pet_specie = '$specie'";
+                                    $sql = "SELECT *, city_tbl.city_name FROM adoptee_tbl INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id WHERE adoptee_tbl.pet_specie = '$specie' AND deleted_at IS NULL";
                                     $result2 = mysqli_query($conn, $sql);
 
                                     if (mysqli_num_rows($result2) > 0) {
@@ -452,7 +452,7 @@ if (isset($_POST['submit_reset'])) {
                                     $_SESSION['gender'] = $_POST['gender'];
 
                                     $i = 1;
-                                    $sql = "SELECT *, city_tbl.city_name FROM adoptee_tbl INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id WHERE adoptee_tbl.pet_gender = '$gender'";
+                                    $sql = "SELECT *, city_tbl.city_name FROM adoptee_tbl INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id WHERE adoptee_tbl.pet_gender = '$gender' AND deleted_at IS NULL";
                                     $result3 = mysqli_query($conn, $sql);
 
                                     if (mysqli_num_rows($result3) > 0) {
@@ -523,7 +523,7 @@ if (isset($_POST['submit_reset'])) {
                                     $_SESSION['size'] = $_POST['size'];
 
                                     $i = 1;
-                                    $sql = "SELECT *, city_tbl.city_name FROM adoptee_tbl INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id WHERE adoptee_tbl.pet_size = '$size'";
+                                    $sql = "SELECT *, city_tbl.city_name FROM adoptee_tbl INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id WHERE adoptee_tbl.pet_size = '$size' AND deleted_at IS NULL";
                                     $result4 = mysqli_query($conn, $sql);
 
                                     if (mysqli_num_rows($result4) > 0) {
@@ -594,7 +594,7 @@ if (isset($_POST['submit_reset'])) {
                                     $_SESSION['neuter'] = $_POST['neuter'];
 
                                     $i = 1;
-                                    $sql = "SELECT *, city_tbl.city_name FROM adoptee_tbl INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id WHERE adoptee_tbl.pet_neuter = '$neuter'";
+                                    $sql = "SELECT *, city_tbl.city_name FROM adoptee_tbl INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id WHERE adoptee_tbl.pet_neuter = '$neuter' AND deleted_at IS NULL";
                                     $result5 = mysqli_query($conn, $sql);
 
                                     if (mysqli_num_rows($result5) > 0) {
@@ -661,7 +661,7 @@ if (isset($_POST['submit_reset'])) {
                                     $i = 1;
                                     $city_id = $_POST['city'];
                                     $_SESSION['city'] = $_POST['city'];
-                                    $sql = "SELECT *, city_tbl.city_name FROM adoptee_tbl INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id WHERE adoptee_tbl.city_id = '$city_id'";
+                                    $sql = "SELECT *, city_tbl.city_name FROM adoptee_tbl INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id WHERE adoptee_tbl.city_id = '$city_id' AND deleted_at IS NULL";
                                     $result6 = mysqli_query($conn, $sql);
 
                                     if (mysqli_num_rows($result6) > 0) {
@@ -756,7 +756,7 @@ if (isset($_POST['submit_reset'])) {
                                         <tbody>
                                             <?php
                                             $i = 1;
-                                            $sql = "SELECT *, city_tbl.city_name FROM adoptee_tbl INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id";
+                                            $sql = "SELECT *, city_tbl.city_name FROM adoptee_tbl INNER JOIN city_tbl ON adoptee_tbl.city_id = city_tbl.city_id WHERE deleted_at IS NULL";
                                             $result = mysqli_query($conn, $sql);
                                             if ($result->num_rows > 0) {
                                                 foreach ($result as $data) {
