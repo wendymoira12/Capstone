@@ -2,5 +2,4 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/nbqdsxfp/public_html/
-    - /bin/cp /repositories/Capstone -R * $DEPLOYPATH
-#wat
+    - /bin/cp -R /repositories/Capstone * $DEPLOYPATH
