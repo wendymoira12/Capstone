@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/example/public_html/
-    - /bin/cp -R /repositories/Capstone * $DEPLOYPATH
+    - export DEPLOYPATH=/home/nbqdsxfp/public_html/
+    - /bin/cp /repositories/Capstone -R * $DEPLOYPATH
