@@ -49,7 +49,7 @@
                         <div class="row">
                             <div class="col-xl-12">
                                 <p class="copy_right text-center">
-
+                                    Copyright &copy; 2023 All rights reserved | UI design by <a href="https://colorlib.com/">Colorlib</a> &#x2764;, Modified by WARP Team
                                 </p>
                             </div>
                         </div>
