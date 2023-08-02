@@ -498,9 +498,6 @@ if (isset($_POST['submit_reset'])) {
         </div>
     </div>
     <!-- /page content -->
-    </div>
-    </div>
-
     <!-- footer content -->
     <footer>
     <div class="pull-right">
@@ -510,6 +507,10 @@ if (isset($_POST['submit_reset'])) {
     <div class="clearfix"></div>
     </footer>
     <!-- /footer content -->
+    </div>
+    </div>
+
+
 
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
