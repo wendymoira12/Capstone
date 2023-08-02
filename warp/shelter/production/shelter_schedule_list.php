@@ -193,6 +193,7 @@ if ($result->num_rows > 0) {
   <footer>
     <div class="pull-right">
       <!-- Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a> -->
+      Copyright &copy; 2023 All rights reserved | UI design by <a href="https://colorlib.com/">Colorlib</a> &#x2764;, Modified by WARP Team
     </div>
     <div class="clearfix"></div>
   </footer>
